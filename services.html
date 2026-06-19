@@ -1,71 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Explore Landmark Landscaping Services - From landscape design to irrigation systems, garden maintenance, and commercial landscaping solutions.">
-  <meta name="keywords" content="landscaping services, irrigation systems, garden maintenance, lawn establishment, tree planting, Kenya">
-  <meta name="robots" content="index, follow">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://www.landmarklandscaping.co.ke/services.html">
-  <meta property="og:title" content="Services - Landmark Landscaping">
-  <link rel="canonical" href="https://www.landmarklandscaping.co.ke/services.html">
-  <title>Services - Landmark Landscaping Services</title>
-  <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Explore Landmark Landscaping Services - From landscape design to irrigation systems, garden maintenance, and commercial landscaping solutions.">
+<meta name="keywords" content="landscaping services, irrigation systems, garden maintenance, lawn establishment, tree planting, Kenya">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.landmarklandscaping.co.ke/services.html">
+<meta property="og:title" content="Services - Landmark Landscaping">
+<link rel="canonical" href="https://www.landmarklandscaping.co.ke/services.html">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' font-size='75' fill='%231B5E20'>🌿</text></svg>">
+<title>Services - Landmark Landscaping Services</title>
+
+<!-- Bootstrap 5 -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- Header & Navigation -->
-  <header>
-    <div class="container">
-      <div class="header-content">
-        <a href="index.html" class="logo">🌿 Landmark Landscaping</a>
-        <button class="menu-toggle" aria-label="Toggle menu">☰</button>
-        <nav class="nav-menu">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="services.html">Services</a></li>
-          <li><a href="projects.html">Projects</a></li>
-          <li><a href="gallery.html">Gallery</a></li>
-          <li><a href="blog.html">Blog</a></li>
-          <li><a href="testimonials.html">Testimonials</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </nav>
-      </div>
-    </div>
-  </header>
 
-  <!-- Breadcrumb -->
-  <div class="breadcrumb">
-    <div class="container">
-      <ul class="breadcrumb-list">
-        <li><a href="index.html">Home</a></li>
-        <li>Services</li>
+<!-- ============ NAVBAR ============ -->
+<nav class="navbar navbar-expand-lg nav-wrap" id="mainNav">
+  <div class="container">
+    <a class="brand" href="index.html"><span class="leaf-mark">🌿</span>Landmark Landscaping</a>
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto align-items-lg-center">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+        <li class="nav-item"><a class="nav-link active" href="services.html">Services</a></li>
+        <li class="nav-item"><a class="nav-link" href="projects.html">Projects</a></li>
+        <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+        <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
+        <li class="nav-item"><a class="nav-link" href="testimonials.html">Testimonials</a></li>
+        <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+          <a class="btn btn-forest btn-sm" href="contact.html">Contact Us</a>
+        </li>
       </ul>
     </div>
   </div>
+</nav>
 
-  <!-- Page Hero -->
-  <section class="hero" style="padding: 100px 0; min-height: 400px;">
-    <div class="hero-content">
-      <h1>Our Landscaping Services</h1>
-      <p>Comprehensive solutions for all your outdoor space needs</p>
+<!-- ============ PAGE HERO ============ -->
+<section class="page-hero">
+  <div class="hero-bg">
+    <img src="https://images.unsplash.com/photo-1599629954294-14df9ec8ce4e?auto=format&fit=crop&w=2000&q=80" alt="Manicured garden with flower beds representing landscaping services">
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="container hero-content">
+    <div class="breadcrumb-bar">
+      <a href="index.html">Home</a><span class="sep">/</span><span class="current">Services</span>
     </div>
-  </section>
+    <p class="eyebrow">What We Offer</p>
+    <h1>Our Landscaping Services</h1>
+    <p class="lede">Comprehensive solutions for all your outdoor space needs — from design to ongoing care.</p>
+  </div>
+</section>
 
-  <!-- Services Grid -->
-  <section class="section">
-    <div class="container">
-      <div class="grid grid-2">
-        <!-- Service 1 -->
-        <div class="card scroll-reveal">
-          <div style="width: 100%; height: 250px; background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%); display: flex; align-items: center; justify-content: center; color: var(--primary-green); font-size: 4rem;">
-            🎨
+<!-- ============ SERVICES GRID ============ -->
+<section class="section">
+  <div class="container">
+    <div class="row g-4">
+
+      <div class="col-md-6 reveal">
+        <div class="svc-detail-card">
+          <div class="img-wrap">
+            <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=700&q=80" alt="Landscape designer planning a garden layout">
+            <div class="ic-overlay">🎨</div>
           </div>
-          <div class="card-content">
+          <div class="body">
             <h3>Landscaping Design</h3>
             <p>Our expert designers create stunning, customized landscape designs that enhance your property's beauty and functionality. We consider your vision, budget, and environmental factors to deliver designs that transform your outdoor spaces.</p>
-            <h4 style="color: var(--primary-green); margin-top: 1.5rem;">What's Included:</h4>
-            <ul class="footer-links">
+            <h4 class="incl">What's Included</h4>
+            <ul class="incl-list">
               <li>Conceptual sketches</li>
               <li>3D renderings</li>
               <li>Plant selections</li>
@@ -74,17 +85,19 @@
             </ul>
           </div>
         </div>
+      </div>
 
-        <!-- Service 2 -->
-        <div class="card scroll-reveal">
-          <div style="width: 100%; height: 250px; background: linear-gradient(135deg, #A5D6A7 0%, #81C784 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 4rem;">
-            💧
+      <div class="col-md-6 reveal">
+        <div class="svc-detail-card">
+          <div class="img-wrap">
+            <img src="https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?auto=format&fit=crop&w=700&q=80" alt="Garden sprinkler irrigation system watering a lawn">
+            <div class="ic-overlay">💧</div>
           </div>
-          <div class="card-content">
+          <div class="body">
             <h3>Irrigation Systems Installation</h3>
             <p>Professional installation of efficient irrigation systems designed to maximize water usage and maintain healthy, thriving plants. Our systems are customized to your property's unique needs and climate conditions.</p>
-            <h4 style="color: var(--primary-green); margin-top: 1.5rem;">What's Included:</h4>
-            <ul class="footer-links">
+            <h4 class="incl">What's Included</h4>
+            <ul class="incl-list">
               <li>System design</li>
               <li>Equipment supply</li>
               <li>Professional installation</li>
@@ -93,17 +106,19 @@
             </ul>
           </div>
         </div>
+      </div>
 
-        <!-- Service 3 -->
-        <div class="card scroll-reveal">
-          <div style="width: 100%; height: 250px; background: linear-gradient(135deg, #66BB6A 0%, #43A047 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 4rem;">
-            🌾
+      <div class="col-md-6 reveal">
+        <div class="svc-detail-card">
+          <div class="img-wrap">
+            <img src="https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?auto=format&fit=crop&w=700&q=80" alt="Gardener trimming and maintaining shrubs">
+            <div class="ic-overlay">🌾</div>
           </div>
-          <div class="card-content">
+          <div class="body">
             <h3>Garden Maintenance</h3>
             <p>Comprehensive garden maintenance services to keep your landscape looking beautiful year-round. From regular weeding to pruning and seasonal care, we ensure your garden remains healthy and vibrant.</p>
-            <h4 style="color: var(--primary-green); margin-top: 1.5rem;">What's Included:</h4>
-            <ul class="footer-links">
+            <h4 class="incl">What's Included</h4>
+            <ul class="incl-list">
               <li>Regular weeding</li>
               <li>Plant pruning</li>
               <li>Seasonal maintenance</li>
@@ -112,17 +127,19 @@
             </ul>
           </div>
         </div>
+      </div>
 
-        <!-- Service 4 -->
-        <div class="card scroll-reveal">
-          <div style="width: 100%; height: 250px; background: linear-gradient(135deg, #1B5E20 0%, #2E7D32 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 4rem;">
-            🌱
+      <div class="col-md-6 reveal">
+        <div class="svc-detail-card">
+          <div class="img-wrap">
+            <img src="https://images.unsplash.com/photo-1558904541-efa843a96f01?auto=format&fit=crop&w=700&q=80" alt="Lush established green lawn">
+            <div class="ic-overlay">🌱</div>
           </div>
-          <div class="card-content">
+          <div class="body">
             <h3>Lawn Establishment</h3>
             <p>Professional lawn installation and establishment with proper soil preparation, grading, and quality grass seeding or sodding. We create lush, healthy lawns that enhance your property's curb appeal.</p>
-            <h4 style="color: var(--primary-green); margin-top: 1.5rem;">What's Included:</h4>
-            <ul class="footer-links">
+            <h4 class="incl">What's Included</h4>
+            <ul class="incl-list">
               <li>Soil preparation</li>
               <li>Site grading</li>
               <li>Seed selection</li>
@@ -131,36 +148,40 @@
             </ul>
           </div>
         </div>
+      </div>
 
-        <!-- Service 5 -->
-        <div class="card scroll-reveal">
-          <div style="width: 100%; height: 250px; background: linear-gradient(135deg, #4CAF50 0%, #66BB6A 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 4rem;">
-            🌳
+      <div class="col-md-6 reveal">
+        <div class="svc-detail-card">
+          <div class="img-wrap">
+            <img src="https://images.unsplash.com/photo-1519331379826-f10be5486c6f?auto=format&fit=crop&w=700&q=80" alt="Trees planted along a park pathway">
+            <div class="ic-overlay">🌳</div>
           </div>
-          <div class="card-content">
-            <h3>Tree Planting & Care</h3>
+          <div class="body">
+            <h3>Tree Planting &amp; Care</h3>
             <p>Expert tree planting and landscaping services to add shade, beauty, and environmental benefits to your property. We select appropriate species and ensure proper installation for long-term growth.</p>
-            <h4 style="color: var(--primary-green); margin-top: 1.5rem;">What's Included:</h4>
-            <ul class="footer-links">
+            <h4 class="incl">What's Included</h4>
+            <ul class="incl-list">
               <li>Species selection</li>
               <li>Site assessment</li>
               <li>Proper planting</li>
-              <li>Staking & support</li>
+              <li>Staking &amp; support</li>
               <li>Maintenance guidance</li>
             </ul>
           </div>
         </div>
+      </div>
 
-        <!-- Service 6 -->
-        <div class="card scroll-reveal">
-          <div style="width: 100%; height: 250px; background: linear-gradient(135deg, #81C784 0%, #A5D6A7 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 4rem;">
-            🌍
+      <div class="col-md-6 reveal">
+        <div class="svc-detail-card">
+          <div class="img-wrap">
+            <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=700&q=80" alt="Sustainable garden with native plants">
+            <div class="ic-overlay">🌍</div>
           </div>
-          <div class="card-content">
+          <div class="body">
             <h3>Green Building Solutions</h3>
             <p>Sustainable landscaping solutions designed with environmental responsibility in mind. We create spaces that are beautiful, functional, and eco-friendly for long-term benefits.</p>
-            <h4 style="color: var(--primary-green); margin-top: 1.5rem;">What's Included:</h4>
-            <ul class="footer-links">
+            <h4 class="incl">What's Included</h4>
+            <ul class="incl-list">
               <li>Sustainable planning</li>
               <li>Native plant use</li>
               <li>Water conservation</li>
@@ -169,36 +190,40 @@
             </ul>
           </div>
         </div>
+      </div>
 
-        <!-- Service 7 -->
-        <div class="card scroll-reveal">
-          <div style="width: 100%; height: 250px; background: linear-gradient(135deg, #C8E6C9 0%, #E8F5E9 100%); display: flex; align-items: center; justify-content: center; color: var(--primary-green); font-size: 4rem;">
-            ✨
+      <div class="col-md-6 reveal">
+        <div class="svc-detail-card">
+          <div class="img-wrap">
+            <img src="https://images.unsplash.com/photo-1480497490787-505ec076689f?auto=format&fit=crop&w=700&q=80" alt="Outdoor pathway lighting and hardscape elements">
+            <div class="ic-overlay">✨</div>
           </div>
-          <div class="card-content">
+          <div class="body">
             <h3>Outdoor Beautification</h3>
             <p>Complete outdoor beautification services including hardscaping, water features, lighting, and decorative elements. We transform ordinary spaces into extraordinary outdoor havens.</p>
-            <h4 style="color: var(--primary-green); margin-top: 1.5rem;">What's Included:</h4>
-            <ul class="footer-links">
+            <h4 class="incl">What's Included</h4>
+            <ul class="incl-list">
               <li>Hardscape design</li>
-              <li>Paving & pathways</li>
+              <li>Paving &amp; pathways</li>
               <li>Water features</li>
               <li>Outdoor lighting</li>
               <li>Decorative elements</li>
             </ul>
           </div>
         </div>
+      </div>
 
-        <!-- Service 8 -->
-        <div class="card scroll-reveal">
-          <div style="width: 100%; height: 250px; background: linear-gradient(135deg, #43A047 0%, #1B5E20 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 4rem;">
-            🏢
+      <div class="col-md-6 reveal">
+        <div class="svc-detail-card">
+          <div class="img-wrap">
+            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=700&q=80" alt="Corporate office building with landscaped grounds">
+            <div class="ic-overlay">🏢</div>
           </div>
-          <div class="card-content">
+          <div class="body">
             <h3>Commercial Landscaping</h3>
             <p>Large-scale landscaping solutions for commercial properties, office buildings, hotels, and institutional facilities. We create professional outdoor spaces that impress clients and employees.</p>
-            <h4 style="color: var(--primary-green); margin-top: 1.5rem;">What's Included:</h4>
-            <ul class="footer-links">
+            <h4 class="incl">What's Included</h4>
+            <ul class="incl-list">
               <li>Master planning</li>
               <li>Professional installation</li>
               <li>Maintenance contracts</li>
@@ -208,166 +233,250 @@
           </div>
         </div>
       </div>
+
     </div>
-  </section>
-
-  <!-- Service Process -->
-  <section class="section" style="background-color: #FFFFFF;">
-    <div class="container">
-      <div class="section-title">
-        <h2>Our Service Process</h2>
-        <p>How we bring your landscaping vision to life</p>
-      </div>
-      <div class="grid grid-4">
-        <div class="card scroll-reveal">
-          <div class="card-content">
-            <div style="background: var(--primary-green); color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: bold; margin-bottom: 1rem;">1</div>
-            <h3>Consultation</h3>
-            <p>We meet with you to understand your needs, preferences, and budget for the project.</p>
-          </div>
-        </div>
-        <div class="card scroll-reveal">
-          <div class="card-content">
-            <div style="background: var(--primary-green); color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: bold; margin-bottom: 1rem;">2</div>
-            <h3>Assessment</h3>
-            <p>We evaluate your property, soil conditions, and environmental factors affecting the design.</p>
-          </div>
-        </div>
-        <div class="card scroll-reveal">
-          <div class="card-content">
-            <div style="background: var(--primary-green); color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: bold; margin-bottom: 1rem;">3</div>
-            <h3>Design</h3>
-            <p>We create detailed plans and designs tailored to your specific requirements and preferences.</p>
-          </div>
-        </div>
-        <div class="card scroll-reveal">
-          <div class="card-content">
-            <div style="background: var(--primary-green); color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: bold; margin-bottom: 1rem;">4</div>
-            <h3>Implementation</h3>
-            <p>Our expert team executes the plan with precision and attention to detail.</p>
-          </div>
-        </div>
-        <div class="card scroll-reveal">
-          <div class="card-content">
-            <div style="background: var(--primary-green); color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: bold; margin-bottom: 1rem;">5</div>
-            <h3>Finishing</h3>
-            <p>We complete all final touches and ensure everything meets our high quality standards.</p>
-          </div>
-        </div>
-        <div class="card scroll-reveal">
-          <div class="card-content">
-            <div style="background: var(--primary-green); color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: bold; margin-bottom: 1rem;">6</div>
-            <h3>Follow-up</h3>
-            <p>We provide maintenance guidance and ongoing support to ensure long-term success.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Why Choose Our Services -->
-  <section class="section">
-    <div class="container">
-      <div class="section-title">
-        <h2>Why Choose Our Services</h2>
-      </div>
-      <div class="grid grid-2">
-        <div class="scroll-reveal">
-          <h3>Professional Expertise</h3>
-          <p>Our team brings years of experience and professional expertise to every project, ensuring high-quality results.</p>
-        </div>
-        <div class="scroll-reveal">
-          <h3>Customized Solutions</h3>
-          <p>We create tailored designs and solutions that perfectly match your unique needs and vision.</p>
-        </div>
-        <div class="scroll-reveal">
-          <h3>Sustainable Practices</h3>
-          <p>We prioritize environmentally responsible approaches that benefit both your space and the planet.</p>
-        </div>
-        <div class="scroll-reveal">
-          <h3>Competitive Pricing</h3>
-          <p>We offer excellent value without compromising on quality or attention to detail.</p>
-        </div>
-        <div class="scroll-reveal">
-          <h3>Full Service Support</h3>
-          <p>From design to maintenance, we handle all aspects of your landscaping needs.</p>
-        </div>
-        <div class="scroll-reveal">
-          <h3>On-Time Delivery</h3>
-          <p>We respect timelines and deliver projects on schedule with professional project management.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA Section -->
-  <section class="section" style="background: linear-gradient(135deg, var(--primary-green) 0%, var(--secondary-green) 100%); color: white;">
-    <div class="container">
-      <div style="max-width: 600px; margin: 0 auto; text-align: center;">
-        <h2 style="color: white;">Ready to Get Started?</h2>
-        <p style="color: rgba(255, 255, 255, 0.95); margin-bottom: 2rem;">Contact us today for a free consultation and let's transform your outdoor space.</p>
-        <a href="contact.html" class="btn btn-outline" style="border-color: white; color: white;">Request a Consultation</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-section">
-          <h3>Landmark Landscaping</h3>
-          <p>Premier landscaping and irrigation solutions transforming outdoor spaces across Kenya.</p>
-          <div class="social-links">
-            <a href="https://facebook.com" title="Facebook">f</a>
-            <a href="https://twitter.com" title="Twitter">𝕏</a>
-            <a href="https://instagram.com" title="Instagram">📷</a>
-            <a href="https://linkedin.com" title="LinkedIn">in</a>
-          </div>
-        </div>
-        <div class="footer-section">
-          <h3>Quick Links</h3>
-          <ul class="footer-links">
-            <li><a href="about.html">About Us</a></li>
-            <li><a href="services.html">Services</a></li>
-            <li><a href="projects.html">Projects</a></li>
-            <li><a href="blog.html">Blog</a></li>
-          </ul>
-        </div>
-        <div class="footer-section">
-          <h3>Contact Info</h3>
-          <ul class="footer-links">
-            <li><a href="mailto:bennyoike@gmail.com">📧 bennyoike@gmail.com</a></li>
-            <li><a href="tel:+254728158526">📱 +254 728 158 526</a></li>
-            <li><a href="#">📍 Nairobi, Kenya</a></li>
-          </ul>
-        </div>
-        <div class="footer-section">
-          <h3>Service Areas</h3>
-          <p>We serve Nairobi and major towns across Kenya including:</p>
-          <p style="font-size: 0.9rem;">Mombasa • Kisumu • Nakuru • Eldoret • Kisii • Kericho</p>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>&copy; 2024 Landmark Landscaping Services. All rights reserved.</p>
-      </div>
-    </div>
-  </footer>
-
-  <!-- Floating Action Buttons -->
-  <button id="whatsapp-btn" aria-label="Contact on WhatsApp">💬</button>
-  <button id="quote-btn" aria-label="Request a quote">📋</button>
-  <button id="back-to-top" aria-label="Back to top">⬆️</button>
-
-  <!-- Drag Handle with Menu -->
-  <div class="drag-handle" title="Drag me around">☎️</div>
-  <div class="drag-menu">
-    <a href="tel:+254728158526">📱 Call Us</a>
-    <a href="mailto:bennyoike@gmail.com">📧 Email</a>
-    <a href="contact.html">💼 Contact Form</a>
-    <a href="https://wa.me/254728158526">💬 WhatsApp</a>
   </div>
+</section>
 
-  <script src="script.js"></script>
+<!-- ============ SERVICE PROCESS ============ -->
+<section class="section section-sage">
+  <div class="container">
+    <div class="section-title mx-auto reveal">
+      <p class="eyebrow">How It Works</p>
+      <h2>Our Service Process</h2>
+      <p class="lead-soft mt-2">How we bring your landscaping vision to life, step by step.</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-sm-6 col-lg-4 reveal">
+        <div class="process-card">
+          <div class="step-num">1</div>
+          <h3>Consultation</h3>
+          <p>We meet with you to understand your needs, preferences, and budget for the project.</p>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-4 reveal">
+        <div class="process-card">
+          <div class="step-num">2</div>
+          <h3>Assessment</h3>
+          <p>We evaluate your property, soil conditions, and environmental factors affecting the design.</p>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-4 reveal">
+        <div class="process-card">
+          <div class="step-num">3</div>
+          <h3>Design</h3>
+          <p>We create detailed plans and designs tailored to your specific requirements and preferences.</p>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-4 reveal">
+        <div class="process-card">
+          <div class="step-num">4</div>
+          <h3>Implementation</h3>
+          <p>Our expert team executes the plan with precision and attention to detail.</p>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-4 reveal">
+        <div class="process-card">
+          <div class="step-num">5</div>
+          <h3>Finishing</h3>
+          <p>We complete all final touches and ensure everything meets our high quality standards.</p>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-4 reveal">
+        <div class="process-card">
+          <div class="step-num">6</div>
+          <h3>Follow-up</h3>
+          <p>We provide maintenance guidance and ongoing support to ensure long-term success.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHY CHOOSE OUR SERVICES ============ -->
+<section class="section">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-5 reveal">
+        <p class="eyebrow">The Difference</p>
+        <h2 class="display fw-semibold mt-2 mb-3" style="font-size:clamp(1.8rem,3vw,2.4rem);">Why choose our services</h2>
+        <div class="leaf-frame" style="height:320px;">
+          <img src="https://images.unsplash.com/photo-1599629954294-14df9ec8ce4e?auto=format&fit=crop&w=700&q=80" alt="Beautifully landscaped garden with colorful flower beds">
+        </div>
+      </div>
+      <div class="col-lg-7">
+        <div class="row">
+          <div class="col-sm-6 reveal">
+            <div class="why-item"><span class="ck">✓</span><div><h3>Professional Expertise</h3><p>Our team brings years of experience and professional expertise to every project, ensuring high-quality results.</p></div></div>
+            <div class="why-item"><span class="ck">✓</span><div><h3>Customized Solutions</h3><p>We create tailored designs and solutions that perfectly match your unique needs and vision.</p></div></div>
+            <div class="why-item" style="border-bottom:none;"><span class="ck">✓</span><div><h3>Sustainable Practices</h3><p>We prioritize environmentally responsible approaches that benefit both your space and the planet.</p></div></div>
+          </div>
+          <div class="col-sm-6 reveal">
+            <div class="why-item"><span class="ck">✓</span><div><h3>Competitive Pricing</h3><p>We offer excellent value without compromising on quality or attention to detail.</p></div></div>
+            <div class="why-item"><span class="ck">✓</span><div><h3>Full Service Support</h3><p>From design to maintenance, we handle all aspects of your landscaping needs.</p></div></div>
+            <div class="why-item" style="border-bottom:none;"><span class="ck">✓</span><div><h3>On-Time Delivery</h3><p>We respect timelines and deliver projects on schedule with professional project management.</p></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA BAND ============ -->
+<section class="section pt-0">
+  <div class="container">
+    <div class="cta-band text-center reveal">
+      <h2 class="fw-semibold mb-2">Ready to get started?</h2>
+      <p class="mb-4" style="color:rgba(255,255,255,.85); max-width:520px; margin-inline:auto;">Contact us today for a free consultation and let's transform your outdoor space.</p>
+      <a href="contact.html" class="btn btn-line-light">Request a Consultation</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="footer-bg"></div>
+  <div class="footer-overlay"></div>
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-4 col-sm-6">
+        <h3>🌿 Landmark Landscaping</h3>
+        <p style="font-size:.92rem;">Premier landscaping and irrigation solutions transforming outdoor spaces across Kenya.</p>
+        <div class="social-row mt-3">
+          <a href="https://facebook.com" title="Facebook" aria-label="Follow us on Facebook">f</a>
+          <a href="https://twitter.com" title="Twitter" aria-label="Follow us on Twitter">𝕏</a>
+          <a href="https://instagram.com" title="Instagram" aria-label="Follow us on Instagram">📷</a>
+          <a href="https://linkedin.com" title="LinkedIn" aria-label="Follow us on LinkedIn">in</a>
+        </div>
+      </div>
+      <div class="col-lg-2 col-sm-6">
+        <h3>Quick Links</h3>
+        <ul class="footer-links list-unstyled">
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="blog.html">Blog</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-3 col-sm-6">
+        <h3>Contact Info</h3>
+        <ul class="footer-links list-unstyled">
+          <li><a href="mailto:bennyoike@gmail.com">📧 bennyoike@gmail.com</a></li>
+          <li><a href="tel:+254728158526">📱 +254 728 158 526</a></li>
+          <li><a href="#">📍 Nairobi, Kenya</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-3 col-sm-6">
+        <h3>Service Areas</h3>
+        <p style="font-size:.92rem;">We serve Nairobi and major towns across Kenya, including:</p>
+      </div>
+    </div>
+
+    <div class="marquee-wrap mt-2 mb-5">
+      <div class="marquee-track">
+        <span class="city-chip">📍 Nairobi</span>
+        <span class="city-chip">📍 Mombasa</span>
+        <span class="city-chip">📍 Kisumu</span>
+        <span class="city-chip">📍 Nakuru</span>
+        <span class="city-chip">📍 Eldoret</span>
+        <span class="city-chip">📍 Kisii</span>
+        <span class="city-chip">📍 Kericho</span>
+        <span class="city-chip">📍 Thika</span>
+        <span class="city-chip">📍 Nyeri</span>
+        <span class="city-chip">📍 Machakos</span>
+        <span class="city-chip">📍 Naivasha</span>
+        <span class="city-chip">📍 Kitale</span>
+        <span class="city-chip">📍 Malindi</span>
+        <span class="city-chip">📍 Meru</span>
+        <span class="city-chip">📍 Nanyuki</span>
+        <span class="city-chip">📍 Nairobi</span>
+        <span class="city-chip">📍 Mombasa</span>
+        <span class="city-chip">📍 Kisumu</span>
+        <span class="city-chip">📍 Nakuru</span>
+        <span class="city-chip">📍 Eldoret</span>
+        <span class="city-chip">📍 Kisii</span>
+        <span class="city-chip">📍 Kericho</span>
+        <span class="city-chip">📍 Thika</span>
+        <span class="city-chip">📍 Nyeri</span>
+        <span class="city-chip">📍 Machakos</span>
+        <span class="city-chip">📍 Naivasha</span>
+        <span class="city-chip">📍 Kitale</span>
+        <span class="city-chip">📍 Malindi</span>
+        <span class="city-chip">📍 Meru</span>
+        <span class="city-chip">📍 Nanyuki</span>
+      </div>
+    </div>
+
+    <div class="footer-bottom text-center pb-4">
+      <p class="mb-0">&copy; 2024 Landmark Landscaping Services. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ FLOATING ACTION BUTTONS ============ -->
+<div class="fab-stack">
+  <button id="back-to-top" class="fab fab-top" aria-label="Back to top" title="Back to top">⬆️</button>
+  <button id="quote-btn" class="fab fab-quote" aria-label="Request a quote" title="Request a Quote" data-bs-toggle="modal" data-bs-target="#quoteModal">📋</button>
+  <a href="https://wa.me/254728158526" target="_blank" rel="noopener" class="fab fab-whatsapp" aria-label="Contact on WhatsApp" title="Chat on WhatsApp">💬</a>
+</div>
+
+<!-- Start of Tawk.to Script -->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/6a35244b16fcef1d436fb5a9/default';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!-- End of Tawk.to Script -->
+
+<!-- ============ QUOTE MODAL ============ -->
+<div class="modal fade" id="quoteModal" tabindex="-1" aria-labelledby="quoteModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content" style="border-radius:20px; border:none;">
+      <div class="modal-header" style="border-bottom:1px solid var(--line);">
+        <h5 class="modal-title display" id="quoteModalLabel">Request a Free Quote</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="quoteForm" novalidate>
+          <div class="mb-3">
+            <label for="qName" class="form-label">Full Name</label>
+            <input type="text" class="form-control" id="qName" required>
+          </div>
+          <div class="mb-3">
+            <label for="qPhone" class="form-label">Phone Number</label>
+            <input type="tel" class="form-control" id="qPhone" required>
+          </div>
+          <div class="mb-3">
+            <label for="qService" class="form-label">Service Needed</label>
+            <select class="form-select" id="qService" required>
+              <option value="" selected disabled>Choose a service…</option>
+              <option>Landscaping Design</option>
+              <option>Irrigation Systems</option>
+              <option>Garden Maintenance</option>
+              <option>Lawn Establishment</option>
+              <option>Tree Planting</option>
+              <option>Commercial Landscaping</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="qMessage" class="form-label">Tell us about your project</label>
+            <textarea class="form-control" id="qMessage" rows="3"></textarea>
+          </div>
+          <div id="quoteFeedback" class="small mb-2" style="display:none;"></div>
+          <button type="submit" class="btn btn-forest w-100">Send Request</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
