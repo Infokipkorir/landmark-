@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Explore Landmark Landscaping Services - From landscape design to irrigation systems, garden maintenance, and commercial landscaping solutions.">
+<meta name="keywords" content="landscaping services, irrigation systems, garden maintenance, lawn establishment, tree planting, Kenya">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.landmarklandscaping.co.ke/services.html">
+<meta property="og:title" content="Services - Landmark Landscaping">
+<link rel="canonical" href="https://www.landmarklandscaping.co.ke/services.html">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' font-size='75' fill='%231B5E20'>🌿</text></svg>">
+<title>Services - Landmark Landscaping Services</title>
+
+<!-- Bootstrap 5 -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --forest:#1B5E20;
+  --forest-deep:#143F18;
+  --leaf:#43A047;
+  --sage:#EEF3E7;
+  --clay:#C0703A;
+  --clay-deep:#9C5526;
+  --sun:#E0A93B;
+  --cream:#FBF8F2;
+  --ink:#1C2418;
+  --ink-soft:#52604A;
+  --line:rgba(28,36,24,0.08);
+  --display:'Fraunces', serif;
+  --body:'Plus Jakarta Sans', system-ui, sans-serif;
+  --mono:'JetBrains Mono', monospace;
+  --radius-lg:28px;
+  --radius-md:16px;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--body); color:var(--ink); background:var(--cream); overflow-x:hidden;}
+h1,h2,h3,.display{font-family:var(--display); color:var(--forest-deep); letter-spacing:-0.01em;}
+.eyebrow{font-family:var(--mono); font-size:.72rem; letter-spacing:.16em; text-transform:uppercase; color:var(--clay-deep); font-weight:500;}
+a{color:var(--forest);}
+.lead-soft{color:var(--ink-soft);}
+
+/* Buttons */
+.btn{border-radius:999px; font-weight:600; padding:.75rem 1.7rem; font-size:.95rem; transition:transform .25s ease, box-shadow .25s ease, background .25s ease;}
+.btn-forest{background:var(--forest); color:#fff; border:none;}
+.btn-forest:hover{background:var(--forest-deep); color:#fff; transform:translateY(-2px); box-shadow:0 10px 24px rgba(27,94,32,.28);}
+.btn-clay{background:var(--clay); color:#fff; border:none;}
+.btn-clay:hover{background:var(--clay-deep); color:#fff; transform:translateY(-2px); box-shadow:0 10px 24px rgba(192,112,58,.3);}
+.btn-line{background:transparent; border:1.5px solid currentColor; color:var(--forest);}
+.btn-line:hover{background:var(--forest); color:#fff; border-color:var(--forest); transform:translateY(-2px);}
+.btn-line-light{background:transparent; border:1.5px solid rgba(255,255,255,.7); color:#fff;}
+.btn-line-light:hover{background:#fff; color:var(--forest-deep); transform:translateY(-2px);}
+.btn-ghost-sm{background:var(--sage); color:var(--forest-deep); border:none; padding:.55rem 1.2rem; font-size:.85rem;}
+.btn-ghost-sm:hover{background:var(--forest); color:#fff; transform:translateY(-2px);}
+
+/* Navbar */
+.nav-wrap{position:fixed; top:0; left:0; right:0; z-index:1000; transition:background .35s ease, box-shadow .35s ease, padding .35s ease; padding:1.1rem 0;}
+.nav-wrap.scrolled{background:rgba(251,248,242,.92); backdrop-filter:blur(10px); box-shadow:0 4px 30px rgba(28,36,24,.08); padding:.6rem 0;}
+.brand{font-family:var(--display); font-weight:600; font-size:1.35rem; color:#fff !important; display:flex; align-items:center; gap:.5rem; text-decoration:none; transition:color .35s ease;}
+.brand .leaf-mark{font-size:1.5rem;}
+.navbar-nav .nav-link{font-weight:600; font-size:.92rem; color:#fff !important; margin:0 .5rem; position:relative; padding:.4rem 0 !important; transition:color .35s ease;}
+.navbar-nav .nav-link::after{content:''; position:absolute; left:0; bottom:-2px; height:2px; width:0%; background:var(--sun); transition:width .25s ease;}
+.navbar-nav .nav-link:hover::after{width:100%;}
+.navbar-nav .nav-link.active{color:var(--sun) !important;}
+.navbar-toggler{border-radius:8px; border-color:rgba(255,255,255,.4);}
+.navbar-toggler-icon{filter:brightness(0) invert(1);}
+.nav-wrap.scrolled .navbar-toggler-icon{filter:none;}
+.nav-wrap.scrolled .brand{color:var(--forest-deep) !important;}
+.nav-wrap.scrolled .navbar-nav .nav-link{color:var(--ink) !important;}
+.nav-wrap.scrolled .navbar-nav .nav-link.active{color:var(--forest) !important;}
+.nav-wrap.scrolled .navbar-nav .nav-link::after{background:var(--clay);}
+@media (max-width: 991.98px){
+  .navbar-collapse.show{background:#fff; border-radius:16px; margin-top:1rem; padding:1rem 1.2rem; box-shadow:0 18px 40px -12px rgba(20,63,24,.25);}
+  .navbar-collapse.show .nav-link{color:var(--ink) !important;}
+  .navbar-collapse.show .nav-link.active{color:var(--forest) !important;}
+}
+
+/* Page hero */
+.page-hero{position:relative; min-height:46vh; display:flex; align-items:center; overflow:hidden; background:var(--forest-deep); padding-top:5rem;}
+.hero-bg{position:absolute; inset:0; background-size:cover; background-position:center; transform:scale(1.02);}
+.hero-bg img{width:100%; height:100%; object-fit:cover; display:block;}
+.hero-overlay{position:absolute; inset:0; background:linear-gradient(120deg, rgba(15,38,16,.94) 15%, rgba(20,63,24,.72) 55%, rgba(20,63,24,.4) 100%);}
+.hero-content{position:relative; z-index:2; color:#fff;}
+.hero-content .eyebrow{color:var(--sun);}
+.page-hero h1{color:#fff; font-size:clamp(2rem, 4.2vw, 3.1rem); font-weight:600; line-height:1.1; max-width:680px;}
+.page-hero p.lede{color:rgba(255,255,255,.88); font-size:1.05rem; max-width:540px; margin:1rem 0 0;}
+.breadcrumb-bar{position:relative; z-index:2; display:flex; align-items:center; gap:.5rem; font-family:var(--mono); font-size:.78rem; letter-spacing:.04em; color:rgba(255,255,255,.7); margin-bottom:1.4rem;}
+.breadcrumb-bar a{color:rgba(255,255,255,.7); text-decoration:none;}
+.breadcrumb-bar a:hover{color:var(--sun);}
+.breadcrumb-bar .sep{opacity:.5;}
+.breadcrumb-bar .current{color:var(--sun);}
+
+/* Sections */
+.section{padding:6.5rem 0;}
+.section-sage{background:var(--sage);}
+.section-title{max-width:620px; margin-bottom:3rem;}
+.section-title.mx-auto{margin-left:auto; margin-right:auto; text-align:center;}
+.section-title h2{font-size:clamp(1.9rem,3.4vw,2.6rem); font-weight:600; margin-top:.4rem;}
+
+.leaf-frame{position:relative; border-radius:42% 58% 65% 35% / 48% 42% 58% 52%; overflow:hidden; box-shadow:0 30px 60px -20px rgba(20,63,24,.35);}
+.leaf-frame img{width:100%; height:100%; object-fit:cover; display:block;}
+
+/* Detailed service cards */
+.svc-detail-card{background:#fff; border-radius:var(--radius-md); overflow:hidden; border:1px solid var(--line); height:100%; display:flex; flex-direction:column; transition:transform .3s ease, box-shadow .3s ease;}
+.svc-detail-card:hover{transform:translateY(-6px); box-shadow:0 24px 50px -18px rgba(20,63,24,.25);}
+.svc-detail-card .img-wrap{height:220px; display:flex; align-items:center; justify-content:center; font-size:3.4rem; color:#fff; position:relative; overflow:hidden;}
+.svc-detail-card .img-wrap img{width:100%; height:100%; object-fit:cover; position:absolute; inset:0;}
+.svc-detail-card .img-wrap .ic-overlay{position:relative; z-index:2; width:64px; height:64px; border-radius:18px; background:rgba(255,255,255,.18); backdrop-filter:blur(6px); display:flex; align-items:center; justify-content:center; font-size:1.8rem; border:1px solid rgba(255,255,255,.3);}
+.svc-detail-card .img-wrap::after{content:''; position:absolute; inset:0; background:linear-gradient(180deg, rgba(20,63,24,.15), rgba(20,63,24,.55));}
+.svc-detail-card .body{padding:1.8rem 1.7rem; display:flex; flex-direction:column; flex:1;}
+.svc-detail-card h3{font-size:1.25rem; font-weight:600; margin-bottom:.7rem;}
+.svc-detail-card p{color:var(--ink-soft); font-size:.93rem;}
+.svc-detail-card .card-actions{margin-top:auto; padding-top:1.3rem; display:flex; gap:.7rem; flex-wrap:wrap;}
+h4.incl{font-family:var(--mono); font-size:.74rem; letter-spacing:.1em; text-transform:uppercase; color:var(--clay-deep); margin-top:1.4rem; margin-bottom:.8rem;}
+ul.incl-list{list-style:none; padding:0; margin:0; display:grid; grid-template-columns:1fr 1fr; gap:.5rem .8rem;}
+ul.incl-list li{font-size:.85rem; color:var(--ink); display:flex; align-items:flex-start; gap:.4rem;}
+ul.incl-list li::before{content:'✓'; color:var(--forest); font-weight:700; flex-shrink:0;}
+
+/* Process steps */
+.process-card{background:#fff; border-radius:var(--radius-md); padding:1.8rem 1.6rem; height:100%; border:1px solid var(--line); position:relative; transition:transform .3s ease, box-shadow .3s ease;}
+.process-card:hover{transform:translateY(-6px); box-shadow:0 20px 44px -16px rgba(20,63,24,.22);}
+.process-card .step-num{background:var(--forest); color:#fff; width:46px; height:46px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:var(--display); font-size:1.25rem; font-weight:600; margin-bottom:1.1rem;}
+.process-card h3{font-size:1.05rem; font-weight:600; margin-bottom:.5rem;}
+.process-card p{font-size:.88rem; color:var(--ink-soft); margin-bottom:0;}
+
+/* Why choose us */
+.why-item{display:flex; gap:1rem; padding:1.4rem 0; border-bottom:1px solid var(--line);}
+.why-item .ck{width:38px; height:38px; min-width:38px; border-radius:50%; background:var(--forest); color:#fff; display:flex; align-items:center; justify-content:center; font-size:.95rem;}
+.why-item h3{font-size:1.02rem; font-weight:700; margin-bottom:.25rem;}
+.why-item p{font-size:.88rem; color:var(--ink-soft); margin-bottom:0;}
+
+/* CTA band */
+.cta-band{background:linear-gradient(120deg, var(--forest-deep) 0%, var(--forest) 100%); border-radius:36px; padding:4rem 2.5rem; position:relative; overflow:hidden; color:#fff;}
+.cta-band::before{content:'🌿'; position:absolute; font-size:14rem; opacity:.08; right:-2rem; top:-4rem; transform:rotate(15deg);}
+.cta-band h2{color:#fff; font-size:clamp(1.7rem,3vw,2.3rem);}
+
+/* Footer */
+footer{position:relative; background:var(--forest-deep); color:rgba(255,255,255,.85); padding:4.5rem 0 0; overflow:hidden;}
+.footer-bg{position:absolute; inset:0; background:url('https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=1800&q=80') center/cover; opacity:.16;}
+.footer-overlay{position:absolute; inset:0; background:linear-gradient(180deg, rgba(20,63,24,.92) 0%, rgba(15,38,16,.97) 100%);}
+footer .container{position:relative; z-index:2;}
+footer h3{color:#fff; font-family:var(--display); font-size:1.05rem; font-weight:600; margin-bottom:1.1rem;}
+footer a{color:rgba(255,255,255,.75); text-decoration:none;}
+footer a:hover{color:var(--sun);}
+footer .footer-links li{margin-bottom:.55rem; font-size:.92rem;}
+footer .footer-links li a{display:flex; align-items:center; gap:.45rem;}
+.marquee-wrap{overflow:hidden; position:relative; mask-image:linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); -webkit-mask-image:linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);}
+.marquee-track{display:flex; gap:1.6rem; width:max-content; animation:marqueeScroll 22s linear infinite;}
+.marquee-wrap:hover .marquee-track{animation-play-state:paused;}
+.marquee-track .city-chip{display:inline-flex; align-items:center; gap:.4rem; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.14); border-radius:999px; padding:.45rem 1rem; font-size:.83rem; white-space:nowrap; color:rgba(255,255,255,.85);}
+@keyframes marqueeScroll{from{transform:translateX(0);} to{transform:translateX(-50%);}}
+@media (prefers-reduced-motion: reduce){.marquee-track{animation:none;}}
+.social-row a{width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,.1); display:inline-flex; align-items:center; justify-content:center; margin-right:.5rem; font-size:.95rem; transition:background .25s ease;}
+.social-row a:hover{background:var(--clay);}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.12); margin-top:2.5rem; padding-top:1.5rem; font-size:.82rem; color:rgba(255,255,255,.6);}
+
+/* Floating action buttons */
+.fab-stack{position:fixed; bottom:1.6rem; right:1.6rem; z-index:1050; display:flex; flex-direction:column; gap:.8rem; align-items:flex-end;}
+.fab{width:54px; height:54px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.4rem; border:none; cursor:pointer; box-shadow:0 12px 28px -8px rgba(20,63,24,.4); transition:transform .25s ease;}
+.fab:hover{transform:scale(1.08);}
+.fab-whatsapp{background:#25D366; color:#fff;}
+.fab-quote{background:var(--clay); color:#fff;}
+.fab-top{background:#fff; color:var(--forest); border:1px solid var(--line); opacity:0; pointer-events:none; transform:translateY(10px);}
+.fab-top.show{opacity:1; pointer-events:auto; transform:translateY(0);}
+
+/* Scroll reveal */
+.reveal{opacity:0; transform:translateY(28px); transition:opacity .7s ease, transform .7s ease;}
+.reveal.in{opacity:1; transform:translateY(0);}
+@media (prefers-reduced-motion: reduce){.reveal{opacity:1; transform:none; transition:none;} html{scroll-behavior:auto;}}
+
+a:focus-visible, button:focus-visible{outline:2px solid var(--clay); outline-offset:3px;}
+
+/* Service detail modal */
+#serviceModal .modal-content{border-radius:22px; border:none; overflow:hidden;}
+#serviceModal .sm-banner{height:220px; position:relative; overflow:hidden;}
+#serviceModal .sm-banner img{width:100%; height:100%; object-fit:cover;}
+#serviceModal .sm-banner::after{content:''; position:absolute; inset:0; background:linear-gradient(180deg, rgba(20,63,24,.1), rgba(20,63,24,.65));}
+#serviceModal .sm-banner .sm-icon{position:absolute; bottom:1rem; left:1.5rem; z-index:2; width:56px; height:56px; border-radius:16px; background:rgba(255,255,255,.2); backdrop-filter:blur(6px); border:1px solid rgba(255,255,255,.3); display:flex; align-items:center; justify-content:center; font-size:1.6rem;}
+#serviceModal .sm-banner .sm-title{position:absolute; bottom:1rem; left:5rem; z-index:2; color:#fff; font-size:1.4rem; font-weight:600; font-family:var(--display);}
+#serviceModal .modal-body{padding:1.8rem 2rem 2rem;}
+#serviceModal .btn-close{filter:invert(1); position:absolute; top:1rem; right:1rem; z-index:3;}
+
+@media (max-width: 991.98px){
+  .page-hero{min-height:38vh;}
+  .section{padding:4.5rem 0;}
+  .cta-band{padding:3rem 1.5rem; border-radius:24px;}
+  ul.incl-list{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ NAVBAR ============ -->
+<nav class="navbar navbar-expand-lg nav-wrap" id="mainNav">
+  <div class="container">
+    <a class="brand" href="index.html"><span class="leaf-mark">🌿</span>Landmark Landscaping</a>
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto align-items-lg-center">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+        <li class="nav-item"><a class="nav-link active" href="services.html">Services</a></li>
+        <li class="nav-item"><a class="nav-link" href="projects.html">Projects</a></li>
+        <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+        <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
+        <li class="nav-item"><a class="nav-link" href="testimonials.html">Testimonials</a></li>
+        <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+          <a class="btn btn-forest btn-sm" href="contact.html">Contact Us</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- ============ PAGE HERO ============ -->
+<section class="page-hero">
+  <div class="hero-bg">
+    <img src="https://images.unsplash.com/photo-1599629954294-14df9ec8ce4e?auto=format&fit=crop&w=2000&q=80" alt="Manicured garden with flower beds representing landscaping services">
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="container hero-content">
+    <div class="breadcrumb-bar">
+      <a href="index.html">Home</a><span class="sep">/</span><span class="current">Services</span>
+    </div>
+    <p class="eyebrow">What We Offer</p>
+    <h1>Services we actually stand behind</h1>
+    <p class="lede">No two yards are the same, so no two jobs look the same either. Here's everything we do, told straight — what it involves, what you get, and how to start.</p>
+  </div>
+</section>
+
+<!-- ============ SERVICES GRID ============ -->
+<section class="section">
+  <div class="container">
+    <div class="section-title mx-auto reveal">
+      <p class="eyebrow">Pick a service</p>
+      <h2>Tap "See the details" on anything that catches your eye</h2>
+      <p class="lead-soft mt-2">Each card opens up into the full picture — what's involved, what's included, and a quick way to ask for it.</p>
+    </div>
+    <div class="row g-4" id="servicesGrid">
+      <!-- Cards are rendered here by JS from the SERVICES data below, plus a clear "See the details" button -->
+    </div>
+  </div>
+</section>
+
+<!-- ============ SERVICE PROCESS ============ -->
+<section class="section section-sage">
+  <div class="container">
+    <div class="section-title mx-auto reveal">
+      <p class="eyebrow">How a job actually runs</p>
+      <h2>From first phone call to final walk-through</h2>
+      <p class="lead-soft mt-2">There's no mystery to it. This is the same process whether it's a small flower bed or a full compound.</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-sm-6 col-lg-4 reveal">
+        <div class="process-card">
+          <div class="step-num">1</div>
+          <h3>We talk first</h3>
+          <p>You tell us what's bugging you about the space, what you're hoping for, and roughly what you want to spend. No pressure, no jargon.</p>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-4 reveal">
+        <div class="process-card">
+          <div class="step-num">2</div>
+          <h3>We come look</h3>
+          <p>Someone walks the site with you — checks the soil, the slope, the sun, the drainage — the stuff that decides whether a plan will actually work.</p>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-4 reveal">
+        <div class="process-card">
+          <div class="step-num">3</div>
+          <h3>We sketch the plan</h3>
+          <p>You get a layout and a plant list built around your site and your budget, not a copy-paste template.</p>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-4 reveal">
+        <div class="process-card">
+          <div class="step-num">4</div>
+          <h3>We get to work</h3>
+          <p>Our crew handles the digging, planting, building, and wiring — and keeps you posted if anything changes along the way.</p>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-4 reveal">
+        <div class="process-card">
+          <div class="step-num">5</div>
+          <h3>We tidy up</h3>
+          <p>Final details, clean edges, a proper clean-up of the site — we don't call it done until it actually looks done.</p>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-4 reveal">
+        <div class="process-card">
+          <div class="step-num">6</div>
+          <h3>We stay in touch</h3>
+          <p>We'll tell you how to care for what's new, and we're a phone call away if a question comes up months later.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHY CHOOSE OUR SERVICES ============ -->
+<section class="section">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-5 reveal">
+        <p class="eyebrow">Honestly speaking</p>
+        <h2 class="display fw-semibold mt-2 mb-3" style="font-size:clamp(1.8rem,3vw,2.4rem);">Why people keep calling us back</h2>
+        <div class="leaf-frame" style="height:320px;">
+          <img src="https://images.unsplash.com/photo-1599629954294-14df9ec8ce4e?auto=format&fit=crop&w=700&q=80" alt="Beautifully landscaped garden with colorful flower beds">
+        </div>
+      </div>
+      <div class="col-lg-7">
+        <div class="row">
+          <div class="col-sm-6 reveal">
+            <div class="why-item"><span class="ck">✓</span><div><h3>We've done this a while</h3><p>Years of hands-in-the-soil experience means fewer surprises and fewer redos.</p></div></div>
+            <div class="why-item"><span class="ck">✓</span><div><h3>Your space, your plan</h3><p>We design around how you'll actually use the place, not a catalogue template.</p></div></div>
+            <div class="why-item" style="border-bottom:none;"><span class="ck">✓</span><div><h3>We try not to waste water</h3><p>Smarter irrigation and native plants mean lower bills and a garden that copes when the rains are late.</p></div></div>
+          </div>
+          <div class="col-sm-6 reveal">
+            <div class="why-item"><span class="ck">✓</span><div><h3>Fair pricing, no surprises</h3><p>You'll know the cost up front — what changes the quote, and what doesn't.</p></div></div>
+            <div class="why-item"><span class="ck">✓</span><div><h3>We don't disappear after</h3><p>Maintenance plans and a real phone number if something needs attention later.</p></div></div>
+            <div class="why-item" style="border-bottom:none;"><span class="ck">✓</span><div><h3>We turn up when we say we will</h3><p>Timelines are something we plan around, not something we apologise for missing.</p></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA BAND ============ -->
+<section class="section pt-0">
+  <div class="container">
+    <div class="cta-band text-center reveal">
+      <h2 class="fw-semibold mb-2">Got a space that needs some love?</h2>
+      <p class="mb-4" style="color:rgba(255,255,255,.85); max-width:520px; margin-inline:auto;">Tell us what you're picturing and we'll tell you honestly what it'll take to get there.</p>
+      <a href="contact.html" class="btn btn-line-light">Talk to us</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="footer-bg"></div>
+  <div class="footer-overlay"></div>
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-4 col-sm-6">
+        <h3>🌿 Landmark Landscaping</h3>
+        <p style="font-size:.92rem;">Premier landscaping and irrigation solutions transforming outdoor spaces across Kenya.</p>
+        <div class="social-row mt-3">
+          <a href="https://facebook.com" title="Facebook" aria-label="Follow us on Facebook">f</a>
+          <a href="https://twitter.com" title="Twitter" aria-label="Follow us on Twitter">𝕏</a>
+          <a href="https://instagram.com" title="Instagram" aria-label="Follow us on Instagram">📷</a>
+          <a href="https://linkedin.com" title="LinkedIn" aria-label="Follow us on LinkedIn">in</a>
+        </div>
+      </div>
+      <div class="col-lg-2 col-sm-6">
+        <h3>Quick Links</h3>
+        <ul class="footer-links list-unstyled">
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="blog.html">Blog</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-3 col-sm-6">
+        <h3>Contact Info</h3>
+        <ul class="footer-links list-unstyled">
+          <li><a href="mailto:bennyoike@gmail.com">📧 bennyoike@gmail.com</a></li>
+          <li><a href="tel:+254728158526">📱 +254 728 158 526</a></li>
+          <li><a href="#">📍 Nairobi, Kenya</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-3 col-sm-6">
+        <h3>Service Areas</h3>
+        <p style="font-size:.92rem;">We serve Nairobi and major towns across Kenya, including:</p>
+      </div>
+    </div>
+
+    <div class="marquee-wrap mt-2 mb-5">
+      <div class="marquee-track">
+        <span class="city-chip">📍 Nairobi</span>
+        <span class="city-chip">📍 Mombasa</span>
+        <span class="city-chip">📍 Kisumu</span>
+        <span class="city-chip">📍 Nakuru</span>
+        <span class="city-chip">📍 Eldoret</span>
+        <span class="city-chip">📍 Kisii</span>
+        <span class="city-chip">📍 Kericho</span>
+        <span class="city-chip">📍 Thika</span>
+        <span class="city-chip">📍 Nyeri</span>
+        <span class="city-chip">📍 Machakos</span>
+        <span class="city-chip">📍 Naivasha</span>
+        <span class="city-chip">📍 Kitale</span>
+        <span class="city-chip">📍 Malindi</span>
+        <span class="city-chip">📍 Meru</span>
+        <span class="city-chip">📍 Nanyuki</span>
+        <span class="city-chip">📍 Nairobi</span>
+        <span class="city-chip">📍 Mombasa</span>
+        <span class="city-chip">📍 Kisumu</span>
+        <span class="city-chip">📍 Nakuru</span>
+        <span class="city-chip">📍 Eldoret</span>
+        <span class="city-chip">📍 Kisii</span>
+        <span class="city-chip">📍 Kericho</span>
+        <span class="city-chip">📍 Thika</span>
+        <span class="city-chip">📍 Nyeri</span>
+        <span class="city-chip">📍 Machakos</span>
+        <span class="city-chip">📍 Naivasha</span>
+        <span class="city-chip">📍 Kitale</span>
+        <span class="city-chip">📍 Malindi</span>
+        <span class="city-chip">📍 Meru</span>
+        <span class="city-chip">📍 Nanyuki</span>
+      </div>
+    </div>
+
+    <div class="footer-bottom text-center pb-4">
+      <p class="mb-0">&copy; 2024 Landmark Landscaping Services. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ FLOATING ACTION BUTTONS ============ -->
+<div class="fab-stack">
+  <button id="back-to-top" class="fab fab-top" aria-label="Back to top" title="Back to top">⬆️</button>
+  <button id="quote-btn" class="fab fab-quote" aria-label="Request a quote" title="Request a Quote" data-bs-toggle="modal" data-bs-target="#quoteModal">📋</button>
+  <a href="https://wa.me/254728158526" target="_blank" rel="noopener" class="fab fab-whatsapp" aria-label="Contact on WhatsApp" title="Chat on WhatsApp">💬</a>
+</div>
+
+<!-- Start of Tawk.to Script -->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/6a35244b16fcef1d436fb5a9/default';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!-- End of Tawk.to Script -->
+
+<!-- ============ SERVICE DETAIL MODAL ============ -->
+<div class="modal fade" id="serviceModal" tabindex="-1" aria-labelledby="serviceModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="sm-banner">
+        <img id="smImage" src="" alt="">
+        <div class="sm-icon" id="smIcon"></div>
+        <div class="sm-title" id="smTitle"></div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p id="smDescription" class="lead-soft"></p>
+        <h4 class="incl">What's Included</h4>
+        <ul class="incl-list" id="smInclList"></ul>
+        <div class="d-flex gap-3 flex-wrap mt-4">
+          <button type="button" class="btn btn-forest" id="smRequestBtn">Request This Service</button>
+          <button type="button" class="btn btn-line" data-bs-dismiss="modal">Keep Browsing</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ QUOTE MODAL ============ -->
+<div class="modal fade" id="quoteModal" tabindex="-1" aria-labelledby="quoteModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content" style="border-radius:20px; border:none;">
+      <div class="modal-header" style="border-bottom:1px solid var(--line);">
+        <h5 class="modal-title display" id="quoteModalLabel">Request a Free Quote</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="quoteForm" novalidate>
+          <div class="mb-3">
+            <label for="qName" class="form-label">Full Name</label>
+            <input type="text" class="form-control" id="qName" required>
+          </div>
+          <div class="mb-3">
+            <label for="qPhone" class="form-label">Phone Number</label>
+            <input type="tel" class="form-control" id="qPhone" required>
+          </div>
+          <div class="mb-3">
+            <label for="qService" class="form-label">Service Needed</label>
+            <select class="form-select" id="qService" required>
+              <option value="" selected disabled>Choose a service…</option>
+              <option>Landscaping Design</option>
+              <option>Irrigation Systems Installation</option>
+              <option>Garden Maintenance</option>
+              <option>Lawn Establishment</option>
+              <option>Tree Planting &amp; Care</option>
+              <option>Green Building Solutions</option>
+              <option>Outdoor Beautification</option>
+              <option>Commercial Landscaping</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="qMessage" class="form-label">Tell us about your project</label>
+            <textarea class="form-control" id="qMessage" rows="3"></textarea>
+          </div>
+          <div id="quoteFeedback" class="small mb-2" style="display:none;"></div>
+          <button type="submit" class="btn btn-forest w-100">Send Request</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+<script>
+// ============ SERVICE DATA — single source of truth for cards + the detail modal ============
+const SERVICES = [
+  {
+    icon: "🎨",
+    title: "Landscaping Design",
+    image: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=900&q=80",
+    summary: "We sit down, listen to how you actually use your outdoor space, and sketch something that fits your land, your budget, and your life — not a template.",
+    description: "Good design starts with questions, not a mood board. We'll walk your plot, talk about how your family or staff actually move through it, and come back with a layout that makes sense for the light, the slope, and the soil you've actually got. You'll see sketches and a simple budget before a single spade goes into the ground.",
+    included: ["Conceptual sketches", "3D renderings", "Plant selections suited to your site", "Hardscape planning", "Honest budget estimate"]
+  },
+  {
+    icon: "💧",
+    title: "Irrigation Systems Installation",
+    image: "https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?auto=format&fit=crop&w=900&q=80",
+    summary: "We put in watering systems that actually match your plants and your water bill — not a one-size-fits-all sprinkler setup.",
+    description: "Too much water is as bad as too little. We design the layout around your soil type, your plant choices, and Nairobi's rainy-season swings, then install it properly the first time — pipework, timers, and all. You walk away with a system you can set and mostly forget.",
+    included: ["System design for your site", "Equipment supply", "Professional installation", "Timer programming", "Full system testing before we leave"]
+  },
+  {
+    icon: "🌾",
+    title: "Garden Maintenance",
+    image: "https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?auto=format&fit=crop&w=900&q=80",
+    summary: "Regular visits to keep weeds down, growth in check, and your garden looking like someone's actually looking after it.",
+    description: "A garden left alone for a month looks like a garden left alone for a month. We schedule visits around the season — more frequent in the rains, lighter in the dry months — so your space stays tidy without you having to think about it.",
+    included: ["Regular weeding", "Plant pruning", "Seasonal care adjustments", "Pest control", "Fertilization"]
+  },
+  {
+    icon: "🌱",
+    title: "Lawn Establishment",
+    image: "https://images.unsplash.com/photo-1558904541-efa843a96f01?auto=format&fit=crop&w=900&q=80",
+    summary: "We get the ground right before we get the grass down — that's the difference between a lawn that lasts and one that doesn't.",
+    description: "Most patchy lawns fail because of what happened (or didn't happen) underground. We prepare the soil properly, grade it so water doesn't pool, then seed or sod with grass that's right for your climate. We stick around for the tricky first weeks while it establishes.",
+    included: ["Soil preparation", "Site grading", "Grass species selection", "Sod or seed installation", "Initial aftercare guidance"]
+  },
+  {
+    icon: "🌳",
+    title: "Tree Planting & Care",
+    image: "https://images.unsplash.com/photo-1519331379826-f10be5486c6f?auto=format&fit=crop&w=900&q=80",
+    summary: "Trees you plant today are shade you'll enjoy for decades — so we make sure they're the right species, in the right spot.",
+    description: "A tree planted in the wrong place becomes a problem in five years — roots in the drain, branches on the wire. We check the site first, choose species that'll actually thrive there, and plant them properly with the staking and aftercare they need to take.",
+    included: ["Species selection for your site", "Site assessment", "Proper planting technique", "Staking & support", "Ongoing care guidance"]
+  },
+  {
+    icon: "🌍",
+    title: "Green Building Solutions",
+    image: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=900&q=80",
+    summary: "For clients who want a garden that's kind to the environment as well as good to look at — native plants, less waste, less water.",
+    description: "Sustainable doesn't have to mean austere. We use native and drought-tolerant plants, organic practices where they make sense, and water-wise layouts — so the garden looks good and costs less to keep that way.",
+    included: ["Sustainable site planning", "Native plant use", "Water conservation measures", "Organic maintenance practices", "Soil health management"]
+  },
+  {
+    icon: "✨",
+    title: "Outdoor Beautification",
+    image: "https://images.unsplash.com/photo-1480497490787-505ec076689f?auto=format&fit=crop&w=900&q=80",
+    summary: "Paths, lighting, water features, and the finishing touches that turn 'nice garden' into 'wow, who did this?'",
+    description: "This is the layer that makes a space feel finished — a paved path that doesn't flood, lighting that makes evenings outdoors actually pleasant, a small water feature for the sound of it. We add these in once the bones of the garden are right.",
+    included: ["Hardscape design", "Paving & pathways", "Water features", "Outdoor lighting", "Decorative elements"]
+  },
+  {
+    icon: "🏢",
+    title: "Commercial Landscaping",
+    image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=900&q=80",
+    summary: "For offices, hotels, and institutions that need grounds that look sharp every single day, not just on launch day.",
+    description: "Commercial grounds get judged daily by clients and staff, so they need a plan that holds up — not just a nice opening photo. We handle the master planning, the installation, and ongoing maintenance contracts so your grounds stay presentable on autopilot.",
+    included: ["Master planning", "Professional installation", "Maintenance contracts", "Regular progress updates", "Dedicated project management"]
+  }
+];
+
+// ============ Render service cards ============
+const grid = document.getElementById('servicesGrid');
+SERVICES.forEach((svc, i) => {
+  const col = document.createElement('div');
+  col.className = 'col-md-6 reveal';
+  col.innerHTML = `
+    <div class="svc-detail-card">
+      <div class="img-wrap">
+        <img src="${svc.image}" alt="${svc.title}">
+        <div class="ic-overlay">${svc.icon}</div>
+      </div>
+      <div class="body">
+        <h3>${svc.title}</h3>
+        <p>${svc.summary}</p>
+        <div class="card-actions">
+          <button type="button" class="btn btn-ghost-sm" data-service-index="${i}">See the details</button>
+        </div>
+      </div>
+    </div>`;
+  grid.appendChild(col);
+});
+
+// ============ Service detail modal logic ============
+const serviceModalEl = document.getElementById('serviceModal');
+const serviceModal = new bootstrap.Modal(serviceModalEl);
+let activeServiceTitle = '';
+
+document.getElementById('servicesGrid').addEventListener('click', (e) => {
+  const btn = e.target.closest('[data-service-index]');
+  if (!btn) return;
+  const svc = SERVICES[parseInt(btn.dataset.serviceIndex, 10)];
+  activeServiceTitle = svc.title;
+  document.getElementById('smImage').src = svc.image;
+  document.getElementById('smImage').alt = svc.title;
+  document.getElementById('smIcon').textContent = svc.icon;
+  document.getElementById('smTitle').textContent = svc.title;
+  document.getElementById('smDescription').textContent = svc.description;
+  document.getElementById('smInclList').innerHTML = svc.included.map(item => `<li>${item}</li>`).join('');
+  serviceModal.show();
+});
+
+document.getElementById('smRequestBtn').addEventListener('click', () => {
+  serviceModal.hide();
+  const qService = document.getElementById('qService');
+  // Match the active service title to an option in the quote form, then open it
+  Array.from(qService.options).forEach(opt => {
+    if (opt.value === activeServiceTitle || opt.textContent.trim() === activeServiceTitle) {
+      qService.value = opt.value;
+    }
+  });
+  setTimeout(() => {
+    bootstrap.Modal.getOrCreateInstance(document.getElementById('quoteModal')).show();
+  }, 250);
+});
+
+// ============ Navbar background on scroll ============
+const nav = document.getElementById('mainNav');
+const backToTop = document.getElementById('back-to-top');
+window.addEventListener('scroll', () => {
+  const scrolled = window.scrollY > 40;
+  nav.classList.toggle('scrolled', scrolled);
+  backToTop.classList.toggle('show', window.scrollY > 480);
+});
+
+// Collapse mobile menu after clicking a link
+document.querySelectorAll('#navMenu .nav-link').forEach(link => {
+  link.addEventListener('click', () => {
+    const menu = document.getElementById('navMenu');
+    if (menu.classList.contains('show')) {
+      bootstrap.Collapse.getOrCreateInstance(menu).hide();
+    }
+  });
+});
+
+// Back to top
+backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+// Scroll reveal via IntersectionObserver (re-checked after cards render)
+function observeReveals(){
+  const revealEls = document.querySelectorAll('.reveal:not(.in)');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => io.observe(el));
+}
+observeReveals();
+
+// Quote form submit (front-end only demo)
+document.getElementById('quoteForm').addEventListener('submit', function (e) {
+  e.preventDefault();
+  const fb = document.getElementById('quoteFeedback');
+  if (!this.checkValidity()) {
+    this.reportValidity();
+    return;
+  }
+  fb.style.display = 'block';
+  fb.style.color = 'var(--forest)';
+  fb.textContent = "Thanks! We'll get back to you within 24 hours.";
+  this.reset();
+  setTimeout(() => {
+    bootstrap.Modal.getInstance(document.getElementById('quoteModal')).hide();
+    fb.style.display = 'none';
+  }, 2200);
+});
+</script>
+</body>
+</html>
