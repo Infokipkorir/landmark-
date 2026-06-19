@@ -1,377 +1,808 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Landmark Landscaping Services - Premier landscaping and irrigation solutions for Nairobi and Kenya. Transform your outdoor spaces into beautiful, functional environments.">
-  <meta name="keywords" content="landscaping, irrigation, garden design, lawn maintenance, Kenya, Nairobi">
-  <meta name="author" content="Landmark Landscaping Services">
-  <meta name="robots" content="index, follow">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://www.landmarklandscaping.co.ke/">
-  <meta property="og:title" content="Landmark Landscaping Services - Transform Your Outdoor Spaces">
-  <meta property="og:description" content="Premier landscaping and irrigation solutions for Nairobi and Kenya.">
-  <meta property="og:image" content="https://www.landmarklandscaping.co.ke/images/hero.jpg">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:url" content="https://www.landmarklandscaping.co.ke/">
-  <meta name="twitter:title" content="Landmark Landscaping Services">
-  <meta name="twitter:description" content="Transform your outdoor spaces into living masterpieces">
-  <meta name="twitter:image" content="https://www.landmarklandscaping.co.ke/images/hero.jpg">
-  <link rel="canonical" href="https://www.landmarklandscaping.co.ke/">
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' font-size='75' fill='%231B5E20'>🌿</text></svg>">
-  <title>Landmark Landscaping Services - Transform Your Outdoor Spaces</title>
-  <link rel="stylesheet" href="styles.css">
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": "Landmark Landscaping Services",
-    "image": "https://www.landmarklandscaping.co.ke/images/logo.jpg",
-    "description": "Premier landscaping and irrigation solutions",
-    "address": {
-      "@type": "PostalAddress",
-      "addressCountry": "KE",
-      "addressRegion": "Nairobi County"
-    },
-    "telephone": "+254728158526",
-    "email": "bennyoike@gmail.com",
-    "url": "https://www.landmarklandscaping.co.ke",
-    "serviceArea": {
-      "@type": "City",
-      "name": "Nairobi"
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Landmark Landscaping Services - Premier landscaping and irrigation solutions for Nairobi and Kenya. Transform your outdoor spaces into beautiful, functional environments.">
+<meta name="keywords" content="landscaping, irrigation, garden design, lawn maintenance, Kenya, Nairobi">
+<meta name="author" content="Landmark Landscaping Services">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.landmarklandscaping.co.ke/">
+<meta property="og:title" content="Landmark Landscaping Services - Transform Your Outdoor Spaces">
+<meta property="og:description" content="Premier landscaping and irrigation solutions for Nairobi and Kenya.">
+<meta property="og:image" content="https://www.landmarklandscaping.co.ke/images/hero.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content="https://www.landmarklandscaping.co.ke/">
+<meta name="twitter:title" content="Landmark Landscaping Services">
+<meta name="twitter:description" content="Transform your outdoor spaces into living masterpieces">
+<meta name="twitter:image" content="https://www.landmarklandscaping.co.ke/images/hero.jpg">
+<link rel="canonical" href="https://www.landmarklandscaping.co.ke/">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' font-size='75' fill='%231B5E20'>🌿</text></svg>">
+<title>Landmark Landscaping Services - Transform Your Outdoor Spaces</title>
+
+<!-- Bootstrap 5 -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Landmark Landscaping Services",
+  "image": "https://www.landmarklandscaping.co.ke/images/logo.jpg",
+  "description": "Premier landscaping and irrigation solutions",
+  "address": { "@type": "PostalAddress", "addressCountry": "KE", "addressRegion": "Nairobi County" },
+  "telephone": "+254728158526",
+  "email": "bennyoike@gmail.com",
+  "url": "https://www.landmarklandscaping.co.ke",
+  "serviceArea": { "@type": "City", "name": "Nairobi" }
+}
+</script>
+
+<style>
+  :root{
+    --forest:#1B5E20;
+    --forest-deep:#143F18;
+    --leaf:#43A047;
+    --sage:#EEF3E7;
+    --clay:#C0703A;
+    --clay-deep:#9C5526;
+    --sun:#E0A93B;
+    --cream:#FBF8F2;
+    --ink:#1C2418;
+    --ink-soft:#52604A;
+    --line:rgba(28,36,24,0.08);
+
+    --display:'Fraunces', serif;
+    --body:'Plus Jakarta Sans', system-ui, sans-serif;
+    --mono:'JetBrains Mono', monospace;
+
+    --radius-lg:28px;
+    --radius-md:16px;
   }
-  </script>
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:var(--body);
+    color:var(--ink);
+    background:var(--cream);
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.display{
+    font-family:var(--display);
+    color:var(--forest-deep);
+    letter-spacing:-0.01em;
+  }
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:.72rem;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--clay-deep);
+    font-weight:500;
+  }
+  a{color:var(--forest);}
+  .lead-soft{color:var(--ink-soft);}
+
+  /* ---------- Buttons ---------- */
+  .btn{
+    border-radius:999px;
+    font-weight:600;
+    padding:.75rem 1.7rem;
+    font-size:.95rem;
+    transition:transform .25s ease, box-shadow .25s ease, background .25s ease;
+  }
+  .btn-forest{background:var(--forest); color:#fff; border:none;}
+  .btn-forest:hover{background:var(--forest-deep); color:#fff; transform:translateY(-2px); box-shadow:0 10px 24px rgba(27,94,32,.28);}
+  .btn-clay{background:var(--clay); color:#fff; border:none;}
+  .btn-clay:hover{background:var(--clay-deep); color:#fff; transform:translateY(-2px); box-shadow:0 10px 24px rgba(192,112,58,.3);}
+  .btn-line{background:transparent; border:1.5px solid currentColor; color:var(--forest);}
+  .btn-line:hover{background:var(--forest); color:#fff; border-color:var(--forest); transform:translateY(-2px);}
+  .btn-line-light{background:transparent; border:1.5px solid rgba(255,255,255,.7); color:#fff;}
+  .btn-line-light:hover{background:#fff; color:var(--forest-deep); transform:translateY(-2px);}
+
+  /* ---------- Navbar ---------- */
+  .nav-wrap{
+    position:fixed; top:0; left:0; right:0; z-index:1000;
+    transition:background .35s ease, box-shadow .35s ease, padding .35s ease;
+    padding:1.1rem 0;
+  }
+  .nav-wrap.scrolled{
+    background:rgba(251,248,242,.92);
+    backdrop-filter:blur(10px);
+    box-shadow:0 4px 30px rgba(28,36,24,.08);
+    padding:.6rem 0;
+  }
+  .brand{
+    font-family:var(--display);
+    font-weight:600;
+    font-size:1.35rem;
+    color:var(--forest-deep) !important;
+    display:flex; align-items:center; gap:.5rem;
+    text-decoration:none;
+  }
+  .brand .leaf-mark{font-size:1.5rem;}
+  .navbar-nav .nav-link{
+    font-weight:600;
+    font-size:.92rem;
+    color:var(--ink) !important;
+    margin:0 .5rem;
+    position:relative;
+    padding:.4rem 0 !important;
+  }
+  .navbar-nav .nav-link::after{
+    content:'';
+    position:absolute; left:0; bottom:-2px; height:2px; width:0%;
+    background:var(--clay);
+    transition:width .25s ease;
+  }
+  .navbar-nav .nav-link:hover::after{width:100%;}
+  .navbar-nav .nav-link.active{color:var(--forest) !important;}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    overflow:hidden;
+    background:var(--forest-deep);
+  }
+  .hero-bg{
+    position:absolute; inset:0;
+    background-image:url('https://images.unsplash.com/photo-1558904541-efa843a96f01?auto=format&fit=crop&w=2000&q=80');
+    background-size:cover; background-position:center;
+    transform:scale(1.05);
+  }
+  .hero-bg img{width:100%;height:100%;object-fit:cover;display:block;}
+  .hero-overlay{
+    position:absolute; inset:0;
+    background:linear-gradient(115deg, rgba(15,38,16,.92) 10%, rgba(20,63,24,.65) 48%, rgba(20,63,24,.25) 80%);
+  }
+  .hero-content{position:relative; z-index:2; color:#fff; padding-top:5rem;}
+  .hero-content .eyebrow{color:var(--sun);}
+  .hero-content h1{
+    color:#fff;
+    font-size:clamp(2.4rem, 5.5vw, 4.1rem);
+    line-height:1.06;
+    font-weight:600;
+    max-width:760px;
+  }
+  .hero-content h1 em{
+    font-style:italic;
+    font-weight:500;
+    color:var(--sun);
+  }
+  .hero-content p.lede{
+    color:rgba(255,255,255,.88);
+    font-size:1.15rem;
+    max-width:540px;
+    margin:1.3rem 0 2rem;
+  }
+  .hero-stats{
+    display:flex; gap:2.2rem; margin-top:3.2rem; flex-wrap:wrap;
+  }
+  .hero-stats .num{font-family:var(--display); font-size:2.1rem; color:#fff; font-weight:600; line-height:1;}
+  .hero-stats .lbl{font-size:.8rem; color:rgba(255,255,255,.75); text-transform:uppercase; letter-spacing:.06em; margin-top:.2rem;}
+  .scroll-cue{
+    position:absolute; bottom:2rem; left:50%; transform:translateX(-50%);
+    z-index:2; color:rgba(255,255,255,.7); font-size:.75rem;
+    display:flex; flex-direction:column; align-items:center; gap:.4rem;
+    letter-spacing:.1em; text-transform:uppercase; font-family:var(--mono);
+  }
+  .scroll-cue .line{width:1px; height:36px; background:rgba(255,255,255,.5); animation:scrollPulse 1.8s ease-in-out infinite;}
+  @keyframes scrollPulse{0%{transform:scaleY(.3); opacity:.3;} 50%{transform:scaleY(1); opacity:1;} 100%{transform:scaleY(.3); opacity:.3;}}
+
+  /* ---------- Sections ---------- */
+  .section{padding:6.5rem 0;}
+  .section-sage{background:var(--sage);}
+  .section-title{max-width:620px; margin-bottom:3rem;}
+  .section-title h2{font-size:clamp(1.9rem,3.4vw,2.6rem); font-weight:600; margin-top:.4rem;}
+
+  /* Leaf-shaped image frame -- signature element */
+  .leaf-frame{
+    position:relative;
+    border-radius:42% 58% 65% 35% / 48% 42% 58% 52%;
+    overflow:hidden;
+    box-shadow:0 30px 60px -20px rgba(20,63,24,.35);
+  }
+  .leaf-frame img{width:100%; height:100%; object-fit:cover; display:block;}
+  .leaf-frame.alt{ border-radius:60% 40% 38% 62% / 55% 48% 52% 45%; }
+
+  .badge-floating{
+    position:absolute;
+    background:#fff;
+    border-radius:var(--radius-md);
+    padding:1.1rem 1.3rem;
+    box-shadow:0 18px 40px -12px rgba(20,63,24,.25);
+    display:flex; align-items:center; gap:.7rem;
+  }
+  .badge-floating .ic{font-size:1.6rem;}
+  .badge-floating .t{font-weight:700; font-size:.95rem; color:var(--forest-deep); line-height:1.1;}
+  .badge-floating .s{font-size:.75rem; color:var(--ink-soft);}
+
+  /* Service cards */
+  .svc-card{
+    background:#fff;
+    border-radius:var(--radius-md);
+    padding:2.1rem 1.8rem;
+    height:100%;
+    border:1px solid var(--line);
+    transition:transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+    position:relative;
+    overflow:hidden;
+  }
+  .svc-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 24px 50px -18px rgba(20,63,24,.25);
+    border-color:transparent;
+  }
+  .svc-card .ic-wrap{
+    width:58px; height:58px;
+    border-radius:16px;
+    background:var(--sage);
+    display:flex; align-items:center; justify-content:center;
+    font-size:1.6rem;
+    margin-bottom:1.3rem;
+    transition:background .3s ease;
+  }
+  .svc-card:hover .ic-wrap{background:var(--forest); }
+  .svc-card h3{font-size:1.18rem; font-weight:600; margin-bottom:.6rem;}
+  .svc-card p{color:var(--ink-soft); font-size:.93rem; margin-bottom:1.1rem;}
+  .svc-card a.more{font-size:.85rem; font-weight:700; color:var(--clay-deep); text-decoration:none;}
+  .svc-card a.more:hover{text-decoration:underline;}
+
+  /* Project cards */
+  .proj-card{
+    border-radius:var(--radius-md);
+    overflow:hidden;
+    background:#fff;
+    border:1px solid var(--line);
+    height:100%;
+    transition:transform .3s ease, box-shadow .3s ease;
+  }
+  .proj-card:hover{transform:translateY(-6px); box-shadow:0 22px 46px -16px rgba(20,63,24,.25);}
+  .proj-card .img-wrap{height:230px; overflow:hidden; position:relative;}
+  .proj-card .img-wrap img{width:100%; height:100%; object-fit:cover; transition:transform .5s ease;}
+  .proj-card:hover .img-wrap img{transform:scale(1.08);}
+  .proj-card .tag{
+    position:absolute; top:14px; left:14px;
+    background:rgba(255,255,255,.92);
+    color:var(--forest-deep);
+    font-family:var(--mono); font-size:.68rem; letter-spacing:.06em; text-transform:uppercase;
+    padding:.35rem .7rem; border-radius:999px;
+  }
+  .proj-card .body{padding:1.5rem 1.6rem;}
+  .proj-card h3{font-size:1.1rem; font-weight:600; margin-bottom:.5rem;}
+  .proj-card p{color:var(--ink-soft); font-size:.9rem; margin-bottom:0;}
+
+  /* Why choose us */
+  .why-item{display:flex; gap:1rem; padding:1.4rem 0; border-bottom:1px solid var(--line);}
+  .why-item .ck{
+    width:38px; height:38px; min-width:38px; border-radius:50%;
+    background:var(--forest); color:#fff;
+    display:flex; align-items:center; justify-content:center; font-size:.95rem;
+  }
+  .why-item h3{font-size:1.02rem; font-weight:700; margin-bottom:.25rem;}
+  .why-item p{font-size:.88rem; color:var(--ink-soft); margin-bottom:0;}
+
+  /* Testimonials */
+  .testi-card{
+    background:#fff; border-radius:var(--radius-md);
+    padding:2rem 1.8rem; height:100%;
+    border:1px solid var(--line);
+    position:relative;
+  }
+  .testi-card .quote-mark{
+    font-family:var(--display); font-size:3rem; color:var(--sage); line-height:0; position:absolute; top:1.2rem; right:1.4rem;
+  }
+  .testi-card p.txt{font-size:.98rem; color:var(--ink); margin-bottom:1.3rem; position:relative; z-index:1;}
+  .testi-card .person{display:flex; align-items:center; gap:.7rem;}
+  .testi-card .avatar{
+    width:42px; height:42px; border-radius:50%;
+    background:var(--forest); color:#fff; display:flex; align-items:center; justify-content:center;
+    font-weight:700; font-family:var(--display);
+  }
+  .testi-card .name{font-weight:700; font-size:.88rem;}
+  .testi-card .loc{font-size:.78rem; color:var(--ink-soft);}
+
+  /* CTA band */
+  .cta-band{
+    background:linear-gradient(120deg, var(--forest-deep) 0%, var(--forest) 100%);
+    border-radius:36px;
+    padding:4rem 2.5rem;
+    position:relative;
+    overflow:hidden;
+    color:#fff;
+  }
+  .cta-band::before{
+    content:'🌿'; position:absolute; font-size:14rem; opacity:.08;
+    right:-2rem; top:-4rem; transform:rotate(15deg);
+  }
+  .cta-band h2{color:#fff; font-size:clamp(1.7rem,3vw,2.3rem);}
+
+  /* Footer */
+  footer{background:var(--forest-deep); color:rgba(255,255,255,.85); padding:4.5rem 0 1.5rem;}
+  footer h3{color:#fff; font-family:var(--display); font-size:1.05rem; font-weight:600; margin-bottom:1.1rem;}
+  footer a{color:rgba(255,255,255,.75); text-decoration:none;}
+  footer a:hover{color:var(--sun);}
+  footer .footer-links li{margin-bottom:.55rem; font-size:.92rem;}
+  .social-row a{
+    width:36px; height:36px; border-radius:50%;
+    background:rgba(255,255,255,.1);
+    display:inline-flex; align-items:center; justify-content:center;
+    margin-right:.5rem; font-size:.95rem;
+    transition:background .25s ease;
+  }
+  .social-row a:hover{background:var(--clay);}
+  .footer-bottom{border-top:1px solid rgba(255,255,255,.12); margin-top:2.5rem; padding-top:1.5rem; font-size:.82rem; color:rgba(255,255,255,.6);}
+
+  /* Floating action buttons */
+  .fab-stack{position:fixed; bottom:1.6rem; right:1.6rem; z-index:1050; display:flex; flex-direction:column; gap:.8rem; align-items:flex-end;}
+  .fab{
+    width:54px; height:54px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-size:1.4rem; border:none; cursor:pointer;
+    box-shadow:0 12px 28px -8px rgba(20,63,24,.4);
+    transition:transform .25s ease;
+  }
+  .fab:hover{transform:scale(1.08);}
+  .fab-whatsapp{background:#25D366; color:#fff;}
+  .fab-quote{background:var(--clay); color:#fff;}
+  .fab-top{background:#fff; color:var(--forest); border:1px solid var(--line); opacity:0; pointer-events:none; transform:translateY(10px);}
+  .fab-top.show{opacity:1; pointer-events:auto; transform:translateY(0);}
+
+  /* Scroll reveal */
+  .reveal{opacity:0; transform:translateY(28px); transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  @media (prefers-reduced-motion: reduce){
+    .reveal{opacity:1; transform:none; transition:none;}
+    html{scroll-behavior:auto;}
+  }
+
+  /* Focus visibility */
+  a:focus-visible, button:focus-visible{outline:2px solid var(--clay); outline-offset:3px;}
+
+  @media (max-width: 991.98px){
+    .hero{min-height:92vh;}
+    .section{padding:4.5rem 0;}
+    .leaf-frame{margin-top:2.5rem;}
+    .cta-band{padding:3rem 1.5rem; border-radius:24px;}
+  }
+  @media (max-width: 575.98px){
+    .hero-stats{gap:1.4rem;}
+    .badge-floating{display:none;}
+  }
+</style>
 </head>
 <body>
-  <!-- Header & Navigation -->
-  <header>
-    <div class="container">
-      <div class="header-content">
-        <a href="index.html" class="logo">🌿 Landmark Landscaping</a>
-        <button class="menu-toggle" aria-label="Toggle menu">☰</button>
-        <nav class="nav-menu">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="services.html">Services</a></li>
-          <li><a href="projects.html">Projects</a></li>
-          <li><a href="gallery.html">Gallery</a></li>
-          <li><a href="blog.html">Blog</a></li>
-          <li><a href="testimonials.html">Testimonials</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </nav>
+
+<!-- ============ NAVBAR ============ -->
+<nav class="navbar navbar-expand-lg nav-wrap" id="mainNav">
+  <div class="container">
+    <a class="brand" href="index.html"><span class="leaf-mark">🌿</span>Landmark Landscaping</a>
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto align-items-lg-center">
+        <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+        <li class="nav-item"><a class="nav-link" href="projects.html">Projects</a></li>
+        <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+        <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
+        <li class="nav-item"><a class="nav-link" href="testimonials.html">Testimonials</a></li>
+        <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+          <a class="btn btn-forest btn-sm" href="contact.html">Contact Us</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero-bg">
+    <img src="https://images.unsplash.com/photo-1558904541-efa843a96f01?auto=format&fit=crop&w=2000&q=80" alt="Lush manicured garden landscape with mature trees and lawn">
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="container hero-content">
+    <p class="eyebrow">Nairobi &amp; Major Towns Across Kenya</p>
+    <h1>Transforming outdoor spaces into <em>living masterpieces</em></h1>
+    <p class="lede">Premier landscaping and irrigation solutions — we design, build, and maintain gardens that thrive, season after season.</p>
+    <div class="d-flex gap-3 flex-wrap">
+      <button id="quote-btn-hero" class="btn btn-clay">Request a Quote</button>
+      <a href="services.html" class="btn btn-line-light">Explore Services</a>
+    </div>
+    <div class="hero-stats">
+      <div><div class="num">12+</div><div class="lbl">Years Experience</div></div>
+      <div><div class="num">300+</div><div class="lbl">Projects Delivered</div></div>
+      <div><div class="num">6</div><div class="lbl">Towns Served</div></div>
+    </div>
+  </div>
+  <div class="scroll-cue"><span class="line"></span>Scroll</div>
+</section>
+
+<!-- ============ ABOUT / INTRO ============ -->
+<section class="section">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6 reveal">
+        <p class="eyebrow">Who We Are</p>
+        <h2 class="display fw-semibold mt-2 mb-3" style="font-size:clamp(1.8rem,3vw,2.4rem);">Rooted in craft, grown over a decade</h2>
+        <p class="lead-soft">With years of expertise in landscape design and irrigation systems, Landmark Landscaping Services has been transforming outdoor spaces across Kenya. We combine creativity with functionality to create beautiful, sustainable environments that enhance property value and quality of life.</p>
+        <p class="lead-soft">Our team of skilled professionals is dedicated to delivering exceptional results that exceed expectations — whether for residential, commercial, or institutional projects.</p>
+        <a href="about.html" class="btn btn-line mt-2">Learn More About Us</a>
+      </div>
+      <div class="col-lg-6 reveal">
+        <div class="position-relative">
+          <div class="leaf-frame" style="height:420px;">
+            <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=900&q=80" alt="Landscaper trimming hedges in a garden">
+          </div>
+          <div class="badge-floating" style="bottom:-1.5rem; left:-1.5rem;">
+            <span class="ic">✓</span>
+            <div><div class="t">300+ Gardens</div><div class="s">designed &amp; built</div></div>
+          </div>
+        </div>
       </div>
     </div>
-  </header>
+  </div>
+</section>
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="hero-content">
-      <h1>Transforming Outdoor Spaces into Living Masterpieces</h1>
-      <p>Premier landscaping and irrigation solutions for Nairobi and major towns across Kenya</p>
-      <div class="hero-cta">
-        <button id="quote-btn" class="btn btn-primary">Request a Quote</button>
-        <a href="services.html" class="btn btn-outline">Explore Services</a>
+<!-- ============ SERVICES ============ -->
+<section class="section section-sage">
+  <div class="container">
+    <div class="section-title reveal">
+      <p class="eyebrow">What We Do</p>
+      <h2>Comprehensive landscaping &amp; irrigation services</h2>
+      <p class="lead-soft mt-2">Tailored solutions for every outdoor space — residential, commercial, or institutional.</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-4 reveal">
+        <div class="svc-card">
+          <div class="ic-wrap">🎨</div>
+          <h3>Landscaping Design</h3>
+          <p>Creative landscape designs that enhance aesthetics and functionality of your outdoor space.</p>
+          <a class="more" href="services.html">Learn more →</a>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 reveal">
+        <div class="svc-card">
+          <div class="ic-wrap">💧</div>
+          <h3>Irrigation Systems</h3>
+          <p>Professional installation of efficient irrigation systems for optimal water usage and plant health.</p>
+          <a class="more" href="services.html">Learn more →</a>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 reveal">
+        <div class="svc-card">
+          <div class="ic-wrap">🌾</div>
+          <h3>Garden Maintenance</h3>
+          <p>Regular maintenance services to keep your gardens thriving and looking their best year-round.</p>
+          <a class="more" href="services.html">Learn more →</a>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 reveal">
+        <div class="svc-card">
+          <div class="ic-wrap">🌿</div>
+          <h3>Lawn Establishment</h3>
+          <p>Professional lawn installation and establishment with proper soil preparation and seeding.</p>
+          <a class="more" href="services.html">Learn more →</a>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 reveal">
+        <div class="svc-card">
+          <div class="ic-wrap">🌳</div>
+          <h3>Tree Planting</h3>
+          <p>Expert tree planting and landscaping to create shade, beauty, and environmental benefits.</p>
+          <a class="more" href="services.html">Learn more →</a>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 reveal">
+        <div class="svc-card">
+          <div class="ic-wrap">🏢</div>
+          <h3>Commercial Landscaping</h3>
+          <p>Large-scale landscaping solutions for commercial properties, offices, and institutional buildings.</p>
+          <a class="more" href="services.html">Learn more →</a>
+        </div>
       </div>
     </div>
-  </section>
-
-  <!-- Company Introduction -->
-  <section class="section">
-    <div class="container">
-      <div class="grid grid-2">
-        <div class="scroll-reveal">
-          <h2>About Landmark Landscaping</h2>
-          <p>With years of expertise in landscape design and irrigation systems, Landmark Landscaping Services has been transforming outdoor spaces across Kenya. We combine creativity with functionality to create beautiful, sustainable environments that enhance property value and quality of life.</p>
-          <p>Our team of skilled professionals is dedicated to delivering exceptional results that exceed expectations, whether for residential, commercial, or institutional projects.</p>
-          <a href="about.html" class="btn btn-primary">Learn More About Us</a>
-        </div>
-        <div class="scroll-reveal">
-          <div style="background: linear-gradient(135deg, #1B5E20 0%, #43A047 100%); border-radius: 8px; height: 300px; display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">
-            🌱
-          </div>
-        </div>
-      </div>
+    <div class="text-center mt-5 reveal">
+      <a href="services.html" class="btn btn-forest">View All Services</a>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Services Overview -->
-  <section class="section" style="background-color: #FFFFFF;">
-    <div class="container">
-      <div class="section-title">
-        <h2>Our Services</h2>
-        <p>Comprehensive landscaping and irrigation solutions tailored to your needs</p>
-      </div>
-      <div class="grid grid-3">
-        <div class="card scroll-reveal">
-          <div class="card-content">
-            <div class="card-icon">🎨</div>
-            <h3>Landscaping Design</h3>
-            <p>Creative landscape designs that enhance aesthetics and functionality of your outdoor space.</p>
-            <a href="services.html">Learn More →</a>
-          </div>
-        </div>
-        <div class="card scroll-reveal">
-          <div class="card-content">
-            <div class="card-icon">💧</div>
-            <h3>Irrigation Systems</h3>
-            <p>Professional installation of efficient irrigation systems for optimal water usage and plant health.</p>
-            <a href="services.html">Learn More →</a>
-          </div>
-        </div>
-        <div class="card scroll-reveal">
-          <div class="card-content">
-            <div class="card-icon">🌾</div>
-            <h3>Garden Maintenance</h3>
-            <p>Regular maintenance services to keep your gardens thriving and looking their best year-round.</p>
-            <a href="services.html">Learn More →</a>
-          </div>
-        </div>
-        <div class="card scroll-reveal">
-          <div class="card-content">
-            <div class="card-icon">🌿</div>
-            <h3>Lawn Establishment</h3>
-            <p>Professional lawn installation and establishment with proper soil preparation and seeding.</p>
-            <a href="services.html">Learn More →</a>
-          </div>
-        </div>
-        <div class="card scroll-reveal">
-          <div class="card-content">
-            <div class="card-icon">🌳</div>
-            <h3>Tree Planting</h3>
-            <p>Expert tree planting and landscaping to create shade, beauty, and environmental benefits.</p>
-            <a href="services.html">Learn More →</a>
-          </div>
-        </div>
-        <div class="card scroll-reveal">
-          <div class="card-content">
-            <div class="card-icon">🏢</div>
-            <h3>Commercial Landscaping</h3>
-            <p>Large-scale landscaping solutions for commercial properties, offices, and institutional buildings.</p>
-            <a href="services.html">Learn More →</a>
-          </div>
-        </div>
-      </div>
-      <div class="text-center mt-4">
-        <a href="services.html" class="btn btn-primary">View All Services</a>
-      </div>
+<!-- ============ PROJECTS ============ -->
+<section class="section">
+  <div class="container">
+    <div class="section-title reveal">
+      <p class="eyebrow">Our Work</p>
+      <h2>Featured projects</h2>
+      <p class="lead-soft mt-2">A showcase of recent landscaping transformations across Kenya.</p>
     </div>
-  </section>
-
-  <!-- Featured Projects -->
-  <section class="section">
-    <div class="container">
-      <div class="section-title">
-        <h2>Featured Projects</h2>
-        <p>Showcase of our recent landscaping transformations</p>
-      </div>
-      <div class="grid grid-3">
-        <div class="card scroll-reveal">
-          <div style="width: 100%; height: 250px; background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%); display: flex; align-items: center; justify-content: center; color: var(--primary-green); font-size: 3rem;">
-            🏡
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-4 reveal">
+        <div class="proj-card">
+          <div class="img-wrap">
+            <span class="tag">Residential</span>
+            <img src="https://images.unsplash.com/photo-1599629954294-14df9ec8ce4e?auto=format&fit=crop&w=700&q=80" alt="Residential garden transformation with green lawn and flower beds">
           </div>
-          <div class="card-content">
+          <div class="body">
             <h3>Residential Garden Transformation</h3>
             <p>Complete garden redesign with new irrigation system and landscape features for a Nairobi home.</p>
-            <a href="projects.html" class="text-dark">View Project →</a>
+            <a href="projects.html" class="more" style="font-weight:700; font-size:.85rem; color:var(--clay-deep); text-decoration:none;">View project →</a>
           </div>
         </div>
-        <div class="card scroll-reveal">
-          <div style="width: 100%; height: 250px; background: linear-gradient(135deg, #A5D6A7 0%, #81C784 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">
-            🏢
+      </div>
+      <div class="col-md-6 col-lg-4 reveal">
+        <div class="proj-card">
+          <div class="img-wrap">
+            <span class="tag">Commercial</span>
+            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=700&q=80" alt="Corporate office landscaping with manicured hedges and walkway">
           </div>
-          <div class="card-content">
+          <div class="body">
             <h3>Corporate Office Landscaping</h3>
-            <p>Modern landscape design and maintenance for corporate headquarters with green spaces.</p>
-            <a href="projects.html" class="text-dark">View Project →</a>
+            <p>Modern landscape design with low-maintenance planting for a busy commercial campus.</p>
+            <a href="projects.html" class="more" style="font-weight:700; font-size:.85rem; color:var(--clay-deep); text-decoration:none;">View project →</a>
           </div>
         </div>
-        <div class="card scroll-reveal">
-          <div style="width: 100%; height: 250px; background: linear-gradient(135deg, #66BB6A 0%, #43A047 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">
-            🌳
+      </div>
+      <div class="col-md-6 col-lg-4 reveal">
+        <div class="proj-card">
+          <div class="img-wrap">
+            <span class="tag">Public Space</span>
+            <img src="https://images.unsplash.com/photo-1519331379826-f10be5486c6f?auto=format&fit=crop&w=700&q=80" alt="Public park landscape with pathways and trees">
           </div>
-          <div class="card-content">
-            <h3>Park & Green Space Development</h3>
+          <div class="body">
+            <h3>Public Park Development</h3>
             <p>Large-scale landscape development for public spaces with sustainable design principles.</p>
-            <a href="projects.html" class="text-dark">View Project →</a>
-          </div>
-        </div>
-      </div>
-      <div class="text-center mt-4">
-        <a href="projects.html" class="btn btn-secondary">View All Projects</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Why Choose Us -->
-  <section class="section" style="background-color: #FFFFFF;">
-    <div class="container">
-      <div class="section-title">
-        <h2>Why Choose Landmark Landscaping?</h2>
-        <p>What sets us apart from the competition</p>
-      </div>
-      <div class="grid grid-4">
-        <div class="card scroll-reveal">
-          <div class="card-content">
-            <div class="card-icon">✓</div>
-            <h3>Expert Team</h3>
-            <p>Skilled professionals with years of experience in landscaping and design.</p>
-          </div>
-        </div>
-        <div class="card scroll-reveal">
-          <div class="card-content">
-            <div class="card-icon">✓</div>
-            <h3>Quality Results</h3>
-            <p>Commitment to excellence in every project, big or small.</p>
-          </div>
-        </div>
-        <div class="card scroll-reveal">
-          <div class="card-content">
-            <div class="card-icon">✓</div>
-            <h3>Custom Solutions</h3>
-            <p>Tailored designs and services to meet your specific needs.</p>
-          </div>
-        </div>
-        <div class="card scroll-reveal">
-          <div class="card-content">
-            <div class="card-icon">✓</div>
-            <h3>Sustainable Practices</h3>
-            <p>Environmentally friendly solutions for long-term benefits.</p>
-          </div>
-        </div>
-        <div class="card scroll-reveal">
-          <div class="card-content">
-            <div class="card-icon">✓</div>
-            <h3>Competitive Pricing</h3>
-            <p>Best value for money without compromising on quality.</p>
-          </div>
-        </div>
-        <div class="card scroll-reveal">
-          <div class="card-content">
-            <div class="card-icon">✓</div>
-            <h3>Wide Coverage</h3>
-            <p>Serving Nairobi and major towns across Kenya.</p>
-          </div>
-        </div>
-        <div class="card scroll-reveal">
-          <div class="card-content">
-            <div class="card-icon">✓</div>
-            <h3>24/7 Support</h3>
-            <p>Dedicated customer support for your peace of mind.</p>
-          </div>
-        </div>
-        <div class="card scroll-reveal">
-          <div class="card-content">
-            <div class="card-icon">✓</div>
-            <h3>Maintenance Plans</h3>
-            <p>Flexible maintenance packages to keep your spaces pristine.</p>
+            <a href="projects.html" class="more" style="font-weight:700; font-size:.85rem; color:var(--clay-deep); text-decoration:none;">View project →</a>
           </div>
         </div>
       </div>
     </div>
-  </section>
-
-  <!-- Testimonials Section -->
-  <section class="section">
-    <div class="container">
-      <div class="section-title">
-        <h2>What Our Clients Say</h2>
-        <p>Real feedback from satisfied customers</p>
-      </div>
-      <div class="grid grid-3">
-        <div class="card scroll-reveal">
-          <div class="card-content">
-            <p><strong>"Exceptional work and attention to detail. Landmark Landscaping transformed our garden into a paradise!"</strong></p>
-            <p>- Sarah M., Nairobi</p>
-          </div>
-        </div>
-        <div class="card scroll-reveal">
-          <div class="card-content">
-            <p><strong>"Professional, reliable, and knowledgeable. Highly recommend for any landscaping project!"</strong></p>
-            <p>- James K., Mombasa</p>
-          </div>
-        </div>
-        <div class="card scroll-reveal">
-          <div class="card-content">
-            <p><strong>"The irrigation system has been a game-changer for our property. Outstanding service!"</strong></p>
-            <p>- Grace P., Kisumu</p>
-          </div>
-        </div>
-      </div>
-      <div class="text-center mt-4">
-        <a href="testimonials.html" class="btn btn-primary">Read More Testimonials</a>
-      </div>
+    <div class="text-center mt-5 reveal">
+      <a href="projects.html" class="btn btn-clay">View All Projects</a>
     </div>
-  </section>
-
-  <!-- Contact CTA Section -->
-  <section class="section" style="background: linear-gradient(135deg, var(--primary-green) 0%, var(--secondary-green) 100%); color: white;">
-    <div class="container">
-      <div style="max-width: 600px; margin: 0 auto; text-align: center;">
-        <h2 style="color: white; margin-bottom: 1rem;">Ready to Transform Your Outdoor Space?</h2>
-        <p style="color: rgba(255, 255, 255, 0.95); margin-bottom: 2rem; font-size: 1.1rem;">Get a free consultation and quote from our expert team today.</p>
-        <a href="contact.html" class="btn btn-outline" style="border-color: white; color: white;">Get Started Now</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-section">
-          <h3>Landmark Landscaping</h3>
-          <p>Premier landscaping and irrigation solutions transforming outdoor spaces across Kenya.</p>
-          <div class="social-links">
-            <a href="https://facebook.com" title="Facebook" aria-label="Follow us on Facebook">f</a>
-            <a href="https://twitter.com" title="Twitter" aria-label="Follow us on Twitter">𝕏</a>
-            <a href="https://instagram.com" title="Instagram" aria-label="Follow us on Instagram">📷</a>
-            <a href="https://linkedin.com" title="LinkedIn" aria-label="Follow us on LinkedIn">in</a>
-          </div>
-        </div>
-        <div class="footer-section">
-          <h3>Quick Links</h3>
-          <ul class="footer-links">
-            <li><a href="about.html">About Us</a></li>
-            <li><a href="services.html">Services</a></li>
-            <li><a href="projects.html">Projects</a></li>
-            <li><a href="blog.html">Blog</a></li>
-          </ul>
-        </div>
-        <div class="footer-section">
-          <h3>Contact Info</h3>
-          <ul class="footer-links">
-            <li><a href="mailto:bennyoike@gmail.com">📧 bennyoike@gmail.com</a></li>
-            <li><a href="tel:+254728158526">📱 +254 728 158 526</a></li>
-            <li><a href="#">📍 Nairobi, Kenya</a></li>
-          </ul>
-        </div>
-        <div class="footer-section">
-          <h3>Service Areas</h3>
-          <p>We serve Nairobi and major towns across Kenya including:</p>
-          <p style="font-size: 0.9rem;">Mombasa • Kisumu • Nakuru • Eldoret • Kisii • Kericho</p>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>&copy; 2024 Landmark Landscaping Services. All rights reserved.</p>
-      </div>
-    </div>
-  </footer>
-
-  <!-- Floating Action Buttons -->
-  <button id="whatsapp-btn" aria-label="Contact on WhatsApp" title="Chat on WhatsApp">💬</button>
-  <button id="quote-btn" aria-label="Request a quote" title="Request a Quote">📋</button>
-  <button id="back-to-top" aria-label="Back to top">⬆️</button>
-
-  <!-- Drag Handle with Menu -->
-  <div class="drag-handle" title="Drag me around">☎️</div>
-  <div class="drag-menu">
-    <a href="tel:+254728158526">📱 Call Us</a>
-    <a href="mailto:bennyoike@gmail.com">📧 Email</a>
-    <a href="contact.html">💼 Contact Form</a>
-    <a href="https://wa.me/254728158526">💬 WhatsApp</a>
   </div>
+</section>
 
-  <script src="script.js"></script>
+<!-- ============ WHY CHOOSE US ============ -->
+<section class="section section-sage">
+  <div class="container">
+    <div class="row g-5 align-items-center">
+      <div class="col-lg-5 reveal">
+        <p class="eyebrow">Why Landmark</p>
+        <h2 class="display fw-semibold mt-2 mb-3" style="font-size:clamp(1.8rem,3vw,2.4rem);">What sets us apart</h2>
+        <p class="lead-soft mb-4">From design to ongoing care, here's why clients across Kenya trust us with their outdoor spaces.</p>
+        <div class="leaf-frame alt" style="height:280px;">
+          <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=700&q=80" alt="Gardener watering plants in a maintained landscape">
+        </div>
+      </div>
+      <div class="col-lg-7">
+        <div class="row">
+          <div class="col-sm-6 reveal">
+            <div class="why-item"><span class="ck">✓</span><div><h3>Expert Team</h3><p>Skilled professionals with years of experience in landscaping and design.</p></div></div>
+            <div class="why-item"><span class="ck">✓</span><div><h3>Quality Results</h3><p>Commitment to excellence in every project, big or small.</p></div></div>
+            <div class="why-item"><span class="ck">✓</span><div><h3>Custom Solutions</h3><p>Tailored designs and services to meet your specific needs.</p></div></div>
+            <div class="why-item" style="border-bottom:none;"><span class="ck">✓</span><div><h3>Sustainable Practices</h3><p>Environmentally friendly solutions for long-term benefits.</p></div></div>
+          </div>
+          <div class="col-sm-6 reveal">
+            <div class="why-item"><span class="ck">✓</span><div><h3>Competitive Pricing</h3><p>Best value for money without compromising on quality.</p></div></div>
+            <div class="why-item"><span class="ck">✓</span><div><h3>Wide Coverage</h3><p>Serving Nairobi and major towns across Kenya.</p></div></div>
+            <div class="why-item"><span class="ck">✓</span><div><h3>24/7 Support</h3><p>Dedicated customer support for your peace of mind.</p></div></div>
+            <div class="why-item" style="border-bottom:none;"><span class="ck">✓</span><div><h3>Maintenance Plans</h3><p>Flexible maintenance packages to keep your spaces pristine.</p></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TESTIMONIALS ============ -->
+<section class="section">
+  <div class="container">
+    <div class="section-title reveal">
+      <p class="eyebrow">Client Stories</p>
+      <h2>What our clients say</h2>
+      <p class="lead-soft mt-2">Real feedback from satisfied customers across Kenya.</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-4 reveal">
+        <div class="testi-card">
+          <span class="quote-mark">"</span>
+          <p class="txt">Exceptional work and attention to detail. Landmark Landscaping transformed our garden into a paradise!</p>
+          <div class="person"><div class="avatar">S</div><div><div class="name">Sarah M.</div><div class="loc">Nairobi</div></div></div>
+        </div>
+      </div>
+      <div class="col-md-4 reveal">
+        <div class="testi-card">
+          <span class="quote-mark">"</span>
+          <p class="txt">Professional, reliable, and knowledgeable. Highly recommend for any landscaping project!</p>
+          <div class="person"><div class="avatar">J</div><div><div class="name">James K.</div><div class="loc">Mombasa</div></div></div>
+        </div>
+      </div>
+      <div class="col-md-4 reveal">
+        <div class="testi-card">
+          <span class="quote-mark">"</span>
+          <p class="txt">The irrigation system has been a game-changer for our property. Outstanding service!</p>
+          <div class="person"><div class="avatar">G</div><div><div class="name">Grace P.</div><div class="loc">Kisumu</div></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="text-center mt-5 reveal">
+      <a href="testimonials.html" class="btn btn-line">Read More Testimonials</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA BAND ============ -->
+<section class="section pt-0">
+  <div class="container">
+    <div class="cta-band text-center reveal">
+      <h2 class="fw-semibold mb-2">Ready to transform your outdoor space?</h2>
+      <p class="mb-4" style="color:rgba(255,255,255,.85); max-width:520px; margin-inline:auto;">Get a free consultation and quote from our expert team today.</p>
+      <a href="contact.html" class="btn btn-line-light">Get Started Now</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-4 col-sm-6">
+        <h3>🌿 Landmark Landscaping</h3>
+        <p style="font-size:.92rem;">Premier landscaping and irrigation solutions transforming outdoor spaces across Kenya.</p>
+        <div class="social-row mt-3">
+          <a href="https://facebook.com" title="Facebook" aria-label="Follow us on Facebook">f</a>
+          <a href="https://twitter.com" title="Twitter" aria-label="Follow us on Twitter">𝕏</a>
+          <a href="https://instagram.com" title="Instagram" aria-label="Follow us on Instagram">📷</a>
+          <a href="https://linkedin.com" title="LinkedIn" aria-label="Follow us on LinkedIn">in</a>
+        </div>
+      </div>
+      <div class="col-lg-2 col-sm-6">
+        <h3>Quick Links</h3>
+        <ul class="footer-links list-unstyled">
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="blog.html">Blog</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-3 col-sm-6">
+        <h3>Contact Info</h3>
+        <ul class="footer-links list-unstyled">
+          <li><a href="mailto:bennyoike@gmail.com">📧 bennyoike@gmail.com</a></li>
+          <li><a href="tel:+254728158526">📱 +254 728 158 526</a></li>
+          <li><a href="#">📍 Nairobi, Kenya</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-3 col-sm-6">
+        <h3>Service Areas</h3>
+        <p style="font-size:.92rem;">We serve Nairobi and major towns across Kenya including:</p>
+        <p style="font-size:.86rem; color:rgba(255,255,255,.7);">Mombasa • Kisumu • Nakuru • Eldoret • Kisii • Kericho</p>
+      </div>
+    </div>
+    <div class="footer-bottom text-center">
+      <p class="mb-0">&copy; 2024 Landmark Landscaping Services. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ FLOATING ACTION BUTTONS ============ -->
+<div class="fab-stack">
+  <button id="back-to-top" class="fab fab-top" aria-label="Back to top" title="Back to top">⬆️</button>
+  <button id="quote-btn" class="fab fab-quote" aria-label="Request a quote" title="Request a Quote" data-bs-toggle="modal" data-bs-target="#quoteModal">📋</button>
+  <a href="https://wa.me/254728158526" target="_blank" rel="noopener" class="fab fab-whatsapp" aria-label="Contact on WhatsApp" title="Chat on WhatsApp">💬</a>
+</div>
+
+<!-- ============ QUOTE MODAL ============ -->
+<div class="modal fade" id="quoteModal" tabindex="-1" aria-labelledby="quoteModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content" style="border-radius:20px; border:none;">
+      <div class="modal-header" style="border-bottom:1px solid var(--line);">
+        <h5 class="modal-title display" id="quoteModalLabel">Request a Free Quote</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="quoteForm" novalidate>
+          <div class="mb-3">
+            <label for="qName" class="form-label">Full Name</label>
+            <input type="text" class="form-control" id="qName" required>
+          </div>
+          <div class="mb-3">
+            <label for="qPhone" class="form-label">Phone Number</label>
+            <input type="tel" class="form-control" id="qPhone" required>
+          </div>
+          <div class="mb-3">
+            <label for="qService" class="form-label">Service Needed</label>
+            <select class="form-select" id="qService" required>
+              <option value="" selected disabled>Choose a service…</option>
+              <option>Landscaping Design</option>
+              <option>Irrigation Systems</option>
+              <option>Garden Maintenance</option>
+              <option>Lawn Establishment</option>
+              <option>Tree Planting</option>
+              <option>Commercial Landscaping</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="qMessage" class="form-label">Tell us about your project</label>
+            <textarea class="form-control" id="qMessage" rows="3"></textarea>
+          </div>
+          <div id="quoteFeedback" class="small mb-2" style="display:none;"></div>
+          <button type="submit" class="btn btn-forest w-100">Send Request</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+<script>
+  // Navbar background on scroll
+  const nav = document.getElementById('mainNav');
+  const backToTop = document.getElementById('back-to-top');
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY > 40;
+    nav.classList.toggle('scrolled', scrolled);
+    backToTop.classList.toggle('show', window.scrollY > 480);
+  });
+
+  // Collapse mobile menu after clicking a link
+  document.querySelectorAll('#navMenu .nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+      const menu = document.getElementById('navMenu');
+      if (menu.classList.contains('show')) {
+        bootstrap.Collapse.getOrCreateInstance(menu).hide();
+      }
+    });
+  });
+
+  // Back to top
+  backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  // Hero "Request a Quote" button opens modal too
+  document.getElementById('quote-btn-hero').addEventListener('click', () => {
+    bootstrap.Modal.getOrCreateInstance(document.getElementById('quoteModal')).show();
+  });
+
+  // Scroll reveal via IntersectionObserver
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => io.observe(el));
+
+  // Quote form submit (front-end only demo)
+  document.getElementById('quoteForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const fb = document.getElementById('quoteFeedback');
+    if (!this.checkValidity()) {
+      this.reportValidity();
+      return;
+    }
+    fb.style.display = 'block';
+    fb.style.color = 'var(--forest)';
+    fb.textContent = 'Thanks! We\'ll get back to you within 24 hours.';
+    this.reset();
+    setTimeout(() => {
+      bootstrap.Modal.getInstance(document.getElementById('quoteModal')).hide();
+      fb.style.display = 'none';
+    }, 2200);
+  });
+</script>
 </body>
 </html>
