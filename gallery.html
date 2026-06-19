@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Browse our professional gallery of landscaping and irrigation projects showcasing our work quality.">
+  <meta name="keywords" content="gallery, landscaping gallery, project images, portfolio gallery">
+  <meta name="robots" content="index, follow">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.landmarklandscaping.co.ke/gallery.html">
+  <meta property="og:title" content="Gallery - Landmark Landscaping">
+  <link rel="canonical" href="https://www.landmarklandscaping.co.ke/gallery.html">
+  <title>Gallery - Landmark Landscaping Services</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+    
+    .gallery-image {
+      position: relative;
+      overflow: hidden;
+      border-radius: 8px;
+      height: 250px;
+      background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    
+    .gallery-image:hover {
+      transform: scale(1.05);
+    }
+    
+    .gallery-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header & Navigation -->
+  <header>
+    <div class="container">
+      <div class="header-content">
+        <a href="index.html" class="logo">🌿 Landmark Landscaping</a>
+        <button class="menu-toggle" aria-label="Toggle menu">☰</button>
+        <nav class="nav-menu">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="testimonials.html">Testimonials</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- Breadcrumb -->
+  <div class="breadcrumb">
+    <div class="container">
+      <ul class="breadcrumb-list">
+        <li><a href="index.html">Home</a></li>
+        <li>Gallery</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Page Hero -->
+  <section class="hero" style="padding: 100px 0; min-height: 400px;">
+    <div class="hero-content">
+      <h1>Project Gallery</h1>
+      <p>Visual showcase of our landscaping and irrigation work</p>
+    </div>
+  </section>
+
+  <!-- Gallery Filter -->
+  <section class="section" style="background-color: #FFFFFF;">
+    <div class="container">
+      <div style="text-align: center; margin-bottom: 2rem;">
+        <button class="filter-btn active btn btn-primary" data-filter="all">All</button>
+        <button class="filter-btn btn btn-outline" data-filter="gardens">Gardens</button>
+        <button class="filter-btn btn btn-outline" data-filter="lawns">Lawns</button>
+        <button class="filter-btn btn btn-outline" data-filter="irrigation">Irrigation</button>
+        <button class="filter-btn btn btn-outline" data-filter="features">Features</button>
+      </div>
+
+      <!-- Gallery Grid -->
+      <div class="gallery-grid">
+        <div class="gallery-item scroll-reveal" data-category="gardens">
+          <div class="gallery-image">🌸</div>
+        </div>
+        <div class="gallery-item scroll-reveal" data-category="gardens">
+          <div class="gallery-image">🌺</div>
+        </div>
+        <div class="gallery-item scroll-reveal" data-category="lawns">
+          <div class="gallery-image">🌾</div>
+        </div>
+        <div class="gallery-item scroll-reveal" data-category="irrigation">
+          <div class="gallery-image">💧</div>
+        </div>
+        <div class="gallery-item scroll-reveal" data-category="features">
+          <div class="gallery-image">🏔️</div>
+        </div>
+        <div class="gallery-item scroll-reveal" data-category="gardens">
+          <div class="gallery-image">🌼</div>
+        </div>
+        <div class="gallery-item scroll-reveal" data-category="gardens">
+          <div class="gallery-image">🌻</div>
+        </div>
+        <div class="gallery-item scroll-reveal" data-category="lawns">
+          <div class="gallery-image">🍃</div>
+        </div>
+        <div class="gallery-item scroll-reveal" data-category="irrigation">
+          <div class="gallery-image">⛲</div>
+        </div>
+        <div class="gallery-item scroll-reveal" data-category="features">
+          <div class="gallery-image">🪵</div>
+        </div>
+        <div class="gallery-item scroll-reveal" data-category="gardens">
+          <div class="gallery-image">🏵️</div>
+        </div>
+        <div class="gallery-item scroll-reveal" data-category="features">
+          <div class="gallery-image">🪨</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery Description -->
+  <section class="section">
+    <div class="container">
+      <div class="section-title">
+        <h2>Our Work Quality</h2>
+        <p>Each image represents our commitment to excellence and creativity</p>
+      </div>
+      <div class="grid grid-3">
+        <div class="card scroll-reveal">
+          <div class="card-content">
+            <div class="card-icon">🎨</div>
+            <h3>Creative Design</h3>
+            <p>Every project is designed with creativity and attention to detail, reflecting our commitment to turning visions into reality.</p>
+          </div>
+        </div>
+        <div class="card scroll-reveal">
+          <div class="card-content">
+            <div class="card-icon">⚙️</div>
+            <h3>Technical Excellence</h3>
+            <p>Our professional installation and execution ensure that every element is properly implemented for longevity.</p>
+          </div>
+        </div>
+        <div class="card scroll-reveal">
+          <div class="card-content">
+            <div class="card-icon">🌿</div>
+            <h3>Sustainable Solutions</h3>
+            <p>We prioritize environmental responsibility in every project, creating spaces that are beautiful and eco-friendly.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="section" style="background: linear-gradient(135deg, var(--primary-green) 0%, var(--secondary-green) 100%); color: white;">
+    <div class="container">
+      <div style="max-width: 600px; margin: 0 auto; text-align: center;">
+        <h2 style="color: white;">See What We Can Create for You</h2>
+        <p style="color: rgba(255, 255, 255, 0.95); margin-bottom: 2rem;">Contact us today to discuss your landscaping project and get started on your transformation.</p>
+        <a href="contact.html" class="btn btn-outline" style="border-color: white; color: white;">Request a Quote</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Landmark Landscaping</h3>
+          <p>Premier landscaping and irrigation solutions transforming outdoor spaces across Kenya.</p>
+          <div class="social-links">
+            <a href="https://facebook.com" title="Facebook">f</a>
+            <a href="https://twitter.com" title="Twitter">𝕏</a>
+            <a href="https://instagram.com" title="Instagram">📷</a>
+            <a href="https://linkedin.com" title="LinkedIn">in</a>
+          </div>
+        </div>
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <ul class="footer-links">
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="blog.html">Blog</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3>Contact Info</h3>
+          <ul class="footer-links">
+            <li><a href="mailto:bennyoike@gmail.com">📧 bennyoike@gmail.com</a></li>
+            <li><a href="tel:+254728158526">📱 +254 728 158 526</a></li>
+            <li><a href="#">📍 Nairobi, Kenya</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3>Service Areas</h3>
+          <p>We serve Nairobi and major towns across Kenya including:</p>
+          <p style="font-size: 0.9rem;">Mombasa • Kisumu • Nakuru • Eldoret • Kisii • Kericho</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 Landmark Landscaping Services. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating Action Buttons -->
+  <button id="whatsapp-btn" aria-label="Contact on WhatsApp">💬</button>
+  <button id="quote-btn" aria-label="Request a quote">📋</button>
+  <button id="back-to-top" aria-label="Back to top">⬆️</button>
+
+  <!-- Drag Handle with Menu -->
+  <div class="drag-handle" title="Drag me around">☎️</div>
+  <div class="drag-menu">
+    <a href="tel:+254728158526">📱 Call Us</a>
+    <a href="mailto:bennyoike@gmail.com">📧 Email</a>
+    <a href="contact.html">💼 Contact Form</a>
+    <a href="https://wa.me/254728158526">💬 WhatsApp</a>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
