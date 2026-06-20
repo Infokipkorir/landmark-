@@ -1,270 +1,830 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Read landscaping tips, guides, and industry insights on Landmark Landscaping blog. Learn about garden care, irrigation, and outdoor design.">
-  <meta name="keywords" content="landscaping blog, gardening tips, irrigation guide, outdoor design, Kenya">
-  <meta name="robots" content="index, follow">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://www.landmarklandscaping.co.ke/blog.html">
-  <meta property="og:title" content="Blog - Landmark Landscaping">
-  <link rel="canonical" href="https://www.landmarklandscaping.co.ke/blog.html">
-  <title>Blog - Landmark Landscaping Services</title>
-  <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Read landscaping tips, guides, and industry insights on Landmark Landscaping blog. Learn about garden care, irrigation, and outdoor design.">
+<meta name="keywords" content="landscaping blog, gardening tips, irrigation guide, outdoor design, Kenya">
+<meta name="author" content="Landmark Landscaping Services">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.landmarklandscaping.co.ke/blog.html">
+<meta property="og:title" content="Blog - Landmark Landscaping">
+<meta property="og:description" content="Landscaping tips, guides, and industry insights">
+<link rel="canonical" href="https://www.landmarklandscaping.co.ke/blog.html">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' font-size='75' fill='%231B5E20'>🌿</text></svg>">
+<title>Blog - Landmark Landscaping Services</title>
+
+<!-- Bootstrap 5 -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+<style>
+  :root{
+    --forest:#1B5E20;
+    --forest-deep:#143F18;
+    --leaf:#43A047;
+    --sage:#EEF3E7;
+    --clay:#C0703A;
+    --clay-deep:#9C5526;
+    --sun:#E0A93B;
+    --cream:#FBF8F2;
+    --ink:#1C2418;
+    --ink-soft:#52604A;
+    --line:rgba(28,36,24,0.08);
+
+    --display:'Fraunces', serif;
+    --body:'Plus Jakarta Sans', system-ui, sans-serif;
+    --mono:'JetBrains Mono', monospace;
+
+    --radius-lg:28px;
+    --radius-md:16px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:var(--body);
+    color:var(--ink);
+    background:var(--cream);
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.display{
+    font-family:var(--display);
+    color:var(--forest-deep);
+    letter-spacing:-0.01em;
+  }
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:.72rem;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--clay-deep);
+    font-weight:500;
+  }
+  a{color:var(--forest);}
+  .lead-soft{color:var(--ink-soft);}
+
+  /* ---------- Buttons ---------- */
+  .btn{
+    border-radius:999px;
+    font-weight:600;
+    padding:.75rem 1.7rem;
+    font-size:.95rem;
+    transition:transform .25s ease, box-shadow .25s ease, background .25s ease;
+  }
+  .btn-forest{background:var(--forest); color:#fff; border:none;}
+  .btn-forest:hover{background:var(--forest-deep); color:#fff; transform:translateY(-2px); box-shadow:0 10px 24px rgba(27,94,32,.28);}
+  .btn-clay{background:var(--clay); color:#fff; border:none;}
+  .btn-clay:hover{background:var(--clay-deep); color:#fff; transform:translateY(-2px); box-shadow:0 10px 24px rgba(192,112,58,.3);}
+  .btn-line{background:transparent; border:1.5px solid currentColor; color:var(--forest);}
+  .btn-line:hover{background:var(--forest); color:#fff; border-color:var(--forest); transform:translateY(-2px);}
+  .btn-line-light{background:transparent; border:1.5px solid rgba(255,255,255,.7); color:#fff;}
+  .btn-line-light:hover{background:#fff; color:var(--forest-deep); transform:translateY(-2px);}
+
+  /* ---------- Navbar ---------- */
+  .nav-wrap{
+    position:fixed; top:0; left:0; right:0; z-index:1000;
+    transition:background .35s ease, box-shadow .35s ease, padding .35s ease;
+    padding:1.1rem 0;
+  }
+  .nav-wrap.scrolled{
+    background:rgba(251,248,242,.92);
+    backdrop-filter:blur(10px);
+    box-shadow:0 4px 30px rgba(28,36,24,.08);
+    padding:.6rem 0;
+  }
+  .brand{
+    font-family:var(--display);
+    font-weight:600;
+    font-size:1.35rem;
+    color:#fff !important;
+    display:flex; align-items:center; gap:.5rem;
+    text-decoration:none;
+    transition:color .35s ease;
+  }
+  .brand .leaf-mark{font-size:1.5rem;}
+  .navbar-nav .nav-link{
+    font-weight:600;
+    font-size:.92rem;
+    color:#fff !important;
+    margin:0 .5rem;
+    position:relative;
+    padding:.4rem 0 !important;
+    transition:color .35s ease;
+  }
+  .navbar-nav .nav-link::after{
+    content:'';
+    position:absolute; left:0; bottom:-2px; height:2px; width:0%;
+    background:var(--sun);
+    transition:width .25s ease;
+  }
+  .navbar-nav .nav-link:hover::after{width:100%;}
+  .navbar-nav .nav-link.active{color:var(--sun) !important;}
+  .navbar-toggler{ border-radius:8px; border-color:rgba(255,255,255,.4); }
+  .navbar-toggler-icon{ filter:brightness(0) invert(1); }
+  .nav-wrap.scrolled .navbar-toggler-icon{ filter:none; }
+  .nav-wrap.scrolled .brand{ color:var(--forest-deep) !important; }
+  .nav-wrap.scrolled .navbar-nav .nav-link{ color:var(--ink) !important; }
+  .nav-wrap.scrolled .navbar-nav .nav-link.active{ color:var(--forest) !important; }
+  .nav-wrap.scrolled .navbar-nav .nav-link::after{ background:var(--clay); }
+  @media (max-width: 991.98px){
+    .navbar-collapse.show{
+      background:#fff;
+      border-radius:16px;
+      margin-top:1rem;
+      padding:1rem 1.2rem;
+      box-shadow:0 18px 40px -12px rgba(20,63,24,.25);
+    }
+    .navbar-collapse.show .nav-link{ color:var(--ink) !important; }
+    .navbar-collapse.show .nav-link.active{ color:var(--forest) !important; }
+  }
+
+  /* ---------- Page Hero ---------- */
+  .page-hero{
+    position:relative;
+    min-height:42vh;
+    display:flex;
+    align-items:center;
+    overflow:hidden;
+    background:var(--forest-deep);
+    padding-top:5rem;
+  }
+  .hero-bg{
+    position:absolute; inset:0;
+    background-image:url('https://images.unsplash.com/photo-1558904541-efa843a96f01?auto=format&fit=crop&w=2000&q=80');
+    background-size:cover; background-position:center;
+    transform:scale(1.02);
+  }
+  .hero-overlay{
+    position:absolute; inset:0;
+    background:linear-gradient(120deg, rgba(15,38,16,.94) 15%, rgba(20,63,24,.72) 55%, rgba(20,63,24,.4) 100%);
+  }
+  .hero-content{position:relative; z-index:2; color:#fff;}
+  .hero-content .eyebrow{color:var(--sun);}
+  .page-hero h1{
+    color:#fff;
+    font-size:clamp(2rem, 4.2vw, 3.1rem);
+    font-weight:600;
+    line-height:1.1;
+    max-width:680px;
+  }
+  .page-hero p.lede{
+    color:rgba(255,255,255,.88);
+    font-size:1.05rem;
+    max-width:560px;
+    margin:1rem 0 0;
+  }
+
+  /* ---------- Sections ---------- */
+  .section{padding:6.5rem 0;}
+  .section-sage{background:var(--sage);}
+  .section-title{max-width:620px; margin-bottom:3rem;}
+  .section-title.mx-auto{margin-left:auto; margin-right:auto; text-align:center;}
+  .section-title h2{font-size:clamp(1.9rem,3.4vw,2.6rem); font-weight:600; margin-top:.4rem;}
+
+  /* ---------- Blog Cards ---------- */
+  .blog-card{
+    background:#fff;
+    border-radius:var(--radius-md);
+    overflow:hidden;
+    border:1px solid var(--line);
+    height:100%;
+    transition:transform .3s ease, box-shadow .3s ease;
+  }
+  .blog-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 24px 50px -18px rgba(20,63,24,.22);
+  }
+  .blog-card-img{
+    width:100%;
+    height:200px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:3rem;
+    background-size:cover;
+    background-position:center;
+  }
+  .blog-card-body{padding:2rem 1.8rem;}
+  .blog-card .category{
+    font-family:var(--mono);
+    font-size:.75rem;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--clay-deep);
+    font-weight:600;
+    margin-bottom:.8rem;
+  }
+  .blog-card h3{
+    font-size:1.2rem;
+    font-weight:600;
+    margin-bottom:1rem;
+    line-height:1.3;
+  }
+  .blog-card p{
+    font-size:.95rem;
+    color:var(--ink-soft);
+    margin-bottom:1.5rem;
+  }
+  .blog-card-footer{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding-top:1rem;
+    border-top:1px solid var(--line);
+  }
+  .read-time{
+    font-size:.85rem;
+    color:var(--ink-soft);
+  }
+  .read-more{
+    font-weight:600;
+    color:var(--forest);
+    text-decoration:none;
+  }
+  .read-more:hover{color:var(--forest-deep);}
+
+  /* ---------- Category Cards ---------- */
+  .category-card{
+    background:#fff;
+    border-radius:var(--radius-md);
+    padding:2.2rem 1.8rem;
+    text-align:center;
+    border:1px solid var(--line);
+    transition:transform .3s ease, box-shadow .3s ease;
+  }
+  .category-card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 18px 40px -12px rgba(20,63,24,.25);
+  }
+  .category-icon{
+    font-size:2.5rem;
+    margin-bottom:1rem;
+  }
+  .category-card h3{font-size:1.1rem; font-weight:600; margin-bottom:.5rem;}
+  .category-card p{font-size:.9rem; color:var(--ink-soft); margin-bottom:0;}
+
+  /* ---------- CTA Band ---------- */
+  .cta-band{
+    background:linear-gradient(120deg, var(--forest-deep) 0%, var(--forest) 100%);
+    border-radius:var(--radius-lg);
+    padding:4rem 2.5rem;
+    position:relative;
+    overflow:hidden;
+    color:#fff;
+  }
+  .cta-band::before{
+    content:'🌿'; position:absolute; font-size:14rem; opacity:.08;
+    right:-2rem; top:-4rem; transform:rotate(15deg);
+  }
+  .cta-band h2{color:#fff; font-size:clamp(1.7rem,3vw,2.3rem);}
+  .cta-band .form-control{
+    border-radius:8px;
+    padding:.8rem 1.2rem;
+    border:none;
+    font-size:.95rem;
+  }
+  .cta-band .btn{padding:.8rem 1.5rem;}
+
+  /* ---------- Footer ---------- */
+  footer{
+    position:relative;
+    background:var(--forest-deep);
+    color:rgba(255,255,255,.85);
+    padding:4.5rem 0 0;
+    overflow:hidden;
+  }
+  .footer-bg{
+    position:absolute; inset:0;
+    background:url('https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=1800&q=80') center/cover;
+    opacity:.16;
+  }
+  .footer-overlay{
+    position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(20,63,24,.92) 0%, rgba(15,38,16,.97) 100%);
+  }
+  footer .container{position:relative; z-index:2;}
+  footer h3{color:#fff; font-family:var(--display); font-size:1.05rem; font-weight:600; margin-bottom:1.1rem;}
+  footer a{color:rgba(255,255,255,.75); text-decoration:none;}
+  footer a:hover{color:var(--sun);}
+  footer .footer-links li{margin-bottom:.55rem; font-size:.92rem;}
+  footer .footer-links li a{display:flex; align-items:center; gap:.45rem;}
+
+  /* Service area marquee */
+  .marquee-wrap{
+    overflow:hidden;
+    position:relative;
+    mask-image:linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+    -webkit-mask-image:linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  }
+  .marquee-track{
+    display:flex;
+    gap:1.6rem;
+    width:max-content;
+    animation:marqueeScroll 22s linear infinite;
+  }
+  .marquee-wrap:hover .marquee-track{animation-play-state:paused;}
+  .marquee-track .city-chip{
+    display:inline-flex; align-items:center; gap:.4rem;
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.14);
+    border-radius:999px;
+    padding:.45rem 1rem;
+    font-size:.83rem;
+    white-space:nowrap;
+    color:rgba(255,255,255,.85);
+  }
+  @keyframes marqueeScroll{
+    from{ transform:translateX(0); }
+    to{ transform:translateX(-50%); }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .marquee-track{animation:none;}
+  }
+  .social-row a{
+    width:36px; height:36px; border-radius:50%;
+    background:rgba(255,255,255,.1);
+    display:inline-flex; align-items:center; justify-content:center;
+    margin-right:.5rem; font-size:.95rem;
+    transition:background .25s ease;
+  }
+  .social-row a:hover{background:var(--clay);}
+  .footer-bottom{border-top:1px solid rgba(255,255,255,.12); margin-top:2.5rem; padding-top:1.5rem; font-size:.82rem; color:rgba(255,255,255,.6);}
+
+  /* ---------- Floating Action Buttons ---------- */
+  .fab-stack{position:fixed; bottom:1.6rem; right:1.6rem; z-index:1050; display:flex; flex-direction:column; gap:.8rem; align-items:flex-end;}
+  .fab{
+    width:54px; height:54px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-size:1.4rem; border:none; cursor:pointer;
+    box-shadow:0 12px 28px -8px rgba(20,63,24,.4);
+    transition:transform .25s ease;
+  }
+  .fab:hover{transform:scale(1.08);}
+  .fab-whatsapp{background:#25D366; color:#fff;}
+  .fab-quote{background:var(--clay); color:#fff;}
+  .fab-top{background:#fff; color:var(--forest); border:1px solid var(--line); opacity:0; pointer-events:none; transform:translateY(10px);}
+  .fab-top.show{opacity:1; pointer-events:auto; transform:translateY(0);}
+
+  /* ---------- Scroll Reveal ---------- */
+  .reveal{opacity:0; transform:translateY(28px); transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  @media (prefers-reduced-motion: reduce){
+    .reveal{opacity:1; transform:none; transition:none;}
+    html{scroll-behavior:auto;}
+  }
+
+  /* Focus visibility */
+  a:focus-visible, button:focus-visible{outline:2px solid var(--clay); outline-offset:3px;}
+
+  @media (max-width: 991.98px){
+    .page-hero{min-height:38vh;}
+    .section{padding:4.5rem 0;}
+    .cta-band{padding:3rem 1.5rem; border-radius:24px;}
+  }
+
+  .city-chip{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    padding:8px 16px;
+    border-radius:30px;
+    background:#f5f8f2;
+    color:#1B5E20;
+    font-weight:500;
+  }
+
+  .city-chip i{
+    color:#43A047;
+  }
+</style>
 </head>
 <body>
-  <!-- Header & Navigation -->
-  <header>
-    <div class="container">
-      <div class="header-content">
-        <a href="index.html" class="logo">🌿 Landmark Landscaping</a>
-        <button class="menu-toggle" aria-label="Toggle menu">☰</button>
-        <nav class="nav-menu">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="services.html">Services</a></li>
-          <li><a href="projects.html">Projects</a></li>
-          <li><a href="gallery.html">Gallery</a></li>
-          <li><a href="blog.html">Blog</a></li>
-          <li><a href="testimonials.html">Testimonials</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </nav>
-      </div>
-    </div>
-  </header>
 
-  <!-- Breadcrumb -->
-  <div class="breadcrumb">
-    <div class="container">
-      <ul class="breadcrumb-list">
-        <li><a href="index.html">Home</a></li>
-        <li>Blog</li>
+<!-- ============ NAVBAR ============ -->
+<nav class="navbar navbar-expand-lg nav-wrap" id="mainNav">
+  <div class="container">
+    <a class="brand" href="index.html"><span class="leaf-mark">🌿</span>Landmark Landscaping</a>
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto align-items-lg-center">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+        <li class="nav-item"><a class="nav-link" href="projects.html">Projects</a></li>
+        <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+        <li class="nav-item"><a class="nav-link active" href="blog.html">Blog</a></li>
+        <li class="nav-item"><a class="nav-link" href="testimonials.html">Testimonials</a></li>
+        <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+          <a class="btn btn-forest btn-sm" href="contact.html">Contact Us</a>
+        </li>
       </ul>
     </div>
   </div>
+</nav>
 
-  <!-- Page Hero -->
-  <section class="hero" style="padding: 100px 0; min-height: 400px;">
-    <div class="hero-content">
-      <h1>Landscaping Blog</h1>
-      <p>Tips, guides, and insights for beautiful outdoor spaces</p>
+<!-- ============ PAGE HERO ============ -->
+<section class="page-hero">
+  <div class="hero-bg">
+    <img src="https://images.unsplash.com/photo-1558904541-efa843a96f01?auto=format&fit=crop&w=2000&q=80" alt="Lush manicured garden landscape">
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="container hero-content">
+    <p class="eyebrow">Expert Insights & Tips</p>
+    <h1>Landscaping Blog</h1>
+    <p class="lede">Learn from our experts about garden design, irrigation, maintenance, and creating beautiful outdoor spaces</p>
+  </div>
+</section>
+
+<!-- ============ BLOG ARTICLES ============ -->
+<section class="section">
+  <div class="container">
+    <div class="section-title mx-auto reveal mb-5">
+      <h2>Latest Articles</h2>
+      <p class="lead-soft mt-2">Discover tips, guides, and insights to transform your outdoor spaces</p>
     </div>
-  </section>
 
-  <!-- Blog Articles -->
-  <section class="section">
-    <div class="container">
-      <div class="grid grid-2">
-        <!-- Article 1 -->
-        <article class="card scroll-reveal">
-          <div style="width: 100%; height: 250px; background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%); display: flex; align-items: center; justify-content: center; color: var(--primary-green); font-size: 3rem;">
+    <div class="row g-4">
+      <!-- Article 1 -->
+      <div class="col-md-6 col-lg-4 reveal">
+        <div class="blog-card">
+          <div class="blog-card-img" style="background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);">
             💧
           </div>
-          <div class="card-content">
-            <div style="color: var(--primary-green); font-size: 0.85rem; font-weight: 600; margin-bottom: 0.5rem;">Irrigation</div>
+          <div class="blog-card-body">
+            <div class="category">Irrigation</div>
             <h3>Smart Irrigation Systems: Save Water, Time, and Money</h3>
-            <p class="text-light">Learn how modern irrigation systems can reduce water consumption by up to 30% while keeping your garden healthy and vibrant.</p>
-            <div style="margin-top: 1rem; display: flex; justify-content: space-between; align-items: center;">
-              <span style="font-size: 0.85rem; color: var(--light-text);">Read time: 5 min</span>
-              <a href="#" class="text-dark" style="font-weight: 600;">Read More →</a>
+            <p>Learn how modern irrigation systems can reduce water consumption by up to 30% while keeping your garden healthy and vibrant.</p>
+            <div class="blog-card-footer">
+              <span class="read-time">5 min read</span>
+              <a href="#" class="read-more">Read More →</a>
             </div>
           </div>
-        </article>
+        </div>
+      </div>
 
-        <!-- Article 2 -->
-        <article class="card scroll-reveal">
-          <div style="width: 100%; height: 250px; background: linear-gradient(135deg, #A5D6A7 0%, #81C784 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">
+      <!-- Article 2 -->
+      <div class="col-md-6 col-lg-4 reveal">
+        <div class="blog-card">
+          <div class="blog-card-img" style="background: linear-gradient(135deg, #A5D6A7 0%, #81C784 100%);">
             🌱
           </div>
-          <div class="card-content">
-            <div style="color: var(--primary-green); font-size: 0.85rem; font-weight: 600; margin-bottom: 0.5rem;">Gardening</div>
+          <div class="blog-card-body">
+            <div class="category">Gardening</div>
             <h3>Creating a Low-Maintenance Garden Design</h3>
-            <p class="text-light">Discover design principles and plant selections that create beautiful gardens requiring minimal maintenance throughout the year.</p>
-            <div style="margin-top: 1rem; display: flex; justify-content: space-between; align-items: center;">
-              <span style="font-size: 0.85rem; color: var(--light-text);">Read time: 6 min</span>
-              <a href="#" class="text-dark" style="font-weight: 600;">Read More →</a>
+            <p>Discover design principles and plant selections that create beautiful gardens requiring minimal maintenance throughout the year.</p>
+            <div class="blog-card-footer">
+              <span class="read-time">6 min read</span>
+              <a href="#" class="read-more">Read More →</a>
             </div>
           </div>
-        </article>
+        </div>
+      </div>
 
-        <!-- Article 3 -->
-        <article class="card scroll-reveal">
-          <div style="width: 100%; height: 250px; background: linear-gradient(135deg, #66BB6A 0%, #43A047 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">
+      <!-- Article 3 -->
+      <div class="col-md-6 col-lg-4 reveal">
+        <div class="blog-card">
+          <div class="blog-card-img" style="background: linear-gradient(135deg, #66BB6A 0%, #43A047 100%);">
             🌳
           </div>
-          <div class="card-content">
-            <div style="color: var(--primary-green); font-size: 0.85rem; font-weight: 600; margin-bottom: 0.5rem;">Tree Care</div>
+          <div class="blog-card-body">
+            <div class="category">Tree Care</div>
             <h3>Best Trees to Plant in Kenya's Climate</h3>
-            <p class="text-light">A comprehensive guide to selecting native and adapted trees that thrive in Kenya's diverse climate zones and soil conditions.</p>
-            <div style="margin-top: 1rem; display: flex; justify-content: space-between; align-items: center;">
-              <span style="font-size: 0.85rem; color: var(--light-text);">Read time: 7 min</span>
-              <a href="#" class="text-dark" style="font-weight: 600;">Read More →</a>
+            <p>A comprehensive guide to selecting native and adapted trees that thrive in Kenya's diverse climate zones and soil conditions.</p>
+            <div class="blog-card-footer">
+              <span class="read-time">7 min read</span>
+              <a href="#" class="read-more">Read More →</a>
             </div>
           </div>
-        </article>
+        </div>
+      </div>
 
-        <!-- Article 4 -->
-        <article class="card scroll-reveal">
-          <div style="width: 100%; height: 250px; background: linear-gradient(135deg, #1B5E20 0%, #2E7D32 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">
+      <!-- Article 4 -->
+      <div class="col-md-6 col-lg-4 reveal">
+        <div class="blog-card">
+          <div class="blog-card-img" style="background: linear-gradient(135deg, #1B5E20 0%, #2E7D32 100%);">
             🏡
           </div>
-          <div class="card-content">
-            <div style="color: var(--primary-green); font-size: 0.85rem; font-weight: 600; margin-bottom: 0.5rem;">Design</div>
+          <div class="blog-card-body">
+            <div class="category">Design</div>
             <h3>Maximizing Small Spaces: Urban Garden Ideas</h3>
-            <p class="text-light">Creative solutions for designing beautiful, functional gardens in limited urban spaces like apartments and small yards.</p>
-            <div style="margin-top: 1rem; display: flex; justify-content: space-between; align-items: center;">
-              <span style="font-size: 0.85rem; color: var(--light-text);">Read time: 5 min</span>
-              <a href="#" class="text-dark" style="font-weight: 600;">Read More →</a>
+            <p>Creative solutions for designing beautiful, functional gardens in limited urban spaces like apartments and small yards.</p>
+            <div class="blog-card-footer">
+              <span class="read-time">5 min read</span>
+              <a href="#" class="read-more">Read More →</a>
             </div>
           </div>
-        </article>
+        </div>
+      </div>
 
-        <!-- Article 5 -->
-        <article class="card scroll-reveal">
-          <div style="width: 100%; height: 250px; background: linear-gradient(135deg, #4CAF50 0%, #66BB6A 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">
+      <!-- Article 5 -->
+      <div class="col-md-6 col-lg-4 reveal">
+        <div class="blog-card">
+          <div class="blog-card-img" style="background: linear-gradient(135deg, #4CAF50 0%, #66BB6A 100%);">
             ♻️
           </div>
-          <div class="card-content">
-            <div style="color: var(--primary-green); font-size: 0.85rem; font-weight: 600; margin-bottom: 0.5rem;">Sustainability</div>
+          <div class="blog-card-body">
+            <div class="category">Sustainability</div>
             <h3>Sustainable Landscaping Practices</h3>
-            <p class="text-light">Learn eco-friendly landscaping techniques that reduce environmental impact while creating beautiful and resilient outdoor spaces.</p>
-            <div style="margin-top: 1rem; display: flex; justify-content: space-between; align-items: center;">
-              <span style="font-size: 0.85rem; color: var(--light-text);">Read time: 8 min</span>
-              <a href="#" class="text-dark" style="font-weight: 600;">Read More →</a>
+            <p>Learn eco-friendly landscaping techniques that reduce environmental impact while creating beautiful and resilient outdoor spaces.</p>
+            <div class="blog-card-footer">
+              <span class="read-time">8 min read</span>
+              <a href="#" class="read-more">Read More →</a>
             </div>
           </div>
-        </article>
+        </div>
+      </div>
 
-        <!-- Article 6 -->
-        <article class="card scroll-reveal">
-          <div style="width: 100%; height: 250px; background: linear-gradient(135deg, #81C784 0%, #A5D6A7 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">
+      <!-- Article 6 -->
+      <div class="col-md-6 col-lg-4 reveal">
+        <div class="blog-card">
+          <div class="blog-card-img" style="background: linear-gradient(135deg, #81C784 0%, #A5D6A7 100%);">
             🌸
           </div>
-          <div class="card-content">
-            <div style="color: var(--primary-green); font-size: 0.85rem; font-weight: 600; margin-bottom: 0.5rem;">Seasonal Care</div>
+          <div class="blog-card-body">
+            <div class="category">Seasonal Care</div>
             <h3>Seasonal Garden Maintenance Checklist</h3>
-            <p class="text-light">A month-by-month guide to maintaining your garden throughout Kenya's seasons with essential tasks and timing.</p>
-            <div style="margin-top: 1rem; display: flex; justify-content: space-between; align-items: center;">
-              <span style="font-size: 0.85rem; color: var(--light-text);">Read time: 6 min</span>
-              <a href="#" class="text-dark" style="font-weight: 600;">Read More →</a>
+            <p>A month-by-month guide to maintaining your garden throughout Kenya's seasons with essential tasks and timing.</p>
+            <div class="blog-card-footer">
+              <span class="read-time">6 min read</span>
+              <a href="#" class="read-more">Read More →</a>
             </div>
           </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- Blog Categories -->
-  <section class="section" style="background-color: #FFFFFF;">
-    <div class="container">
-      <div class="section-title">
-        <h2>Browse by Category</h2>
-      </div>
-      <div class="grid grid-4">
-        <div class="card scroll-reveal" style="text-align: center;">
-          <div class="card-content">
-            <div class="card-icon">💧</div>
-            <h3>Irrigation</h3>
-            <p>Water systems, efficiency, and best practices</p>
-          </div>
-        </div>
-        <div class="card scroll-reveal" style="text-align: center;">
-          <div class="card-content">
-            <div class="card-icon">🌱</div>
-            <h3>Gardening</h3>
-            <p>Plant care, growing tips, and maintenance</p>
-          </div>
-        </div>
-        <div class="card scroll-reveal" style="text-align: center;">
-          <div class="card-content">
-            <div class="card-icon">🎨</div>
-            <h3>Design</h3>
-            <p>Landscape planning and creative ideas</p>
-          </div>
-        </div>
-        <div class="card scroll-reveal" style="text-align: center;">
-          <div class="card-content">
-            <div class="card-icon">🌍</div>
-            <h3>Sustainability</h3>
-            <p>Eco-friendly practices and solutions</p>
-          </div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Newsletter CTA -->
-  <section class="section" style="background: linear-gradient(135deg, var(--primary-green) 0%, var(--secondary-green) 100%); color: white;">
-    <div class="container">
-      <div style="max-width: 500px; margin: 0 auto; text-align: center;">
-        <h2 style="color: white; margin-bottom: 1rem;">Subscribe to Our Newsletter</h2>
-        <p style="color: rgba(255, 255, 255, 0.95); margin-bottom: 2rem;">Get landscaping tips, seasonal advice, and project updates delivered to your inbox.</p>
-        <form style="display: flex; gap: 10px;">
-          <input type="email" placeholder="Your email" style="flex: 1; padding: 12px 15px; border: none; border-radius: 4px; font-size: 1rem;">
-          <button type="submit" class="btn btn-outline" style="border-color: white; color: white;">Subscribe</button>
+<!-- ============ CATEGORIES ============ -->
+<section class="section section-sage">
+  <div class="container">
+    <div class="section-title mx-auto reveal mb-5">
+      <h2>Browse by Category</h2>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-3 reveal">
+        <div class="category-card">
+          <div class="category-icon">💧</div>
+          <h3>Irrigation</h3>
+          <p>Water systems, efficiency, and best practices</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3 reveal">
+        <div class="category-card">
+          <div class="category-icon">🌱</div>
+          <h3>Gardening</h3>
+          <p>Plant care, growing tips, and maintenance</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3 reveal">
+        <div class="category-card">
+          <div class="category-icon">🎨</div>
+          <h3>Design</h3>
+          <p>Landscape planning and creative ideas</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3 reveal">
+        <div class="category-card">
+          <div class="category-icon">🌍</div>
+          <h3>Sustainability</h3>
+          <p>Eco-friendly practices and solutions</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ NEWSLETTER CTA ============ -->
+<section class="section" style="background:#fff;">
+  <div class="container">
+    <div class="cta-band">
+      <div style="max-width:600px; margin:0 auto; text-align:center;">
+        <h2 class="mb-3">Subscribe to Our Newsletter</h2>
+        <p style="color:rgba(255,255,255,.95); margin-bottom:2rem; font-size:1rem;">Get landscaping tips, seasonal advice, and project updates delivered to your inbox.</p>
+        <form class="d-flex gap-2 flex-wrap justify-content-center">
+          <input type="email" class="form-control" placeholder="Your email" style="max-width:300px;" required>
+          <button type="submit" class="btn btn-light" style="color:var(--forest); font-weight:600;">Subscribe</button>
         </form>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Footer -->
-  <footer>
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-section">
-          <h3>Landmark Landscaping</h3>
-          <p>Premier landscaping and irrigation solutions transforming outdoor spaces across Kenya.</p>
-          <div class="social-links">
-            <a href="https://facebook.com" title="Facebook">f</a>
-            <a href="https://twitter.com" title="Twitter">𝕏</a>
-            <a href="https://instagram.com" title="Instagram">📷</a>
-            <a href="https://linkedin.com" title="LinkedIn">in</a>
-          </div>
-        </div>
-        <div class="footer-section">
-          <h3>Quick Links</h3>
-          <ul class="footer-links">
-            <li><a href="about.html">About Us</a></li>
-            <li><a href="services.html">Services</a></li>
-            <li><a href="projects.html">Projects</a></li>
-            <li><a href="blog.html">Blog</a></li>
-          </ul>
-        </div>
-        <div class="footer-section">
-          <h3>Contact Info</h3>
-          <ul class="footer-links">
-            <li><a href="mailto:bennyoike@gmail.com">📧 bennyoike@gmail.com</a></li>
-            <li><a href="tel:+254728158526">📱 +254 728 158 526</a></li>
-            <li><a href="#">📍 Nairobi, Kenya</a></li>
-          </ul>
-        </div>
-        <div class="footer-section">
-          <h3>Service Areas</h3>
-          <p>We serve Nairobi and major towns across Kenya including:</p>
-          <p style="font-size: 0.9rem;">Mombasa • Kisumu • Nakuru • Eldoret • Kisii • Kericho</p>
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="footer-bg"></div>
+  <div class="footer-overlay"></div>
+  <div class="container">
+    <div class="row pb-4 mb-5">
+      <div class="col-lg-4 col-sm-6">
+        <h3>
+            <i class="bi bi-flower1 text-success me-2"></i>
+            Landmark Landscaping
+        </h3>
+        <p style="font-size:.92rem;">
+            Premier landscaping and irrigation solutions transforming outdoor spaces across Kenya.
+        </p>
+        <div class="social-row mt-3">
+            <a href="https://facebook.com"
+               title="Facebook"
+               aria-label="Follow us on Facebook">
+                <i class="bi bi-facebook"></i>
+            </a>
+            <a href="https://twitter.com"
+               title="X (Twitter)"
+               aria-label="Follow us on X">
+                <i class="bi bi-twitter-x"></i>
+            </a>
+            <a href="https://instagram.com"
+               title="Instagram"
+               aria-label="Follow us on Instagram">
+                <i class="bi bi-instagram"></i>
+            </a>
+            <a href="https://linkedin.com"
+               title="LinkedIn"
+               aria-label="Follow us on LinkedIn">
+                <i class="bi bi-linkedin"></i>
+            </a>
+            <a href="https://wa.me/254728158526"
+               title="WhatsApp"
+               aria-label="Chat with us on WhatsApp">
+                <i class="bi bi-whatsapp"></i>
+            </a>
         </div>
       </div>
-      <div class="footer-bottom">
-        <p>&copy; 2024 Landmark Landscaping Services. All rights reserved.</p>
+      <div class="col-lg-2 col-sm-6">
+        <h3>Quick Links</h3>
+        <ul class="footer-links list-unstyled">
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="blog.html">Blog</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-3 col-sm-6">
+        <h3>Contact Info</h3>
+        <ul class="footer-links list-unstyled">
+            <li>
+                <a href="mailto:bennyoike@gmail.com">
+                    <i class="bi bi-envelope-fill me-2 text-success"></i>
+                    bennyoike@gmail.com
+                </a>
+            </li>
+            <li>
+                <a href="tel:+254728158526">
+                    <i class="bi bi-telephone-fill me-2 text-success"></i>
+                    +254 728 158 526
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="bi bi-geo-alt-fill me-2 text-success"></i>
+                    Nairobi, Kenya
+                </a>
+            </li>
+        </ul>
+      </div>
+      <div class="col-lg-3 col-sm-6">
+        <h3>Service Areas</h3>
+        <p style="font-size:.92rem;">We serve Nairobi and major towns across Kenya, including:</p>
       </div>
     </div>
-  </footer>
 
-  <!-- Floating Action Buttons -->
-  <button id="whatsapp-btn" aria-label="Contact on WhatsApp">💬</button>
-  <button id="quote-btn" aria-label="Request a quote">📋</button>
-  <button id="back-to-top" aria-label="Back to top">⬆️</button>
+    <div class="marquee-wrap mt-2 mb-5">
+      <div class="marquee-track">
+          <span class="city-chip"><i class="bi bi-geo-alt-fill"></i> Nairobi</span>
+          <span class="city-chip"><i class="bi bi-geo-alt-fill"></i> Mombasa</span>
+          <span class="city-chip"><i class="bi bi-geo-alt-fill"></i> Kisumu</span>
+          <span class="city-chip"><i class="bi bi-geo-alt-fill"></i> Nakuru</span>
+          <span class="city-chip"><i class="bi bi-geo-alt-fill"></i> Eldoret</span>
+          <span class="city-chip"><i class="bi bi-geo-alt-fill"></i> Kisii</span>
+          <span class="city-chip"><i class="bi bi-geo-alt-fill"></i> Kericho</span>
+          <span class="city-chip"><i class="bi bi-geo-alt-fill"></i> Thika</span>
+          <span class="city-chip"><i class="bi bi-geo-alt-fill"></i> Nyeri</span>
+          <span class="city-chip"><i class="bi bi-geo-alt-fill"></i> Machakos</span>
+          <span class="city-chip"><i class="bi bi-geo-alt-fill"></i> Naivasha</span>
+          <span class="city-chip"><i class="bi bi-geo-alt-fill"></i> Kitale</span>
+          <span class="city-chip"><i class="bi bi-geo-alt-fill"></i> Malindi</span>
+          <span class="city-chip"><i class="bi bi-geo-alt-fill"></i> Meru</span>
+          <span class="city-chip"><i class="bi bi-geo-alt-fill"></i> Nanyuki</span>
+      </div>
+    </div>
 
-  <!-- Drag Handle with Menu -->
-  <div class="drag-handle" title="Drag me around">☎️</div>
-  <div class="drag-menu">
-    <a href="tel:+254728158526">📱 Call Us</a>
-    <a href="mailto:bennyoike@gmail.com">📧 Email</a>
-    <a href="contact.html">💼 Contact Form</a>
-    <a href="https://wa.me/254728158526">💬 WhatsApp</a>
+    <div class="footer-bottom text-center pb-4">
+      <p class="mb-0">&copy; 2026 Landmark Landscaping Services. All rights reserved.</p>
+    </div>
   </div>
+</footer>
 
-  <script src="script.js"></script>
+<!-- ============ FLOATING ACTION BUTTONS ============ -->
+<div class="fab-stack">
+  <button id="back-to-top" class="fab fab-top" aria-label="Back to top" title="Back to top">⬆️</button>
+  <button id="quote-btn" class="fab fab-quote" aria-label="Request a quote" title="Request a Quote" data-bs-toggle="modal" data-bs-target="#quoteModal">📋</button>
+  <a href="https://wa.me/254728158526" target="_blank" rel="noopener" class="fab fab-whatsapp" aria-label="Contact on WhatsApp" title="Chat on WhatsApp">💬</a>
+</div>
+
+<!-- ============ QUOTE MODAL ============ -->
+<div class="modal fade" id="quoteModal" tabindex="-1" aria-labelledby="quoteModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content" style="border-radius:20px; border:none;">
+      <div class="modal-header" style="border-bottom:1px solid var(--line);">
+        <h5 class="modal-title display" id="quoteModalLabel">Request a Free Quote</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="quoteForm" novalidate>
+          <div class="mb-3">
+            <label for="qName" class="form-label">Full Name</label>
+            <input type="text" class="form-control" id="qName" required>
+          </div>
+          <div class="mb-3">
+            <label for="qPhone" class="form-label">Phone Number</label>
+            <input type="tel" class="form-control" id="qPhone" required>
+          </div>
+          <div class="mb-3">
+            <label for="qService" class="form-label">Service Needed</label>
+            <select class="form-select" id="qService" required>
+              <option value="" selected disabled>Choose a service…</option>
+              <option>Landscaping Design</option>
+              <option>Irrigation Systems</option>
+              <option>Garden Maintenance</option>
+              <option>Lawn Establishment</option>
+              <option>Tree Planting</option>
+              <option>Commercial Landscaping</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="qMessage" class="form-label">Tell us about your project</label>
+            <textarea class="form-control" id="qMessage" rows="3"></textarea>
+          </div>
+          <div id="quoteFeedback" class="small mb-2" style="display:none;"></div>
+          <button type="submit" class="btn btn-forest w-100">Send Request</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+<script>
+  // Navbar background on scroll
+  const nav = document.getElementById('mainNav');
+  const backToTop = document.getElementById('back-to-top');
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY > 40;
+    nav.classList.toggle('scrolled', scrolled);
+    backToTop.classList.toggle('show', window.scrollY > 480);
+  });
+
+  // Collapse mobile menu after clicking a link
+  document.querySelectorAll('#navMenu .nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+      const menu = document.getElementById('navMenu');
+      if (menu.classList.contains('show')) {
+        bootstrap.Collapse.getOrCreateInstance(menu).hide();
+      }
+    });
+  });
+
+  // Back to top
+  backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  // Scroll reveal via IntersectionObserver
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => io.observe(el));
+
+  // Quote form submit
+  document.getElementById('quoteForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const fb = document.getElementById('quoteFeedback');
+    if (!this.checkValidity()) {
+      this.reportValidity();
+      return;
+    }
+    fb.style.display = 'block';
+    fb.style.color = 'var(--forest)';
+    fb.textContent = 'Thanks! We\'ll get back to you within 24 hours.';
+    this.reset();
+    setTimeout(() => {
+      bootstrap.Modal.getInstance(document.getElementById('quoteModal')).hide();
+      fb.style.display = 'none';
+    }, 2200);
+  });
+</script>
 </body>
 </html>

@@ -1,242 +1,1026 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Browse our professional gallery of landscaping and irrigation projects showcasing our work quality.">
-  <meta name="keywords" content="gallery, landscaping gallery, project images, portfolio gallery">
-  <meta name="robots" content="index, follow">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://www.landmarklandscaping.co.ke/gallery.html">
-  <meta property="og:title" content="Gallery - Landmark Landscaping">
-  <link rel="canonical" href="https://www.landmarklandscaping.co.ke/gallery.html">
-  <title>Gallery - Landmark Landscaping Services</title>
-  <link rel="stylesheet" href="styles.css">
-  <style>
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 1.5rem;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Browse our professional gallery of landscaping and irrigation projects showcasing our work quality.">
+<meta name="keywords" content="gallery, landscaping gallery, project images, portfolio gallery">
+<meta name="author" content="Landmark Landscaping Services">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.landmarklandscaping.co.ke/gallery.html">
+<meta property="og:title" content="Gallery - Landmark Landscaping">
+<link rel="canonical" href="https://www.landmarklandscaping.co.ke/gallery.html">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' font-size='75' fill='%231B5E20'>🌿</text></svg>">
+<title>Gallery - Landmark Landscaping Services</title>
+
+<!-- Bootstrap 5 -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+<style>
+  :root{
+    --forest:#1B5E20;
+    --forest-deep:#143F18;
+    --leaf:#43A047;
+    --sage:#EEF3E7;
+    --clay:#C0703A;
+    --clay-deep:#9C5526;
+    --sun:#E0A93B;
+    --cream:#FBF8F2;
+    --ink:#1C2418;
+    --ink-soft:#52604A;
+    --line:rgba(28,36,24,0.08);
+
+    --display:'Fraunces', serif;
+    --body:'Plus Jakarta Sans', system-ui, sans-serif;
+    --mono:'JetBrains Mono', monospace;
+
+    --radius-lg:28px;
+    --radius-md:16px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:var(--body);
+    color:var(--ink);
+    background:var(--cream);
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.display{
+    font-family:var(--display);
+    color:var(--forest-deep);
+    letter-spacing:-0.01em;
+  }
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:.72rem;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--clay-deep);
+    font-weight:500;
+  }
+  a{color:var(--forest);}
+  .lead-soft{color:var(--ink-soft);}
+
+  /* ---------- Buttons ---------- */
+  .btn{
+    border-radius:999px;
+    font-weight:600;
+    padding:.75rem 1.7rem;
+    font-size:.95rem;
+    transition:transform .25s ease, box-shadow .25s ease, background .25s ease;
+  }
+  .btn-forest{background:var(--forest); color:#fff; border:none;}
+  .btn-forest:hover{background:var(--forest-deep); color:#fff; transform:translateY(-2px); box-shadow:0 10px 24px rgba(27,94,32,.28);}
+  .btn-clay{background:var(--clay); color:#fff; border:none;}
+  .btn-clay:hover{background:var(--clay-deep); color:#fff; transform:translateY(-2px); box-shadow:0 10px 24px rgba(192,112,58,.3);}
+  .btn-line{background:transparent; border:1.5px solid currentColor; color:var(--forest);}
+  .btn-line:hover{background:var(--forest); color:#fff; border-color:var(--forest); transform:translateY(-2px);}
+  .btn-line-light{background:transparent; border:1.5px solid rgba(255,255,255,.7); color:#fff;}
+  .btn-line-light:hover{background:#fff; color:var(--forest-deep); transform:translateY(-2px);}
+
+  /* ---------- Navbar ---------- */
+  .nav-wrap{
+    position:fixed; top:0; left:0; right:0; z-index:1000;
+    transition:background .35s ease, box-shadow .35s ease, padding .35s ease;
+    padding:1.1rem 0;
+  }
+  .nav-wrap.scrolled{
+    background:rgba(251,248,242,.92);
+    backdrop-filter:blur(10px);
+    box-shadow:0 4px 30px rgba(28,36,24,.08);
+    padding:.6rem 0;
+  }
+  .brand{
+    font-family:var(--display);
+    font-weight:600;
+    font-size:1.35rem;
+    color:#fff !important;
+    display:flex; align-items:center; gap:.5rem;
+    text-decoration:none;
+    transition:color .35s ease;
+  }
+  .brand .leaf-mark{font-size:1.5rem;}
+  .navbar-nav .nav-link{
+    font-weight:600;
+    font-size:.92rem;
+    color:#fff !important;
+    margin:0 .5rem;
+    position:relative;
+    padding:.4rem 0 !important;
+    transition:color .35s ease;
+  }
+  .navbar-nav .nav-link::after{
+    content:'';
+    position:absolute; left:0; bottom:-2px; height:2px; width:0%;
+    background:var(--sun);
+    transition:width .25s ease;
+  }
+  .navbar-nav .nav-link:hover::after{width:100%;}
+  .navbar-nav .nav-link.active{color:var(--sun) !important;}
+  .navbar-toggler{ border-radius:8px; border-color:rgba(255,255,255,.4); }
+  .navbar-toggler-icon{ filter:brightness(0) invert(1); }
+  .nav-wrap.scrolled .navbar-toggler-icon{ filter:none; }
+  .nav-wrap.scrolled .brand{ color:var(--forest-deep) !important; }
+  .nav-wrap.scrolled .navbar-nav .nav-link{ color:var(--ink) !important; }
+  .nav-wrap.scrolled .navbar-nav .nav-link.active{ color:var(--forest) !important; }
+  .nav-wrap.scrolled .navbar-nav .nav-link::after{ background:var(--clay); }
+  @media (max-width: 991.98px){
+    .navbar-collapse.show{
+      background:#fff;
+      border-radius:16px;
+      margin-top:1rem;
+      padding:1rem 1.2rem;
+      box-shadow:0 18px 40px -12px rgba(20,63,24,.25);
     }
-    
-    .gallery-image {
-      position: relative;
-      overflow: hidden;
-      border-radius: 8px;
-      height: 250px;
-      background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 3rem;
-      cursor: pointer;
-      transition: transform 0.3s ease;
-    }
-    
-    .gallery-image:hover {
-      transform: scale(1.05);
-    }
-    
-    .gallery-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-  </style>
+    .navbar-collapse.show .nav-link{ color:var(--ink) !important; }
+    .navbar-collapse.show .nav-link.active{ color:var(--forest) !important; }
+  }
+
+  /* ---------- Page Hero ---------- */
+  .page-hero{
+    position:relative;
+    min-height:42vh;
+    display:flex;
+    align-items:center;
+    overflow:hidden;
+    background:var(--forest-deep);
+    padding-top:5rem;
+  }
+  .hero-bg{
+    position:absolute; inset:0;
+    background-image:url('https://images.unsplash.com/photo-1558904541-efa843a96f01?auto=format&fit=crop&w=2000&q=80');
+    background-size:cover; background-position:center;
+    transform:scale(1.02);
+  }
+  .hero-overlay{
+    position:absolute; inset:0;
+    background:linear-gradient(120deg, rgba(15,38,16,.94) 15%, rgba(20,63,24,.72) 55%, rgba(20,63,24,.4) 100%);
+  }
+  .hero-content{position:relative; z-index:2; color:#fff;}
+  .hero-content .eyebrow{color:var(--sun);}
+  .page-hero h1{
+    color:#fff;
+    font-size:clamp(2rem, 4.2vw, 3.1rem);
+    font-weight:600;
+    line-height:1.1;
+    max-width:680px;
+  }
+  .page-hero p.lede{
+    color:rgba(255,255,255,.88);
+    font-size:1.05rem;
+    max-width:560px;
+    margin:1rem 0 0;
+  }
+
+  /* ---------- Sections ---------- */
+  .section{padding:6.5rem 0;}
+  .section-sage{background:var(--sage);}
+  .section-title{max-width:620px; margin-bottom:3rem;}
+  .section-title.mx-auto{margin-left:auto; margin-right:auto; text-align:center;}
+  .section-title h2{font-size:clamp(1.9rem,3.4vw,2.6rem); font-weight:600; margin-top:.4rem;}
+
+  /* ---------- Gallery Filter Buttons ---------- */
+  .filter-controls{
+    display:flex;
+    flex-wrap:wrap;
+    gap:.8rem;
+    justify-content:center;
+    margin-bottom:3.5rem;
+  }
+  .filter-btn{
+    border-radius:999px;
+    padding:.6rem 1.5rem;
+    font-weight:600;
+    font-size:.9rem;
+    border:2px solid var(--line);
+    background:#fff;
+    color:var(--ink);
+    cursor:pointer;
+    transition:all .3s ease;
+  }
+  .filter-btn:hover{
+    border-color:var(--forest);
+    color:var(--forest);
+  }
+  .filter-btn.active{
+    background:var(--forest);
+    color:#fff;
+    border-color:var(--forest);
+  }
+
+  /* ---------- Gallery Grid ---------- */
+  .gallery-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(280px, 1fr));
+    gap:2rem;
+  }
+  .gallery-item{
+    position:relative;
+    border-radius:var(--radius-md);
+    overflow:hidden;
+    aspect-ratio:1;
+    background:#fff;
+    border:1px solid var(--line);
+    cursor:pointer;
+    transition:transform .35s ease, box-shadow .35s ease;
+    opacity:0;
+    animation:fadeInGallery .6s ease forwards;
+  }
+  @keyframes fadeInGallery{
+    from{ opacity:0; transform:scale(0.95); }
+    to{ opacity:1; transform:scale(1); }
+  }
+  .gallery-item.hide{
+    display:none;
+  }
+  .gallery-item:hover{
+    transform:translateY(-8px);
+    box-shadow:0 24px 50px -18px rgba(20,63,24,.35);
+  }
+  .gallery-item img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+    transition:transform .4s ease;
+  }
+  .gallery-item:hover img{
+    transform:scale(1.08);
+  }
+  .gallery-overlay{
+    position:absolute;
+    inset:0;
+    background:rgba(27,94,32,.7);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    opacity:0;
+    transition:opacity .3s ease;
+    z-index:2;
+  }
+  .gallery-item:hover .gallery-overlay{
+    opacity:1;
+  }
+  .gallery-zoom-icon{
+    width:50px;
+    height:50px;
+    background:#fff;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:1.5rem;
+    color:var(--forest);
+  }
+
+  /* ---------- Feature Cards ---------- */
+  .feature-card{
+    background:#fff;
+    border-radius:var(--radius-md);
+    padding:2.2rem 1.8rem;
+    text-align:center;
+    border:1px solid var(--line);
+    transition:transform .3s ease, box-shadow .3s ease;
+  }
+  .feature-card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 18px 40px -12px rgba(20,63,24,.25);
+  }
+  .feature-icon{
+    font-size:2.8rem;
+    margin-bottom:1rem;
+  }
+  .feature-card h3{font-size:1.15rem; font-weight:600; margin-bottom:.8rem;}
+  .feature-card p{font-size:.9rem; color:var(--ink-soft); margin-bottom:0;}
+
+  /* ---------- CTA Band ---------- */
+  .cta-band{
+    background:linear-gradient(120deg, var(--forest-deep) 0%, var(--forest) 100%);
+    border-radius:var(--radius-lg);
+    padding:4rem 2.5rem;
+    position:relative;
+    overflow:hidden;
+    color:#fff;
+  }
+  .cta-band::before{
+    content:'🌿'; position:absolute; font-size:14rem; opacity:.08;
+    right:-2rem; top:-4rem; transform:rotate(15deg);
+  }
+  .cta-band h2{color:#fff; font-size:clamp(1.7rem,3vw,2.3rem);}
+
+  /* ---------- Lightbox Modal ---------- */
+  .lightbox{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.9);
+    z-index:2000;
+    align-items:center;
+    justify-content:center;
+    animation:fadeIn .3s ease;
+  }
+  .lightbox.show{
+    display:flex;
+  }
+  @keyframes fadeIn{
+    from{ opacity:0; }
+    to{ opacity:1; }
+  }
+  .lightbox-content{
+    position:relative;
+    max-width:90vw;
+    max-height:90vh;
+    animation:slideUp .3s ease;
+  }
+  @keyframes slideUp{
+    from{ transform:translateY(30px); opacity:0; }
+    to{ transform:translateY(0); opacity:1; }
+  }
+  .lightbox-image{
+    width:100%;
+    height:100%;
+    max-width:80vw;
+    max-height:80vh;
+    object-fit:contain;
+    border-radius:8px;
+  }
+  .lightbox-close{
+    position:absolute;
+    top:-40px;
+    right:0;
+    background:#fff;
+    color:#000;
+    border:none;
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    font-size:1.5rem;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:background .25s ease;
+  }
+  .lightbox-close:hover{
+    background:var(--clay);
+    color:#fff;
+  }
+  .lightbox-nav{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    background:rgba(255,255,255,.2);
+    color:#fff;
+    border:none;
+    width:45px;
+    height:45px;
+    border-radius:50%;
+    font-size:1.5rem;
+    cursor:pointer;
+    transition:background .25s ease;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .lightbox-nav:hover{
+    background:rgba(255,255,255,.4);
+  }
+  .lightbox-prev{
+    left:-60px;
+  }
+  .lightbox-next{
+    right:-60px;
+  }
+
+  /* ---------- Footer ---------- */
+  footer{
+    position:relative;
+    background:var(--forest-deep);
+    color:rgba(255,255,255,.85);
+    padding:4.5rem 0 0;
+    overflow:hidden;
+  }
+  .footer-bg{
+    position:absolute; inset:0;
+    background:url('https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=1800&q=80') center/cover;
+    opacity:.16;
+  }
+  .footer-overlay{
+    position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(20,63,24,.92) 0%, rgba(15,38,16,.97) 100%);
+  }
+  footer .container{position:relative; z-index:2;}
+  footer h3{color:#fff; font-family:var(--display); font-size:1.05rem; font-weight:600; margin-bottom:1.1rem;}
+  footer a{color:rgba(255,255,255,.75); text-decoration:none;}
+  footer a:hover{color:var(--sun);}
+  footer .footer-links li{margin-bottom:.55rem; font-size:.92rem;}
+  footer .footer-links li a{display:flex; align-items:center; gap:.45rem;}
+
+  /* Service area marquee */
+  .marquee-wrap{
+    overflow:hidden;
+    position:relative;
+    mask-image:linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+    -webkit-mask-image:linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  }
+  .marquee-track{
+    display:flex;
+    gap:1.6rem;
+    width:max-content;
+    animation:marqueeScroll 22s linear infinite;
+  }
+  .marquee-wrap:hover .marquee-track{animation-play-state:paused;}
+  .marquee-track .city-chip{
+    display:inline-flex; align-items:center; gap:.4rem;
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.14);
+    border-radius:999px;
+    padding:.45rem 1rem;
+    font-size:.83rem;
+    white-space:nowrap;
+    color:rgba(255,255,255,.85);
+  }
+  @keyframes marqueeScroll{
+    from{ transform:translateX(0); }
+    to{ transform:translateX(-50%); }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .marquee-track{animation:none;}
+  }
+  .social-row a{
+    width:36px; height:36px; border-radius:50%;
+    background:rgba(255,255,255,.1);
+    display:inline-flex; align-items:center; justify-content:center;
+    margin-right:.5rem; font-size:.95rem;
+    transition:background .25s ease;
+  }
+  .social-row a:hover{background:var(--clay);}
+  .footer-bottom{border-top:1px solid rgba(255,255,255,.12); margin-top:2.5rem; padding-top:1.5rem; font-size:.82rem; color:rgba(255,255,255,.6);}
+
+  /* ---------- Floating Action Buttons ---------- */
+  .fab-stack{position:fixed; bottom:1.6rem; right:1.6rem; z-index:1050; display:flex; flex-direction:column; gap:.8rem; align-items:flex-end;}
+  .fab{
+    width:54px; height:54px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-size:1.4rem; border:none; cursor:pointer;
+    box-shadow:0 12px 28px -8px rgba(20,63,24,.4);
+    transition:transform .25s ease;
+  }
+  .fab:hover{transform:scale(1.08);}
+  .fab-whatsapp{background:#25D366; color:#fff;}
+  .fab-quote{background:var(--clay); color:#fff;}
+  .fab-top{background:#fff; color:var(--forest); border:1px solid var(--line); opacity:0; pointer-events:none; transform:translateY(10px);}
+  .fab-top.show{opacity:1; pointer-events:auto; transform:translateY(0);}
+
+  /* ---------- Scroll Reveal ---------- */
+  .reveal{opacity:0; transform:translateY(28px); transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  @media (prefers-reduced-motion: reduce){
+    .reveal{opacity:1; transform:none; transition:none;}
+    html{scroll-behavior:auto;}
+  }
+
+  /* Focus visibility */
+  a:focus-visible, button:focus-visible{outline:2px solid var(--clay); outline-offset:3px;}
+
+  @media (max-width: 991.98px){
+    .page-hero{min-height:38vh;}
+    .section{padding:4.5rem 0;}
+    .cta-band{padding:3rem 1.5rem; border-radius:24px;}
+    .gallery-grid{grid-template-columns:repeat(auto-fill, minmax(200px, 1fr));}
+    .lightbox-prev{left:-40px;}
+    .lightbox-next{right:-40px;}
+  }
+
+  @media (max-width: 575.98px){
+    .filter-controls{gap:.6rem;}
+    .filter-btn{padding:.5rem 1.2rem; font-size:.85rem;}
+    .gallery-grid{grid-template-columns:repeat(auto-fill, minmax(150px, 1fr)); gap:1rem;}
+  }
+
+  .city-chip{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    padding:8px 16px;
+    border-radius:30px;
+    background:#f5f8f2;
+    color:#1B5E20;
+    font-weight:500;
+  }
+
+  .city-chip i{
+    color:#43A047;
+  }
+</style>
 </head>
 <body>
-  <!-- Header & Navigation -->
-  <header>
-    <div class="container">
-      <div class="header-content">
-        <a href="index.html" class="logo">🌿 Landmark Landscaping</a>
-        <button class="menu-toggle" aria-label="Toggle menu">☰</button>
-        <nav class="nav-menu">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="services.html">Services</a></li>
-          <li><a href="projects.html">Projects</a></li>
-          <li><a href="gallery.html">Gallery</a></li>
-          <li><a href="blog.html">Blog</a></li>
-          <li><a href="testimonials.html">Testimonials</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </nav>
-      </div>
-    </div>
-  </header>
 
-  <!-- Breadcrumb -->
-  <div class="breadcrumb">
-    <div class="container">
-      <ul class="breadcrumb-list">
-        <li><a href="index.html">Home</a></li>
-        <li>Gallery</li>
+<!-- ============ NAVBAR ============ -->
+<nav class="navbar navbar-expand-lg nav-wrap" id="mainNav">
+  <div class="container">
+    <a class="brand" href="index.html"><span class="leaf-mark">🌿</span>Landmark Landscaping</a>
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto align-items-lg-center">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+        <li class="nav-item"><a class="nav-link" href="projects.html">Projects</a></li>
+        <li class="nav-item"><a class="nav-link active" href="gallery.html">Gallery</a></li>
+        <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
+        <li class="nav-item"><a class="nav-link" href="testimonials.html">Testimonials</a></li>
+        <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+          <a class="btn btn-forest btn-sm" href="contact.html">Contact Us</a>
+        </li>
       </ul>
     </div>
   </div>
+</nav>
 
-  <!-- Page Hero -->
-  <section class="hero" style="padding: 100px 0; min-height: 400px;">
-    <div class="hero-content">
-      <h1>Project Gallery</h1>
-      <p>Visual showcase of our landscaping and irrigation work</p>
-    </div>
-  </section>
-
-  <!-- Gallery Filter -->
-  <section class="section" style="background-color: #FFFFFF;">
-    <div class="container">
-      <div style="text-align: center; margin-bottom: 2rem;">
-        <button class="filter-btn active btn btn-primary" data-filter="all">All</button>
-        <button class="filter-btn btn btn-outline" data-filter="gardens">Gardens</button>
-        <button class="filter-btn btn btn-outline" data-filter="lawns">Lawns</button>
-        <button class="filter-btn btn btn-outline" data-filter="irrigation">Irrigation</button>
-        <button class="filter-btn btn btn-outline" data-filter="features">Features</button>
-      </div>
-
-      <!-- Gallery Grid -->
-      <div class="gallery-grid">
-        <div class="gallery-item scroll-reveal" data-category="gardens">
-          <div class="gallery-image">🌸</div>
-        </div>
-        <div class="gallery-item scroll-reveal" data-category="gardens">
-          <div class="gallery-image">🌺</div>
-        </div>
-        <div class="gallery-item scroll-reveal" data-category="lawns">
-          <div class="gallery-image">🌾</div>
-        </div>
-        <div class="gallery-item scroll-reveal" data-category="irrigation">
-          <div class="gallery-image">💧</div>
-        </div>
-        <div class="gallery-item scroll-reveal" data-category="features">
-          <div class="gallery-image">🏔️</div>
-        </div>
-        <div class="gallery-item scroll-reveal" data-category="gardens">
-          <div class="gallery-image">🌼</div>
-        </div>
-        <div class="gallery-item scroll-reveal" data-category="gardens">
-          <div class="gallery-image">🌻</div>
-        </div>
-        <div class="gallery-item scroll-reveal" data-category="lawns">
-          <div class="gallery-image">🍃</div>
-        </div>
-        <div class="gallery-item scroll-reveal" data-category="irrigation">
-          <div class="gallery-image">⛲</div>
-        </div>
-        <div class="gallery-item scroll-reveal" data-category="features">
-          <div class="gallery-image">🪵</div>
-        </div>
-        <div class="gallery-item scroll-reveal" data-category="gardens">
-          <div class="gallery-image">🏵️</div>
-        </div>
-        <div class="gallery-item scroll-reveal" data-category="features">
-          <div class="gallery-image">🪨</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Gallery Description -->
-  <section class="section">
-    <div class="container">
-      <div class="section-title">
-        <h2>Our Work Quality</h2>
-        <p>Each image represents our commitment to excellence and creativity</p>
-      </div>
-      <div class="grid grid-3">
-        <div class="card scroll-reveal">
-          <div class="card-content">
-            <div class="card-icon">🎨</div>
-            <h3>Creative Design</h3>
-            <p>Every project is designed with creativity and attention to detail, reflecting our commitment to turning visions into reality.</p>
-          </div>
-        </div>
-        <div class="card scroll-reveal">
-          <div class="card-content">
-            <div class="card-icon">⚙️</div>
-            <h3>Technical Excellence</h3>
-            <p>Our professional installation and execution ensure that every element is properly implemented for longevity.</p>
-          </div>
-        </div>
-        <div class="card scroll-reveal">
-          <div class="card-content">
-            <div class="card-icon">🌿</div>
-            <h3>Sustainable Solutions</h3>
-            <p>We prioritize environmental responsibility in every project, creating spaces that are beautiful and eco-friendly.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA Section -->
-  <section class="section" style="background: linear-gradient(135deg, var(--primary-green) 0%, var(--secondary-green) 100%); color: white;">
-    <div class="container">
-      <div style="max-width: 600px; margin: 0 auto; text-align: center;">
-        <h2 style="color: white;">See What We Can Create for You</h2>
-        <p style="color: rgba(255, 255, 255, 0.95); margin-bottom: 2rem;">Contact us today to discuss your landscaping project and get started on your transformation.</p>
-        <a href="contact.html" class="btn btn-outline" style="border-color: white; color: white;">Request a Quote</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-section">
-          <h3>Landmark Landscaping</h3>
-          <p>Premier landscaping and irrigation solutions transforming outdoor spaces across Kenya.</p>
-          <div class="social-links">
-            <a href="https://facebook.com" title="Facebook">f</a>
-            <a href="https://twitter.com" title="Twitter">𝕏</a>
-            <a href="https://instagram.com" title="Instagram">📷</a>
-            <a href="https://linkedin.com" title="LinkedIn">in</a>
-          </div>
-        </div>
-        <div class="footer-section">
-          <h3>Quick Links</h3>
-          <ul class="footer-links">
-            <li><a href="about.html">About Us</a></li>
-            <li><a href="services.html">Services</a></li>
-            <li><a href="projects.html">Projects</a></li>
-            <li><a href="blog.html">Blog</a></li>
-          </ul>
-        </div>
-        <div class="footer-section">
-          <h3>Contact Info</h3>
-          <ul class="footer-links">
-            <li><a href="mailto:bennyoike@gmail.com">📧 bennyoike@gmail.com</a></li>
-            <li><a href="tel:+254728158526">📱 +254 728 158 526</a></li>
-            <li><a href="#">📍 Nairobi, Kenya</a></li>
-          </ul>
-        </div>
-        <div class="footer-section">
-          <h3>Service Areas</h3>
-          <p>We serve Nairobi and major towns across Kenya including:</p>
-          <p style="font-size: 0.9rem;">Mombasa • Kisumu • Nakuru • Eldoret • Kisii • Kericho</p>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>&copy; 2024 Landmark Landscaping Services. All rights reserved.</p>
-      </div>
-    </div>
-  </footer>
-
-  <!-- Floating Action Buttons -->
-  <button id="whatsapp-btn" aria-label="Contact on WhatsApp">💬</button>
-  <button id="quote-btn" aria-label="Request a quote">📋</button>
-  <button id="back-to-top" aria-label="Back to top">⬆️</button>
-
-  <!-- Drag Handle with Menu -->
-  <div class="drag-handle" title="Drag me around">☎️</div>
-  <div class="drag-menu">
-    <a href="tel:+254728158526">📱 Call Us</a>
-    <a href="mailto:bennyoike@gmail.com">📧 Email</a>
-    <a href="contact.html">💼 Contact Form</a>
-    <a href="https://wa.me/254728158526">💬 WhatsApp</a>
+<!-- ============ PAGE HERO ============ -->
+<section class="page-hero">
+  <div class="hero-bg">
+    <img src="https://images.unsplash.com/photo-1558904541-efa843a96f01?auto=format&fit=crop&w=2000&q=80" alt="Lush manicured garden landscape">
   </div>
+  <div class="hero-overlay"></div>
+  <div class="container hero-content">
+    <p class="eyebrow">Visual Showcase</p>
+    <h1>Project Gallery</h1>
+    <p class="lede">Browse our professional landscaping and irrigation projects that showcase our commitment to excellence</p>
+  </div>
+</section>
 
-  <script src="script.js"></script>
+<!-- ============ GALLERY FILTER ============ -->
+<section class="section" style="background:#fff;">
+  <div class="container">
+    <div class="filter-controls reveal">
+      <button class="filter-btn active" data-filter="all">All Projects</button>
+      <button class="filter-btn" data-filter="gardens">Gardens</button>
+      <button class="filter-btn" data-filter="lawns">Lawns</button>
+      <button class="filter-btn" data-filter="irrigation">Irrigation</button>
+      <button class="filter-btn" data-filter="features">Features</button>
+      <button class="filter-btn" data-filter="commercial">Commercial</button>
+    </div>
+
+    <!-- Gallery Grid with Google Images -->
+    <div class="gallery-grid" id="galleryGrid">
+      <!-- Gardens -->
+      <div class="gallery-item" data-category="gardens">
+        <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe3e?auto=format&fit=crop&w=600&q=80" alt="Beautiful garden landscape" title="Residential Garden Design">
+        <div class="gallery-overlay">
+          <div class="gallery-zoom-icon">🔍</div>
+        </div>
+      </div>
+      <div class="gallery-item" data-category="gardens">
+        <img src="https://images.unsplash.com/photo-1469022563149-aa64dbd37dda?auto=format&fit=crop&w=600&q=80" alt="Flower garden" title="Flower Garden">
+        <div class="gallery-overlay">
+          <div class="gallery-zoom-icon">🔍</div>
+        </div>
+      </div>
+      <div class="gallery-item" data-category="gardens">
+        <img src="https://images.unsplash.com/photo-1505066211613-c19b14541e11?auto=format&fit=crop&w=600&q=80" alt="Zen garden design" title="Zen Garden">
+        <div class="gallery-overlay">
+          <div class="gallery-zoom-icon">🔍</div>
+        </div>
+      </div>
+      <div class="gallery-item" data-category="gardens">
+        <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=600&q=80" alt="Garden hedge trimming" title="Manicured Garden">
+        <div class="gallery-overlay">
+          <div class="gallery-zoom-icon">🔍</div>
+        </div>
+      </div>
+
+      <!-- Lawns -->
+      <div class="gallery-item" data-category="lawns">
+        <img src="https://images.unsplash.com/photo-1518895949257-7621c3c786d7?auto=format&fit=crop&w=600&q=80" alt="Lush green lawn" title="Lawn Installation">
+        <div class="gallery-overlay">
+          <div class="gallery-zoom-icon">🔍</div>
+        </div>
+      </div>
+      <div class="gallery-item" data-category="lawns">
+        <img src="https://images.unsplash.com/photo-1558904541-efa843a96f01?auto=format&fit=crop&w=600&q=80" alt="Residential lawn" title="Residential Lawn">
+        <div class="gallery-overlay">
+          <div class="gallery-zoom-icon">🔍</div>
+        </div>
+      </div>
+      <div class="gallery-item" data-category="lawns">
+        <img src="https://images.unsplash.com/photo-1576959375944-abd3342b3402?auto=format&fit=crop&w=600&q=80" alt="Modern lawn design" title="Contemporary Lawn">
+        <div class="gallery-overlay">
+          <div class="gallery-zoom-icon">🔍</div>
+        </div>
+      </div>
+
+      <!-- Irrigation -->
+      <div class="gallery-item" data-category="irrigation">
+        <img src="https://images.unsplash.com/photo-1532601814749-5edb17fdc67a?auto=format&fit=crop&w=600&q=80" alt="Irrigation system" title="Drip Irrigation">
+        <div class="gallery-overlay">
+          <div class="gallery-zoom-icon">🔍</div>
+        </div>
+      </div>
+      <div class="gallery-item" data-category="irrigation">
+        <img src="https://images.unsplash.com/photo-1585320806919-52fadfc38f48?auto=format&fit=crop&w=600&q=80" alt="Water fountain" title="Water Feature">
+        <div class="gallery-overlay">
+          <div class="gallery-zoom-icon">🔍</div>
+        </div>
+      </div>
+      <div class="gallery-item" data-category="irrigation">
+        <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?auto=format&fit=crop&w=600&q=80" alt="Garden watering" title="Automated Irrigation">
+        <div class="gallery-overlay">
+          <div class="gallery-zoom-icon">🔍</div>
+        </div>
+      </div>
+
+      <!-- Features -->
+      <div class="gallery-item" data-category="features">
+        <img src="https://images.unsplash.com/photo-1552582928-c08a6b03fef0?auto=format&fit=crop&w=600&q=80" alt="Garden patio" title="Patio Design">
+        <div class="gallery-overlay">
+          <div class="gallery-zoom-icon">🔍</div>
+        </div>
+      </div>
+      <div class="gallery-item" data-category="features">
+        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=600&q=80" alt="Stone pathway" title="Landscape Features">
+        <div class="gallery-overlay">
+          <div class="gallery-zoom-icon">🔍</div>
+        </div>
+      </div>
+      <div class="gallery-item" data-category="features">
+        <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=600&q=80" alt="Garden seating area" title="Outdoor Seating">
+        <div class="gallery-overlay">
+          <div class="gallery-zoom-icon">🔍</div>
+        </div>
+      </div>
+
+      <!-- Commercial -->
+      <div class="gallery-item" data-category="commercial">
+        <img src="https://images.unsplash.com/photo-1578500494198-246f612d03b3?auto=format&fit=crop&w=600&q=80" alt="Commercial landscaping" title="Corporate Office Landscape">
+        <div class="gallery-overlay">
+          <div class="gallery-zoom-icon">🔍</div>
+        </div>
+      </div>
+      <div class="gallery-item" data-category="commercial">
+        <img src="https://images.unsplash.com/photo-1528696378935-e1003a1b8b58?auto=format&fit=crop&w=600&q=80" alt="Commercial garden" title="Business Complex Landscaping">
+        <div class="gallery-overlay">
+          <div class="gallery-zoom-icon">🔍</div>
+        </div>
+      </div>
+      <div class="gallery-item" data-category="commercial">
+        <img src="https://images.unsplash.com/photo-1520817711670-42c08e5e9840?auto=format&fit=crop&w=600&q=80" alt="Modern commercial space" title="Institutional Landscaping">
+        <div class="gallery-overlay">
+          <div class="gallery-zoom-icon">🔍</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WORK QUALITY SECTION ============ -->
+<section class="section section-sage">
+  <div class="container">
+    <div class="section-title mx-auto reveal mb-5">
+      <h2>Our Work Quality</h2>
+      <p class="lead-soft mt-2">Each project reflects our commitment to excellence and creativity</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-4 reveal">
+        <div class="feature-card">
+          <div class="feature-icon">🎨</div>
+          <h3>Creative Design</h3>
+          <p>Every project is designed with creativity and attention to detail, reflecting our commitment to turning visions into reality.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 reveal">
+        <div class="feature-card">
+          <div class="feature-icon">⚙️</div>
+          <h3>Technical Excellence</h3>
+          <p>Our professional installation and execution ensure that every element is properly implemented for longevity and performance.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 reveal">
+        <div class="feature-card">
+          <div class="feature-icon">🌿</div>
+          <h3>Sustainable Solutions</h3>
+          <p>We prioritize environmental responsibility in every project, creating spaces that are beautiful and eco-friendly.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA SECTION ============ -->
+<section class="section" style="background:#fff;">
+  <div class="container">
+    <div class="cta-band">
+      <div style="max-width:700px; margin:0 auto; text-align:center;">
+        <h2 class="mb-3">Ready to Transform Your Space?</h2>
+        <p style="color:rgba(255,255,255,.95); margin-bottom:2.5rem; font-size:1.05rem;">Contact us today to discuss your landscaping project and let us create something beautiful for you.</p>
+        <a href="contact.html" class="btn btn-light" style="color:var(--forest); font-weight:600;">Request a Free Quote</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="footer-bg"></div>
+  <div class="footer-overlay"></div>
+  <div class="container">
+    <div class="row pb-4 mb-5">
+      <div class="col-lg-4 col-sm-6">
+        <h3>
+            <i class="bi bi-flower1 text-success me-2"></i>
+            Landmark Landscaping
+        </h3>
+        <p style="font-size:.92rem;">
+            Premier landscaping and irrigation solutions transforming outdoor spaces across Kenya.
+        </p>
+        <div class="social-row mt-3">
+            <a href="https://facebook.com" title="Facebook" aria-label="Follow us on Facebook">
+                <i class="bi bi-facebook"></i>
+            </a>
+            <a href="https://twitter.com" title="X (Twitter)" aria-label="Follow us on X">
+                <i class="bi bi-twitter-x"></i>
+            </a>
+            <a href="https://instagram.com" title="Instagram" aria-label="Follow us on Instagram">
+                <i class="bi bi-instagram"></i>
+            </a>
+            <a href="https://linkedin.com" title="LinkedIn" aria-label="Follow us on LinkedIn">
+                <i class="bi bi-linkedin"></i>
+            </a>
+            <a href="https://wa.me/254728158526" title="WhatsApp" aria-label="Chat with us on WhatsApp">
+                <i class="bi bi-whatsapp"></i>
+            </a>
+        </div>
+      </div>
+      <div class="col-lg-2 col-sm-6">
+        <h3>Quick Links</h3>
+        <ul class="footer-links list-unstyled">
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="blog.html">Blog</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-3 col-sm-6">
+        <h3>Contact Info</h3>
+        <ul class="footer-links list-unstyled">
+            <li>
+                <a href="mailto:bennyoike@gmail.com">
+                    <i class="bi bi-envelope-fill me-2 text-success"></i>
+                    bennyoike@gmail.com
+                </a>
+            </li>
+            <li>
+                <a href="tel:+254728158526">
+                    <i class="bi bi-telephone-fill me-2 text-success"></i>
+                    +254 728 158 526
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="bi bi-geo-alt-fill me-2 text-success"></i>
+                    Nairobi, Kenya
+                </a>
+            </li>
+        </ul>
+      </div>
+      <div class="col-lg-3 col-sm-6">
+        <h3>Service Areas</h3>
+        <p style="font-size:.92rem;">We serve Nairobi and major towns across Kenya, including:</p>
+      </div>
+    </div>
+
+    <div class="marquee-wrap mt-2 mb-5">
+      <div class="marquee-track">
+          <span class="city-chip"><i class="bi bi-geo-alt-fill"></i> Nairobi</span>
+          <span class="city-chip"><i class="bi bi-geo-alt-fill"></i> Mombasa</span>
+          <span class="city-chip"><i class="bi bi-geo-alt-fill"></i> Kisumu</span>
+          <span class="city-chip"><i class="bi bi-geo-alt-fill"></i> Nakuru</span>
+          <span class="city-chip"><i class="bi bi-geo-alt-fill"></i> Eldoret</span>
+          <span class="city-chip"><i class="bi bi-geo-alt-fill"></i> Kisii</span>
+          <span class="city-chip"><i class="bi bi-geo-alt-fill"></i> Kericho</span>
+          <span class="city-chip"><i class="bi bi-geo-alt-fill"></i> Thika</span>
+          <span class="city-chip"><i class="bi bi-geo-alt-fill"></i> Nyeri</span>
+          <span class="city-chip"><i class="bi bi-geo-alt-fill"></i> Machakos</span>
+          <span class="city-chip"><i class="bi bi-geo-alt-fill"></i> Naivasha</span>
+          <span class="city-chip"><i class="bi bi-geo-alt-fill"></i> Kitale</span>
+          <span class="city-chip"><i class="bi bi-geo-alt-fill"></i> Malindi</span>
+          <span class="city-chip"><i class="bi bi-geo-alt-fill"></i> Meru</span>
+          <span class="city-chip"><i class="bi bi-geo-alt-fill"></i> Nanyuki</span>
+      </div>
+    </div>
+
+    <div class="footer-bottom text-center pb-4">
+      <p class="mb-0">&copy; 2026 Landmark Landscaping Services. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ FLOATING ACTION BUTTONS ============ -->
+<div class="fab-stack">
+  <button id="back-to-top" class="fab fab-top" aria-label="Back to top" title="Back to top">⬆️</button>
+  <button id="quote-btn" class="fab fab-quote" aria-label="Request a quote" title="Request a Quote" data-bs-toggle="modal" data-bs-target="#quoteModal">📋</button>
+  <a href="https://wa.me/254728158526" target="_blank" rel="noopener" class="fab fab-whatsapp" aria-label="Contact on WhatsApp" title="Chat on WhatsApp">💬</a>
+</div>
+
+<!-- ============ LIGHTBOX MODAL ============ -->
+<div class="lightbox" id="lightbox">
+  <div class="lightbox-content">
+    <button class="lightbox-close" id="lightboxClose">✕</button>
+    <button class="lightbox-nav lightbox-prev" id="lightboxPrev">❮</button>
+    <img class="lightbox-image" id="lightboxImage" src="" alt="">
+    <button class="lightbox-nav lightbox-next" id="lightboxNext">❯</button>
+  </div>
+</div>
+
+<!-- ============ QUOTE MODAL ============ -->
+<div class="modal fade" id="quoteModal" tabindex="-1" aria-labelledby="quoteModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content" style="border-radius:20px; border:none;">
+      <div class="modal-header" style="border-bottom:1px solid var(--line);">
+        <h5 class="modal-title display" id="quoteModalLabel">Request a Free Quote</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="quoteForm" novalidate>
+          <div class="mb-3">
+            <label for="qName" class="form-label">Full Name</label>
+            <input type="text" class="form-control" id="qName" required>
+          </div>
+          <div class="mb-3">
+            <label for="qPhone" class="form-label">Phone Number</label>
+            <input type="tel" class="form-control" id="qPhone" required>
+          </div>
+          <div class="mb-3">
+            <label for="qService" class="form-label">Service Needed</label>
+            <select class="form-select" id="qService" required>
+              <option value="" selected disabled>Choose a service…</option>
+              <option>Landscaping Design</option>
+              <option>Irrigation Systems</option>
+              <option>Garden Maintenance</option>
+              <option>Lawn Establishment</option>
+              <option>Tree Planting</option>
+              <option>Commercial Landscaping</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="qMessage" class="form-label">Tell us about your project</label>
+            <textarea class="form-control" id="qMessage" rows="3"></textarea>
+          </div>
+          <div id="quoteFeedback" class="small mb-2" style="display:none;"></div>
+          <button type="submit" class="btn btn-forest w-100">Send Request</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+<script>
+  // ========== Gallery Filter ==========
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const galleryItems = document.querySelectorAll('.gallery-item');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      // Remove active class from all buttons
+      filterBtns.forEach(b => b.classList.remove('active'));
+      // Add active class to clicked button
+      btn.classList.add('active');
+
+      const filter = btn.getAttribute('data-filter');
+
+      // Filter gallery items
+      galleryItems.forEach(item => {
+        const category = item.getAttribute('data-category');
+        if (filter === 'all' || category === filter) {
+          item.classList.remove('hide');
+          setTimeout(() => {
+            item.style.display = 'block';
+          }, 50);
+        } else {
+          item.classList.add('hide');
+          item.style.display = 'none';
+        }
+      });
+    });
+  });
+
+  // ========== Lightbox ==========
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImage = document.getElementById('lightboxImage');
+  const lightboxClose = document.getElementById('lightboxClose');
+  const lightboxPrev = document.getElementById('lightboxPrev');
+  const lightboxNext = document.getElementById('lightboxNext');
+  let currentImageIndex = 0;
+  let visibleImages = [];
+
+  function getVisibleImages() {
+    return Array.from(galleryItems).filter(item => item.style.display !== 'none').map(item => item.querySelector('img'));
+  }
+
+  galleryItems.forEach((item, index) => {
+    item.addEventListener('click', () => {
+      visibleImages = getVisibleImages();
+      currentImageIndex = visibleImages.findIndex(img => img.src === item.querySelector('img').src);
+      openLightbox(item.querySelector('img').src);
+    });
+  });
+
+  function openLightbox(imgSrc) {
+    lightboxImage.src = imgSrc;
+    lightbox.classList.add('show');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove('show');
+    document.body.style.overflow = 'auto';
+  }
+
+  lightboxClose.addEventListener('click', closeLightbox);
+
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) closeLightbox();
+  });
+
+  lightboxPrev.addEventListener('click', () => {
+    currentImageIndex = (currentImageIndex - 1 + visibleImages.length) % visibleImages.length;
+    lightboxImage.src = visibleImages[currentImageIndex].src;
+  });
+
+  lightboxNext.addEventListener('click', () => {
+    currentImageIndex = (currentImageIndex + 1) % visibleImages.length;
+    lightboxImage.src = visibleImages[currentImageIndex].src;
+  });
+
+  // Keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    if (!lightbox.classList.contains('show')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') lightboxPrev.click();
+    if (e.key === 'ArrowRight') lightboxNext.click();
+  });
+
+  // ========== Navbar Scroll ==========
+  const nav = document.getElementById('mainNav');
+  const backToTop = document.getElementById('back-to-top');
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY > 40;
+    nav.classList.toggle('scrolled', scrolled);
+    backToTop.classList.toggle('show', window.scrollY > 480);
+  });
+
+  // ========== Collapse Mobile Menu ==========
+  document.querySelectorAll('#navMenu .nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+      const menu = document.getElementById('navMenu');
+      if (menu.classList.contains('show')) {
+        bootstrap.Collapse.getOrCreateInstance(menu).hide();
+      }
+    });
+  });
+
+  // ========== Back to Top ==========
+  backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  // ========== Scroll Reveal ==========
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => io.observe(el));
+
+  // ========== Quote Form ==========
+  document.getElementById('quoteForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const fb = document.getElementById('quoteFeedback');
+    if (!this.checkValidity()) {
+      this.reportValidity();
+      return;
+    }
+    fb.style.display = 'block';
+    fb.style.color = 'var(--forest)';
+    fb.textContent = 'Thanks! We\'ll get back to you within 24 hours.';
+    this.reset();
+    setTimeout(() => {
+      bootstrap.Modal.getInstance(document.getElementById('quoteModal')).hide();
+      fb.style.display = 'none';
+    }, 2200);
+  });
+</script>
 </body>
 </html>
