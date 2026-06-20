@@ -248,6 +248,16 @@
     object-fit:cover;
     display:block;
     transition:transform .4s ease;
+    background:linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size:200% 100%;
+    animation:loading 1.5s infinite;
+  }
+  .gallery-item img.loaded{
+    animation:none;
+  }
+  @keyframes loading{
+    0%{ background-position:200% 0; }
+    100%{ background-position:-200% 0; }
   }
   .gallery-item:hover img{
     transform:scale(1.08);
@@ -883,8 +893,38 @@
   </div>
 </div>
 
+<!-- Start of Tawk.to Script -->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/6a35244b16fcef1d436fb5a9/default';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
 <script>
+  // ========== Image Loading Handler ==========
+  const images = document.querySelectorAll('.gallery-item img');
+  images.forEach(img => {
+    img.addEventListener('load', () => {
+      img.classList.add('loaded');
+    });
+    img.addEventListener('error', () => {
+      img.style.display = 'none';
+      console.warn('Image failed to load:', img.src);
+    });
+    // Trigger load event if already cached
+    if (img.complete) {
+      img.classList.add('loaded');
+    }
+  });
+
   // ========== Gallery Filter ==========
   const filterBtns = document.querySelectorAll('.filter-btn');
   const galleryItems = document.querySelectorAll('.gallery-item');
