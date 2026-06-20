@@ -1,317 +1,918 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Read testimonials and reviews from satisfied Landmark Landscaping clients across Kenya.">
-  <meta name="keywords" content="testimonials, reviews, client feedback, customer reviews">
-  <meta name="robots" content="index, follow">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://www.landmarklandscaping.co.ke/testimonials.html">
-  <meta property="og:title" content="Testimonials - Landmark Landscaping">
-  <link rel="canonical" href="https://www.landmarklandscaping.co.ke/testimonials.html">
-  <title>Testimonials - Landmark Landscaping Services</title>
-  <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Read real client testimonials and ratings for Landmark Landscaping Services. See why homeowners and businesses across Kenya trust us — and share your own feedback.">
+<meta name="keywords" content="testimonials, client reviews, landscaping reviews Kenya, customer feedback, Landmark Landscaping reviews">
+<meta name="author" content="Landmark Landscaping Services">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.landmarklandscaping.co.ke/testimonials.html">
+<meta property="og:title" content="Client Testimonials | Landmark Landscaping Services">
+<meta property="og:description" content="Real feedback and ratings from clients across Kenya — and a place to share your own experience with us.">
+<meta property="og:image" content="https://www.landmarklandscaping.co.ke/images/testimonials-og.jpg">
+<meta property="og:locale" content="en_KE">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content="https://www.landmarklandscaping.co.ke/testimonials.html">
+<meta name="twitter:title" content="Client Testimonials - Landmark Landscaping Services">
+<meta name="twitter:description" content="Real feedback and ratings from clients across Kenya.">
+<link rel="canonical" href="https://www.landmarklandscaping.co.ke/testimonials.html">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' font-size='75' fill='%231B5E20'>🌿</text></svg>">
+<title>Client Testimonials | Landmark Landscaping Services</title>
+
+<!-- Bootstrap 5 -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Landmark Landscaping Services",
+  "image": "https://www.landmarklandscaping.co.ke/images/logo.jpg",
+  "telephone": "+254728158526",
+  "email": "bennyoike@gmail.com",
+  "address": { "@type": "PostalAddress", "addressCountry": "KE", "addressRegion": "Nairobi County" },
+  "url": "https://www.landmarklandscaping.co.ke",
+  "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.8", "reviewCount": "500" },
+  "review": [
+    { "@type": "Review", "author": { "@type": "Person", "name": "Sarah Mitchell" }, "reviewRating": { "@type": "Rating", "ratingValue": "5" }, "reviewBody": "The team at Landmark Landscaping completely transformed our garden with creative design and exceptional attention to detail." },
+    { "@type": "Review", "author": { "@type": "Person", "name": "James Koech" }, "reviewRating": { "@type": "Rating", "ratingValue": "5" }, "reviewBody": "Professional, reliable and knowledgeable — our irrigation system works perfectly." },
+    { "@type": "Review", "author": { "@type": "Person", "name": "Grace Abakah" }, "reviewRating": { "@type": "Rating", "ratingValue": "5" }, "reviewBody": "They handled our entire commercial project from concept to completion. Highly recommended." }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.landmarklandscaping.co.ke/" },
+    { "@type": "ListItem", "position": 2, "name": "Testimonials", "item": "https://www.landmarklandscaping.co.ke/testimonials.html" }
+  ]
+}
+</script>
+
+<style>
+:root{
+  --forest:#1B5E20;
+  --forest-deep:#143F18;
+  --leaf:#43A047;
+  --sage:#EEF3E7;
+  --clay:#C0703A;
+  --clay-deep:#9C5526;
+  --sun:#E0A93B;
+  --cream:#FBF8F2;
+  --ink:#1C2418;
+  --ink-soft:#52604A;
+  --line:rgba(28,36,24,0.08);
+  --display:'Fraunces', serif;
+  --body:'Plus Jakarta Sans', system-ui, sans-serif;
+  --mono:'JetBrains Mono', monospace;
+  --radius-lg:28px;
+  --radius-md:16px;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--body); color:var(--ink); background:var(--cream); overflow-x:hidden;}
+h1,h2,h3,.display{font-family:var(--display); color:var(--forest-deep); letter-spacing:-0.01em;}
+.eyebrow{font-family:var(--mono); font-size:.72rem; letter-spacing:.16em; text-transform:uppercase; color:var(--clay-deep); font-weight:500;}
+a{color:var(--forest);}
+.lead-soft{color:var(--ink-soft);}
+
+/* Buttons */
+.btn{border-radius:999px; font-weight:600; padding:.75rem 1.7rem; font-size:.95rem; transition:transform .25s ease, box-shadow .25s ease, background .25s ease;}
+.btn-forest{background:var(--forest); color:#fff; border:none;}
+.btn-forest:hover{background:var(--forest-deep); color:#fff; transform:translateY(-2px); box-shadow:0 10px 24px rgba(27,94,32,.28);}
+.btn-clay{background:var(--clay); color:#fff; border:none;}
+.btn-clay:hover{background:var(--clay-deep); color:#fff; transform:translateY(-2px); box-shadow:0 10px 24px rgba(192,112,58,.3);}
+.btn-line{background:transparent; border:1.5px solid currentColor; color:var(--forest);}
+.btn-line:hover{background:var(--forest); color:#fff; border-color:var(--forest); transform:translateY(-2px);}
+.btn-line-light{background:transparent; border:1.5px solid rgba(255,255,255,.7); color:#fff;}
+.btn-line-light:hover{background:#fff; color:var(--forest-deep); transform:translateY(-2px);}
+
+/* Navbar */
+.nav-wrap{position:fixed; top:0; left:0; right:0; z-index:1000; transition:background .35s ease, box-shadow .35s ease, padding .35s ease; padding:1.1rem 0;}
+.nav-wrap.scrolled{background:rgba(251,248,242,.92); backdrop-filter:blur(10px); box-shadow:0 4px 30px rgba(28,36,24,.08); padding:.6rem 0;}
+.brand{font-family:var(--display); font-weight:600; font-size:1.35rem; color:#fff !important; display:flex; align-items:center; gap:.5rem; text-decoration:none; transition:color .35s ease;}
+.brand .leaf-mark{font-size:1.5rem;}
+.navbar-nav .nav-link{font-weight:600; font-size:.92rem; color:#fff !important; margin:0 .5rem; position:relative; padding:.4rem 0 !important; transition:color .35s ease;}
+.navbar-nav .nav-link::after{content:''; position:absolute; left:0; bottom:-2px; height:2px; width:0%; background:var(--sun); transition:width .25s ease;}
+.navbar-nav .nav-link:hover::after{width:100%;}
+.navbar-nav .nav-link.active{color:var(--sun) !important;}
+.navbar-toggler{border-radius:8px; border-color:rgba(255,255,255,.4);}
+.navbar-toggler-icon{filter:brightness(0) invert(1);}
+.nav-wrap.scrolled .navbar-toggler-icon{filter:none;}
+.nav-wrap.scrolled .brand{color:var(--forest-deep) !important;}
+.nav-wrap.scrolled .navbar-nav .nav-link{color:var(--ink) !important;}
+.nav-wrap.scrolled .navbar-nav .nav-link.active{color:var(--forest) !important;}
+.nav-wrap.scrolled .navbar-nav .nav-link::after{background:var(--clay);}
+@media (max-width: 991.98px){
+  .navbar-collapse.show{background:#fff; border-radius:16px; margin-top:1rem; padding:1rem 1.2rem; box-shadow:0 18px 40px -12px rgba(20,63,24,.25);}
+  .navbar-collapse.show .nav-link{color:var(--ink) !important;}
+  .navbar-collapse.show .nav-link.active{color:var(--forest) !important;}
+}
+
+/* Coming Soon Section */
+.coming-soon-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  min-height: 350px;
+  text-align: center;
+}
+
+.spinner-wrapper {
+  margin-bottom: 2rem;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid var(--line);
+  border-top-color: var(--forest);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.coming-soon-text {
+  font-family: var(--display);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  color: var(--forest-deep);
+  margin: 1rem 0;
+  font-weight: 600;
+}
+
+.coming-soon-subtext {
+  font-size: 1rem;
+  color: var(--ink-soft);
+  max-width: 400px;
+  margin: 0.5rem auto 0;
+}
+
+@media (max-width: 576px) {
+  .coming-soon-container {
+    min-height: 300px;
+    padding: 3rem 1.5rem;
+  }
+  
+  .spinner {
+    width: 40px;
+    height: 40px;
+    border-width: 3px;
+  }
+}
+
+/* Page hero */
+.page-hero{position:relative; min-height:42vh; display:flex; align-items:center; overflow:hidden; background:var(--forest-deep); padding-top:5rem;}
+.hero-bg{position:absolute; inset:0; background-size:cover; background-position:center; transform:scale(1.02);}
+.hero-bg img{width:100%; height:100%; object-fit:cover; display:block;}
+.hero-overlay{position:absolute; inset:0; background:linear-gradient(120deg, rgba(15,38,16,.94) 15%, rgba(20,63,24,.72) 55%, rgba(20,63,24,.4) 100%);}
+.hero-content{position:relative; z-index:2; color:#fff;}
+.hero-content .eyebrow{color:var(--sun);}
+.page-hero h1{color:#fff; font-size:clamp(2rem, 4.2vw, 3.1rem); font-weight:600; line-height:1.1; max-width:680px;}
+.page-hero p.lede{color:rgba(255,255,255,.88); font-size:1.05rem; max-width:560px; margin:1rem 0 0;}
+.breadcrumb-bar{position:relative; z-index:2; display:flex; align-items:center; gap:.5rem; font-family:var(--mono); font-size:.78rem; letter-spacing:.04em; color:rgba(255,255,255,.7); margin-bottom:1.4rem;}
+.breadcrumb-bar a{color:rgba(255,255,255,.7); text-decoration:none;}
+.breadcrumb-bar a:hover{color:var(--sun);}
+.breadcrumb-bar .sep{opacity:.5;}
+.breadcrumb-bar .current{color:var(--sun);}
+.hero-rating-pill{position:relative; z-index:2; display:inline-flex; align-items:center; gap:.6rem; background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.25); border-radius:999px; padding:.5rem 1.1rem; margin-top:1.6rem; backdrop-filter:blur(6px);}
+.hero-rating-pill .stars{color:var(--sun); font-size:.85rem; letter-spacing:1px;}
+.hero-rating-pill span.txt{font-size:.82rem; color:rgba(255,255,255,.9); font-weight:600;}
+
+/* Sections */
+.section{padding:6.5rem 0;}
+.section-sage{background:var(--sage);}
+.section-title{max-width:620px; margin-bottom:3rem;}
+.section-title.mx-auto{margin-left:auto; margin-right:auto; text-align:center;}
+.section-title h2{font-size:clamp(1.9rem,3.4vw,2.6rem); font-weight:600; margin-top:.4rem;}
+
+/* Trust stats */
+.stats-band{background:linear-gradient(135deg, var(--forest) 0%, var(--forest-deep) 100%); color:#fff;}
+.stat-box{text-align:center;}
+.stat-box .num{font-family:var(--display); font-size:clamp(2.1rem,4vw,3rem); font-weight:700; line-height:1;}
+.stat-box .lbl{font-size:.85rem; color:rgba(255,255,255,.82); margin-top:.5rem;}
+.stat-box .mini-stars{color:var(--sun); font-size:1rem; letter-spacing:2px; margin-top:.3rem;}
+
+/* Review cards */
+.review-card{background:#fff; border-radius:var(--radius-md); padding:2.1rem 1.8rem; height:100%; border:1px solid var(--line); position:relative; transition:transform .3s ease, box-shadow .3s ease;}
+.review-card:hover{transform:translateY(-7px); box-shadow:0 24px 50px -18px rgba(20,63,24,.22);}
+.review-card .quote-mark{font-family:var(--display); font-size:3rem; color:var(--sage); line-height:0; position:absolute; top:1.5rem; right:1.7rem;}
+.review-card .stars{color:var(--sun); font-size:.85rem; margin-bottom:1rem; display:flex; gap:3px; position:relative; z-index:1;}
+.review-card .stars i.bi-star{color:#D8DED2;}
+.review-card p.txt{font-size:.94rem; color:var(--ink); margin-bottom:1.4rem; font-style:italic; position:relative; z-index:1;}
+.review-card .person{display:flex; align-items:center; gap:.8rem; padding-top:1.1rem; border-top:1px solid var(--line);}
+.review-card .avatar{width:44px; height:44px; min-width:44px; border-radius:50%; background:var(--forest); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; font-family:var(--display);}
+.review-card .name{font-weight:700; font-size:.9rem;}
+.review-card .loc{font-size:.78rem; color:var(--ink-soft);}
+.review-card.is-new{border-color:var(--clay);}
+.review-card.is-new::before{content:'Just submitted'; position:absolute; top:-11px; left:1.6rem; background:var(--clay); color:#fff; font-size:.65rem; font-weight:700; letter-spacing:.05em; text-transform:uppercase; padding:.3rem .7rem; border-radius:999px;}
+
+/* Why item */
+.why-card{background:#fff; border-radius:var(--radius-md); padding:2rem 1.7rem; height:100%; border:1px solid var(--line); transition:transform .3s ease, box-shadow .3s ease;}
+.why-card:hover{transform:translateY(-8px); box-shadow:0 24px 50px -18px rgba(20,63,24,.25);}
+.why-card .ic-wrap{width:54px; height:54px; border-radius:14px; background:var(--sage); display:flex; align-items:center; justify-content:center; font-size:1.4rem; color:var(--forest); margin-bottom:1.1rem;}
+.why-card h3{font-size:1.05rem; font-weight:600; margin-bottom:.5rem;}
+.why-card p{font-size:.88rem; color:var(--ink-soft); margin-bottom:0;}
+
+/* Feedback prompt card */
+.feedback-prompt{background:linear-gradient(120deg, var(--forest-deep) 0%, var(--forest) 100%); border-radius:36px; padding:3.4rem 2.5rem; color:#fff; position:relative; overflow:hidden; text-align:center;}
+.feedback-prompt::before{content:'\f595'; font-family:'bootstrap-icons'; position:absolute; font-size:10rem; opacity:.08; right:-1rem; top:-2.5rem; transform:rotate(10deg);}
+.feedback-prompt h2{color:#fff; font-size:clamp(1.6rem,3vw,2.1rem);}
+.feedback-prompt p{color:rgba(255,255,255,.85); max-width:560px; margin:0 auto 1.6rem;}
+
+/* Star rating widget */
+.star-rate{display:flex; gap:.4rem; font-size:1.6rem; direction:ltr; flex-direction:row-reverse;}
+.star-rate input{display:none;}
+.star-rate label{color:#D8DED2; cursor:pointer; transition:color .15s ease, transform .15s ease;}
+.star-rate label:hover, .star-rate label:hover ~ label{color:var(--sun); transform:scale(1.08);}
+.star-rate input:checked ~ label{color:var(--sun);}
+
+.rate-row{display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:.6rem; padding:1rem 0; border-bottom:1px solid var(--line);}
+.rate-row:last-of-type{border-bottom:none;}
+.rate-row .rate-label{font-weight:600; font-size:.92rem; max-width:60%;}
+.rate-row .rate-label small{display:block; font-weight:400; color:var(--ink-soft); font-size:.78rem; margin-top:.15rem;}
+
+.privacy-note{background:var(--sage); border-left:3px solid var(--clay); border-radius:10px; padding:.9rem 1.1rem; font-size:.85rem; color:var(--ink-soft); display:flex; gap:.6rem; align-items:flex-start;}
+.privacy-note i{color:var(--clay-deep); font-size:1.1rem; margin-top:.1rem;}
+
+.name-toggle-btns .btn{padding:.45rem 1rem; font-size:.82rem;}
+.name-toggle-btns .btn.active-choice{background:var(--forest); color:#fff;}
+
+.modal-content .form-control, .modal-content .form-select{border-radius:12px; border:1px solid var(--line); padding:.7rem 1rem;}
+.modal-content .form-control:focus, .modal-content .form-select:focus{border-color:var(--forest); box-shadow:0 0 0 .2rem rgba(27,94,32,.12);}
+.modal-content label{font-weight:600; font-size:.88rem;}
+
+/* CTA band */
+.cta-band{background:linear-gradient(120deg, var(--forest-deep) 0%, var(--forest) 100%); border-radius:36px; padding:4rem 2.5rem; position:relative; overflow:hidden; color:#fff;}
+.cta-band::before{content:'🌿'; position:absolute; font-size:14rem; opacity:.08; right:-2rem; top:-4rem; transform:rotate(15deg);}
+.cta-band h2{color:#fff; font-size:clamp(1.7rem,3vw,2.3rem);}
+
+/* Footer */
+footer{position:relative; background:var(--forest-deep); color:rgba(255,255,255,.85); padding:4.5rem 0 0; overflow:hidden;}
+.footer-bg{position:absolute; inset:0; background:url('https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=1800&q=80') center/cover; opacity:.16;}
+.footer-overlay{position:absolute; inset:0; background:linear-gradient(180deg, rgba(20,63,24,.92) 0%, rgba(15,38,16,.97) 100%);}
+footer .container{position:relative; z-index:2;}
+footer h3{color:#fff; font-family:var(--display); font-size:1.05rem; font-weight:600; margin-bottom:1.1rem;}
+footer a{color:rgba(255,255,255,.75); text-decoration:none;}
+footer a:hover{color:var(--sun);}
+footer .footer-links li{margin-bottom:.55rem; font-size:.92rem;}
+footer .footer-links li a{display:flex; align-items:center; gap:.45rem;}
+.marquee-wrap{overflow:hidden; position:relative; mask-image:linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); -webkit-mask-image:linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);}
+.marquee-track{display:flex; gap:1.6rem; width:max-content; animation:marqueeScroll 22s linear infinite;}
+.marquee-wrap:hover .marquee-track{animation-play-state:paused;}
+@keyframes marqueeScroll{from{transform:translateX(0);} to{transform:translateX(-50%);}}
+@media (prefers-reduced-motion: reduce){.marquee-track{animation:none;}}
+.footer-social-row a{width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,.1); display:inline-flex; align-items:center; justify-content:center; margin-right:.5rem; font-size:.95rem; transition:background .25s ease;}
+.footer-social-row a:hover{background:var(--clay);}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.12); margin-top:2.5rem; padding-top:1.5rem; font-size:.82rem; color:rgba(255,255,255,.6);}
+.city-chip{display:inline-flex; align-items:center; gap:6px; padding:8px 16px; border-radius:30px; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.14); color:rgba(255,255,255,.85); font-weight:500; white-space:nowrap;}
+.city-chip i{color:var(--sun);}
+
+/* Floating action buttons */
+.fab-stack{position:fixed; bottom:1.6rem; right:1.6rem; z-index:1050; display:flex; flex-direction:column; gap:.8rem; align-items:flex-end;}
+.fab{width:54px; height:54px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.3rem; border:none; cursor:pointer; box-shadow:0 12px 28px -8px rgba(20,63,24,.4); transition:transform .25s ease;}
+.fab:hover{transform:scale(1.08);}
+.fab-whatsapp{background:#25D366; color:#fff;}
+.fab-quote{background:var(--clay); color:#fff;}
+.fab-top{background:#fff; color:var(--forest); border:1px solid var(--line); opacity:0; pointer-events:none; transform:translateY(10px);}
+.fab-top.show{opacity:1; pointer-events:auto; transform:translateY(0);}
+
+/* Scroll reveal */
+.reveal{opacity:0; transform:translateY(28px); transition:opacity .7s ease, transform .7s ease;}
+.reveal.in{opacity:1; transform:translateY(0);}
+@media (prefers-reduced-motion: reduce){.reveal{opacity:1; transform:none; transition:none;} html{scroll-behavior:auto;}}
+
+a:focus-visible, button:focus-visible{outline:2px solid var(--clay); outline-offset:3px;}
+
+@media (max-width: 991.98px){
+  .page-hero{min-height:36vh;}
+  .section{padding:4.5rem 0;}
+  .cta-band, .feedback-prompt{padding:3rem 1.5rem; border-radius:24px;}
+  .rate-row .rate-label{max-width:100%;}
+}
+</style>
 </head>
 <body>
-  <!-- Header & Navigation -->
-  <header>
-    <div class="container">
-      <div class="header-content">
-        <a href="index.html" class="logo">🌿 Landmark Landscaping</a>
-        <button class="menu-toggle" aria-label="Toggle menu">☰</button>
-        <nav class="nav-menu">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="services.html">Services</a></li>
-          <li><a href="projects.html">Projects</a></li>
-          <li><a href="gallery.html">Gallery</a></li>
-          <li><a href="blog.html">Blog</a></li>
-          <li><a href="testimonials.html">Testimonials</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </nav>
-      </div>
-    </div>
-  </header>
 
-  <!-- Breadcrumb -->
-  <div class="breadcrumb">
-    <div class="container">
-      <ul class="breadcrumb-list">
-        <li><a href="index.html">Home</a></li>
-        <li>Testimonials</li>
+<!-- ============ NAVBAR ============ -->
+<nav class="navbar navbar-expand-lg nav-wrap" id="mainNav">
+  <div class="container">
+    <a class="brand" href="index.html"><span class="leaf-mark">🌿</span>Landmark Landscaping</a>
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto align-items-lg-center">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+        <li class="nav-item"><a class="nav-link" href="projects.html">Projects</a></li>
+        <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+        <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
+        <li class="nav-item"><a class="nav-link active" href="testimonials.html">Testimonials</a></li>
+        <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+          <a class="btn btn-forest btn-sm" href="contact.html">Contact Us</a>
+        </li>
       </ul>
     </div>
   </div>
+</nav>
 
-  <!-- Page Hero -->
-  <section class="hero" style="padding: 100px 0; min-height: 400px;">
-    <div class="hero-content">
-      <h1>Client Testimonials</h1>
-      <p>Hear from satisfied clients across Kenya</p>
-    </div>
-  </section>
-
-  <!-- Testimonials Grid -->
-  <section class="section">
-    <div class="container">
-      <div class="grid grid-2">
-        <!-- Testimonial 1 -->
-        <div class="card scroll-reveal">
-          <div class="card-content">
-            <div style="display: flex; gap: 4px; margin-bottom: 1rem;">
-              <span style="color: #FFA500;">★</span>
-              <span style="color: #FFA500;">★</span>
-              <span style="color: #FFA500;">★</span>
-              <span style="color: #FFA500;">★</span>
-              <span style="color: #FFA500;">★</span>
-            </div>
-            <p style="font-style: italic; margin-bottom: 1rem; color: var(--dark-text); font-weight: 500;">"The team at Landmark Landscaping completely transformed our garden. The design was creative, the execution was professional, and the attention to detail was exceptional. We couldn't be happier with the results!"</p>
-            <div style="padding-top: 1rem; border-top: 1px solid var(--border-color);">
-              <p style="font-weight: 600; margin-bottom: 0.25rem;">Sarah Mitchell</p>
-              <p style="font-size: 0.9rem; color: var(--light-text);">Karen, Nairobi • Residential Garden Project</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Testimonial 2 -->
-        <div class="card scroll-reveal">
-          <div class="card-content">
-            <div style="display: flex; gap: 4px; margin-bottom: 1rem;">
-              <span style="color: #FFA500;">★</span>
-              <span style="color: #FFA500;">★</span>
-              <span style="color: #FFA500;">★</span>
-              <span style="color: #FFA500;">★</span>
-              <span style="color: #FFA500;">★</span>
-            </div>
-            <p style="font-style: italic; margin-bottom: 1rem; color: var(--dark-text); font-weight: 500;">"Professional, reliable, and incredibly knowledgeable. They took time to understand our needs and delivered exactly what we wanted. The irrigation system works perfectly!"</p>
-            <div style="padding-top: 1rem; border-top: 1px solid var(--border-color);">
-              <p style="font-weight: 600; margin-bottom: 0.25rem;">James Koech</p>
-              <p style="font-size: 0.9rem; color: var(--light-text);">Mombasa • Irrigation Installation</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Testimonial 3 -->
-        <div class="card scroll-reveal">
-          <div class="card-content">
-            <div style="display: flex; gap: 4px; margin-bottom: 1rem;">
-              <span style="color: #FFA500;">★</span>
-              <span style="color: #FFA500;">★</span>
-              <span style="color: #FFA500;">★</span>
-              <span style="color: #FFA500;">★</span>
-              <span style="color: #FFA500;">★</span>
-            </div>
-            <p style="font-style: italic; margin-bottom: 1rem; color: var(--dark-text); font-weight: 500;">"Landmark Landscaping handled our entire commercial project from concept to completion. Their team is professional, punctual, and delivers quality work. Highly recommended!"</p>
-            <div style="padding-top: 1rem; border-top: 1px solid var(--border-color);">
-              <p style="font-weight: 600; margin-bottom: 0.25rem;">Grace Abakah</p>
-              <p style="font-size: 0.9rem; color: var(--light-text);">Kisumu • Commercial Landscaping</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Testimonial 4 -->
-        <div class="card scroll-reveal">
-          <div class="card-content">
-            <div style="display: flex; gap: 4px; margin-bottom: 1rem;">
-              <span style="color: #FFA500;">★</span>
-              <span style="color: #FFA500;">★</span>
-              <span style="color: #FFA500;">★</span>
-              <span style="color: #FFA500;">★</span>
-              <span style="color: #FFA500;">★</span>
-            </div>
-            <p style="font-style: italic; margin-bottom: 1rem; color: var(--dark-text); font-weight: 500;">"We've been using their maintenance services for two years now, and our garden has never looked better. The team is reliable, skilled, and genuinely cares about the quality of their work."</p>
-            <div style="padding-top: 1rem; border-top: 1px solid var(--border-color);">
-              <p style="font-weight: 600; margin-bottom: 0.25rem;">David Omondi</p>
-              <p style="font-size: 0.9rem; color: var(--light-text);">Westlands • Maintenance Services</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Testimonial 5 -->
-        <div class="card scroll-reveal">
-          <div class="card-content">
-            <div style="display: flex; gap: 4px; margin-bottom: 1rem;">
-              <span style="color: #FFA500;">★</span>
-              <span style="color: #FFA500;">★</span>
-              <span style="color: #FFA500;">★</span>
-              <span style="color: #FFA500;">★</span>
-              <span style="color: #FFA500;">★</span>
-            </div>
-            <p style="font-style: italic; margin-bottom: 1rem; color: var(--dark-text); font-weight: 500;">"Benjamin and his team are true professionals. They understood our vision, offered valuable suggestions, and created a beautiful outdoor space. The price was reasonable, and the work quality is outstanding."</p>
-            <div style="padding-top: 1rem; border-top: 1px solid var(--border-color);">
-              <p style="font-weight: 600; margin-bottom: 0.25rem;">Margaret Kipchoge</p>
-              <p style="font-size: 0.9rem; color: var(--light-text);">Nakuru • Garden Design & Installation</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Testimonial 6 -->
-        <div class="card scroll-reveal">
-          <div class="card-content">
-            <div style="display: flex; gap: 4px; margin-bottom: 1rem;">
-              <span style="color: #FFA500;">★</span>
-              <span style="color: #FFA500;">★</span>
-              <span style="color: #FFA500;">★</span>
-              <span style="color: #FFA500;">★</span>
-              <span style="color: #FFA500;">★</span>
-            </div>
-            <p style="font-style: italic; margin-bottom: 1rem; color: var(--dark-text); font-weight: 500;">"Exceptional service from start to finish! They were responsive, accommodating, and delivered high-quality work on schedule. I would definitely use them again and recommend to anyone needing landscaping services."</p>
-            <div style="padding-top: 1rem; border-top: 1px solid var(--border-color);">
-              <p style="font-weight: 600; margin-bottom: 0.25rem;">Robert Kariuki</p>
-              <p style="font-size: 0.9rem; color: var(--light-text);">Eldoret • Landscape Renovation</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Trust Stats -->
-  <section class="section stats-section" style="background: linear-gradient(135deg, var(--primary-green) 0%, var(--secondary-green) 100%); color: white;">
-    <div class="container">
-      <div class="grid grid-4">
-        <div class="text-center scroll-reveal">
-          <div class="counter" data-target="500" style="font-size: 3rem; font-weight: 700; margin-bottom: 0.5rem;">0+</div>
-          <p>Happy Clients</p>
-        </div>
-        <div class="text-center scroll-reveal">
-          <div style="font-size: 3rem; font-weight: 700; margin-bottom: 0.5rem;">4.8/5</div>
-          <p>Average Rating</p>
-        </div>
-        <div class="text-center scroll-reveal">
-          <div class="counter" data-target="250" style="font-size: 3rem; font-weight: 700; margin-bottom: 0.5rem;">0+</div>
-          <p>Projects Completed</p>
-        </div>
-        <div class="text-center scroll-reveal">
-          <div style="font-size: 3rem; font-weight: 700; margin-bottom: 0.5rem;">20+</div>
-          <p>Service Towns</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Why Clients Trust Us -->
-  <section class="section">
-    <div class="container">
-      <div class="section-title">
-        <h2>Why Clients Trust Us</h2>
-      </div>
-      <div class="grid grid-3">
-        <div class="card scroll-reveal">
-          <div class="card-content">
-            <div class="card-icon">✓</div>
-            <h3>Professional Excellence</h3>
-            <p>We maintain the highest standards in design, installation, and maintenance of landscaping projects.</p>
-          </div>
-        </div>
-        <div class="card scroll-reveal">
-          <div class="card-content">
-            <div class="card-icon">✓</div>
-            <h3>Transparent Communication</h3>
-            <p>We keep clients informed at every stage and are responsive to inquiries and concerns.</p>
-          </div>
-        </div>
-        <div class="card scroll-reveal">
-          <div class="card-content">
-            <div class="card-icon">✓</div>
-            <h3>Reliable & Punctual</h3>
-            <p>We deliver projects on time and honor all commitments made to our clients.</p>
-          </div>
-        </div>
-        <div class="card scroll-reveal">
-          <div class="card-content">
-            <div class="card-icon">✓</div>
-            <h3>Value for Money</h3>
-            <p>Our competitive pricing ensures you get the best quality work at reasonable costs.</p>
-          </div>
-        </div>
-        <div class="card scroll-reveal">
-          <div class="card-content">
-            <div class="card-icon">✓</div>
-            <h3>Customized Solutions</h3>
-            <p>We tailor every project to match your unique vision, needs, and preferences.</p>
-          </div>
-        </div>
-        <div class="card scroll-reveal">
-          <div class="card-content">
-            <div class="card-icon">✓</div>
-            <h3>Ongoing Support</h3>
-            <p>We provide maintenance and support services to ensure long-term success of your landscape.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Call to Action -->
-  <section class="section" style="background: linear-gradient(135deg, var(--primary-green) 0%, var(--secondary-green) 100%); color: white;">
-    <div class="container">
-      <div style="max-width: 600px; margin: 0 auto; text-align: center;">
-        <h2 style="color: white;">Join Our Satisfied Clients</h2>
-        <p style="color: rgba(255, 255, 255, 0.95); margin-bottom: 2rem;">Ready to transform your outdoor space? Contact us today for a free consultation.</p>
-        <a href="contact.html" class="btn btn-outline" style="border-color: white; color: white;">Get Started Now</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-section">
-          <h3>Landmark Landscaping</h3>
-          <p>Premier landscaping and irrigation solutions transforming outdoor spaces across Kenya.</p>
-          <div class="social-links">
-            <a href="https://facebook.com" title="Facebook">f</a>
-            <a href="https://twitter.com" title="Twitter">𝕏</a>
-            <a href="https://instagram.com" title="Instagram">📷</a>
-            <a href="https://linkedin.com" title="LinkedIn">in</a>
-          </div>
-        </div>
-        <div class="footer-section">
-          <h3>Quick Links</h3>
-          <ul class="footer-links">
-            <li><a href="about.html">About Us</a></li>
-            <li><a href="services.html">Services</a></li>
-            <li><a href="projects.html">Projects</a></li>
-            <li><a href="blog.html">Blog</a></li>
-          </ul>
-        </div>
-        <div class="footer-section">
-          <h3>Contact Info</h3>
-          <ul class="footer-links">
-            <li><a href="mailto:bennyoike@gmail.com">📧 bennyoike@gmail.com</a></li>
-            <li><a href="tel:+254728158526">📱 +254 728 158 526</a></li>
-            <li><a href="#">📍 Nairobi, Kenya</a></li>
-          </ul>
-        </div>
-        <div class="footer-section">
-          <h3>Service Areas</h3>
-          <p>We serve Nairobi and major towns across Kenya including:</p>
-          <p style="font-size: 0.9rem;">Mombasa • Kisumu • Nakuru • Eldoret • Kisii • Kericho</p>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>&copy; 2024 Landmark Landscaping Services. All rights reserved.</p>
-      </div>
-    </div>
-  </footer>
-
-  <!-- Floating Action Buttons -->
-  <button id="whatsapp-btn" aria-label="Contact on WhatsApp">💬</button>
-  <button id="quote-btn" aria-label="Request a quote">📋</button>
-  <button id="back-to-top" aria-label="Back to top">⬆️</button>
-
-  <!-- Drag Handle with Menu -->
-  <div class="drag-handle" title="Drag me around">☎️</div>
-  <div class="drag-menu">
-    <a href="tel:+254728158526">📱 Call Us</a>
-    <a href="mailto:bennyoike@gmail.com">📧 Email</a>
-    <a href="contact.html">💼 Contact Form</a>
-    <a href="https://wa.me/254728158526">💬 WhatsApp</a>
+<!-- ============ PAGE HERO ============ -->
+<section class="page-hero">
+  <div class="hero-bg">
+    <img src="https://images.unsplash.com/photo-1519331379826-f10be5486c6f?auto=format&fit=crop&w=2000&q=80" alt="Beautifully landscaped garden enjoyed by a happy client">
   </div>
+  <div class="hero-overlay"></div>
+  <div class="container hero-content">
+    <div class="breadcrumb-bar">
+      <a href="index.html">Home</a><span class="sep">/</span><span class="current">Testimonials</span>
+    </div>
+    <p class="eyebrow">Client Stories</p>
+    <h1>What Our Clients Say</h1>
+    <p class="lede">Real feedback and ratings from homeowners and businesses we've worked with across Kenya.</p>
+    <div class="hero-rating-pill">
+      <span class="stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-half"></i></span>
+      <span class="txt">4.8 out of 5 — from 500+ clients</span>
+    </div>
+  </div>
+</section>
 
-  <script src="script.js"></script>
+<!-- ============ TRUST STATS ============ -->
+<section class="stats-band py-5">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-6 col-lg-3 reveal">
+        <div class="stat-box">
+          <div class="num counter" data-target="500">0</div>
+          <div class="lbl">Happy Clients</div>
+        </div>
+      </div>
+      <div class="col-6 col-lg-3 reveal">
+        <div class="stat-box">
+          <div class="num">4.8/5</div>
+          <div class="mini-stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-half"></i></div>
+          <div class="lbl">Average Rating</div>
+        </div>
+      </div>
+      <div class="col-6 col-lg-3 reveal">
+        <div class="stat-box">
+          <div class="num counter" data-target="250">0</div>
+          <div class="lbl">Projects Completed</div>
+        </div>
+      </div>
+      <div class="col-6 col-lg-3 reveal">
+        <div class="stat-box">
+          <div class="num counter" data-target="20">0</div>
+          <div class="lbl">Service Towns</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TESTIMONIALS GRID ============ -->
+<section class="section">
+  <div class="container">
+    <div class="section-title mx-auto reveal">
+      <p class="eyebrow">In Their Words</p>
+      <h2>Reviews from across Kenya</h2>
+      <p class="lead-soft mt-2">Every project leaves a story — here are some our clients chose to share.</p>
+    </div>
+
+    <!-- Coming Soon Section -->
+    <div class="coming-soon-container">
+      <div class="spinner-wrapper">
+        <div class="spinner"></div>
+      </div>
+      <h3 class="coming-soon-text">Coming Soon</h3>
+      <p class="coming-soon-subtext">We're gathering testimonials from our amazing clients. Check back soon!</p>
+    </div>
+
+    <!-- Live testimonials grid (hidden for dynamic content) -->
+    <div class="row g-4" id="testimonialsGrid"></div>
+  </div>
+</section>
+
+<!-- ============ WHY CLIENTS TRUST US ============ -->
+<section class="section section-sage">
+  <div class="container">
+    <div class="section-title mx-auto reveal">
+      <p class="eyebrow">Why It Works</p>
+      <h2>Why clients trust us</h2>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-4 reveal">
+        <div class="why-card">
+          <div class="ic-wrap"><i class="bi bi-patch-check-fill"></i></div>
+          <h3>Professional Excellence</h3>
+          <p>We maintain the highest standards in design, installation, and maintenance of landscaping projects.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 reveal">
+        <div class="why-card">
+          <div class="ic-wrap"><i class="bi bi-chat-dots-fill"></i></div>
+          <h3>Transparent Communication</h3>
+          <p>We keep clients informed at every stage and are responsive to inquiries and concerns.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 reveal">
+        <div class="why-card">
+          <div class="ic-wrap"><i class="bi bi-clock-fill"></i></div>
+          <h3>Reliable &amp; Punctual</h3>
+          <p>We deliver projects on time and honor all commitments made to our clients.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 reveal">
+        <div class="why-card">
+          <div class="ic-wrap"><i class="bi bi-cash-coin"></i></div>
+          <h3>Value for Money</h3>
+          <p>Our competitive pricing ensures you get the best quality work at reasonable costs.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 reveal">
+        <div class="why-card">
+          <div class="ic-wrap"><i class="bi bi-palette-fill"></i></div>
+          <h3>Customized Solutions</h3>
+          <p>We tailor every project to match your unique vision, needs, and preferences.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 reveal">
+        <div class="why-card">
+          <div class="ic-wrap"><i class="bi bi-headset"></i></div>
+          <h3>Ongoing Support</h3>
+          <p>We provide maintenance and support services to ensure long-term success of your landscape.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FEEDBACK / RATING PROMPT ============ -->
+<section class="section pt-0">
+  <div class="container">
+    <div class="feedback-prompt reveal">
+      <h2 class="fw-semibold mb-2">Worked with us? Tell us about it</h2>
+      <p>Rate your experience and leave a comment — with your permission, it may be added to this page as a testimonial.</p>
+      <button type="button" class="btn btn-line-light" data-bs-toggle="modal" data-bs-target="#feedbackModal">
+        <i class="bi bi-star-fill me-2"></i>Share Your Feedback
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA BAND ============ -->
+<section class="section pt-0">
+  <div class="container">
+    <div class="cta-band text-center reveal">
+      <h2 class="fw-semibold mb-2">Ready to transform your outdoor space?</h2>
+      <p class="mb-4" style="color:rgba(255,255,255,.85); max-width:520px; margin-inline:auto;">Get a free consultation and quote from our expert team today.</p>
+      <a href="contact.html" class="btn btn-line-light">Get Started Now</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="footer-bg"></div>
+  <div class="footer-overlay"></div>
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-4 col-sm-6">
+        <h3><i class="bi bi-flower1 text-success me-2"></i>Landmark Landscaping</h3>
+        <p style="font-size:.92rem;">Premier landscaping and irrigation solutions transforming outdoor spaces across Kenya.</p>
+        <div class="footer-social-row mt-3">
+          <a href="https://facebook.com" title="Facebook" aria-label="Follow us on Facebook"><i class="bi bi-facebook"></i></a>
+          <a href="https://twitter.com" title="X (Twitter)" aria-label="Follow us on X"><i class="bi bi-twitter-x"></i></a>
+          <a href="https://instagram.com" title="Instagram" aria-label="Follow us on Instagram"><i class="bi bi-instagram"></i></a>
+          <a href="https://linkedin.com" title="LinkedIn" aria-label="Follow us on LinkedIn"><i class="bi bi-linkedin"></i></a>
+          <a href="https://wa.me/254728158526" title="WhatsApp" aria-label="Chat with us on WhatsApp"><i class="bi bi-whatsapp"></i></a>
+        </div>
+      </div>
+      <div class="col-lg-2 col-sm-6">
+        <h3>Quick Links</h3>
+        <ul class="footer-links list-unstyled">
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="blog.html">Blog</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-3 col-sm-6">
+        <h3>Contact Info</h3>
+        <ul class="footer-links list-unstyled">
+          <li><a href="mailto:bennyoike@gmail.com"><i class="bi bi-envelope-fill me-2 text-success"></i>bennyoike@gmail.com</a></li>
+          <li><a href="tel:+254728158526"><i class="bi bi-telephone-fill me-2 text-success"></i>+254 728 158 526</a></li>
+          <li><a href="#"><i class="bi bi-geo-alt-fill me-2 text-success"></i>Nairobi, Kenya</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-3 col-sm-6">
+        <h3>Service Areas</h3>
+        <p style="font-size:.92rem;">We serve Nairobi and major towns across Kenya, including:</p>
+      </div>
+    </div>
+
+    <div class="marquee-wrap mt-2 mb-5">
+      <div class="marquee-track">
+        <span class="city-chip"><i class="bi bi-geo-alt-fill"></i> Nairobi</span>
+        <span class="city-chip"><i class="bi bi-geo-alt-fill"></i> Mombasa</span>
+        <span class="city-chip"><i class="bi bi-geo-alt-fill"></i> Kisumu</span>
+        <span class="city-chip"><i class="bi bi-geo-alt-fill"></i> Nakuru</span>
+        <span class="city-chip"><i class="bi bi-geo-alt-fill"></i> Eldoret</span>
+        <span class="city-chip"><i class="bi bi-geo-alt-fill"></i> Kisii</span>
+        <span class="city-chip"><i class="bi bi-geo-alt-fill"></i> Kericho</span>
+        <span class="city-chip"><i class="bi bi-geo-alt-fill"></i> Thika</span>
+        <span class="city-chip"><i class="bi bi-geo-alt-fill"></i> Nyeri</span>
+        <span class="city-chip"><i class="bi bi-geo-alt-fill"></i> Machakos</span>
+        <span class="city-chip"><i class="bi bi-geo-alt-fill"></i> Naivasha</span>
+        <span class="city-chip"><i class="bi bi-geo-alt-fill"></i> Kitale</span>
+        <span class="city-chip"><i class="bi bi-geo-alt-fill"></i> Malindi</span>
+        <span class="city-chip"><i class="bi bi-geo-alt-fill"></i> Meru</span>
+        <span class="city-chip"><i class="bi bi-geo-alt-fill"></i> Nanyuki</span>
+        <span class="city-chip"><i class="bi bi-geo-alt-fill"></i> Nairobi</span>
+        <span class="city-chip"><i class="bi bi-geo-alt-fill"></i> Mombasa</span>
+        <span class="city-chip"><i class="bi bi-geo-alt-fill"></i> Kisumu</span>
+        <span class="city-chip"><i class="bi bi-geo-alt-fill"></i> Nakuru</span>
+        <span class="city-chip"><i class="bi bi-geo-alt-fill"></i> Eldoret</span>
+        <span class="city-chip"><i class="bi bi-geo-alt-fill"></i> Kisii</span>
+        <span class="city-chip"><i class="bi bi-geo-alt-fill"></i> Kericho</span>
+        <span class="city-chip"><i class="bi bi-geo-alt-fill"></i> Thika</span>
+        <span class="city-chip"><i class="bi bi-geo-alt-fill"></i> Nyeri</span>
+        <span class="city-chip"><i class="bi bi-geo-alt-fill"></i> Machakos</span>
+        <span class="city-chip"><i class="bi bi-geo-alt-fill"></i> Naivasha</span>
+        <span class="city-chip"><i class="bi bi-geo-alt-fill"></i> Kitale</span>
+        <span class="city-chip"><i class="bi bi-geo-alt-fill"></i> Malindi</span>
+        <span class="city-chip"><i class="bi bi-geo-alt-fill"></i> Meru</span>
+        <span class="city-chip"><i class="bi bi-geo-alt-fill"></i> Nanyuki</span>
+      </div>
+    </div>
+
+    <div class="footer-bottom text-center pb-4">
+      <p class="mb-0">&copy; 2026 Landmark Landscaping Services. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ FLOATING ACTION BUTTONS ============ -->
+<div class="fab-stack">
+  <button id="back-to-top" class="fab fab-top" aria-label="Back to top" title="Back to top"><i class="bi bi-arrow-up"></i></button>
+  <button id="quote-btn" class="fab fab-quote" aria-label="Request a quote" title="Request a Quote" data-bs-toggle="modal" data-bs-target="#quoteModal"><i class="bi bi-file-earmark-text-fill"></i></button>
+  <a href="https://wa.me/254728158526" target="_blank" rel="noopener" class="fab fab-whatsapp" aria-label="Contact on WhatsApp" title="Chat on WhatsApp"><i class="bi bi-whatsapp"></i></a>
+</div>
+
+<!-- Start of Tawk.to Script -->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/6a35244b16fcef1d436fb5a9/default';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!-- End of Tawk.to Script -->
+
+<!-- ============ FEEDBACK / TESTIMONIAL MODAL ============ -->
+<div class="modal fade" id="feedbackModal" tabindex="-1" aria-labelledby="feedbackModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content" style="border-radius:20px; border:none;">
+      <div class="modal-header" style="border-bottom:1px solid var(--line);">
+        <h5 class="modal-title display" id="feedbackModalLabel"><i class="bi bi-chat-heart text-success me-2"></i>Share Your Feedback</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <div class="privacy-note mb-4">
+          <i class="bi bi-shield-lock-fill"></i>
+          <div><strong>Heads up before you write:</strong> if you tick "Yes, you may publish this," your rating, comment, and display name may appear publicly on this page and our social pages. Please don't include sensitive personal info — phone number, email, exact address, or ID/payment details — in the comment box below.</div>
+        </div>
+
+        <form id="feedbackForm" novalidate>
+
+          <h6 class="eyebrow mb-2">Rate your experience</h6>
+          <div class="rate-row">
+            <div class="rate-label">Services offered<small>Did we deliver what was promised, on time and as discussed?</small></div>
+            <div class="star-rate" data-rate-name="rateServices">
+              <input type="radio" name="rateServices" id="rs5" value="5"><label for="rs5" title="5"><i class="bi bi-star-fill"></i></label>
+              <input type="radio" name="rateServices" id="rs4" value="4"><label for="rs4" title="4"><i class="bi bi-star-fill"></i></label>
+              <input type="radio" name="rateServices" id="rs3" value="3"><label for="rs3" title="3"><i class="bi bi-star-fill"></i></label>
+              <input type="radio" name="rateServices" id="rs2" value="2"><label for="rs2" title="2"><i class="bi bi-star-fill"></i></label>
+              <input type="radio" name="rateServices" id="rs1" value="1"><label for="rs1" title="1"><i class="bi bi-star-fill"></i></label>
+            </div>
+          </div>
+
+          <div class="rate-row">
+            <div class="rate-label">Our service team<small>Were the servicemen on-site professional, punctual, and respectful?</small></div>
+            <div class="star-rate" data-rate-name="rateTeam">
+              <input type="radio" name="rateTeam" id="rt5" value="5"><label for="rt5" title="5"><i class="bi bi-star-fill"></i></label>
+              <input type="radio" name="rateTeam" id="rt4" value="4"><label for="rt4" title="4"><i class="bi bi-star-fill"></i></label>
+              <input type="radio" name="rateTeam" id="rt3" value="3"><label for="rt3" title="3"><i class="bi bi-star-fill"></i></label>
+              <input type="radio" name="rateTeam" id="rt2" value="2"><label for="rt2" title="2"><i class="bi bi-star-fill"></i></label>
+              <input type="radio" name="rateTeam" id="rt1" value="1"><label for="rt1" title="1"><i class="bi bi-star-fill"></i></label>
+            </div>
+          </div>
+
+          <div class="rate-row">
+            <div class="rate-label">Water handling<small>How well did we manage irrigation and avoid wasting water on your site?</small></div>
+            <div class="star-rate" data-rate-name="rateWater">
+              <input type="radio" name="rateWater" id="rw5" value="5"><label for="rw5" title="5"><i class="bi bi-star-fill"></i></label>
+              <input type="radio" name="rateWater" id="rw4" value="4"><label for="rw4" title="4"><i class="bi bi-star-fill"></i></label>
+              <input type="radio" name="rateWater" id="rw3" value="3"><label for="rw3" title="3"><i class="bi bi-star-fill"></i></label>
+              <input type="radio" name="rateWater" id="rw2" value="2"><label for="rw2" title="2"><i class="bi bi-star-fill"></i></label>
+              <input type="radio" name="rateWater" id="rw1" value="1"><label for="rw1" title="1"><i class="bi bi-star-fill"></i></label>
+            </div>
+          </div>
+
+          <div class="rate-row">
+            <div class="rate-label">Teamwork &amp; conduct<small>Did our staff treat each other, and you, with courtesy and respect?</small></div>
+            <div class="star-rate" data-rate-name="rateConduct">
+              <input type="radio" name="rateConduct" id="rc5" value="5"><label for="rc5" title="5"><i class="bi bi-star-fill"></i></label>
+              <input type="radio" name="rateConduct" id="rc4" value="4"><label for="rc4" title="4"><i class="bi bi-star-fill"></i></label>
+              <input type="radio" name="rateConduct" id="rc3" value="3"><label for="rc3" title="3"><i class="bi bi-star-fill"></i></label>
+              <input type="radio" name="rateConduct" id="rc2" value="2"><label for="rc2" title="2"><i class="bi bi-star-fill"></i></label>
+              <input type="radio" name="rateConduct" id="rc1" value="1"><label for="rc1" title="1"><i class="bi bi-star-fill"></i></label>
+            </div>
+          </div>
+
+          <div class="rate-row">
+            <div class="rate-label">Overall rating<small>All things considered, how was your experience with us?</small></div>
+            <div class="star-rate" data-rate-name="rateOverall">
+              <input type="radio" name="rateOverall" id="ro5" value="5"><label for="ro5" title="5"><i class="bi bi-star-fill"></i></label>
+              <input type="radio" name="rateOverall" id="ro4" value="4"><label for="ro4" title="4"><i class="bi bi-star-fill"></i></label>
+              <input type="radio" name="rateOverall" id="ro3" value="3"><label for="ro3" title="3"><i class="bi bi-star-fill"></i></label>
+              <input type="radio" name="rateOverall" id="ro2" value="2"><label for="ro2" title="2"><i class="bi bi-star-fill"></i></label>
+              <input type="radio" name="rateOverall" id="ro1" value="1"><label for="ro1" title="1"><i class="bi bi-star-fill"></i></label>
+            </div>
+          </div>
+
+          <div class="mt-4">
+            <label for="fbComment" class="form-label fw-bold">Tell us more (optional)</label>
+            <textarea class="form-control" id="fbComment" rows="3" placeholder="What stood out about working with us?"></textarea>
+          </div>
+
+          <div class="mt-4">
+            <label class="form-label fw-bold d-block">How should we show your name if this gets published?</label>
+            <div class="name-toggle-btns d-flex gap-2 mb-2 flex-wrap">
+              <button type="button" class="btn btn-line active-choice" id="useNameBtn">Use my name</button>
+              <button type="button" class="btn btn-line" id="genNameBtn">Generate anonymous name</button>
+            </div>
+            <input type="text" class="form-control" id="fbName" placeholder="e.g. Sarah M.">
+            <div class="form-text">We'll only ever show a first name and initial, never your full contact details.</div>
+          </div>
+
+          <div class="mt-3">
+            <label for="fbLocation" class="form-label fw-bold">Town &amp; project type (optional)</label>
+            <input type="text" class="form-control" id="fbLocation" placeholder="e.g. Karen, Nairobi · Garden Maintenance">
+          </div>
+
+          <div class="mt-4">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="fbConsent">
+              <label class="form-check-label" for="fbConsent">
+                Yes, you may publish my rating, comment, and display name as a testimonial on this page and our social pages.
+              </label>
+            </div>
+          </div>
+
+          <div id="feedbackResult" class="small mt-3" style="display:none;"></div>
+
+          <button type="submit" class="btn btn-forest w-100 mt-3">Submit Feedback</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ QUOTE MODAL ============ -->
+<div class="modal fade" id="quoteModal" tabindex="-1" aria-labelledby="quoteModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content" style="border-radius:20px; border:none;">
+      <div class="modal-header" style="border-bottom:1px solid var(--line);">
+        <h5 class="modal-title display" id="quoteModalLabel">Request a Free Quote</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="quoteForm" novalidate>
+          <div class="mb-3">
+            <label for="qName" class="form-label">Full Name</label>
+            <input type="text" class="form-control" id="qName" required>
+          </div>
+          <div class="mb-3">
+            <label for="qPhone" class="form-label">Phone Number</label>
+            <input type="tel" class="form-control" id="qPhone" required>
+          </div>
+          <div class="mb-3">
+            <label for="qService" class="form-label">Service Needed</label>
+            <select class="form-select" id="qService" required>
+              <option value="" selected disabled>Choose a service…</option>
+              <option>Landscaping Design</option>
+              <option>Irrigation Systems</option>
+              <option>Garden Maintenance</option>
+              <option>Lawn Establishment</option>
+              <option>Tree Planting</option>
+              <option>Commercial Landscaping</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="qMessage" class="form-label">Tell us about your project</label>
+            <textarea class="form-control" id="qMessage" rows="3"></textarea>
+          </div>
+          <div id="quoteFeedback" class="small mb-2" style="display:none;"></div>
+          <button type="submit" class="btn btn-forest w-100">Send Request</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+<script>
+// ============ Navbar background on scroll ============
+const nav = document.getElementById('mainNav');
+const backToTop = document.getElementById('back-to-top');
+window.addEventListener('scroll', () => {
+  const scrolled = window.scrollY > 40;
+  nav.classList.toggle('scrolled', scrolled);
+  backToTop.classList.toggle('show', window.scrollY > 480);
+});
+
+// Collapse mobile menu after clicking a link
+document.querySelectorAll('#navMenu .nav-link').forEach(link => {
+  link.addEventListener('click', () => {
+    const menu = document.getElementById('navMenu');
+    if (menu.classList.contains('show')) {
+      bootstrap.Collapse.getOrCreateInstance(menu).hide();
+    }
+  });
+});
+
+// Back to top
+backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+// ============ Scroll reveal ============
+const revealEls = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('in');
+      io.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.15 });
+revealEls.forEach(el => io.observe(el));
+
+// ============ Animated stat counters ============
+const counters = document.querySelectorAll('.counter');
+const counterIO = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    const el = entry.target;
+    const target = parseInt(el.dataset.target, 10);
+    const duration = 1400;
+    const start = performance.now();
+    function tick(now) {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.round(eased * target) + '+';
+      if (progress < 1) requestAnimationFrame(tick);
+      else el.textContent = target + '+';
+    }
+    requestAnimationFrame(tick);
+    counterIO.unobserve(el);
+  });
+}, { threshold: 0.4 });
+counters.forEach(el => counterIO.observe(el));
+
+// ============ Quote form submit (front-end only demo) ============
+document.getElementById('quoteForm').addEventListener('submit', function (e) {
+  e.preventDefault();
+  const fb = document.getElementById('quoteFeedback');
+  if (!this.checkValidity()) {
+    this.reportValidity();
+    return;
+  }
+  fb.style.display = 'block';
+  fb.style.color = 'var(--forest)';
+  fb.textContent = "Thanks! We'll get back to you within 24 hours.";
+  this.reset();
+  setTimeout(() => {
+    bootstrap.Modal.getInstance(document.getElementById('quoteModal')).hide();
+    fb.style.display = 'none';
+  }, 2200);
+});
+
+// ============ Feedback / Testimonial modal logic ============
+const FIRST_NAMES = ["Happy", "Grateful", "Sunny", "Green", "Kind", "Bright", "Loyal", "Cheerful"];
+const KENYAN_INITIALS = ["M.", "K.", "W.", "N.", "O.", "A.", "J.", "S."];
+
+const fbNameInput = document.getElementById('fbName');
+const useNameBtn = document.getElementById('useNameBtn');
+const genNameBtn = document.getElementById('genNameBtn');
+
+useNameBtn.addEventListener('click', () => {
+  useNameBtn.classList.add('active-choice');
+  genNameBtn.classList.remove('active-choice');
+  fbNameInput.value = '';
+  fbNameInput.placeholder = 'e.g. Sarah M.';
+  fbNameInput.readOnly = false;
+});
+
+genNameBtn.addEventListener('click', () => {
+  genNameBtn.classList.add('active-choice');
+  useNameBtn.classList.remove('active-choice');
+  const first = FIRST_NAMES[Math.floor(Math.random() * FIRST_NAMES.length)];
+  const initial = KENYAN_INITIALS[Math.floor(Math.random() * KENYAN_INITIALS.length)];
+  fbNameInput.value = `${first} ${initial}`;
+  fbNameInput.readOnly = true;
+});
+
+// Build a review card and drop it into the live testimonials grid
+function addTestimonialCard({ name, location, comment, rating }) {
+  const grid = document.getElementById('testimonialsGrid');
+  const col = document.createElement('div');
+  col.className = 'col-md-6 col-lg-4 reveal in';
+
+  const initial = (name.trim().charAt(0) || '?').toUpperCase();
+  let stars = '';
+  for (let i = 1; i <= 5; i++) {
+    stars += i <= rating ? '<i class="bi bi-star-fill"></i>' : '<i class="bi bi-star"></i>';
+  }
+
+  col.innerHTML = `
+    <div class="review-card is-new">
+      <span class="quote-mark">"</span>
+      <div class="stars">${stars}</div>
+      <p class="txt">${comment}</p>
+      <div class="person">
+        <div class="avatar">${initial}</div>
+        <div><div class="name">${name}</div><div class="loc">${location}</div></div>
+      </div>
+    </div>`;
+
+  grid.prepend(col);
+}
+
+document.getElementById('feedbackForm').addEventListener('submit', function (e) {
+  e.preventDefault();
+  const result = document.getElementById('feedbackResult');
+
+  const ratingGroups = ['rateServices', 'rateTeam', 'rateWater', 'rateConduct', 'rateOverall'];
+  const missing = ratingGroups.some(name => !this.querySelector(`input[name="${name}"]:checked`));
+  if (missing) {
+    result.style.display = 'block';
+    result.style.color = 'var(--clay-deep)';
+    result.textContent = 'Please rate all five categories before submitting — it only takes a few taps.';
+    return;
+  }
+
+  const consent = document.getElementById('fbConsent').checked;
+  const overallRating = parseInt(this.querySelector('input[name="rateOverall"]:checked').value, 10);
+  const comment = document.getElementById('fbComment').value.trim();
+  let displayName = fbNameInput.value.trim();
+  const location = document.getElementById('fbLocation').value.trim() || 'Kenya';
+
+  if (consent) {
+    if (!displayName) {
+      const first = FIRST_NAMES[Math.floor(Math.random() * FIRST_NAMES.length)];
+      const initial = KENYAN_INITIALS[Math.floor(Math.random() * KENYAN_INITIALS.length)];
+      displayName = `${first} ${initial}`;
+    }
+    addTestimonialCard({
+      name: displayName,
+      location: location,
+      comment: comment || 'A great experience working with the Landmark Landscaping team.',
+      rating: overallRating
+    });
+  }
+
+  result.style.display = 'block';
+  result.style.color = 'var(--forest)';
+  result.textContent = consent
+    ? 'Thank you! Your testimonial has been added below.'
+    : "Thank you for taking the time to share this — it genuinely helps us improve.";
+  this.reset();
+  genNameBtn.classList.remove('active-choice');
+  useNameBtn.classList.add('active-choice');
+  fbNameInput.readOnly = false;
+
+  setTimeout(() => {
+    bootstrap.Modal.getInstance(document.getElementById('feedbackModal')).hide();
+    result.style.display = 'none';
+  }, 2600);
+});
+</script>
 </body>
 </html>
