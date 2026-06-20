@@ -267,7 +267,47 @@
   .category-card h3{font-size:1.1rem; font-weight:600; margin-bottom:.5rem;}
   .category-card p{font-size:.9rem; color:var(--ink-soft); margin-bottom:0;}
 
-  /* ---------- CTA Band ---------- */
+  /* ---------- Article Modal ---------- */
+  .modal-fullscreen-sm-down {
+    --bs-modal-margin: 0;
+  }
+  .modal-fullscreen-sm-down .modal-content {
+    border-radius:var(--radius-md);
+  }
+  .modal-fullscreen-sm-down .modal-dialog {
+    margin:1rem;
+  }
+  @media (max-width: 575.98px){
+    .modal-fullscreen-sm-down .modal-dialog {
+      margin:0;
+      width:100%;
+      height:100vh;
+      max-width:100%;
+    }
+    .modal-fullscreen-sm-down .modal-content {
+      height:100vh;
+      border-radius:0;
+      display:flex;
+      flex-direction:column;
+    }
+    .modal-fullscreen-sm-down .modal-header {
+      border-radius:0;
+      padding:1rem;
+    }
+    .modal-fullscreen-sm-down .modal-body {
+      flex:1;
+      overflow-y:auto;
+      padding:1.5rem;
+    }
+  }
+  @media (min-width: 576px){
+    .modal-fullscreen-sm-down .modal-dialog {
+      max-width:800px;
+      margin:auto;
+    }
+  }
+
+  /* CTA Band ---------- */
   .cta-band{
     background:linear-gradient(120deg, var(--forest-deep) 0%, var(--forest) 100%);
     border-radius:var(--radius-lg);
@@ -463,7 +503,7 @@
             <p>Learn how modern irrigation systems can reduce water consumption by up to 30% while keeping your garden healthy and vibrant.</p>
             <div class="blog-card-footer">
               <span class="read-time">5 min read</span>
-              <a href="#" class="read-more">Read More →</a>
+              <a href="#" class="read-more" data-bs-toggle="modal" data-bs-target="#articleModal" onclick="showArticle('Smart Irrigation Systems: Save Water, Time, and Money', 'Irrigation', 'Learn how modern irrigation systems can reduce water consumption by up to 30% while keeping your garden healthy and vibrant. In this comprehensive guide, we explore the latest smart irrigation technologies designed specifically for Kenya\'s climate. Modern systems use soil moisture sensors and weather data to optimize watering schedules, reducing waste while ensuring your plants receive exactly what they need. We\'ll cover drip irrigation benefits, smart controllers, and how to calculate ROI for your investment. Many homeowners see payback within 2-3 seasons through water savings alone.')">Read More →</a>
             </div>
           </div>
         </div>
@@ -481,7 +521,7 @@
             <p>Discover design principles and plant selections that create beautiful gardens requiring minimal maintenance throughout the year.</p>
             <div class="blog-card-footer">
               <span class="read-time">6 min read</span>
-              <a href="#" class="read-more">Read More →</a>
+              <a href="#" class="read-more" data-bs-toggle="modal" data-bs-target="#articleModal" onclick="showArticle('Creating a Low-Maintenance Garden Design', 'Gardening', 'Discover design principles and plant selections that create beautiful gardens requiring minimal maintenance throughout the year. A low-maintenance garden doesn\'t mean boring—it means smart planning and selecting the right plants for your space. We discuss hardscape design to minimize weeding, native plant selections that thrive without extra care, and mulching strategies. Learn about xeriscaping principles adapted for Kenya\'s climate, soil preparation techniques that reduce long-term maintenance, and which plants offer year-round beauty with minimal attention. With proper design, your garden can be both stunning and easy to manage.')">Read More →</a>
             </div>
           </div>
         </div>
@@ -499,7 +539,7 @@
             <p>A comprehensive guide to selecting native and adapted trees that thrive in Kenya's diverse climate zones and soil conditions.</p>
             <div class="blog-card-footer">
               <span class="read-time">7 min read</span>
-              <a href="#" class="read-more">Read More →</a>
+              <a href="#" class="read-more" data-bs-toggle="modal" data-bs-target="#articleModal" onclick="showArticle('Best Trees to Plant in Kenya\'s Climate', 'Tree Care', 'A comprehensive guide to selecting native and adapted trees that thrive in Kenya\'s diverse climate zones and soil conditions. Kenya\'s varied microclimates mean tree selection is crucial for long-term success. We profile top performers: Neem trees for hardiness and air quality, Acacia species for drought resistance, and flowering trees like Jacaranda for beauty. Learn about soil requirements, spacing, planting techniques, and initial care to establish strong root systems. We also discuss heritage trees, fruit-bearing options, and trees that attract beneficial wildlife. Proper tree selection ensures decades of shade, beauty, and environmental benefits.')">Read More →</a>
             </div>
           </div>
         </div>
@@ -517,7 +557,7 @@
             <p>Creative solutions for designing beautiful, functional gardens in limited urban spaces like apartments and small yards.</p>
             <div class="blog-card-footer">
               <span class="read-time">5 min read</span>
-              <a href="#" class="read-more">Read More →</a>
+              <a href="#" class="read-more" data-bs-toggle="modal" data-bs-target="#articleModal" onclick="showArticle('Maximizing Small Spaces: Urban Garden Ideas', 'Design', 'Creative solutions for designing beautiful, functional gardens in limited urban spaces like apartments and small yards. Urban living doesn\'t mean sacrificing green space. Discover vertical gardening techniques, container garden design, and micro-garden layouts that transform balconies, patios, and small yards. We cover wall-mounted gardens, hanging baskets, tiered plantings, and multipurpose furniture that doubles as planting areas. Learn which plants thrive in containers, spacing optimization, and drainage solutions for apartments. Includes ideas for rooftop gardens, small water features, and creating privacy screens with greenery. Even the smallest space can become a lush retreat.')">Read More →</a>
             </div>
           </div>
         </div>
@@ -535,7 +575,7 @@
             <p>Learn eco-friendly landscaping techniques that reduce environmental impact while creating beautiful and resilient outdoor spaces.</p>
             <div class="blog-card-footer">
               <span class="read-time">8 min read</span>
-              <a href="#" class="read-more">Read More →</a>
+              <a href="#" class="read-more" data-bs-toggle="modal" data-bs-target="#articleModal" onclick="showArticle('Sustainable Landscaping Practices', 'Sustainability', 'Learn eco-friendly landscaping techniques that reduce environmental impact while creating beautiful and resilient outdoor spaces. Sustainable landscaping goes beyond aesthetics—it\'s about creating ecosystems that benefit the environment. We explore water conservation through smart irrigation and rainwater harvesting, organic soil building without chemicals, native planting that supports local wildlife, and pollinator gardens. Learn composting techniques, mulching best practices, and how to reduce carbon footprint through landscaping choices. Discover pest management without pesticides, wildlife habitat creation, and designs that improve stormwater management. A sustainable landscape is beautiful, resilient, and kind to the planet.')">Read More →</a>
             </div>
           </div>
         </div>
@@ -553,7 +593,7 @@
             <p>A month-by-month guide to maintaining your garden throughout Kenya's seasons with essential tasks and timing.</p>
             <div class="blog-card-footer">
               <span class="read-time">6 min read</span>
-              <a href="#" class="read-more">Read More →</a>
+              <a href="#" class="read-more" data-bs-toggle="modal" data-bs-target="#articleModal" onclick="showArticle('Seasonal Garden Maintenance Checklist', 'Seasonal Care', 'A month-by-month guide to maintaining your garden throughout Kenya\'s seasons with essential tasks and timing. Kenya\'s two rainy seasons mean specific maintenance windows for optimal plant health. Our detailed checklist covers spring preparation, planting schedules, summer watering strategies, and seasonal pest management. Learn when to prune different plants, optimal fertilizing times, and disease prevention techniques for each season. We provide timing for lawn care, hedge maintenance, and preparing plants for dry seasons. Follow this guide to keep your garden thriving year-round with tasks aligned to natural seasons and rainfall patterns. Success requires right timing, and we show you exactly when to act.')">Read More →</a>
             </div>
           </div>
         </div>
@@ -730,6 +770,23 @@
   <a href="https://wa.me/254728158526" target="_blank" rel="noopener" class="fab fab-whatsapp" aria-label="Contact on WhatsApp" title="Chat on WhatsApp">💬</a>
 </div>
 
+<!-- ============ ARTICLE DETAIL MODAL ============ -->
+<div class="modal fade" id="articleModal" tabindex="-1" aria-labelledby="articleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-fullscreen-sm-down modal-lg">
+    <div class="modal-content" style="border-radius:20px; border:none;">
+      <div class="modal-header" style="border-bottom:1px solid var(--line);">
+        <h5 class="modal-title display" id="articleModalLabel">Article Title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="articleModalBody" style="max-height:70vh; overflow-y:auto; padding:2rem;">
+        <div id="articleContent">
+          <!-- Content will be inserted here -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- ============ QUOTE MODAL ============ -->
 <div class="modal fade" id="quoteModal" tabindex="-1" aria-labelledby="quoteModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
@@ -788,7 +845,30 @@ s0.parentNode.insertBefore(s1,s0);
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
 <script>
-  // Navbar background on scroll
+  // ========== Article Modal Handler ==========
+  function showArticle(title, category, content) {
+    document.getElementById('articleModalLabel').textContent = title;
+    document.getElementById('articleContent').innerHTML = `
+      <div class="mb-4">
+        <span class="badge bg-success" style="font-size:0.85rem; padding:0.5rem 1rem; border-radius:999px;">${category}</span>
+      </div>
+      <div style="line-height:1.8; color:var(--ink-soft); font-size:1.05rem;">
+        <p style="margin-bottom:1.5rem;">${content}</p>
+        <hr style="border:1px solid var(--line); margin:2rem 0;">
+        <div style="background:var(--sage); padding:1.5rem; border-radius:var(--radius-md); margin-top:2rem;">
+          <h5 style="color:var(--forest-deep); margin-bottom:1rem;">Need Help with Your Landscaping?</h5>
+          <p style="margin-bottom:1rem;">Our team of experts can help you implement these ideas in your garden. Contact us today!</p>
+          <button class="btn btn-forest" style="width:100%;" data-bs-dismiss="modal" onclick="openQuoteModal()">Request a Quote</button>
+        </div>
+      </div>
+    `;
+  }
+
+  function openQuoteModal() {
+    bootstrap.Modal.getOrCreateInstance(document.getElementById('quoteModal')).show();
+  }
+
+  // ========== Navbar Scroll Handler ==========
   const nav = document.getElementById('mainNav');
   const backToTop = document.getElementById('back-to-top');
   window.addEventListener('scroll', () => {
