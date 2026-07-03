@@ -12,13 +12,21 @@
 <meta property="og:title" content="Landscaping & Irrigation Services in Nairobi, Kenya | Landmark Landscaping">
 <meta property="og:description" content="Landscape design, irrigation installation, garden maintenance, lawn establishment, tree planting & commercial landscaping across Kenya. Get a free quote.">
 <meta property="og:image" content="https://landmarklandscaping.co.ke/images/services-og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta property="og:locale" content="en_KE">
+<meta property="og:site_name" content="Landmark Landscaping Services">
+<meta name="theme-color" content="#1B5E20">
+<meta name="format-detection" content="telephone=yes">
+<meta name="geo.region" content="KE-30">
+<meta name="geo.placename" content="Nairobi">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:url" content="https://landmarklandscaping.co.ke/services.html">
 <meta name="twitter:title" content="Landscaping & Irrigation Services - Landmark Landscaping">
 <meta name="twitter:description" content="Landscape design, irrigation, garden maintenance, lawn establishment, tree planting & commercial landscaping across Kenya.">
 <meta name="twitter:image" content="https://landmarklandscaping.co.ke/images/services-og.jpg">
 <link rel="canonical" href="https://landmarklandscaping.co.ke/services.html">
+<link rel="sitemap" type="application/xml" href="https://landmarklandscaping.co.ke/sitemap.xml">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' font-size='75' fill='%231B5E20'>🌿</text></svg>">
 <title>Landscaping & Irrigation Services in Nairobi, Kenya | Landmark Landscaping</title>
 
@@ -60,6 +68,39 @@
       { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Swimming Pool Maintenance" } }
     ]
   }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Which areas in Kenya do you serve?",
+      "acceptedAnswer": { "@type": "Answer", "text": "We're based in Nairobi and handle jobs across the city and its suburbs, plus major towns countrywide — including Mombasa, Kisumu, Nakuru, Eldoret, Thika, Nyeri, and more. Distance changes the quote, not whether we'll come." }
+    },
+    {
+      "@type": "Question",
+      "name": "How much does landscaping cost in Nairobi?",
+      "acceptedAnswer": { "@type": "Answer", "text": "It depends on the size of the space, what's already there, and how much design or construction work is involved. We walk the site first and give you a written estimate before anything starts, so there are no surprises later." }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you offer ongoing maintenance, or just one-off jobs?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Both. Clients can start with a one-off project like a redesign or lawn establishment, then move onto a recurring maintenance plan, or set up regular upkeep from day one." }
+    },
+    {
+      "@type": "Question",
+      "name": "How soon can you start after I request a quote?",
+      "acceptedAnswer": { "@type": "Answer", "text": "We usually respond within 24 hours to arrange a site visit. Start dates depend on the scope of the job and our current schedule, confirmed after we've seen the space." }
+    },
+    {
+      "@type": "Question",
+      "name": "Can you handle both residential and commercial properties?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes — homes, offices, hotels, and institutional grounds. Commercial contracts usually include a maintenance plan and regular progress updates." }
+    }
+  ]
 }
 </script>
 <script type="application/ld+json">
@@ -226,9 +267,23 @@ footer .footer-links li a{display:flex; align-items:center; gap:.45rem;}
 .fab-top.show{opacity:1; pointer-events:auto; transform:translateY(0);}
 
 /* Scroll reveal */
-.reveal{opacity:0; transform:translateY(28px); transition:opacity .7s ease, transform .7s ease;}
+.reveal{opacity:0; transform:translateY(28px); transition:opacity .7s cubic-bezier(.22,.61,.36,1), transform .7s cubic-bezier(.22,.61,.36,1);}
 .reveal.in{opacity:1; transform:translateY(0);}
-@media (prefers-reduced-motion: reduce){.reveal{opacity:1; transform:none; transition:none;} html{scroll-behavior:auto;}}
+.reveal-left{opacity:0; transform:translateX(-32px); transition:opacity .7s cubic-bezier(.22,.61,.36,1), transform .7s cubic-bezier(.22,.61,.36,1);}
+.reveal-left.in{opacity:1; transform:translateX(0);}
+.reveal-right{opacity:0; transform:translateX(32px); transition:opacity .7s cubic-bezier(.22,.61,.36,1), transform .7s cubic-bezier(.22,.61,.36,1);}
+.reveal-right.in{opacity:1; transform:translateX(0);}
+.reveal-scale{opacity:0; transform:scale(.92); transition:opacity .65s cubic-bezier(.22,.61,.36,1), transform .65s cubic-bezier(.22,.61,.36,1);}
+.reveal-scale.in{opacity:1; transform:scale(1);}
+@media (prefers-reduced-motion: reduce){
+  .reveal,.reveal-left,.reveal-right,.reveal-scale{opacity:1; transform:none; transition:none;}
+  html{scroll-behavior:auto;}
+  .scroll-progress{display:none;}
+  .hero-bg{transform:none !important;}
+}
+
+/* Scroll progress bar */
+.scroll-progress{position:fixed; top:0; left:0; height:3px; width:0%; background:linear-gradient(90deg, var(--clay), var(--sun)); z-index:1100; transition:width .1s linear;}
 
 a:focus-visible, button:focus-visible{outline:2px solid var(--clay); outline-offset:3px;}
 
@@ -251,6 +306,9 @@ a:focus-visible, button:focus-visible{outline:2px solid var(--clay); outline-off
 </style>
 </head>
 <body>
+
+<!-- ============ SCROLL PROGRESS BAR ============ -->
+<div class="scroll-progress" id="scrollProgress"></div>
 
 <!-- ============ NAVBAR ============ -->
 <nav class="navbar navbar-expand-lg nav-wrap" id="mainNav">
@@ -279,7 +337,7 @@ a:focus-visible, button:focus-visible{outline:2px solid var(--clay); outline-off
 <!-- ============ PAGE HERO ============ -->
 <section class="page-hero">
   <div class="hero-bg">
-    <img src="https://images.unsplash.com/photo-1599629954294-14df9ec8ce4e?auto=format&fit=crop&w=2000&q=80" alt="Manicured garden with flower beds representing landscaping services">
+    <img src="https://images.unsplash.com/photo-1599629954294-14df9ec8ce4e?auto=format&fit=crop&w=2000&q=80" alt="Manicured garden with flower beds representing landscaping services" loading="eager" fetchpriority="high">
   </div>
   <div class="hero-overlay"></div>
   <div class="container hero-content">
@@ -315,42 +373,42 @@ a:focus-visible, button:focus-visible{outline:2px solid var(--clay); outline-off
       <p class="lead-soft mt-2">There's no mystery to it. This is the same process whether it's a small flower bed or a full compound.</p>
     </div>
     <div class="row g-4">
-      <div class="col-sm-6 col-lg-4 reveal">
+      <div class="col-sm-6 col-lg-4 reveal-scale">
         <div class="process-card">
           <div class="step-num">1</div>
           <h3>We talk first</h3>
           <p>You tell us what's bugging you about the space, what you're hoping for, and roughly what you want to spend. No pressure, no jargon.</p>
         </div>
       </div>
-      <div class="col-sm-6 col-lg-4 reveal">
+      <div class="col-sm-6 col-lg-4 reveal-scale">
         <div class="process-card">
           <div class="step-num">2</div>
           <h3>We come look</h3>
           <p>Someone walks the site with you — checks the soil, the slope, the sun, the drainage — the stuff that decides whether a plan will actually work.</p>
         </div>
       </div>
-      <div class="col-sm-6 col-lg-4 reveal">
+      <div class="col-sm-6 col-lg-4 reveal-scale">
         <div class="process-card">
           <div class="step-num">3</div>
           <h3>We sketch the plan</h3>
           <p>You get a layout and a plant list built around your site and your budget, not a copy-paste template.</p>
         </div>
       </div>
-      <div class="col-sm-6 col-lg-4 reveal">
+      <div class="col-sm-6 col-lg-4 reveal-scale">
         <div class="process-card">
           <div class="step-num">4</div>
           <h3>We get to work</h3>
           <p>Our crew handles the digging, planting, building, and wiring — and keeps you posted if anything changes along the way.</p>
         </div>
       </div>
-      <div class="col-sm-6 col-lg-4 reveal">
+      <div class="col-sm-6 col-lg-4 reveal-scale">
         <div class="process-card">
           <div class="step-num">5</div>
           <h3>We tidy up</h3>
           <p>Final details, clean edges, a proper clean-up of the site — we don't call it done until it actually looks done.</p>
         </div>
       </div>
-      <div class="col-sm-6 col-lg-4 reveal">
+      <div class="col-sm-6 col-lg-4 reveal-scale">
         <div class="process-card">
           <div class="step-num">6</div>
           <h3>We stay in touch</h3>
@@ -365,24 +423,91 @@ a:focus-visible, button:focus-visible{outline:2px solid var(--clay); outline-off
 <section class="section">
   <div class="container">
     <div class="row align-items-center g-5">
-      <div class="col-lg-5 reveal">
+      <div class="col-lg-5 reveal-left">
         <p class="eyebrow">Honestly speaking</p>
         <h2 class="display fw-semibold mt-2 mb-3" style="font-size:clamp(1.8rem,3vw,2.4rem);">Why people keep calling us back</h2>
         <div class="leaf-frame" style="height:320px;">
-          <img src="https://images.unsplash.com/photo-1599629954294-14df9ec8ce4e?auto=format&fit=crop&w=700&q=80" alt="Beautifully landscaped garden with colorful flower beds">
+          <img src="https://images.unsplash.com/photo-1599629954294-14df9ec8ce4e?auto=format&fit=crop&w=700&q=80" alt="Beautifully landscaped garden with colorful flower beds in Nairobi" loading="lazy" decoding="async">
         </div>
       </div>
       <div class="col-lg-7">
         <div class="row">
-          <div class="col-sm-6 reveal">
+          <div class="col-sm-6 reveal-right">
             <div class="why-item"><span class="ck">✓</span><div><h3>We've done this a while</h3><p>Years of hands-in-the-soil experience means fewer surprises and fewer redos.</p></div></div>
             <div class="why-item"><span class="ck">✓</span><div><h3>Your space, your plan</h3><p>We design around how you'll actually use the place, not a catalogue template.</p></div></div>
             <div class="why-item" style="border-bottom:none;"><span class="ck">✓</span><div><h3>We try not to waste water</h3><p>Smarter irrigation and native plants mean lower bills and a garden that copes when the rains are late.</p></div></div>
           </div>
-          <div class="col-sm-6 reveal">
+          <div class="col-sm-6 reveal-right" style="transition-delay:.12s;">
             <div class="why-item"><span class="ck">✓</span><div><h3>Fair pricing, no surprises</h3><p>You'll know the cost up front — what changes the quote, and what doesn't.</p></div></div>
             <div class="why-item"><span class="ck">✓</span><div><h3>We don't disappear after</h3><p>Maintenance plans and a real phone number if something needs attention later.</p></div></div>
             <div class="why-item" style="border-bottom:none;"><span class="ck">✓</span><div><h3>We turn up when we say we will</h3><p>Timelines are something we plan around, not something we apologise for missing.</p></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="section section-sage">
+  <div class="container">
+    <div class="section-title mx-auto reveal">
+      <p class="eyebrow">Quick answers</p>
+      <h2>Questions people usually ask us first</h2>
+      <p class="lead-soft mt-2">Still got one that's not here? Just call or WhatsApp us — see the footer for both.</p>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-lg-9">
+        <div class="accordion" id="servicesFaq">
+          <div class="accordion-item reveal" style="border-radius:14px; border:1px solid var(--line); margin-bottom:1rem; overflow:hidden;">
+            <h3 class="accordion-header">
+              <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                Which areas in Kenya do you serve?
+              </button>
+            </h3>
+            <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#servicesFaq">
+              <div class="accordion-body lead-soft">We're based in Nairobi and handle jobs across the city and its suburbs, plus major towns countrywide — including Mombasa, Kisumu, Nakuru, Eldoret, Thika, Nyeri, and more. Distance changes the quote, not whether we'll come.</div>
+            </div>
+          </div>
+          <div class="accordion-item reveal" style="border-radius:14px; border:1px solid var(--line); margin-bottom:1rem; overflow:hidden; transition-delay:.06s;">
+            <h3 class="accordion-header">
+              <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                How much does landscaping cost in Nairobi?
+              </button>
+            </h3>
+            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#servicesFaq">
+              <div class="accordion-body lead-soft">It depends on the size of the space, what's already there, and how much design or construction work is involved — a small flower bed and a full compound overhaul aren't priced the same way. We walk the site first and give you a written estimate before anything starts, so there are no surprises later.</div>
+            </div>
+          </div>
+          <div class="accordion-item reveal" style="border-radius:14px; border:1px solid var(--line); margin-bottom:1rem; overflow:hidden; transition-delay:.12s;">
+            <h3 class="accordion-header">
+              <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                Do you offer ongoing maintenance, or just one-off jobs?
+              </button>
+            </h3>
+            <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#servicesFaq">
+              <div class="accordion-body lead-soft">Both. Plenty of clients start with a one-off project like a redesign or lawn establishment, then move onto a recurring maintenance plan once it's in. Others just want the regular upkeep from day one. We'll set it up either way.</div>
+            </div>
+          </div>
+          <div class="accordion-item reveal" style="border-radius:14px; border:1px solid var(--line); margin-bottom:1rem; overflow:hidden; transition-delay:.18s;">
+            <h3 class="accordion-header">
+              <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                How soon can you start after I request a quote?
+              </button>
+            </h3>
+            <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#servicesFaq">
+              <div class="accordion-body lead-soft">We usually get back to you within 24 hours to arrange a site visit. From there, timing depends on the scope of the job and our current schedule — we'll give you a realistic start date once we've seen the space, not a vague "soon."</div>
+            </div>
+          </div>
+          <div class="accordion-item reveal" style="border-radius:14px; border:1px solid var(--line); overflow:hidden; transition-delay:.24s;">
+            <h3 class="accordion-header">
+              <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">
+                Can you handle both residential and commercial properties?
+              </button>
+            </h3>
+            <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#servicesFaq">
+              <div class="accordion-body lead-soft">Yes — homes, offices, hotels, and institutional grounds. Commercial contracts usually come with a maintenance plan and regular progress updates baked in, since those grounds need to look sharp every day, not just after a one-time clean-up.</div>
+            </div>
           </div>
         </div>
       </div>
@@ -508,7 +633,7 @@ s0.parentNode.insertBefore(s1,s0);
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content">
       <div class="sm-banner">
-        <img id="smImage" src="" alt="">
+        <img id="smImage" src="" alt="" loading="lazy" decoding="async">
         <div class="sm-icon" id="smIcon"></div>
         <div class="sm-title" id="smTitle"></div>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -651,12 +776,12 @@ const SERVICES = [
     included: ["Water testing & chemical balancing", "Cleaning & vacuuming", "Filter & pump checks", "Algae & debris control", "Seasonal deep cleaning"]
   },
   {
-    icon: "🏗️",
-    title: "Green Construction & Design",
-    image: "https://images.unsplash.com/photo-1556983852-43bf21186b2a?auto=format&fit=crop&w=900&q=80",
-    summary: "Structures and layouts built with sustainable materials and methods — so the build is as responsible as the garden around it.",
-    description: "For clients adding structures to a property — pergolas, garden rooms, boundary walls, green roofs — we design and build with sustainability in mind: local and low-impact materials, water-wise integration with the landscape, and energy-conscious layouts, without compromising on finish.",
-    included: ["Sustainable material sourcing", "Green roof & wall design", "Water-wise structural integration", "Energy-conscious layouts", "Full project management"]
+    icon: "⛳",
+    title: "Golf Design & Green Construction",
+    image: "https://images.unsplash.com/photo-1621905251918-48416bd8575a?auto=format&fit=crop&w=900&q=80",
+    summary: "From putting greens to garden structures — we design and build with sustainable materials and methods, on any scale.",
+    description: "Whether it's a private putting green, a golf-course landscaping contract, or garden structures like pergolas, boundary walls, and green roofs, we plan and build with sustainability in mind: local and low-impact materials, water-wise integration with the surrounding landscape, and energy-conscious layouts, without compromising on finish or playability.",
+    included: ["Golf green & fairway design", "Sustainable material sourcing", "Green roof & wall construction", "Water-wise structural integration", "Full project management"]
   },
   {
     icon: "✨",
@@ -684,7 +809,7 @@ SERVICES.forEach((svc, i) => {
   col.innerHTML = `
     <div class="svc-detail-card">
       <div class="img-wrap">
-        <img src="${svc.image}" alt="${svc.title}">
+        <img src="${svc.image}" alt="${svc.title} service in Nairobi, Kenya by Landmark Landscaping" loading="lazy" decoding="async" width="900" height="600">
         <div class="ic-overlay">${svc.icon}</div>
       </div>
       <div class="body">
@@ -754,19 +879,51 @@ document.querySelectorAll('#navMenu .nav-link').forEach(link => {
 backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
 // Scroll reveal via IntersectionObserver (re-checked after cards render)
+// Cards within the same row get a small staggered delay so groups animate in sequence rather than all at once.
 function observeReveals(){
-  const revealEls = document.querySelectorAll('.reveal:not(.in)');
+  const revealEls = document.querySelectorAll('.reveal:not(.in), .reveal-left:not(.in), .reveal-right:not(.in), .reveal-scale:not(.in)');
   const io = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        entry.target.classList.add('in');
-        io.unobserve(entry.target);
+        const el = entry.target;
+        const row = el.closest('.row');
+        let delay = 0;
+        if (row && !el.style.transitionDelay) {
+          const siblings = Array.from(row.children).filter(c => c.classList.contains('reveal') || c.classList.contains('reveal-scale') || c.classList.contains('reveal-left') || c.classList.contains('reveal-right'));
+          const idx = siblings.indexOf(el);
+          if (idx > -1) delay = Math.min(idx * 90, 360);
+        }
+        if (delay) el.style.transitionDelay = delay + 'ms';
+        el.classList.add('in');
+        io.unobserve(el);
       }
     });
   }, { threshold: 0.15 });
   revealEls.forEach(el => io.observe(el));
 }
 observeReveals();
+
+// Scroll progress bar — fills as the user scrolls down the page
+const scrollProgressBar = document.getElementById('scrollProgress');
+function updateScrollProgress(){
+  const doc = document.documentElement;
+  const scrollTop = window.scrollY || doc.scrollTop;
+  const maxScroll = doc.scrollHeight - doc.clientHeight;
+  const pct = maxScroll > 0 ? (scrollTop / maxScroll) * 100 : 0;
+  scrollProgressBar.style.width = pct + '%';
+}
+window.addEventListener('scroll', updateScrollProgress, { passive: true });
+updateScrollProgress();
+
+// Subtle parallax on the hero background image
+const heroBg = document.querySelector('.hero-bg');
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+if (heroBg && !prefersReducedMotion) {
+  window.addEventListener('scroll', () => {
+    const offset = Math.min(window.scrollY * 0.25, 80);
+    heroBg.style.transform = `translateY(${offset}px) scale(1.08)`;
+  }, { passive: true });
+}
 
 // Quote form submit (front-end only demo)
 document.getElementById('quoteForm').addEventListener('submit', function (e) {
