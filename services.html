@@ -159,7 +159,18 @@ a{color:var(--forest);}
 .nav-wrap{position:fixed; top:0; left:0; right:0; z-index:1000; transition:background .35s ease, box-shadow .35s ease, padding .35s ease; padding:1.1rem 0;}
 .nav-wrap.scrolled{background:rgba(251,248,242,.92); backdrop-filter:blur(10px); box-shadow:0 4px 30px rgba(28,36,24,.08); padding:.6rem 0;}
 .brand{font-family:var(--display); font-weight:600; font-size:1.35rem; color:#fff !important; display:flex; align-items:center; gap:.5rem; text-decoration:none; transition:color .35s ease;}
-.brand .leaf-mark{font-size:1.5rem;}
+.brand .leaf-mark{width:36px; height:36px; object-fit:contain; flex-shrink:0;}
+.brand-text-wrap{overflow:hidden; display:inline-block; position:relative; vertical-align:middle;}
+.brand-text{display:inline-block; white-space:nowrap; animation:brandSlideLoop 4s ease-in-out infinite;}
+@keyframes brandSlideLoop{
+  0%{transform:translateX(120%); opacity:0;}
+  18%{transform:translateX(0); opacity:1;}
+  65%{transform:translateX(0); opacity:1;}
+  82%{transform:translateX(-120%); opacity:0;}
+  82.1%{transform:translateX(120%);}
+  100%{transform:translateX(120%); opacity:0;}
+}
+@media (prefers-reduced-motion: reduce){.brand-text{animation:none;}}
 .navbar-nav .nav-link{font-weight:600; font-size:.92rem; color:#fff !important; margin:0 .5rem; position:relative; padding:.4rem 0 !important; transition:color .35s ease;}
 .navbar-nav .nav-link::after{content:''; position:absolute; left:0; bottom:-2px; height:2px; width:0%; background:var(--sun); transition:width .25s ease;}
 .navbar-nav .nav-link:hover::after{width:100%;}
@@ -313,7 +324,10 @@ a:focus-visible, button:focus-visible{outline:2px solid var(--clay); outline-off
 <!-- ============ NAVBAR ============ -->
 <nav class="navbar navbar-expand-lg nav-wrap" id="mainNav">
   <div class="container">
-    <a class="brand" href="index.html"><span class="leaf-mark">🌿</span>Landmark Landscaping</a>
+    <a class="brand" href="index.html">
+      <img src="android-chrome-512x512 (1).png" alt="Landmark Landscaping" class="leaf-mark">
+      <span class="brand-text-wrap"><span class="brand-text">Landmark Landscaping</span></span>
+    </a>
     <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
