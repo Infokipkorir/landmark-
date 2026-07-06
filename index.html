@@ -526,7 +526,7 @@
   .footer-bottom{border-top:1px solid rgba(255,255,255,.12); margin-top:2.5rem; padding-top:1.5rem; font-size:.82rem; color:rgba(255,255,255,.6);}
 
   /* Floating action buttons */
-  .fab-stack{position:fixed; bottom:1.6rem; right:1.6rem; z-index:1050; display:flex; flex-direction:column; gap:.8rem; align-items:flex-end;}
+  .fab-stack{position:fixed; bottom:1.6rem; left:1.6rem; z-index:1050; display:flex; flex-direction:column; gap:.8rem; align-items:flex-start;}
   .fab{
     width:54px; height:54px; border-radius:50%;
     display:flex; align-items:center; justify-content:center;
@@ -561,6 +561,12 @@
   @media (max-width: 575.98px){
     .hero-stats{gap:1.4rem;}
     .badge-floating{display:none;}
+    .fab-stack{
+      left:.9rem;
+      bottom:calc(.9rem + env(safe-area-inset-bottom, 0px));
+      gap:.55rem;
+    }
+    .fab{width:46px; height:46px; font-size:1.2rem;}
   }
   .city-chip{
     display:inline-flex;
@@ -980,27 +986,27 @@
 <!-- Jotform AI Agent -->
 <script src='https://cdn.jotfor.ms/agent/embedjs/019f3688a66870008f0d2da64897b73582e6/embed.js'></script>
 <script>
-  // Force the Jotform widget bubble to the opposite side (left) of the WhatsApp/Quote stack (right)
+  // Force the Jotform widget bubble to the right side, opposite the WhatsApp/Quote stack (now on the left)
   (function(){
-    function flipJotformToLeft(){
+    function flipJotformToRight(){
       var els = document.querySelectorAll('iframe[src*="jotform" i], iframe[title*="agent" i], iframe[id*="jotform" i], iframe[id*="JotformAgent" i]');
       els.forEach(function(iframe){
         var el = iframe;
         while (el && el !== document.body) {
           var cs = window.getComputedStyle(el);
           if (cs.position === 'fixed') {
-            el.style.setProperty('left', '20px', 'important');
-            el.style.setProperty('right', 'auto', 'important');
+            el.style.setProperty('right', '20px', 'important');
+            el.style.setProperty('left', 'auto', 'important');
             break;
           }
           el = el.parentElement;
         }
       });
     }
-    var mo = new MutationObserver(flipJotformToLeft);
+    var mo = new MutationObserver(flipJotformToRight);
     mo.observe(document.documentElement, { childList: true, subtree: true });
-    flipJotformToLeft();
-    window.addEventListener('load', flipJotformToLeft);
+    flipJotformToRight();
+    window.addEventListener('load', flipJotformToRight);
   })();
 </script>
 
