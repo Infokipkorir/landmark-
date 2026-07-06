@@ -244,8 +244,11 @@ footer .container{position:relative; z-index:2;}
 footer h3{color:#fff; font-family:var(--display); font-size:1.05rem; font-weight:600; margin-bottom:1.1rem;}
 footer a{color:rgba(255,255,255,.75); text-decoration:none;}
 footer a:hover{color:var(--sun);}
-footer .footer-links li{margin-bottom:.55rem; font-size:.92rem;}
+footer .footer-links li{margin-bottom:.55rem; font-size:.92rem; display:flex; justify-content:center;}
 footer .footer-links li a{display:flex; align-items:center; gap:.45rem;}
+@media (min-width: 992px){
+  footer .footer-links li{justify-content:flex-start;}
+}
 .marquee-wrap{overflow:hidden; position:relative; mask-image:linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); -webkit-mask-image:linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);}
 .marquee-track{display:flex; gap:1.6rem; width:max-content; animation:marqueeScroll 22s linear infinite;}
 .marquee-wrap:hover .marquee-track{animation-play-state:paused;}
@@ -258,13 +261,21 @@ footer .footer-links li a{display:flex; align-items:center; gap:.45rem;}
 .city-chip i{color:var(--sun);}
 
 /* Floating action buttons */
-.fab-stack{position:fixed; bottom:1.6rem; right:1.6rem; z-index:1050; display:flex; flex-direction:column; gap:.8rem; align-items:flex-end;}
+.fab-stack{position:fixed; bottom:1.6rem; left:1.6rem; z-index:1050; display:flex; flex-direction:column; gap:.8rem; align-items:flex-start;}
 .fab{width:54px; height:54px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.4rem; border:none; cursor:pointer; box-shadow:0 12px 28px -8px rgba(20,63,24,.4); transition:transform .25s ease;}
 .fab:hover{transform:scale(1.08);}
 .fab-whatsapp{background:#25D366; color:#fff;}
 .fab-quote{background:var(--clay); color:#fff;}
 .fab-top{background:#fff; color:var(--forest); border:1px solid var(--line); opacity:0; pointer-events:none; transform:translateY(10px);}
 .fab-top.show{opacity:1; pointer-events:auto; transform:translateY(0);}
+@media (max-width: 575.98px){
+  .fab-stack{
+    left:.9rem;
+    bottom:calc(.9rem + env(safe-area-inset-bottom, 0px));
+    gap:.55rem;
+  }
+  .fab{width:46px; height:46px; font-size:1.2rem;}
+}
 
 /* Scroll reveal */
 .reveal{opacity:0; transform:translateY(28px); transition:opacity .7s ease, transform .7s ease;}
@@ -566,7 +577,7 @@ a:focus-visible, button:focus-visible{outline:2px solid var(--clay); outline-off
   <div class="footer-bg"></div>
   <div class="footer-overlay"></div>
   <div class="container">
-    <div class="row g-4">
+    <div class="row g-4 text-center text-lg-start justify-content-center">
       <div class="col-lg-4 col-sm-6">
         <h3><i class="bi bi-flower1 text-success me-2"></i>Landmark Landscaping</h3>
         <p style="font-size:.92rem;">Premier landscaping and irrigation solutions transforming outdoor spaces across Kenya.</p>
@@ -644,24 +655,37 @@ a:focus-visible, button:focus-visible{outline:2px solid var(--clay); outline-off
 
 <!-- ============ FLOATING ACTION BUTTONS ============ -->
 <div class="fab-stack">
-  <button id="back-to-top" class="fab fab-top" aria-label="Back to top" title="Back to top">⬆️</button>
-  <button id="quote-btn" class="fab fab-quote" aria-label="Request a quote" title="Request a Quote" data-bs-toggle="modal" data-bs-target="#quoteModal">📋</button>
-  <a href="https://wa.me/254728158526" target="_blank" rel="noopener" class="fab fab-whatsapp" aria-label="Contact on WhatsApp" title="Chat on WhatsApp">💬</a>
+  <button id="back-to-top" class="fab fab-top" aria-label="Back to top" title="Back to top"><i class="bi bi-arrow-up"></i></button>
+  <button id="quote-btn" class="fab fab-quote" aria-label="Request a quote" title="Request a Quote" data-bs-toggle="modal" data-bs-target="#quoteModal"><i class="bi bi-clipboard2-check"></i></button>
+  <a href="https://wa.me/254728158526" target="_blank" rel="noopener" class="fab fab-whatsapp" aria-label="Contact on WhatsApp" title="Chat on WhatsApp"><i class="bi bi-whatsapp"></i></a>
 </div>
 
-<!-- Start of Tawk.to Script -->
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/6a35244b16fcef1d436fb5a9/default';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
+<!-- Jotform AI Agent -->
+<script src='https://cdn.jotfor.ms/agent/embedjs/019f3688a66870008f0d2da64897b73582e6/embed.js'></script>
+<script>
+  // Force the Jotform widget bubble to the right side, opposite the WhatsApp/Quote stack (on the left)
+  (function(){
+    function flipJotformToRight(){
+      var els = document.querySelectorAll('iframe[src*="jotform" i], iframe[title*="agent" i], iframe[id*="jotform" i], iframe[id*="JotformAgent" i]');
+      els.forEach(function(iframe){
+        var el = iframe;
+        while (el && el !== document.body) {
+          var cs = window.getComputedStyle(el);
+          if (cs.position === 'fixed') {
+            el.style.setProperty('right', '20px', 'important');
+            el.style.setProperty('left', 'auto', 'important');
+            break;
+          }
+          el = el.parentElement;
+        }
+      });
+    }
+    var mo = new MutationObserver(flipJotformToRight);
+    mo.observe(document.documentElement, { childList: true, subtree: true });
+    flipJotformToRight();
+    window.addEventListener('load', flipJotformToRight);
+  })();
 </script>
-<!-- End of Tawk.to Script -->
 
 <!-- ============ FEEDBACK / TESTIMONIAL MODAL ============ -->
 <div class="modal fade" id="feedbackModal" tabindex="-1" aria-labelledby="feedbackModalLabel" aria-hidden="true">
