@@ -481,8 +481,11 @@
   footer h3{color:#fff; font-family:var(--display); font-size:1.05rem; font-weight:600; margin-bottom:1.1rem;}
   footer a{color:rgba(255,255,255,.75); text-decoration:none;}
   footer a:hover{color:var(--sun);}
-  footer .footer-links li{margin-bottom:.55rem; font-size:.92rem;}
+  footer .footer-links li{margin-bottom:.55rem; font-size:.92rem; display:flex; justify-content:center;}
   footer .footer-links li a{display:flex; align-items:center; gap:.45rem;}
+  @media (min-width: 992px){
+    footer .footer-links li{justify-content:flex-start;}
+  }
 
   /* Service area marquee */
   .marquee-wrap{
@@ -590,7 +593,7 @@
 <nav class="navbar navbar-expand-lg nav-wrap" id="mainNav">
 <div class="container">
   <a class="brand" href="index.html">
-    <img src="android-chrome-512x512.png" alt="Landmark Landscaping" class="leaf-mark">
+    <img src="src="android-chrome-512x512 (1)." alt="Landmark Landscaping" class="leaf-mark">
     <span class="brand-text-wrap"><span class="brand-text">Landmark Landscaping</span></span>
   </a>
     <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-label="Toggle navigation">
@@ -863,6 +866,8 @@
 
 <!-- ============ FOOTER ============ -->
 <footer>
+  <div class="container">
+  <div class="row gy-4 text-center text-lg-start justify-content-center">
   <div class="col-lg-4 col-sm-6">
     <h3>
         <i class="bi bi-flower1 text-success me-2"></i>
@@ -873,7 +878,7 @@
         Premier landscaping and irrigation solutions transforming outdoor spaces across Kenya.
     </p>
 
-    <div class="social-row mt-3">
+    <div class="social-row mt-3 d-flex justify-content-center justify-content-lg-start">
         <a href="https://facebook.com"
            title="Facebook"
            aria-label="Follow us on Facebook">
@@ -938,17 +943,12 @@
     </ul>
 </div>
 
-<div class="col-lg-3 col-sm-6">
-    <h3>Service Areas</h3>
-    <p style="font-size:.92rem;">
-        We serve Nairobi and major towns across Kenya, including:
-    </p>
-</div>
       <div class="col-lg-3 col-sm-6">
         <h3>Service Areas</h3>
         <p style="font-size:.92rem;">We serve Nairobi and major towns across Kenya, including:</p>
       </div>
     </div>
+  </div>
 
     <div class="marquee-wrap mt-2 mb-5">
     <div class="marquee-track">
@@ -970,10 +970,11 @@
     </div>
     </div>
 
+    <div class="container">
     <div class="footer-bottom text-center pb-4">
       <p class="mb-0">&copy; 2026 Landmark Landscaping Services. All rights reserved.</p>
     </div>
-  </div>
+    </div>
 </footer>
 
 <!-- ============ FLOATING ACTION BUTTONS ============ -->
