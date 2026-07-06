@@ -979,6 +979,30 @@
 
 <!-- Jotform AI Agent -->
 <script src='https://cdn.jotfor.ms/agent/embedjs/019f3688a66870008f0d2da64897b73582e6/embed.js'></script>
+<script>
+  // Force the Jotform widget bubble to the opposite side (left) of the WhatsApp/Quote stack (right)
+  (function(){
+    function flipJotformToLeft(){
+      var els = document.querySelectorAll('iframe[src*="jotform" i], iframe[title*="agent" i], iframe[id*="jotform" i], iframe[id*="JotformAgent" i]');
+      els.forEach(function(iframe){
+        var el = iframe;
+        while (el && el !== document.body) {
+          var cs = window.getComputedStyle(el);
+          if (cs.position === 'fixed') {
+            el.style.setProperty('left', '20px', 'important');
+            el.style.setProperty('right', 'auto', 'important');
+            break;
+          }
+          el = el.parentElement;
+        }
+      });
+    }
+    var mo = new MutationObserver(flipJotformToLeft);
+    mo.observe(document.documentElement, { childList: true, subtree: true });
+    flipJotformToLeft();
+    window.addEventListener('load', flipJotformToLeft);
+  })();
+</script>
 
 <!-- ============ QUOTE MODAL ============ -->
 <div class="modal fade" id="quoteModal" tabindex="-1" aria-labelledby="quoteModalLabel" aria-hidden="true">
