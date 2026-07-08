@@ -1064,6 +1064,29 @@
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ3Y3N1eHZjcW15a2hja3hxZ2poIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODMyOTE1NjIsImV4cCI6MjA5ODg2NzU2Mn0.rAXetUdSG-uzEhQfvhgK8Kn-K5Hxyxx9M7QO4nKTZiA'
   );
 </script>
+
+<!-- Page-view tracking beacon (feeds the admin console's Page insights tab) -->
+<script>
+  (function () {
+    // One id per browser tab session, so repeat views within a visit are still separate rows
+    // but a page refresh doesn't spam a brand-new session each time.
+    var SESSION_KEY = 'lm_session_id';
+    var sessionId = sessionStorage.getItem(SESSION_KEY);
+    if (!sessionId) {
+      sessionId = (crypto.randomUUID ? crypto.randomUUID() : (Date.now().toString(36) + Math.random().toString(36).slice(2)));
+      sessionStorage.setItem(SESSION_KEY, sessionId);
+    }
+
+    var pagePath = window.location.pathname || '/';
+
+    LM.sb.from('page_views').insert({
+      page_path: pagePath,
+      session_id: sessionId
+    }).then(function (res) {
+      if (res.error) console.warn('Page view log failed:', res.error);
+    });
+  })();
+</script>
 <script>
   // Navbar background on scroll
   const nav = document.getElementById('mainNav');
