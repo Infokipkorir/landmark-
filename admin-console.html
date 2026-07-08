@@ -680,13 +680,15 @@ function pill(status) {
 }
 function parseUserAgent(ua) {
   ua = ua || navigator.userAgent || '';
-  let browser = 'Unknown browser';
-  if (/Edg\//.test(ua)) browser = 'Edge';
-  else if (/OPR\//.test(ua)) browser = 'Opera';
-  else if (/Chrome\//.test(ua) && !/Chromium/.test(ua)) browser = 'Chrome';
-  else if (/Firefox\//.test(ua)) browser = 'Firefox';
-  else if (/Safari\//.test(ua) && /Version\//.test(ua)) browser = 'Safari';
-  else if (/MSIE|Trident/.test(ua)) browser = 'Internet Explorer';
+  let browser = 'Unknown browser', browserVersion = '';
+  let m;
+  if (/Edg\//.test(ua)) { browser = 'Edge'; m = ua.match(/Edg\/([\d.]+)/); }
+  else if (/OPR\//.test(ua)) { browser = 'Opera'; m = ua.match(/OPR\/([\d.]+)/); }
+  else if (/Chrome\//.test(ua) && !/Chromium/.test(ua)) { browser = 'Chrome'; m = ua.match(/Chrome\/([\d.]+)/); }
+  else if (/Firefox\//.test(ua)) { browser = 'Firefox'; m = ua.match(/Firefox\/([\d.]+)/); }
+  else if (/Safari\//.test(ua) && /Version\//.test(ua)) { browser = 'Safari'; m = ua.match(/Version\/([\d.]+)/); }
+  else if (/MSIE|Trident/.test(ua)) { browser = 'Internet Explorer'; }
+  browserVersion = m ? m[1] : '';
 
   let os = 'Unknown OS';
   if (/Windows NT/.test(ua)) os = 'Windows';
@@ -699,7 +701,7 @@ function parseUserAgent(ua) {
   if (/iPad|Tablet/.test(ua)) device = 'Tablet';
   else if (/Mobi|Android(?!.*Tablet)|iPhone/.test(ua)) device = 'Mobile';
 
-  return { browser, os, device };
+  return { browser, browserVersion, os, device };
 }
 
 async function lookupApproxLocation() {
@@ -822,20 +824,18 @@ let heartbeatTimer = null;
 
 async function registerSession() {
   if (!currentAdmin) return;
-  const { browser, os, device } = parseUserAgent(navigator.userAgent);
+  const { browser, browserVersion, os, device } = parseUserAgent(navigator.userAgent);
   const loc = await lookupApproxLocation();
 
   await sb.from('admin_sessions').upsert({
-    session_key: TAB_SESSION_KEY,
+    session_token: TAB_SESSION_KEY,
     admin_id: currentAdmin.id,
-    admin_name: currentAdmin.full_name || null,
-    admin_email: currentAdmin.email || null,
     device, browser, os,
+    browser_version: browserVersion,
     user_agent: navigator.userAgent,
-    ip: loc.ip, city: loc.city, region: loc.region, country: loc.country,
-    started_at: new Date().toISOString(),
-    last_seen_at: new Date().toISOString(),
-  }, { onConflict: 'session_key' });
+    ip_address: loc.ip, city: loc.city, region: loc.region, country: loc.country,
+    last_active_at: new Date().toISOString(),
+  }, { onConflict: 'session_token' });
 
   if ($('#section-sessions').classList.contains('active')) loadSessions();
 }
@@ -845,8 +845,8 @@ function startHeartbeat() {
   heartbeatTimer = setInterval(async () => {
     if (!currentAdmin) return;
     await sb.from('admin_sessions')
-      .update({ last_seen_at: new Date().toISOString() })
-      .eq('session_key', TAB_SESSION_KEY);
+      .update({ last_active_at: new Date().toISOString() })
+      .eq('session_token', TAB_SESSION_KEY);
     updateTopbarAdminStatus();
     if ($('#section-sessions').classList.contains('active')) loadSessions();
   }, SESSION_HEARTBEAT_MS);
@@ -859,7 +859,7 @@ async function endSessionCleanup() {
   stopHeartbeat();
   stopIdleWatch();
   try {
-    await sb.from('admin_sessions').delete().eq('session_key', TAB_SESSION_KEY);
+    await sb.from('admin_sessions').delete().eq('session_token', TAB_SESSION_KEY);
   } catch { /* best effort */ }
 }
 
@@ -877,8 +877,8 @@ async function loadSessions() {
 
   const { data, error } = await sb
     .from('admin_sessions')
-    .select('*')
-    .order('last_seen_at', { ascending: false });
+    .select('*, admin_profiles(id, full_name, email)')
+    .order('last_active_at', { ascending: false });
 
   if (error) {
     grid.innerHTML = `<div class="session-card"><div class="session-card-empty">Could not load session data.</div></div>`;
@@ -886,13 +886,13 @@ async function loadSessions() {
   }
 
   const now = Date.now();
-  const isOnline = (row) => (now - new Date(row.last_seen_at).getTime()) < SESSION_ONLINE_WINDOW_MS;
+  const isOnline = (row) => (now - new Date(row.last_active_at).getTime()) < SESSION_ONLINE_WINDOW_MS;
 
   // One card per admin — most recently active session for that admin.
   const byAdmin = new Map();
   (data || []).forEach(row => {
     const existing = byAdmin.get(row.admin_id);
-    if (!existing || new Date(row.last_seen_at) > new Date(existing.last_seen_at)) {
+    if (!existing || new Date(row.last_active_at) > new Date(existing.last_active_at)) {
       byAdmin.set(row.admin_id, row);
     }
   });
@@ -901,13 +901,14 @@ async function loadSessions() {
   const cards = (allAdmins || []).map(admin => {
     const row = byAdmin.get(admin.id);
     const you = currentAdmin && admin.id === currentAdmin.id;
+    const name = admin.full_name || admin.email;
     if (!row) {
       return `
         <div class="session-card is-offline">
           <div class="session-card-head">
-            <div class="avatar-circle">${initialsFor(admin.full_name || admin.email)}</div>
+            <div class="avatar-circle">${initialsFor(name)}</div>
             <div style="flex:1;">
-              <div class="session-card-name">${escapeHtml(admin.full_name || admin.email)}${you ? '<span class="you-badge">You</span>' : ''}</div>
+              <div class="session-card-name">${escapeHtml(name)}${you ? '<span class="you-badge">You</span>' : ''}</div>
               <div class="session-card-email">${escapeHtml(admin.email || '')}</div>
             </div>
             <span class="status-tag offline"><span class="dot"></span>Offline</span>
@@ -916,22 +917,23 @@ async function loadSessions() {
         </div>`;
     }
     const online = isOnline(row);
+    const browserLabel = [row.browser, row.browser_version].filter(Boolean).join(' ');
     return `
       <div class="session-card ${you ? 'is-you' : ''} ${online ? '' : 'is-offline'}">
         <div class="session-card-head">
-          <div class="avatar-circle">${initialsFor(row.admin_name || row.admin_email)}</div>
+          <div class="avatar-circle">${initialsFor(name)}</div>
           <div style="flex:1;">
-            <div class="session-card-name">${escapeHtml(row.admin_name || row.admin_email)}${you ? '<span class="you-badge">You</span>' : ''}</div>
-            <div class="session-card-email">${escapeHtml(row.admin_email || '')}</div>
+            <div class="session-card-name">${escapeHtml(name)}${you ? '<span class="you-badge">You</span>' : ''}</div>
+            <div class="session-card-email">${escapeHtml(admin.email || '')}</div>
           </div>
           <span class="status-tag ${online ? 'online' : 'offline'}"><span class="dot"></span>${online ? 'Online' : 'Offline'}</span>
         </div>
         <div class="session-meta-list">
           <div class="session-meta-row"><span class="m-icon">&#128421;</span><span class="m-label">Device</span><span>${escapeHtml(row.device || 'Unknown')} &middot; ${escapeHtml(row.os || 'Unknown OS')}</span></div>
-          <div class="session-meta-row"><span class="m-icon">&#127760;</span><span class="m-label">Browser</span><span>${escapeHtml(row.browser || 'Unknown')}</span></div>
+          <div class="session-meta-row"><span class="m-icon">&#127760;</span><span class="m-label">Browser</span><span>${escapeHtml(browserLabel || 'Unknown')}</span></div>
           <div class="session-meta-row"><span class="m-icon">&#128205;</span><span class="m-label">Location</span><span>${escapeHtml([row.city, row.region, row.country].filter(Boolean).join(', ') || 'Unavailable')}</span></div>
-          <div class="session-meta-row"><span class="m-icon">&#9201;</span><span class="m-label">Signed in</span><span>${timeAgo(row.started_at)}</span></div>
-          <div class="session-meta-row"><span class="m-icon">&#128337;</span><span class="m-label">Last active</span><span>${timeAgo(row.last_seen_at)}</span></div>
+          <div class="session-meta-row"><span class="m-icon">&#9201;</span><span class="m-label">Signed in</span><span>${timeAgo(row.created_at)}</span></div>
+          <div class="session-meta-row"><span class="m-icon">&#128337;</span><span class="m-label">Last active</span><span>${timeAgo(row.last_active_at)}</span></div>
         </div>
       </div>`;
   }).join('');
@@ -959,10 +961,10 @@ async function updateTopbarAdminStatus(precomputedOnlineCount) {
 
   let onlineCount = precomputedOnlineCount;
   if (onlineCount === undefined) {
-    const { data } = await sb.from('admin_sessions').select('admin_id, last_seen_at');
+    const { data } = await sb.from('admin_sessions').select('admin_id, last_active_at');
     const now = Date.now();
     const onlineIds = new Set((data || [])
-      .filter(r => (now - new Date(r.last_seen_at).getTime()) < SESSION_ONLINE_WINDOW_MS)
+      .filter(r => (now - new Date(r.last_active_at).getTime()) < SESSION_ONLINE_WINDOW_MS)
       .map(r => r.admin_id));
     onlineCount = onlineIds.size;
   }
