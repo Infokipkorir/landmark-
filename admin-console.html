@@ -1,0 +1,1332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Console — Landmark Landscaping</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* =========================================================
+   Landmark Landscaping — Admin Console
+   Design tokens: "greenhouse control room"
+   ========================================================= */
+
+:root {
+  --ink: #1B2420;
+  --ink-muted: #5B655F;
+  --surface: #F7F6F2;
+  --panel: #FFFFFF;
+  --moss: #3F6C4E;
+  --moss-dark: #2E5039;
+  --moss-tint: #E7EEE9;
+  --clay: #B5651D;
+  --clay-tint: #F7EAE0;
+  --sand: #D8CFBE;
+  --sand-light: #EDE9E0;
+  --red: #A3372B;
+  --red-tint: #F7E6E3;
+  --gold: #9C7A24;
+  --gold-tint: #F5EFDD;
+
+  --font-display: "Fraunces", Georgia, serif;
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", "Courier New", monospace;
+
+  --radius-sm: 6px;
+  --radius: 10px;
+  --radius-lg: 14px;
+  --shadow-card: 0 1px 2px rgba(27,36,32,0.06), 0 4px 16px rgba(27,36,32,0.05);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--surface);
+  color: var(--ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 600; margin: 0; color: var(--ink); }
+a { color: var(--moss-dark); }
+button { font-family: var(--font-body); cursor: pointer; }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  height: 38px; padding: 0 16px; border-radius: var(--radius-sm);
+  border: 1px solid var(--sand); background: var(--panel); color: var(--ink);
+  font-size: 13.5px; font-weight: 500;
+  transition: background .15s ease, border-color .15s ease, transform .1s ease;
+}
+.btn:hover { background: var(--sand-light); }
+.btn:active { transform: scale(0.98); }
+.btn-primary { background: var(--moss); border-color: var(--moss); color: #fff; }
+.btn-primary:hover { background: var(--moss-dark); }
+.btn-danger { background: var(--panel); border-color: var(--red); color: var(--red); }
+.btn-danger:hover { background: var(--red-tint); }
+.btn-block { width: 100%; }
+.btn-sm { height: 30px; padding: 0 12px; font-size: 12.5px; }
+.btn[disabled] { opacity: .55; cursor: not-allowed; }
+.btn-icon { width: 34px; height: 34px; padding: 0; border-radius: var(--radius-sm); }
+
+.field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+.field-label { font-size: 12.5px; font-weight: 600; color: var(--ink-muted); text-transform: uppercase; letter-spacing: .04em; }
+input, select, textarea {
+  font-family: var(--font-body); font-size: 14px; padding: 10px 12px;
+  border-radius: var(--radius-sm); border: 1px solid var(--sand);
+  background: var(--panel); color: var(--ink); outline: none; width: 100%;
+}
+input:focus, select:focus, textarea:focus { border-color: var(--moss); box-shadow: 0 0 0 3px var(--moss-tint); }
+textarea { resize: vertical; min-height: 90px; font-family: var(--font-body); }
+
+/* LOGIN PAGE */
+.login-body {
+  min-height: 100vh; display: flex; align-items: center; justify-content: center;
+  background:
+    radial-gradient(circle at 20% 10%, rgba(63,108,78,0.10), transparent 45%),
+    radial-gradient(circle at 85% 90%, rgba(181,101,29,0.08), transparent 40%),
+    var(--surface);
+  padding: 24px;
+}
+.login-wrap { width: 100%; max-width: 400px; }
+.login-card { background: var(--panel); border: 1px solid var(--sand); border-radius: var(--radius-lg); box-shadow: var(--shadow-card); padding: 36px 32px 30px; }
+.login-brand { display: flex; align-items: center; gap: 12px; margin-bottom: 26px; }
+.brand-mark {
+  width: 40px; height: 40px; border-radius: 9px; background: var(--moss); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); font-weight: 600; font-size: 18px;
+}
+.brand-name { font-weight: 600; font-size: 14.5px; color: var(--ink); }
+.brand-sub { font-size: 11.5px; color: var(--ink-muted); text-transform: uppercase; letter-spacing: .06em; }
+.login-title { font-size: 24px; margin-bottom: 6px; }
+.login-help { font-size: 13.5px; color: var(--ink-muted); line-height: 1.5; margin: 0 0 24px; }
+.login-form { margin-top: 6px; }
+.login-error { background: var(--red-tint); color: var(--red); border-radius: var(--radius-sm); padding: 10px 12px; font-size: 13px; margin-bottom: 14px; }
+.login-footnote { text-align: center; font-size: 12px; color: var(--ink-muted); margin-top: 18px; }
+
+/* DASHBOARD SHELL */
+.shell { display: flex; min-height: 100vh; }
+.sidebar {
+  width: 240px; flex-shrink: 0; background: var(--ink); color: #EDEFEC;
+  display: flex; flex-direction: column; transition: width .18s ease;
+  position: sticky; top: 0; height: 100vh; overflow: hidden;
+}
+.shell.sidebar-collapsed .sidebar { width: 68px; }
+.sidebar-head { display: flex; align-items: center; gap: 10px; padding: 18px 16px; border-bottom: 1px solid rgba(255,255,255,0.08); white-space: nowrap; }
+.sidebar-head .brand-mark { flex-shrink: 0; }
+.sidebar-head .brand-name { color: #fff; }
+.sidebar-head .brand-sub { color: #9BA69E; }
+.shell.sidebar-collapsed .sidebar-head .brand-name,
+.shell.sidebar-collapsed .sidebar-head .brand-sub { display: none; }
+.sidebar-nav { flex: 1; padding: 12px 10px; overflow-y: auto; }
+.nav-item {
+  display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: var(--radius-sm);
+  color: #C7CFC9; font-size: 13.5px; font-weight: 500; cursor: pointer; white-space: nowrap;
+  margin-bottom: 2px; border: none; background: none; width: 100%; text-align: left;
+}
+.nav-item:hover { background: rgba(255,255,255,0.06); color: #fff; }
+.nav-item.active { background: var(--moss); color: #fff; }
+.nav-icon { width: 18px; height: 18px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+.nav-badge { margin-left: auto; background: var(--clay); color: #fff; font-size: 10.5px; font-weight: 600; border-radius: 20px; padding: 1px 7px; font-family: var(--font-mono); }
+.shell.sidebar-collapsed .nav-label,
+.shell.sidebar-collapsed .nav-badge { display: none; }
+.sidebar-foot { padding: 12px 10px 16px; border-top: 1px solid rgba(255,255,255,0.08); }
+
+.main { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.topbar { display: flex; align-items: center; gap: 14px; padding: 14px 24px; background: var(--panel); border-bottom: 1px solid var(--sand); position: sticky; top: 0; z-index: 10; }
+.topbar-title { font-size: 19px; }
+.topbar-sub { font-size: 12.5px; color: var(--ink-muted); margin-top: 1px; }
+.topbar-spacer { flex: 1; }
+.topbar-user { display: flex; align-items: center; gap: 10px; }
+.avatar-circle { width: 32px; height: 32px; border-radius: 50%; background: var(--moss-tint); color: var(--moss-dark); display: flex; align-items: center; justify-content: center; font-size: 12.5px; font-weight: 600; }
+.icon-btn { width: 36px; height: 36px; border-radius: var(--radius-sm); border: 1px solid var(--sand); background: var(--panel); display: flex; align-items: center; justify-content: center; color: var(--ink-muted); }
+.icon-btn:hover { background: var(--sand-light); }
+
+.content { padding: 24px; flex: 1; }
+.panel-section { display: none; }
+.panel-section.active { display: block; animation: fadein .15s ease; }
+@keyframes fadein { from { opacity: 0; transform: translateY(3px);} to { opacity: 1; transform: translateY(0);} }
+
+.card { background: var(--panel); border: 1px solid var(--sand); border-radius: var(--radius-lg); box-shadow: var(--shadow-card); }
+.card-pad { padding: 20px; }
+.card-head { display: flex; align-items: center; justify-content: space-between; padding: 18px 20px 0; }
+.card-head h3 { font-size: 15.5px; }
+
+.stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 20px; }
+.stat-card { background: var(--panel); border: 1px solid var(--sand); border-radius: var(--radius-lg); padding: 16px 18px; }
+.stat-label { font-size: 11.5px; text-transform: uppercase; letter-spacing: .05em; color: var(--ink-muted); font-weight: 600; }
+.stat-value { font-family: var(--font-display); font-size: 30px; margin-top: 6px; }
+.stat-delta { font-size: 12px; margin-top: 4px; font-family: var(--font-mono); }
+.stat-delta.up { color: var(--moss-dark); }
+.stat-delta.down { color: var(--red); }
+
+.rings-card { display: flex; align-items: center; gap: 28px; flex-wrap: wrap; }
+.rings-legend { display: flex; flex-direction: column; gap: 10px; font-size: 13px; }
+.rings-legend-item { display: flex; align-items: center; gap: 8px; }
+.rings-dot { width: 9px; height: 9px; border-radius: 50%; }
+
+.table-wrap { overflow-x: auto; }
+table.data-table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+.data-table th { text-align: left; padding: 10px 14px; font-size: 11.5px; text-transform: uppercase; letter-spacing: .04em; color: var(--ink-muted); font-weight: 600; border-bottom: 1px solid var(--sand); white-space: nowrap; }
+.data-table td { padding: 12px 14px; border-bottom: 1px solid var(--sand-light); vertical-align: middle; }
+.data-table tr:last-child td { border-bottom: none; }
+.data-table tr:hover td { background: var(--sand-light); }
+.cell-mono { font-family: var(--font-mono); font-size: 12.5px; color: var(--ink-muted); }
+.cell-name { font-weight: 600; cursor: pointer; }
+.cell-muted { color: var(--ink-muted); }
+
+.pill { display: inline-flex; align-items: center; gap: 5px; padding: 3px 10px; border-radius: 20px; font-size: 11.5px; font-weight: 600; }
+.pill-new { background: var(--clay-tint); color: var(--clay); }
+.pill-contacted, .pill-read { background: var(--gold-tint); color: var(--gold); }
+.pill-closed_won, .pill-published, .pill-responded { background: var(--moss-tint); color: var(--moss-dark); }
+.pill-closed_lost, .pill-archived { background: var(--sand-light); color: var(--ink-muted); }
+.pill-draft { background: var(--sand-light); color: var(--ink-muted); }
+.pill-open { background: var(--clay-tint); color: var(--clay); }
+.pill-pending { background: var(--gold-tint); color: var(--gold); }
+.pill-closed { background: var(--sand-light); color: var(--ink-muted); }
+
+.toolbar { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; flex-wrap: wrap; }
+.toolbar .search-input { max-width: 260px; }
+.toolbar-spacer { flex: 1; }
+
+.empty-state { text-align: center; padding: 48px 20px; color: var(--ink-muted); }
+.empty-state h4 { font-size: 15px; color: var(--ink); margin-bottom: 6px; }
+.empty-state p { font-size: 13.5px; margin: 0; }
+
+.modal-overlay { position: fixed; inset: 0; background: rgba(27,36,32,0.45); display: flex; align-items: center; justify-content: center; padding: 20px; z-index: 100; }
+.modal { background: var(--panel); border-radius: var(--radius-lg); width: 100%; max-width: 560px; max-height: 88vh; overflow-y: auto; box-shadow: 0 20px 60px rgba(0,0,0,0.25); }
+.modal-head { display: flex; align-items: center; justify-content: space-between; padding: 18px 22px; border-bottom: 1px solid var(--sand); }
+.modal-body { padding: 22px; }
+.modal-foot { display: flex; justify-content: flex-end; gap: 10px; padding: 16px 22px; border-top: 1px solid var(--sand); }
+
+.admin-gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px,1fr)); gap: 14px; }
+.admin-gallery-item { position: relative; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--sand); aspect-ratio: 4/3; background: var(--sand-light); }
+.admin-gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.admin-gallery-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(27,36,32,0.75), transparent 55%); display: flex; align-items: flex-end; justify-content: space-between; padding: 8px; opacity: 0; transition: opacity .15s ease; }
+.admin-gallery-item:hover .admin-gallery-overlay { opacity: 1; }
+.admin-gallery-overlay .tag { color: #fff; font-size: 11px; font-weight: 600; }
+
+.editor-grid { display: grid; grid-template-columns: 1fr 260px; gap: 20px; align-items: start; }
+.upload-zone { border: 1.5px dashed var(--sand); border-radius: var(--radius); padding: 22px; text-align: center; color: var(--ink-muted); font-size: 13px; cursor: pointer; background: var(--sand-light); }
+.upload-zone:hover { border-color: var(--moss); }
+
+.support-layout { display: grid; grid-template-columns: 300px 1fr; gap: 0; border: 1px solid var(--sand); border-radius: var(--radius-lg); overflow: hidden; background: var(--panel); min-height: 480px; }
+.thread-list { border-right: 1px solid var(--sand); overflow-y: auto; max-height: 620px; }
+.thread-item { padding: 14px 16px; border-bottom: 1px solid var(--sand-light); cursor: pointer; }
+.thread-item:hover { background: var(--sand-light); }
+.thread-item.active { background: var(--moss-tint); }
+.thread-item .t-name { font-weight: 600; font-size: 13.5px; }
+.thread-item .t-preview { font-size: 12.5px; color: var(--ink-muted); margin-top: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.thread-item .t-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px; }
+.thread-item .t-time { font-size: 10.5px; color: var(--ink-muted); font-family: var(--font-mono); }
+
+.thread-panel { display: flex; flex-direction: column; }
+.thread-header { padding: 14px 18px; border-bottom: 1px solid var(--sand); display: flex; justify-content: space-between; align-items: center; }
+.thread-messages { flex: 1; padding: 18px; overflow-y: auto; max-height: 460px; display: flex; flex-direction: column; gap: 12px; }
+.msg { max-width: 72%; padding: 9px 13px; border-radius: var(--radius); font-size: 13.5px; line-height: 1.5; }
+.msg-visitor { background: var(--sand-light); align-self: flex-start; border-bottom-left-radius: 3px; }
+.msg-admin { background: var(--moss); color: #fff; align-self: flex-end; border-bottom-right-radius: 3px; }
+.thread-reply { display: flex; gap: 10px; padding: 14px 18px; border-top: 1px solid var(--sand); }
+.thread-reply textarea { min-height: 42px; }
+
+.sidebar-toggle-mobile { display: none; }
+.sidebar-scrim { display: none; }
+.toast { position: fixed; bottom: 22px; right: 22px; background: var(--ink); color: #fff; padding: 12px 18px; border-radius: var(--radius-sm); font-size: 13.5px; box-shadow: var(--shadow-card); z-index: 300; opacity: 0; transform: translateY(8px); transition: opacity .2s ease, transform .2s ease; pointer-events: none; }
+.toast.show { opacity: 1; transform: translateY(0); }
+.split-field { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+[hidden] { display: none !important; }
+
+@media (max-width: 900px) {
+  .stat-grid { grid-template-columns: repeat(2, 1fr); }
+  .editor-grid { grid-template-columns: 1fr; }
+  .support-layout { grid-template-columns: 1fr; }
+  .thread-list { max-height: 220px; }
+}
+@media (max-width: 768px) {
+  .sidebar { position: fixed; z-index: 200; left: 0; top: 0; transform: translateX(-100%); transition: transform .2s ease; width: 240px; }
+  .shell.mobile-nav-open .sidebar { transform: translateX(0); }
+  .shell.sidebar-collapsed .sidebar { width: 240px; }
+  .sidebar-scrim { display: none; position: fixed; inset: 0; background: rgba(27,36,32,0.4); z-index: 150; }
+  .shell.mobile-nav-open .sidebar-scrim { display: block; }
+  .sidebar-toggle-mobile { display: flex; }
+  .stat-grid { grid-template-columns: 1fr 1fr; }
+  .content { padding: 16px; }
+  .topbar { padding: 12px 16px; }
+  .topbar-title { font-size: 16.5px; }
+  .rings-card { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 520px) {
+  .stat-grid { grid-template-columns: 1fr; }
+  .toolbar { flex-direction: column; align-items: stretch; }
+  .toolbar .search-input { max-width: none; }
+  .admin-gallery-grid { grid-template-columns: repeat(2,1fr); }
+  .msg { max-width: 88%; }
+  .split-field { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     LOGIN VIEW
+     ============================================================ -->
+<div class="login-body" id="loginView">
+  <div class="login-wrap">
+    <div class="login-card">
+      <div class="login-brand">
+        <div class="brand-mark">L</div>
+        <div>
+          <div class="brand-name">Landmark Landscaping</div>
+          <div class="brand-sub">Admin console</div>
+        </div>
+      </div>
+      <h1 class="login-title">Sign in</h1>
+      <p class="login-help">Use your admin email and password to manage quotes, contacts, the gallery and the blog.</p>
+      <form id="loginForm" class="login-form" autocomplete="on">
+        <label class="field">
+          <span class="field-label">Email</span>
+          <input type="email" id="email" name="email" required placeholder="you@landmarklandscaping.co.ke">
+        </label>
+        <label class="field">
+          <span class="field-label">Password</span>
+          <input type="password" id="password" name="password" required placeholder="••••••••">
+        </label>
+        <div id="loginError" class="login-error" hidden></div>
+        <button type="submit" class="btn btn-primary btn-block" id="loginBtn">Sign in</button>
+      </form>
+    </div>
+    <p class="login-footnote">Access is restricted to authorized Landmark Landscaping staff.</p>
+  </div>
+</div>
+
+<!-- ============================================================
+     DASHBOARD VIEW
+     ============================================================ -->
+<div class="shell" id="shell" hidden>
+
+  <div class="sidebar-scrim" id="sidebarScrim"></div>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-head">
+      <div class="brand-mark">L</div>
+      <div>
+        <div class="brand-name">Landmark</div>
+        <div class="brand-sub">Admin console</div>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav" id="sidebarNav">
+      <button class="nav-item active" data-section="overview"><span class="nav-icon">&#9678;</span><span class="nav-label">Overview</span></button>
+      <button class="nav-item" data-section="quotes"><span class="nav-icon">&#9776;</span><span class="nav-label">Quotes</span><span class="nav-badge" id="badgeQuotes" hidden>0</span></button>
+      <button class="nav-item" data-section="contacts"><span class="nav-icon">&#9993;</span><span class="nav-label">Contacts</span><span class="nav-badge" id="badgeContacts" hidden>0</span></button>
+      <button class="nav-item" data-section="testimonials"><span class="nav-icon">&#9733;</span><span class="nav-label">Testimonials</span><span class="nav-badge" id="badgeTestimonials" hidden>0</span></button>
+      <button class="nav-item" data-section="gallery"><span class="nav-icon">&#9635;</span><span class="nav-label">Gallery</span></button>
+      <button class="nav-item" data-section="blog"><span class="nav-icon">&#9998;</span><span class="nav-label">Blog</span></button>
+      <button class="nav-item" data-section="support"><span class="nav-icon">&#9990;</span><span class="nav-label">Support</span><span class="nav-badge" id="badgeSupport" hidden>0</span></button>
+      <button class="nav-item" data-section="insights"><span class="nav-icon">&#9776;</span><span class="nav-label">Page insights</span></button>
+    </nav>
+
+    <div class="sidebar-foot">
+      <button class="nav-item" id="logoutBtn"><span class="nav-icon">&#9099;</span><span class="nav-label">Sign out</span></button>
+    </div>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <button class="icon-btn sidebar-toggle-mobile" id="mobileNavToggle" aria-label="Open menu">&#9776;</button>
+      <button class="icon-btn" id="sidebarCollapseBtn" aria-label="Collapse sidebar" title="Collapse sidebar">&#8676;</button>
+      <div>
+        <div class="topbar-title" id="pageTitle">Overview</div>
+        <div class="topbar-sub" id="pageSub">Snapshot of everything happening on the site</div>
+      </div>
+      <div class="topbar-spacer"></div>
+      <div class="topbar-user">
+        <div class="avatar-circle" id="userInitials">--</div>
+      </div>
+    </header>
+
+    <main class="content">
+
+      <!-- OVERVIEW -->
+      <section class="panel-section active" id="section-overview">
+        <div class="stat-grid">
+          <div class="stat-card"><div class="stat-label">New quotes (7d)</div><div class="stat-value" id="statQuotes7d">–</div></div>
+          <div class="stat-card"><div class="stat-label">New contacts (7d)</div><div class="stat-value" id="statContacts7d">–</div></div>
+          <div class="stat-card"><div class="stat-label">Pending testimonials</div><div class="stat-value" id="statTestimonialsPending">–</div></div>
+          <div class="stat-card"><div class="stat-label">Open support threads</div><div class="stat-value" id="statSupportOpen">–</div></div>
+        </div>
+
+        <div class="card card-pad rings-card" style="margin-bottom:20px;">
+          <svg id="growthRings" width="180" height="180" viewBox="0 0 180 180"></svg>
+          <div class="rings-legend" id="ringsLegend"></div>
+        </div>
+
+        <div class="card">
+          <div class="card-head"><h3>Latest quote requests</h3><button class="btn btn-sm" data-goto="quotes">View all</button></div>
+          <div class="table-wrap" style="padding:14px 20px 20px;">
+            <table class="data-table"><thead><tr><th>Name</th><th>Service</th><th>Status</th><th>Received</th></tr></thead>
+              <tbody id="overviewQuotesBody"><tr><td colspan="4" class="cell-muted">Loading…</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- QUOTES -->
+      <section class="panel-section" id="section-quotes">
+        <div class="toolbar">
+          <input class="search-input" type="text" id="quoteSearch" placeholder="Search by name or phone">
+          <select id="quoteStatusFilter">
+            <option value="">All statuses</option>
+            <option value="new">New</option>
+            <option value="contacted">Contacted</option>
+            <option value="closed_won">Closed won</option>
+            <option value="closed_lost">Closed lost</option>
+          </select>
+          <div class="toolbar-spacer"></div>
+          <button class="btn btn-sm" id="refreshQuotes">Refresh</button>
+        </div>
+        <div class="card">
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr><th>Name</th><th>Phone</th><th>Service</th><th>Status</th><th>Received</th><th></th></tr></thead>
+              <tbody id="quotesBody"><tr><td colspan="6" class="cell-muted">Loading…</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACTS -->
+      <section class="panel-section" id="section-contacts">
+        <div class="toolbar">
+          <input class="search-input" type="text" id="contactSearch" placeholder="Search by name or email">
+          <select id="contactStatusFilter">
+            <option value="">All statuses</option>
+            <option value="new">New</option>
+            <option value="read">Read</option>
+            <option value="responded">Responded</option>
+            <option value="archived">Archived</option>
+          </select>
+          <div class="toolbar-spacer"></div>
+          <button class="btn btn-sm" id="refreshContacts">Refresh</button>
+        </div>
+        <div class="card">
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr><th>Name</th><th>Email</th><th>Subject</th><th>Status</th><th>Received</th><th></th></tr></thead>
+              <tbody id="contactsBody"><tr><td colspan="6" class="cell-muted">Loading…</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- TESTIMONIALS -->
+      <section class="panel-section" id="section-testimonials">
+        <div class="toolbar">
+          <select id="testimonialFilter">
+            <option value="">All testimonials</option>
+            <option value="pending">Pending review</option>
+            <option value="published">Published</option>
+          </select>
+          <div class="toolbar-spacer"></div>
+          <button class="btn btn-sm" id="refreshTestimonials">Refresh</button>
+        </div>
+        <div class="card">
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr><th>Name</th><th>Rating</th><th>Comment</th><th>Status</th><th>Received</th><th></th></tr></thead>
+              <tbody id="testimonialsBody"><tr><td colspan="6" class="cell-muted">Loading…</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- GALLERY -->
+      <section class="panel-section" id="section-gallery">
+        <div class="toolbar">
+          <select id="galleryCategoryFilter">
+            <option value="">All categories</option>
+            <option value="gardens">Gardens</option>
+            <option value="lawns">Lawns</option>
+            <option value="irrigation">Irrigation</option>
+            <option value="features">Features</option>
+            <option value="commercial">Commercial</option>
+          </select>
+          <div class="toolbar-spacer"></div>
+          <button class="btn btn-primary btn-sm" id="uploadImageBtn">Upload image</button>
+          <input type="file" id="galleryFileInput" accept="image/*" multiple hidden>
+        </div>
+        <div class="admin-gallery-grid" id="galleryGridAdmin"></div>
+      </section>
+
+      <!-- BLOG -->
+      <section class="panel-section" id="section-blog">
+        <div class="toolbar">
+          <input class="search-input" type="text" id="blogSearch" placeholder="Search posts">
+          <select id="blogStatusFilter">
+            <option value="">All posts</option>
+            <option value="draft">Drafts</option>
+            <option value="published">Published</option>
+          </select>
+          <div class="toolbar-spacer"></div>
+          <button class="btn btn-primary btn-sm" id="newPostBtn">New post</button>
+        </div>
+        <div class="card">
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr><th>Title</th><th>Category</th><th>Status</th><th>Updated</th><th></th></tr></thead>
+              <tbody id="blogBody"><tr><td colspan="5" class="cell-muted">Loading…</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- SUPPORT -->
+      <section class="panel-section" id="section-support">
+        <div class="support-layout">
+          <div class="thread-list" id="threadList"></div>
+          <div class="thread-panel">
+            <div class="thread-header">
+              <div>
+                <div id="threadHeaderName" style="font-weight:600;font-size:14px;">Select a conversation</div>
+                <div id="threadHeaderMeta" class="cell-muted" style="font-size:12px;"></div>
+              </div>
+              <button class="btn btn-sm" id="closeThreadBtn" hidden>Mark closed</button>
+            </div>
+            <div class="thread-messages" id="threadMessages">
+              <div class="empty-state"><h4>No conversation selected</h4><p>Pick a thread on the left to view and reply.</p></div>
+            </div>
+            <div class="thread-reply" id="threadReplyBar" hidden>
+              <textarea id="threadReplyInput" placeholder="Type a reply…"></textarea>
+              <button class="btn btn-primary" id="threadReplySend">Send</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PAGE INSIGHTS -->
+      <section class="panel-section" id="section-insights">
+        <div class="stat-grid">
+          <div class="stat-card"><div class="stat-label">Views today</div><div class="stat-value" id="statViewsToday">–</div></div>
+          <div class="stat-card"><div class="stat-label">Views (7d)</div><div class="stat-value" id="statViews7d">–</div></div>
+          <div class="stat-card"><div class="stat-label">Views (30d)</div><div class="stat-value" id="statViews30d">–</div></div>
+          <div class="stat-card"><div class="stat-label">Unique pages</div><div class="stat-value" id="statUniquePages">–</div></div>
+        </div>
+        <div class="card">
+          <div class="card-head"><h3>Top pages (last 30 days)</h3></div>
+          <div class="table-wrap" style="padding:14px 20px 20px;">
+            <table class="data-table"><thead><tr><th>Page</th><th>Views</th></tr></thead>
+              <tbody id="insightsBody"><tr><td colspan="2" class="cell-muted">Loading…</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<!-- Generic detail / edit modal -->
+<div class="modal-overlay" id="modalOverlay" hidden>
+  <div class="modal" id="modalBox">
+    <div class="modal-head">
+      <h3 id="modalTitle">Details</h3>
+      <button class="icon-btn" id="modalClose" aria-label="Close">&times;</button>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+    <div class="modal-foot" id="modalFoot"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+/* =========================================================
+   Supabase connection — Landmark Landscaping project
+   ========================================================= */
+const SUPABASE_URL = 'https://bwcsuxvcqmykhckxqgjh.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ3Y3N1eHZjcW15a2hja3hxZ2poIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODMyOTE1NjIsImV4cCI6MjA5ODg2NzU2Mn0.rAXetUdSG-uzEhQfvhgK8Kn-K5Hxyxx9M7QO4nKTZiA';
+const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+const MEDIA_BUCKET = 'media';
+
+/* =========================================================
+   Small helpers
+   ========================================================= */
+function $(sel, root) { return (root || document).querySelector(sel); }
+function $all(sel, root) { return Array.from((root || document).querySelectorAll(sel)); }
+function escapeHtml(str) {
+  return (str ?? '').toString().replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+function timeAgo(iso) {
+  if (!iso) return '';
+  const d = new Date(iso), diff = (Date.now() - d.getTime()) / 1000;
+  if (diff < 60) return 'just now';
+  if (diff < 3600) return Math.floor(diff/60) + 'm ago';
+  if (diff < 86400) return Math.floor(diff/3600) + 'h ago';
+  if (diff < 2592000) return Math.floor(diff/86400) + 'd ago';
+  return d.toLocaleDateString();
+}
+function pill(status) {
+  const label = (status || '').replace(/_/g, ' ');
+  return `<span class="pill pill-${status}">${escapeHtml(label)}</span>`;
+}
+let toastTimer;
+function toast(msg) {
+  const el = $('#toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove('show'), 2600);
+}
+
+/* =========================================================
+   Auth
+   ========================================================= */
+let currentAdmin = null;
+
+async function checkSession() {
+  const { data: { session } } = await supabase.auth.getSession();
+  if (!session) return showLogin();
+
+  const { data: profile } = await supabase
+    .from('admin_profiles')
+    .select('id, full_name, email')
+    .eq('id', session.user.id)
+    .maybeSingle();
+
+  if (!profile) {
+    await supabase.auth.signOut();
+    return showLogin();
+  }
+  currentAdmin = profile;
+  showDashboard();
+}
+
+function showLogin() {
+  $('#loginView').hidden = false;
+  $('#shell').hidden = true;
+}
+
+function showDashboard() {
+  $('#loginView').hidden = true;
+  $('#shell').hidden = false;
+  const initialsSource = currentAdmin.full_name || currentAdmin.email || '--';
+  $('#userInitials').textContent = initialsSource.trim().split(/\s+/).map(w => w[0]).join('').slice(0,2).toUpperCase();
+  loadOverview();
+}
+
+$('#loginForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const errorBox = $('#loginError');
+  const loginBtn = $('#loginBtn');
+  errorBox.hidden = true;
+  loginBtn.disabled = true;
+  loginBtn.textContent = 'Signing in…';
+
+  const email = $('#email').value.trim();
+  const password = $('#password').value;
+
+  try {
+    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+    if (error) throw error;
+
+    const { data: profile, error: profileError } = await supabase
+      .from('admin_profiles')
+      .select('id, full_name, email')
+      .eq('id', data.user.id)
+      .maybeSingle();
+
+    if (profileError || !profile) {
+      await supabase.auth.signOut();
+      throw new Error('This account is not authorized for admin access.');
+    }
+
+    currentAdmin = profile;
+    showDashboard();
+  } catch (err) {
+    errorBox.textContent = err.message || 'Could not sign in. Check your details and try again.';
+    errorBox.hidden = false;
+  } finally {
+    loginBtn.disabled = false;
+    loginBtn.textContent = 'Sign in';
+  }
+});
+
+$('#logoutBtn').addEventListener('click', async () => {
+  await supabase.auth.signOut();
+  currentAdmin = null;
+  showLogin();
+});
+
+/* =========================================================
+   Sidebar / navigation
+   ========================================================= */
+const SECTION_META = {
+  overview:     ['Overview', 'Snapshot of everything happening on the site'],
+  quotes:       ['Quote requests', 'Every quote submitted through the website'],
+  contacts:     ['Contact messages', 'Messages from the general contact form'],
+  testimonials: ['Testimonials', 'Reviews awaiting approval or already published'],
+  gallery:      ['Gallery', 'Project photos shown across the site'],
+  blog:         ['Blog', 'Articles and landscaping tips'],
+  support:      ['Support', 'Live chat conversations with visitors'],
+  insights:     ['Page insights', 'Traffic across the public site'],
+};
+
+function gotoSection(name) {
+  $all('.panel-section').forEach(s => s.classList.remove('active'));
+  $('#section-' + name).classList.add('active');
+  $all('.nav-item[data-section]').forEach(b => b.classList.toggle('active', b.dataset.section === name));
+  const [title, sub] = SECTION_META[name];
+  $('#pageTitle').textContent = title;
+  $('#pageSub').textContent = sub;
+  $('#shell').classList.remove('mobile-nav-open');
+
+  if (name === 'quotes') loadQuotes();
+  if (name === 'contacts') loadContacts();
+  if (name === 'testimonials') loadTestimonials();
+  if (name === 'gallery') loadGallery();
+  if (name === 'blog') loadBlog();
+  if (name === 'support') loadSupportThreads();
+  if (name === 'insights') loadInsights();
+}
+
+$all('.nav-item[data-section]').forEach(btn => {
+  btn.addEventListener('click', () => gotoSection(btn.dataset.section));
+});
+$all('[data-goto]').forEach(btn => {
+  btn.addEventListener('click', () => gotoSection(btn.dataset.goto));
+});
+$('#sidebarCollapseBtn').addEventListener('click', () => $('#shell').classList.toggle('sidebar-collapsed'));
+$('#mobileNavToggle').addEventListener('click', () => $('#shell').classList.toggle('mobile-nav-open'));
+$('#sidebarScrim').addEventListener('click', () => $('#shell').classList.remove('mobile-nav-open'));
+
+/* =========================================================
+   Modal
+   ========================================================= */
+function openModal(title, bodyHtml, footHtml) {
+  $('#modalTitle').textContent = title;
+  $('#modalBody').innerHTML = bodyHtml;
+  $('#modalFoot').innerHTML = footHtml || '';
+  $('#modalOverlay').hidden = false;
+}
+function closeModal() { $('#modalOverlay').hidden = true; }
+$('#modalClose').addEventListener('click', closeModal);
+$('#modalOverlay').addEventListener('click', (e) => { if (e.target.id === 'modalOverlay') closeModal(); });
+
+/* =========================================================
+   OVERVIEW
+   ========================================================= */
+async function loadOverview() {
+  const since7d = new Date(Date.now() - 7*86400000).toISOString();
+
+  const [{ count: quotes7d }, { count: contacts7d }, { count: testimonialsPending }, { count: supportOpen }] = await Promise.all([
+    supabase.from('quote_requests').select('id', { count: 'exact', head: true }).gte('created_at', since7d),
+    supabase.from('contact_messages').select('id', { count: 'exact', head: true }).gte('created_at', since7d),
+    supabase.from('testimonials').select('id', { count: 'exact', head: true }).eq('status', 'pending'),
+    supabase.from('support_threads').select('id', { count: 'exact', head: true }).eq('status', 'open'),
+  ]);
+
+  $('#statQuotes7d').textContent = quotes7d ?? 0;
+  $('#statContacts7d').textContent = contacts7d ?? 0;
+  $('#statTestimonialsPending').textContent = testimonialsPending ?? 0;
+  $('#statSupportOpen').textContent = supportOpen ?? 0;
+
+  updateBadge('badgeQuotes', quotes7d);
+  updateBadge('badgeContacts', contacts7d);
+  updateBadge('badgeTestimonials', testimonialsPending);
+  updateBadge('badgeSupport', supportOpen);
+
+  drawGrowthRings({
+    quotes: quotes7d || 0,
+    contacts: contacts7d || 0,
+    testimonials: testimonialsPending || 0,
+    support: supportOpen || 0,
+  });
+
+  const { data: latestQuotes } = await supabase
+    .from('quote_requests')
+    .select('id, name, service, status, created_at')
+    .order('created_at', { ascending: false })
+    .limit(6);
+
+  const body = $('#overviewQuotesBody');
+  if (!latestQuotes || latestQuotes.length === 0) {
+    body.innerHTML = `<tr><td colspan="4" class="cell-muted">No quote requests yet.</td></tr>`;
+  } else {
+    body.innerHTML = latestQuotes.map(q => `
+      <tr>
+        <td class="cell-name">${escapeHtml(q.name)}</td>
+        <td>${escapeHtml(q.service || '—')}</td>
+        <td>${pill(q.status)}</td>
+        <td class="cell-muted">${timeAgo(q.created_at)}</td>
+      </tr>`).join('');
+  }
+}
+
+function updateBadge(id, count) {
+  const el = $('#' + id);
+  if (count && count > 0) { el.hidden = false; el.textContent = count; }
+  else { el.hidden = true; }
+}
+
+function drawGrowthRings(data) {
+  const svg = $('#growthRings');
+  const legend = $('#ringsLegend');
+  const series = [
+    { key: 'quotes', label: 'Quotes (7d)', color: 'var(--moss)' },
+    { key: 'contacts', label: 'Contacts (7d)', color: 'var(--clay)' },
+    { key: 'testimonials', label: 'Pending testimonials', color: 'var(--gold)' },
+    { key: 'support', label: 'Open support', color: 'var(--red)' },
+  ];
+  const max = Math.max(1, ...series.map(s => data[s.key]));
+  const cx = 90, cy = 90;
+  let radius = 78;
+  let svgParts = [];
+  series.forEach(s => {
+    const value = data[s.key];
+    const frac = value / max;
+    const circumference = 2 * Math.PI * radius;
+    const dash = Math.max(frac * circumference, value > 0 ? 4 : 0);
+    svgParts.push(`
+      <circle cx="${cx}" cy="${cy}" r="${radius}" fill="none" stroke="var(--sand-light)" stroke-width="10"></circle>
+      <circle cx="${cx}" cy="${cy}" r="${radius}" fill="none" stroke="${s.color}" stroke-width="10"
+        stroke-linecap="round" stroke-dasharray="${dash} ${circumference}"
+        transform="rotate(-90 ${cx} ${cy})"></circle>
+    `);
+    radius -= 18;
+  });
+  svg.innerHTML = svgParts.join('');
+  legend.innerHTML = series.map(s => `
+    <div class="rings-legend-item">
+      <span class="rings-dot" style="background:${s.color}"></span>
+      <span>${s.label}: <strong>${data[s.key]}</strong></span>
+    </div>`).join('');
+}
+
+/* =========================================================
+   QUOTES
+   ========================================================= */
+async function loadQuotes() {
+  const body = $('#quotesBody');
+  body.innerHTML = `<tr><td colspan="6" class="cell-muted">Loading…</td></tr>`;
+
+  let query = supabase.from('quote_requests').select('*').order('created_at', { ascending: false });
+  const status = $('#quoteStatusFilter').value;
+  if (status) query = query.eq('status', status);
+
+  const { data, error } = await query;
+  if (error) { body.innerHTML = `<tr><td colspan="6" class="cell-muted">Could not load quotes.</td></tr>`; return; }
+
+  const search = $('#quoteSearch').value.trim().toLowerCase();
+  const rows = (data || []).filter(q =>
+    !search || (q.name || '').toLowerCase().includes(search) || (q.phone || '').toLowerCase().includes(search)
+  );
+
+  if (rows.length === 0) {
+    body.innerHTML = `<tr><td colspan="6" class="cell-muted">No quote requests found.</td></tr>`;
+    return;
+  }
+
+  body.innerHTML = rows.map(q => `
+    <tr>
+      <td class="cell-name" data-open-quote="${q.id}">${escapeHtml(q.name)}</td>
+      <td class="cell-mono">${escapeHtml(q.phone || '—')}</td>
+      <td>${escapeHtml(q.service || '—')}</td>
+      <td>${pill(q.status)}</td>
+      <td class="cell-muted">${timeAgo(q.created_at)}</td>
+      <td><button class="btn btn-sm" data-open-quote="${q.id}">View</button></td>
+    </tr>`).join('');
+
+  $all('[data-open-quote]', body).forEach(el => {
+    el.addEventListener('click', () => openQuoteModal(rows.find(r => r.id === el.dataset.openQuote)));
+  });
+}
+
+function openQuoteModal(q) {
+  if (!q) return;
+  openModal('Quote request', `
+    <div class="field"><span class="field-label">Name</span><div>${escapeHtml(q.name)}</div></div>
+    <div class="split-field">
+      <div class="field"><span class="field-label">Phone</span><div>${escapeHtml(q.phone || '—')}</div></div>
+      <div class="field"><span class="field-label">Email</span><div>${escapeHtml(q.email || '—')}</div></div>
+    </div>
+    <div class="field"><span class="field-label">Service</span><div>${escapeHtml(q.service || '—')}</div></div>
+    <div class="field"><span class="field-label">Message</span><div>${escapeHtml(q.message || '—')}</div></div>
+    <label class="field">
+      <span class="field-label">Status</span>
+      <select id="quoteStatusSelect">
+        ${['new','contacted','closed_won','closed_lost'].map(s => `<option value="${s}" ${s===q.status?'selected':''}>${s.replace('_',' ')}</option>`).join('')}
+      </select>
+    </label>
+  `, `
+    <button class="btn" id="deleteQuoteBtn">Delete</button>
+    <button class="btn btn-primary" id="saveQuoteBtn">Save status</button>
+  `);
+
+  $('#saveQuoteBtn').addEventListener('click', async () => {
+    const status = $('#quoteStatusSelect').value;
+    const { error } = await supabase.from('quote_requests').update({ status }).eq('id', q.id);
+    if (error) return toast('Could not update quote.');
+    toast('Quote updated.');
+    closeModal();
+    loadQuotes();
+    loadOverview();
+  });
+  $('#deleteQuoteBtn').addEventListener('click', async () => {
+    if (!confirm('Delete this quote request?')) return;
+    const { error } = await supabase.from('quote_requests').delete().eq('id', q.id);
+    if (error) return toast('Could not delete quote.');
+    toast('Quote deleted.');
+    closeModal();
+    loadQuotes();
+    loadOverview();
+  });
+}
+
+$('#refreshQuotes').addEventListener('click', loadQuotes);
+$('#quoteStatusFilter').addEventListener('change', loadQuotes);
+$('#quoteSearch').addEventListener('input', debounce(loadQuotes, 250));
+
+/* =========================================================
+   CONTACTS
+   ========================================================= */
+async function loadContacts() {
+  const body = $('#contactsBody');
+  body.innerHTML = `<tr><td colspan="6" class="cell-muted">Loading…</td></tr>`;
+
+  let query = supabase.from('contact_messages').select('*').order('created_at', { ascending: false });
+  const status = $('#contactStatusFilter').value;
+  if (status) query = query.eq('status', status);
+
+  const { data, error } = await query;
+  if (error) { body.innerHTML = `<tr><td colspan="6" class="cell-muted">Could not load contacts.</td></tr>`; return; }
+
+  const search = $('#contactSearch').value.trim().toLowerCase();
+  const rows = (data || []).filter(c =>
+    !search || (c.name || '').toLowerCase().includes(search) || (c.email || '').toLowerCase().includes(search)
+  );
+
+  if (rows.length === 0) {
+    body.innerHTML = `<tr><td colspan="6" class="cell-muted">No contact messages found.</td></tr>`;
+    return;
+  }
+
+  body.innerHTML = rows.map(c => `
+    <tr>
+      <td class="cell-name" data-open-contact="${c.id}">${escapeHtml(c.name)}</td>
+      <td class="cell-mono">${escapeHtml(c.email || '—')}</td>
+      <td>${escapeHtml(c.subject || '—')}</td>
+      <td>${pill(c.status)}</td>
+      <td class="cell-muted">${timeAgo(c.created_at)}</td>
+      <td><button class="btn btn-sm" data-open-contact="${c.id}">View</button></td>
+    </tr>`).join('');
+
+  $all('[data-open-contact]', body).forEach(el => {
+    el.addEventListener('click', () => openContactModal(rows.find(r => r.id === el.dataset.openContact)));
+  });
+}
+
+function openContactModal(c) {
+  if (!c) return;
+  openModal('Contact message', `
+    <div class="split-field">
+      <div class="field"><span class="field-label">Name</span><div>${escapeHtml(c.name)}</div></div>
+      <div class="field"><span class="field-label">Email</span><div>${escapeHtml(c.email || '—')}</div></div>
+    </div>
+    <div class="field"><span class="field-label">Subject</span><div>${escapeHtml(c.subject || '—')}</div></div>
+    <div class="field"><span class="field-label">Message</span><div>${escapeHtml(c.message || '—')}</div></div>
+    <label class="field">
+      <span class="field-label">Status</span>
+      <select id="contactStatusSelect">
+        ${['new','read','responded','archived'].map(s => `<option value="${s}" ${s===c.status?'selected':''}>${s}</option>`).join('')}
+      </select>
+    </label>
+  `, `
+    <button class="btn" id="deleteContactBtn">Delete</button>
+    <button class="btn btn-primary" id="saveContactBtn">Save status</button>
+  `);
+
+  $('#saveContactBtn').addEventListener('click', async () => {
+    const status = $('#contactStatusSelect').value;
+    const { error } = await supabase.from('contact_messages').update({ status }).eq('id', c.id);
+    if (error) return toast('Could not update message.');
+    toast('Message updated.');
+    closeModal();
+    loadContacts();
+    loadOverview();
+  });
+  $('#deleteContactBtn').addEventListener('click', async () => {
+    if (!confirm('Delete this contact message?')) return;
+    const { error } = await supabase.from('contact_messages').delete().eq('id', c.id);
+    if (error) return toast('Could not delete message.');
+    toast('Message deleted.');
+    closeModal();
+    loadContacts();
+    loadOverview();
+  });
+}
+
+$('#refreshContacts').addEventListener('click', loadContacts);
+$('#contactStatusFilter').addEventListener('change', loadContacts);
+$('#contactSearch').addEventListener('input', debounce(loadContacts, 250));
+
+/* =========================================================
+   TESTIMONIALS
+   ========================================================= */
+async function loadTestimonials() {
+  const body = $('#testimonialsBody');
+  body.innerHTML = `<tr><td colspan="6" class="cell-muted">Loading…</td></tr>`;
+
+  let query = supabase.from('testimonials').select('*').order('created_at', { ascending: false });
+  const status = $('#testimonialFilter').value;
+  if (status) query = query.eq('status', status);
+
+  const { data, error } = await query;
+  if (error) { body.innerHTML = `<tr><td colspan="6" class="cell-muted">Could not load testimonials.</td></tr>`; return; }
+
+  if (!data || data.length === 0) {
+    body.innerHTML = `<tr><td colspan="6" class="cell-muted">No testimonials found.</td></tr>`;
+    return;
+  }
+
+  body.innerHTML = data.map(t => `
+    <tr>
+      <td class="cell-name">${escapeHtml(t.name)}</td>
+      <td>${'&#9733;'.repeat(t.rating || 0)}${'&#9734;'.repeat(5 - (t.rating || 0))}</td>
+      <td style="max-width:280px;">${escapeHtml((t.comment || '').slice(0, 90))}${(t.comment||'').length > 90 ? '…' : ''}</td>
+      <td>${pill(t.status)}</td>
+      <td class="cell-muted">${timeAgo(t.created_at)}</td>
+      <td style="white-space:nowrap;">
+        ${t.status !== 'published' ? `<button class="btn btn-sm btn-primary" data-publish="${t.id}">Publish</button>` : `<button class="btn btn-sm" data-unpublish="${t.id}">Unpublish</button>`}
+        <button class="btn btn-sm btn-danger" data-delete-testimonial="${t.id}">Delete</button>
+      </td>
+    </tr>`).join('');
+
+  $all('[data-publish]', body).forEach(btn => btn.addEventListener('click', () => setTestimonialStatus(btn.dataset.publish, 'published')));
+  $all('[data-unpublish]', body).forEach(btn => btn.addEventListener('click', () => setTestimonialStatus(btn.dataset.unpublish, 'pending')));
+  $all('[data-delete-testimonial]', body).forEach(btn => btn.addEventListener('click', () => deleteTestimonial(btn.dataset.deleteTestimonial)));
+}
+
+async function setTestimonialStatus(id, status) {
+  const { error } = await supabase.from('testimonials').update({ status }).eq('id', id);
+  if (error) return toast('Could not update testimonial.');
+  toast(status === 'published' ? 'Testimonial published.' : 'Testimonial unpublished.');
+  loadTestimonials();
+  loadOverview();
+}
+async function deleteTestimonial(id) {
+  if (!confirm('Delete this testimonial?')) return;
+  const { error } = await supabase.from('testimonials').delete().eq('id', id);
+  if (error) return toast('Could not delete testimonial.');
+  toast('Testimonial deleted.');
+  loadTestimonials();
+  loadOverview();
+}
+
+$('#refreshTestimonials').addEventListener('click', loadTestimonials);
+$('#testimonialFilter').addEventListener('change', loadTestimonials);
+
+/* =========================================================
+   GALLERY
+   ========================================================= */
+async function loadGallery() {
+  const grid = $('#galleryGridAdmin');
+  grid.innerHTML = `<div class="empty-state"><p>Loading…</p></div>`;
+
+  let query = supabase.from('gallery_images').select('*').order('created_at', { ascending: false });
+  const category = $('#galleryCategoryFilter').value;
+  if (category) query = query.eq('category', category);
+
+  const { data, error } = await query;
+  if (error) { grid.innerHTML = `<div class="empty-state"><p>Could not load the gallery.</p></div>`; return; }
+
+  if (!data || data.length === 0) {
+    grid.innerHTML = `<div class="empty-state"><h4>No images yet</h4><p>Upload a project photo to get started.</p></div>`;
+    return;
+  }
+
+  grid.innerHTML = data.map(img => `
+    <div class="admin-gallery-item">
+      <img src="${escapeHtml(img.url)}" alt="${escapeHtml(img.caption || '')}" loading="lazy">
+      <div class="admin-gallery-overlay">
+        <span class="tag">${escapeHtml(img.category || '')}</span>
+        <button class="btn btn-sm btn-danger" data-delete-image="${img.id}" data-storage-path="${escapeHtml(img.storage_path || '')}">Delete</button>
+      </div>
+    </div>`).join('');
+
+  $all('[data-delete-image]', grid).forEach(btn => {
+    btn.addEventListener('click', () => deleteGalleryImage(btn.dataset.deleteImage, btn.dataset.storagePath));
+  });
+}
+
+async function deleteGalleryImage(id, storagePath) {
+  if (!confirm('Delete this image?')) return;
+  if (storagePath) await supabase.storage.from(MEDIA_BUCKET).remove([storagePath]);
+  const { error } = await supabase.from('gallery_images').delete().eq('id', id);
+  if (error) return toast('Could not delete image.');
+  toast('Image deleted.');
+  loadGallery();
+}
+
+$('#uploadImageBtn').addEventListener('click', () => $('#galleryFileInput').click());
+$('#galleryFileInput').addEventListener('change', async (e) => {
+  const files = Array.from(e.target.files || []);
+  if (files.length === 0) return;
+  const category = $('#galleryCategoryFilter').value || 'gardens';
+
+  for (const file of files) {
+    const path = `gallery/${Date.now()}-${Math.random().toString(36).slice(2,8)}-${file.name.replace(/[^a-zA-Z0-9.\-_]/g,'_')}`;
+    const { error: upErr } = await supabase.storage.from(MEDIA_BUCKET).upload(path, file, { upsert: false });
+    if (upErr) { toast('Upload failed: ' + upErr.message); continue; }
+    const { data: pub } = supabase.storage.from(MEDIA_BUCKET).getPublicUrl(path);
+    await supabase.from('gallery_images').insert({
+      url: pub.publicUrl, storage_path: path, category
+    });
+  }
+  toast('Upload complete.');
+  e.target.value = '';
+  loadGallery();
+});
+$('#galleryCategoryFilter').addEventListener('change', loadGallery);
+
+/* =========================================================
+   BLOG
+   ========================================================= */
+async function loadBlog() {
+  const body = $('#blogBody');
+  body.innerHTML = `<tr><td colspan="5" class="cell-muted">Loading…</td></tr>`;
+
+  let query = supabase.from('blog_posts').select('*').order('updated_at', { ascending: false });
+  const status = $('#blogStatusFilter').value;
+  if (status) query = query.eq('status', status);
+
+  const { data, error } = await query;
+  if (error) { body.innerHTML = `<tr><td colspan="5" class="cell-muted">Could not load posts.</td></tr>`; return; }
+
+  const search = $('#blogSearch').value.trim().toLowerCase();
+  const rows = (data || []).filter(p => !search || (p.title || '').toLowerCase().includes(search));
+
+  if (rows.length === 0) {
+    body.innerHTML = `<tr><td colspan="5" class="cell-muted">No posts found.</td></tr>`;
+    return;
+  }
+
+  body.innerHTML = rows.map(p => `
+    <tr>
+      <td class="cell-name" data-edit-post="${p.id}">${escapeHtml(p.title)}</td>
+      <td>${escapeHtml(p.category || '—')}</td>
+      <td>${pill(p.status)}</td>
+      <td class="cell-muted">${timeAgo(p.updated_at)}</td>
+      <td><button class="btn btn-sm" data-edit-post="${p.id}">Edit</button></td>
+    </tr>`).join('');
+
+  $all('[data-edit-post]', body).forEach(el => {
+    el.addEventListener('click', () => openBlogModal(rows.find(r => r.id === el.dataset.editPost)));
+  });
+}
+
+function slugify(title) {
+  return (title || '').toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+}
+
+function openBlogModal(post) {
+  const isNew = !post;
+  const p = post || { title: '', category: '', content: '', status: 'draft' };
+  openModal(isNew ? 'New post' : 'Edit post', `
+    <label class="field"><span class="field-label">Title</span><input id="postTitle" value="${escapeHtml(p.title)}" placeholder="Post title"></label>
+    <div class="split-field">
+      <label class="field"><span class="field-label">Category</span><input id="postCategory" value="${escapeHtml(p.category || '')}" placeholder="e.g. Lawn care"></label>
+      <label class="field"><span class="field-label">Status</span>
+        <select id="postStatus">
+          <option value="draft" ${p.status==='draft'?'selected':''}>Draft</option>
+          <option value="published" ${p.status==='published'?'selected':''}>Published</option>
+        </select>
+      </label>
+    </div>
+    <label class="field"><span class="field-label">Content</span><textarea id="postContent" style="min-height:180px;">${escapeHtml(p.content || '')}</textarea></label>
+  `, `
+    ${!isNew ? `<button class="btn btn-danger" id="deletePostBtn">Delete</button>` : ''}
+    <button class="btn btn-primary" id="savePostBtn">Save post</button>
+  `);
+
+  $('#savePostBtn').addEventListener('click', async () => {
+    const title = $('#postTitle').value.trim();
+    if (!title) return toast('Please add a title.');
+    const payload = {
+      title,
+      category: $('#postCategory').value.trim(),
+      content: $('#postContent').value,
+      status: $('#postStatus').value,
+      slug: slugify(title),
+      updated_at: new Date().toISOString(),
+    };
+    const { error } = isNew
+      ? await supabase.from('blog_posts').insert(payload)
+      : await supabase.from('blog_posts').update(payload).eq('id', p.id);
+    if (error) return toast('Could not save post.');
+    toast('Post saved.');
+    closeModal();
+    loadBlog();
+  });
+
+  if (!isNew) {
+    $('#deletePostBtn').addEventListener('click', async () => {
+      if (!confirm('Delete this post?')) return;
+      const { error } = await supabase.from('blog_posts').delete().eq('id', p.id);
+      if (error) return toast('Could not delete post.');
+      toast('Post deleted.');
+      closeModal();
+      loadBlog();
+    });
+  }
+}
+
+$('#newPostBtn').addEventListener('click', () => openBlogModal(null));
+$('#blogStatusFilter').addEventListener('change', loadBlog);
+$('#blogSearch').addEventListener('input', debounce(loadBlog, 250));
+
+/* =========================================================
+   SUPPORT
+   ========================================================= */
+let activeThreadId = null;
+let supportChannel = null;
+
+async function loadSupportThreads() {
+  const list = $('#threadList');
+  list.innerHTML = `<div class="empty-state"><p>Loading…</p></div>`;
+
+  const { data, error } = await supabase
+    .from('support_threads')
+    .select('*')
+    .order('last_message_at', { ascending: false });
+
+  if (error) { list.innerHTML = `<div class="empty-state"><p>Could not load conversations.</p></div>`; return; }
+  if (!data || data.length === 0) { list.innerHTML = `<div class="empty-state"><h4>No conversations yet</h4><p>Visitor chats will show up here.</p></div>`; return; }
+
+  list.innerHTML = data.map(t => `
+    <div class="thread-item ${t.id === activeThreadId ? 'active' : ''}" data-thread="${t.id}">
+      <div class="t-meta">
+        <span class="t-name">${escapeHtml(t.visitor_name || 'Website visitor')}</span>
+        <span class="t-time">${timeAgo(t.last_message_at)}</span>
+      </div>
+      <div class="t-preview">${pill(t.status)} &nbsp;${escapeHtml(t.visitor_email || '')}</div>
+    </div>`).join('');
+
+  $all('[data-thread]', list).forEach(el => {
+    el.addEventListener('click', () => openThread(el.dataset.thread, data.find(t => t.id === el.dataset.thread)));
+  });
+}
+
+async function openThread(id, threadMeta) {
+  activeThreadId = id;
+  $all('.thread-item', $('#threadList')).forEach(el => el.classList.toggle('active', el.dataset.thread === id));
+
+  $('#threadHeaderName').textContent = threadMeta?.visitor_name || 'Website visitor';
+  $('#threadHeaderMeta').textContent = threadMeta?.visitor_email || '';
+  $('#threadReplyBar').hidden = false;
+  $('#closeThreadBtn').hidden = false;
+  $('#closeThreadBtn').textContent = threadMeta?.status === 'closed' ? 'Reopen thread' : 'Mark closed';
+
+  await renderThreadMessages(id);
+
+  if (supportChannel) supabase.removeChannel(supportChannel);
+  supportChannel = supabase
+    .channel('support-thread-' + id)
+    .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'support_messages', filter: `thread_id=eq.${id}` }, () => renderThreadMessages(id))
+    .subscribe();
+}
+
+async function renderThreadMessages(id) {
+  const wrap = $('#threadMessages');
+  const { data, error } = await supabase
+    .from('support_messages')
+    .select('*')
+    .eq('thread_id', id)
+    .order('created_at', { ascending: true });
+
+  if (error) { wrap.innerHTML = `<div class="empty-state"><p>Could not load messages.</p></div>`; return; }
+  if (!data || data.length === 0) { wrap.innerHTML = `<div class="empty-state"><p>No messages yet.</p></div>`; return; }
+
+  wrap.innerHTML = data.map(m => `<div class="msg msg-${m.sender}">${escapeHtml(m.message)}</div>`).join('');
+  wrap.scrollTop = wrap.scrollHeight;
+}
+
+$('#threadReplySend').addEventListener('click', async () => {
+  if (!activeThreadId) return;
+  const input = $('#threadReplyInput');
+  const message = input.value.trim();
+  if (!message) return;
+  const { error } = await supabase.from('support_messages').insert({ thread_id: activeThreadId, sender: 'admin', message });
+  if (error) return toast('Could not send reply.');
+  await supabase.from('support_threads').update({ last_message_at: new Date().toISOString() }).eq('id', activeThreadId);
+  input.value = '';
+  renderThreadMessages(activeThreadId);
+});
+
+$('#closeThreadBtn').addEventListener('click', async () => {
+  if (!activeThreadId) return;
+  const { data: t } = await supabase.from('support_threads').select('status').eq('id', activeThreadId).maybeSingle();
+  const newStatus = t?.status === 'closed' ? 'open' : 'closed';
+  await supabase.from('support_threads').update({ status: newStatus }).eq('id', activeThreadId);
+  toast(newStatus === 'closed' ? 'Thread closed.' : 'Thread reopened.');
+  loadSupportThreads();
+  loadOverview();
+});
+
+/* =========================================================
+   PAGE INSIGHTS
+   ========================================================= */
+async function loadInsights() {
+  const startOfToday = new Date(); startOfToday.setHours(0,0,0,0);
+  const since7d = new Date(Date.now() - 7*86400000).toISOString();
+  const since30d = new Date(Date.now() - 30*86400000).toISOString();
+
+  const [{ count: today }, { count: v7 }, { data: v30rows }] = await Promise.all([
+    supabase.from('page_views').select('id', { count: 'exact', head: true }).gte('viewed_at', startOfToday.toISOString()),
+    supabase.from('page_views').select('id', { count: 'exact', head: true }).gte('viewed_at', since7d),
+    supabase.from('page_views').select('page_path').gte('viewed_at', since30d),
+  ]);
+
+  $('#statViewsToday').textContent = today ?? 0;
+  $('#statViews7d').textContent = v7 ?? 0;
+  $('#statViews30d').textContent = (v30rows || []).length;
+
+  const counts = {};
+  (v30rows || []).forEach(r => { counts[r.page_path] = (counts[r.page_path] || 0) + 1; });
+  const pages = Object.entries(counts).sort((a,b) => b[1]-a[1]);
+
+  $('#statUniquePages').textContent = pages.length;
+
+  const body = $('#insightsBody');
+  if (pages.length === 0) {
+    body.innerHTML = `<tr><td colspan="2" class="cell-muted">No page views recorded in the last 30 days.</td></tr>`;
+  } else {
+    body.innerHTML = pages.slice(0, 20).map(([page, count]) => `
+      <tr><td class="cell-mono">${escapeHtml(page)}</td><td>${count}</td></tr>
+    `).join('');
+  }
+}
+
+/* =========================================================
+   Utilities
+   ========================================================= */
+function debounce(fn, ms) {
+  let t;
+  return (...args) => { clearTimeout(t); t = setTimeout(() => fn(...args), ms); };
+}
+
+/* =========================================================
+   Boot
+   ========================================================= */
+checkSession();
+supabase.auth.onAuthStateChange((event) => {
+  if (event === 'SIGNED_OUT') showLogin();
+});
+</script>
+</body>
+</html>
