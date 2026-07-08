@@ -581,58 +581,10 @@
       <button class="filter-btn" data-filter="commercial">Commercial</button>
     </div>
 
-    <!-- Gallery Grid with Real Project Photos -->
+    <!-- Gallery Grid — populated from the admin console's uploads -->
     <div class="gallery-grid" id="galleryGrid">
-      <!-- Gardens -->
-      <div class="gallery-item" data-category="gardens">
-        <img src="IMG-20260707-WA0021_1_.jpg" alt="Manicured residential lawn with trimmed hedge and garden lamp" title="Residential Garden &amp; Hedge Design">
-        <div class="gallery-overlay">
-          <div class="gallery-zoom-icon">🔍</div>
-        </div>
-      </div>
-      <div class="gallery-item" data-category="gardens">
-        <img src="IMG-20260707-WA0071.jpg" alt="Landscaped compound with pergola and stone-edged lawn" title="Compound Garden Design">
-        <div class="gallery-overlay">
-          <div class="gallery-zoom-icon">🔍</div>
-        </div>
-      </div>
-
-      <!-- Lawns -->
-      <div class="gallery-item" data-category="lawns">
-        <img src="IMG-20260707-WA0070.jpg" alt="Established lawn under mature tree with perimeter wall" title="Lawn Establishment &amp; Maintenance">
-        <div class="gallery-overlay">
-          <div class="gallery-zoom-icon">🔍</div>
-        </div>
-      </div>
-      <div class="gallery-item" data-category="lawns">
-        <img src="IMG-20260707-WA0008_1_.jpg" alt="Backyard lawn with mulched flower bed and shaped shrubs" title="Lawn Care &amp; Flower Bed Detailing">
-        <div class="gallery-overlay">
-          <div class="gallery-zoom-icon">🔍</div>
-        </div>
-      </div>
-
-      <!-- Irrigation -->
-      <div class="gallery-item" data-category="irrigation">
-        <img src="IMG-20260707-WA0072.jpg" alt="Residential lawn with sprinkler irrigation running" title="Automated Sprinkler Irrigation">
-        <div class="gallery-overlay">
-          <div class="gallery-zoom-icon">🔍</div>
-        </div>
-      </div>
-
-      <!-- Features -->
-      <div class="gallery-item" data-category="features">
-        <img src="IMG-20260707-WA0074.jpg" alt="Flowering orange trumpet vine hedge in full bloom" title="Flowering Hedge Feature">
-        <div class="gallery-overlay">
-          <div class="gallery-zoom-icon">🔍</div>
-        </div>
-      </div>
-
-      <!-- Commercial -->
-      <div class="gallery-item" data-category="commercial">
-        <img src="IMG-20260707-WA0011.jpg" alt="Large-scale commercial grounds lawn maintenance" title="Commercial Grounds Maintenance">
-        <div class="gallery-overlay">
-          <div class="gallery-zoom-icon">🔍</div>
-        </div>
+      <div class="gallery-status" id="galleryStatus" style="grid-column:1/-1; text-align:center; padding:3rem 1rem; color:var(--ink-soft);">
+        Loading project photos…
       </div>
     </div>
   </div>
@@ -853,50 +805,108 @@ s0.parentNode.insertBefore(s1,s0);
 </script>
 <!--End of Tawk.to Script-->
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
 <script>
-  // ========== Image Loading Handler ==========
-  const images = document.querySelectorAll('.gallery-item img');
-  images.forEach(img => {
-    img.addEventListener('load', () => {
-      img.classList.add('loaded');
-    });
-    img.addEventListener('error', () => {
-      img.style.display = 'none';
-      console.warn('Image failed to load:', img.src);
-    });
-    // Trigger load event if already cached
-    if (img.complete) {
-      img.classList.add('loaded');
+  // ========== Supabase connection (same project as the admin console) ==========
+  const SUPABASE_URL = 'https://bwcsuxvcqmykhckxqgjh.supabase.co';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ3Y3N1eHZjcW15a2hja3hxZ2poIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODMyOTE1NjIsImV4cCI6MjA5ODg2NzU2Mn0.rAXetUdSG-uzEhQfvhgK8Kn-K5Hxyxx9M7QO4nKTZiA';
+  const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  const CATEGORY_LABELS = {
+    gardens: 'Garden design project',
+    lawns: 'Lawn care project',
+    irrigation: 'Irrigation system project',
+    features: 'Landscape feature project',
+    commercial: 'Commercial grounds project',
+  };
+
+  function escapeHtml(str) {
+    return (str ?? '').toString().replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+
+  const galleryGrid = document.getElementById('galleryGrid');
+  const galleryStatus = document.getElementById('galleryStatus');
+
+  // ========== Load gallery items uploaded via the admin console ==========
+  async function loadGalleryFromDB() {
+    const { data, error } = await sb
+      .from('gallery_images')
+      .select('*')
+      .order('created_at', { ascending: false });
+
+    if (error) {
+      if (galleryStatus) {
+        galleryStatus.textContent = 'Could not load the gallery right now. Please try again shortly.';
+      }
+      return;
     }
-  });
 
-  // ========== Gallery Filter ==========
+    if (!data || data.length === 0) {
+      galleryGrid.innerHTML = `<div id="galleryStatus" style="grid-column:1/-1; text-align:center; padding:3rem 1rem; color:var(--ink-soft);">No project photos yet — check back soon.</div>`;
+      return;
+    }
+
+    galleryGrid.innerHTML = data.map(img => {
+      const label = img.caption || CATEGORY_LABELS[img.category] || 'Landscaping project';
+      return `
+        <div class="gallery-item" data-category="${escapeHtml(img.category || 'gardens')}">
+          <img src="${escapeHtml(img.url)}" alt="${escapeHtml(label)}" title="${escapeHtml(label)}" loading="lazy">
+          <div class="gallery-overlay">
+            <div class="gallery-zoom-icon">🔍</div>
+          </div>
+        </div>`;
+    }).join('');
+
+    initGalleryInteractions();
+  }
+
+  // ========== Wiring that has to run *after* items exist in the DOM ==========
+  function initGalleryInteractions() {
+    const galleryItems = document.querySelectorAll('.gallery-item');
+
+    // Image loading shimmer
+    galleryItems.forEach(item => {
+      const img = item.querySelector('img');
+      img.addEventListener('load', () => img.classList.add('loaded'));
+      img.addEventListener('error', () => { img.style.display = 'none'; });
+      if (img.complete) img.classList.add('loaded');
+    });
+
+    // Apply whichever filter is currently active
+    const activeFilter = document.querySelector('.filter-btn.active')?.getAttribute('data-filter') || 'all';
+    applyGalleryFilter(activeFilter);
+
+    // Lightbox open on click
+    galleryItems.forEach(item => {
+      item.addEventListener('click', () => {
+        const visible = getVisibleImages();
+        currentImageIndex = visible.findIndex(img => img.src === item.querySelector('img').src);
+        openLightbox(item.querySelector('img').src);
+      });
+    });
+  }
+
+  function applyGalleryFilter(filter) {
+    document.querySelectorAll('.gallery-item').forEach(item => {
+      const category = item.getAttribute('data-category');
+      if (filter === 'all' || category === filter) {
+        item.classList.remove('hide');
+        item.style.display = 'block';
+      } else {
+        item.classList.add('hide');
+        item.style.display = 'none';
+      }
+    });
+  }
+
+  // ========== Gallery Filter buttons ==========
   const filterBtns = document.querySelectorAll('.filter-btn');
-  const galleryItems = document.querySelectorAll('.gallery-item');
-
   filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
-      // Remove active class from all buttons
       filterBtns.forEach(b => b.classList.remove('active'));
-      // Add active class to clicked button
       btn.classList.add('active');
-
-      const filter = btn.getAttribute('data-filter');
-
-      // Filter gallery items
-      galleryItems.forEach(item => {
-        const category = item.getAttribute('data-category');
-        if (filter === 'all' || category === filter) {
-          item.classList.remove('hide');
-          setTimeout(() => {
-            item.style.display = 'block';
-          }, 50);
-        } else {
-          item.classList.add('hide');
-          item.style.display = 'none';
-        }
-      });
+      applyGalleryFilter(btn.getAttribute('data-filter'));
     });
   });
 
@@ -907,19 +917,12 @@ s0.parentNode.insertBefore(s1,s0);
   const lightboxPrev = document.getElementById('lightboxPrev');
   const lightboxNext = document.getElementById('lightboxNext');
   let currentImageIndex = 0;
-  let visibleImages = [];
 
   function getVisibleImages() {
-    return Array.from(galleryItems).filter(item => item.style.display !== 'none').map(item => item.querySelector('img'));
+    return Array.from(document.querySelectorAll('.gallery-item'))
+      .filter(item => item.style.display !== 'none')
+      .map(item => item.querySelector('img'));
   }
-
-  galleryItems.forEach((item, index) => {
-    item.addEventListener('click', () => {
-      visibleImages = getVisibleImages();
-      currentImageIndex = visibleImages.findIndex(img => img.src === item.querySelector('img').src);
-      openLightbox(item.querySelector('img').src);
-    });
-  });
 
   function openLightbox(imgSrc) {
     lightboxImage.src = imgSrc;
@@ -939,13 +942,15 @@ s0.parentNode.insertBefore(s1,s0);
   });
 
   lightboxPrev.addEventListener('click', () => {
-    currentImageIndex = (currentImageIndex - 1 + visibleImages.length) % visibleImages.length;
-    lightboxImage.src = visibleImages[currentImageIndex].src;
+    const visible = getVisibleImages();
+    currentImageIndex = (currentImageIndex - 1 + visible.length) % visible.length;
+    lightboxImage.src = visible[currentImageIndex].src;
   });
 
   lightboxNext.addEventListener('click', () => {
-    currentImageIndex = (currentImageIndex + 1) % visibleImages.length;
-    lightboxImage.src = visibleImages[currentImageIndex].src;
+    const visible = getVisibleImages();
+    currentImageIndex = (currentImageIndex + 1) % visible.length;
+    lightboxImage.src = visible[currentImageIndex].src;
   });
 
   // Keyboard navigation
@@ -955,6 +960,8 @@ s0.parentNode.insertBefore(s1,s0);
     if (e.key === 'ArrowLeft') lightboxPrev.click();
     if (e.key === 'ArrowRight') lightboxNext.click();
   });
+
+  loadGalleryFromDB();
 
   // ========== Navbar Scroll ==========
   const nav = document.getElementById('mainNav');
