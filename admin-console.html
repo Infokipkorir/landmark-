@@ -233,6 +233,46 @@ table.data-table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
 .thread-reply { display: flex; gap: 10px; padding: 14px 18px; border-top: 1px solid var(--sand); }
 .thread-reply textarea { min-height: 42px; }
 
+/* SESSIONS / SECURITY */
+.topbar-admin-status {
+  display: flex; align-items: center; gap: 6px; font-size: 11.5px; font-weight: 600;
+  padding: 5px 11px; border-radius: 20px; background: var(--sand-light); color: var(--ink-muted);
+  border: 1px solid var(--sand); white-space: nowrap; appearance: none; font-family: var(--font-body);
+}
+.topbar-admin-status .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--sand); flex-shrink: 0; }
+.topbar-admin-status.both-online { background: var(--moss-tint); color: var(--moss-dark); border-color: transparent; }
+.topbar-admin-status.both-online .dot { background: var(--moss-dark); box-shadow: 0 0 0 3px rgba(63,108,78,0.18); }
+
+.session-banner {
+  display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-radius: var(--radius);
+  background: var(--moss-tint); color: var(--moss-dark); font-size: 13.5px; font-weight: 500; margin-bottom: 18px;
+}
+.session-banner .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--moss-dark); flex-shrink: 0; box-shadow: 0 0 0 3px rgba(63,108,78,0.18); }
+
+.session-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; margin-bottom: 20px; }
+.session-card { border: 1px solid var(--sand); border-radius: var(--radius-lg); background: var(--panel); box-shadow: var(--shadow-card); padding: 18px 20px; position: relative; }
+.session-card.is-you { border-color: var(--moss); box-shadow: 0 0 0 3px var(--moss-tint); }
+.session-card.is-offline { opacity: .6; }
+.session-card-head { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+.session-card-name { font-weight: 600; font-size: 14.5px; display: flex; align-items: center; gap: 8px; }
+.session-card-email { font-size: 12px; color: var(--ink-muted); margin-top: 1px; }
+.you-badge { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; background: var(--moss); color: #fff; padding: 2px 7px; border-radius: 20px; }
+.status-tag { display: inline-flex; align-items: center; gap: 5px; font-size: 11.5px; font-weight: 600; }
+.status-tag .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--sand); }
+.status-tag.online { color: var(--moss-dark); }
+.status-tag.online .dot { background: var(--moss-dark); box-shadow: 0 0 0 3px rgba(63,108,78,0.16); }
+.status-tag.offline { color: var(--ink-muted); }
+.session-meta-list { display: flex; flex-direction: column; gap: 8px; }
+.session-meta-row { display: flex; align-items: flex-start; gap: 9px; font-size: 12.5px; color: var(--ink); }
+.session-meta-row .m-icon { width: 16px; flex-shrink: 0; text-align: center; color: var(--ink-muted); }
+.session-meta-row .m-label { color: var(--ink-muted); min-width: 62px; flex-shrink: 0; }
+.session-card-empty { border: 1.5px dashed var(--sand); border-radius: var(--radius-lg); padding: 26px 20px; text-align: center; color: var(--ink-muted); font-size: 13px; background: var(--sand-light); }
+.security-note { display: flex; gap: 10px; align-items: flex-start; padding: 13px 16px; border-radius: var(--radius); background: var(--gold-tint); color: #6E5417; font-size: 12.5px; line-height: 1.5; margin-top: 4px; }
+.idle-modal-overlay { position: fixed; inset: 0; background: rgba(27,36,32,0.55); display: flex; align-items: center; justify-content: center; padding: 20px; z-index: 400; }
+.idle-modal { background: var(--panel); border-radius: var(--radius-lg); width: 100%; max-width: 380px; padding: 26px 24px; text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+.idle-modal h3 { margin-bottom: 8px; }
+.idle-modal p { font-size: 13.5px; color: var(--ink-muted); line-height: 1.5; margin: 0 0 18px; }
+
 .sidebar-toggle-mobile { display: none; }
 .sidebar-scrim { display: none; }
 .toast { position: fixed; bottom: 22px; right: 22px; background: var(--ink); color: #fff; padding: 12px 18px; border-radius: var(--radius-sm); font-size: 13.5px; box-shadow: var(--shadow-card); z-index: 300; opacity: 0; transform: translateY(8px); transition: opacity .2s ease, transform .2s ease; pointer-events: none; }
@@ -266,6 +306,8 @@ table.data-table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
   .admin-gallery-grid { grid-template-columns: repeat(2,1fr); }
   .msg { max-width: 88%; }
   .split-field { grid-template-columns: 1fr; }
+  .session-grid { grid-template-columns: 1fr; }
+  .topbar-admin-status .label { display: none; }
 }
 </style>
 </head>
@@ -328,6 +370,7 @@ table.data-table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
       <button class="nav-item" data-section="blog"><span class="nav-icon">&#9998;</span><span class="nav-label">Blog</span></button>
       <button class="nav-item" data-section="support"><span class="nav-icon">&#9990;</span><span class="nav-label">Support</span><span class="nav-badge" id="badgeSupport" hidden>0</span></button>
       <button class="nav-item" data-section="insights"><span class="nav-icon">&#9776;</span><span class="nav-label">Page insights</span></button>
+      <button class="nav-item" data-section="sessions"><span class="nav-icon">&#9673;</span><span class="nav-label">Admin sessions</span></button>
     </nav>
 
     <div class="sidebar-foot">
@@ -345,6 +388,9 @@ table.data-table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
       </div>
       <div class="topbar-spacer"></div>
       <div class="topbar-user">
+        <button class="topbar-admin-status" id="topbarAdminStatus" data-goto="sessions" title="View admin sessions">
+          <span class="dot"></span><span class="label" id="topbarAdminStatusLabel">Checking…</span>
+        </button>
         <div class="avatar-circle" id="userInitials">--</div>
       </div>
     </header>
@@ -525,7 +571,30 @@ table.data-table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
         </div>
       </section>
 
+      <!-- ADMIN SESSIONS -->
+      <section class="panel-section" id="section-sessions">
+        <div id="sessionsBanner"></div>
+        <div class="session-grid" id="sessionsGrid">
+          <div class="session-card"><div class="session-card-empty">Loading sessions…</div></div>
+        </div>
+        <div class="card card-pad">
+          <h3 style="margin-bottom:10px;">Access &amp; security</h3>
+          <div class="security-note">
+            &#9888;&nbsp; This console is limited to <strong>2 admin accounts</strong>, enforced at the database level. Signing in automatically registers this device/browser/location below. Closing this browser window or tab ends your session — you'll need to sign in again next time. Sessions also time out automatically after 20 minutes of inactivity.
+          </div>
+        </div>
+      </section>
+
     </main>
+  </div>
+</div>
+
+<!-- Idle timeout warning -->
+<div class="idle-modal-overlay" id="idleModalOverlay" hidden>
+  <div class="idle-modal">
+    <h3>Still there?</h3>
+    <p>For security, you'll be signed out in <strong id="idleCountdown">60</strong> seconds due to inactivity.</p>
+    <button class="btn btn-primary btn-block" id="idleStayBtn">Stay signed in</button>
   </div>
 </div>
 
@@ -557,9 +626,36 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 if (window.__landmarkAdminBooted) { return; }
 window.__landmarkAdminBooted = true;
 
-const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+// Using sessionStorage (not localStorage) means the login session lives only
+// as long as this browser tab/window stays open — closing it clears the
+// session automatically, so nobody needs to remember to sign out.
+const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+  auth: {
+    persistSession: true,
+    storage: window.sessionStorage,
+    autoRefreshToken: true,
+    detectSessionInUrl: false,
+  },
+});
 
 const MEDIA_BUCKET = 'media';
+const MAX_ADMINS = 2;
+const IDLE_LIMIT_MS = 20 * 60 * 1000;      // auto sign-out after 20 min inactivity
+const IDLE_WARNING_MS = 60 * 1000;         // show warning 60s before sign-out
+const SESSION_HEARTBEAT_MS = 30 * 1000;    // refresh "last seen" every 30s
+const SESSION_ONLINE_WINDOW_MS = 90 * 1000; // considered online if seen in last 90s
+
+// A fresh key per browser tab, kept only in sessionStorage — used to tell
+// this device's row apart in admin_sessions and to clean it up on close.
+function getTabSessionKey() {
+  let key = sessionStorage.getItem('landmark_admin_tab_key');
+  if (!key) {
+    key = (crypto.randomUUID ? crypto.randomUUID() : 'tab-' + Date.now() + '-' + Math.random().toString(36).slice(2));
+    sessionStorage.setItem('landmark_admin_tab_key', key);
+  }
+  return key;
+}
+const TAB_SESSION_KEY = getTabSessionKey();
 
 /* =========================================================
    Small helpers
@@ -582,6 +678,47 @@ function pill(status) {
   const label = (status || '').replace(/_/g, ' ');
   return `<span class="pill pill-${status}">${escapeHtml(label)}</span>`;
 }
+function parseUserAgent(ua) {
+  ua = ua || navigator.userAgent || '';
+  let browser = 'Unknown browser';
+  if (/Edg\//.test(ua)) browser = 'Edge';
+  else if (/OPR\//.test(ua)) browser = 'Opera';
+  else if (/Chrome\//.test(ua) && !/Chromium/.test(ua)) browser = 'Chrome';
+  else if (/Firefox\//.test(ua)) browser = 'Firefox';
+  else if (/Safari\//.test(ua) && /Version\//.test(ua)) browser = 'Safari';
+  else if (/MSIE|Trident/.test(ua)) browser = 'Internet Explorer';
+
+  let os = 'Unknown OS';
+  if (/Windows NT/.test(ua)) os = 'Windows';
+  else if (/Mac OS X/.test(ua) && !/iPhone|iPad/.test(ua)) os = 'macOS';
+  else if (/Android/.test(ua)) os = 'Android';
+  else if (/iPhone|iPad|iPod/.test(ua)) os = 'iOS';
+  else if (/Linux/.test(ua)) os = 'Linux';
+
+  let device = 'Desktop';
+  if (/iPad|Tablet/.test(ua)) device = 'Tablet';
+  else if (/Mobi|Android(?!.*Tablet)|iPhone/.test(ua)) device = 'Mobile';
+
+  return { browser, os, device };
+}
+
+async function lookupApproxLocation() {
+  // Best-effort IP-based geolocation — no permission prompt, no precise GPS.
+  try {
+    const res = await fetch('https://ipapi.co/json/');
+    if (!res.ok) throw new Error('lookup failed');
+    const j = await res.json();
+    return {
+      ip: j.ip || null,
+      city: j.city || null,
+      region: j.region || null,
+      country: j.country_name || null,
+    };
+  } catch {
+    return { ip: null, city: null, region: null, country: null };
+  }
+}
+
 let toastTimer;
 function toast(msg) {
   const el = $('#toast');
@@ -612,6 +749,9 @@ async function checkSession() {
   }
   currentAdmin = profile;
   showDashboard();
+  registerSession();
+  startHeartbeat();
+  startIdleWatch();
 }
 
 function showLogin() {
@@ -625,6 +765,7 @@ function showDashboard() {
   const initialsSource = currentAdmin.full_name || currentAdmin.email || '--';
   $('#userInitials').textContent = initialsSource.trim().split(/\s+/).map(w => w[0]).join('').slice(0,2).toUpperCase();
   loadOverview();
+  updateTopbarAdminStatus();
 }
 
 $('#loginForm').addEventListener('submit', async (e) => {
@@ -655,6 +796,9 @@ $('#loginForm').addEventListener('submit', async (e) => {
 
     currentAdmin = profile;
     showDashboard();
+    registerSession();
+    startHeartbeat();
+    startIdleWatch();
   } catch (err) {
     errorBox.textContent = err.message || 'Could not sign in. Check your details and try again.';
     errorBox.hidden = false;
@@ -665,9 +809,222 @@ $('#loginForm').addEventListener('submit', async (e) => {
 });
 
 $('#logoutBtn').addEventListener('click', async () => {
+  await endSessionCleanup();
   await sb.auth.signOut();
   currentAdmin = null;
   showLogin();
+});
+
+/* =========================================================
+   Device / session tracking
+   ========================================================= */
+let heartbeatTimer = null;
+
+async function registerSession() {
+  if (!currentAdmin) return;
+  const { browser, os, device } = parseUserAgent(navigator.userAgent);
+  const loc = await lookupApproxLocation();
+
+  await sb.from('admin_sessions').upsert({
+    session_key: TAB_SESSION_KEY,
+    admin_id: currentAdmin.id,
+    admin_name: currentAdmin.full_name || null,
+    admin_email: currentAdmin.email || null,
+    device, browser, os,
+    user_agent: navigator.userAgent,
+    ip: loc.ip, city: loc.city, region: loc.region, country: loc.country,
+    started_at: new Date().toISOString(),
+    last_seen_at: new Date().toISOString(),
+  }, { onConflict: 'session_key' });
+
+  if ($('#section-sessions').classList.contains('active')) loadSessions();
+}
+
+function startHeartbeat() {
+  stopHeartbeat();
+  heartbeatTimer = setInterval(async () => {
+    if (!currentAdmin) return;
+    await sb.from('admin_sessions')
+      .update({ last_seen_at: new Date().toISOString() })
+      .eq('session_key', TAB_SESSION_KEY);
+    updateTopbarAdminStatus();
+    if ($('#section-sessions').classList.contains('active')) loadSessions();
+  }, SESSION_HEARTBEAT_MS);
+}
+function stopHeartbeat() {
+  if (heartbeatTimer) { clearInterval(heartbeatTimer); heartbeatTimer = null; }
+}
+
+async function endSessionCleanup() {
+  stopHeartbeat();
+  stopIdleWatch();
+  try {
+    await sb.from('admin_sessions').delete().eq('session_key', TAB_SESSION_KEY);
+  } catch { /* best effort */ }
+}
+
+// There's no reliable way to run an authenticated Supabase call from
+// beforeunload (sendBeacon can't carry the auth headers PostgREST needs).
+// Instead, "online" status is simply derived from how recently the
+// heartbeat last updated last_seen_at — once a tab closes, the heartbeat
+// stops and the row falls out of the online window within ~90s.
+window.addEventListener('pagehide', () => { stopHeartbeat(); stopIdleWatch(); });
+
+async function loadSessions() {
+  const grid = $('#sessionsGrid');
+  const banner = $('#sessionsBanner');
+  grid.innerHTML = `<div class="session-card"><div class="session-card-empty">Loading sessions…</div></div>`;
+
+  const { data, error } = await sb
+    .from('admin_sessions')
+    .select('*')
+    .order('last_seen_at', { ascending: false });
+
+  if (error) {
+    grid.innerHTML = `<div class="session-card"><div class="session-card-empty">Could not load session data.</div></div>`;
+    return;
+  }
+
+  const now = Date.now();
+  const isOnline = (row) => (now - new Date(row.last_seen_at).getTime()) < SESSION_ONLINE_WINDOW_MS;
+
+  // One card per admin — most recently active session for that admin.
+  const byAdmin = new Map();
+  (data || []).forEach(row => {
+    const existing = byAdmin.get(row.admin_id);
+    if (!existing || new Date(row.last_seen_at) > new Date(existing.last_seen_at)) {
+      byAdmin.set(row.admin_id, row);
+    }
+  });
+
+  const { data: allAdmins } = await sb.from('admin_profiles').select('id, full_name, email').limit(MAX_ADMINS + 5);
+  const cards = (allAdmins || []).map(admin => {
+    const row = byAdmin.get(admin.id);
+    const you = currentAdmin && admin.id === currentAdmin.id;
+    if (!row) {
+      return `
+        <div class="session-card is-offline">
+          <div class="session-card-head">
+            <div class="avatar-circle">${initialsFor(admin.full_name || admin.email)}</div>
+            <div style="flex:1;">
+              <div class="session-card-name">${escapeHtml(admin.full_name || admin.email)}${you ? '<span class="you-badge">You</span>' : ''}</div>
+              <div class="session-card-email">${escapeHtml(admin.email || '')}</div>
+            </div>
+            <span class="status-tag offline"><span class="dot"></span>Offline</span>
+          </div>
+          <div class="session-card-empty" style="padding:14px;">No active session right now.</div>
+        </div>`;
+    }
+    const online = isOnline(row);
+    return `
+      <div class="session-card ${you ? 'is-you' : ''} ${online ? '' : 'is-offline'}">
+        <div class="session-card-head">
+          <div class="avatar-circle">${initialsFor(row.admin_name || row.admin_email)}</div>
+          <div style="flex:1;">
+            <div class="session-card-name">${escapeHtml(row.admin_name || row.admin_email)}${you ? '<span class="you-badge">You</span>' : ''}</div>
+            <div class="session-card-email">${escapeHtml(row.admin_email || '')}</div>
+          </div>
+          <span class="status-tag ${online ? 'online' : 'offline'}"><span class="dot"></span>${online ? 'Online' : 'Offline'}</span>
+        </div>
+        <div class="session-meta-list">
+          <div class="session-meta-row"><span class="m-icon">&#128421;</span><span class="m-label">Device</span><span>${escapeHtml(row.device || 'Unknown')} &middot; ${escapeHtml(row.os || 'Unknown OS')}</span></div>
+          <div class="session-meta-row"><span class="m-icon">&#127760;</span><span class="m-label">Browser</span><span>${escapeHtml(row.browser || 'Unknown')}</span></div>
+          <div class="session-meta-row"><span class="m-icon">&#128205;</span><span class="m-label">Location</span><span>${escapeHtml([row.city, row.region, row.country].filter(Boolean).join(', ') || 'Unavailable')}</span></div>
+          <div class="session-meta-row"><span class="m-icon">&#9201;</span><span class="m-label">Signed in</span><span>${timeAgo(row.started_at)}</span></div>
+          <div class="session-meta-row"><span class="m-icon">&#128337;</span><span class="m-label">Last active</span><span>${timeAgo(row.last_seen_at)}</span></div>
+        </div>
+      </div>`;
+  }).join('');
+
+  grid.innerHTML = cards || `<div class="session-card"><div class="session-card-empty">No admin accounts found.</div></div>`;
+
+  const onlineCount = Array.from(byAdmin.values()).filter(isOnline).length;
+  banner.innerHTML = onlineCount >= 2
+    ? `<div class="session-banner"><span class="dot"></span>Both admins are currently logged in and active.</div>`
+    : '';
+
+  updateTopbarAdminStatus(onlineCount);
+}
+
+function initialsFor(source) {
+  const s = (source || '--').trim();
+  if (!s) return '--';
+  return s.split(/\s+/).map(w => w[0]).join('').slice(0, 2).toUpperCase();
+}
+
+async function updateTopbarAdminStatus(precomputedOnlineCount) {
+  const el = $('#topbarAdminStatus');
+  const label = $('#topbarAdminStatusLabel');
+  if (!el || !label) return;
+
+  let onlineCount = precomputedOnlineCount;
+  if (onlineCount === undefined) {
+    const { data } = await sb.from('admin_sessions').select('admin_id, last_seen_at');
+    const now = Date.now();
+    const onlineIds = new Set((data || [])
+      .filter(r => (now - new Date(r.last_seen_at).getTime()) < SESSION_ONLINE_WINDOW_MS)
+      .map(r => r.admin_id));
+    onlineCount = onlineIds.size;
+  }
+
+  label.textContent = onlineCount >= 2 ? 'Both admins online' : (onlineCount === 1 ? '1 admin online' : 'No other admins online');
+  el.classList.toggle('both-online', onlineCount >= 2);
+}
+
+/* =========================================================
+   Idle timeout — auto sign-out after inactivity
+   ========================================================= */
+let idleTimer = null, idleWarnTimer = null, idleCountdownInterval = null;
+
+function startIdleWatch() {
+  stopIdleWatch();
+  resetIdleTimer();
+  ['mousemove', 'mousedown', 'keydown', 'scroll', 'touchstart'].forEach(evt => {
+    document.addEventListener(evt, resetIdleTimer, { passive: true });
+  });
+}
+function stopIdleWatch() {
+  if (idleTimer) clearTimeout(idleTimer);
+  if (idleWarnTimer) clearTimeout(idleWarnTimer);
+  if (idleCountdownInterval) clearInterval(idleCountdownInterval);
+  idleTimer = idleWarnTimer = idleCountdownInterval = null;
+  ['mousemove', 'mousedown', 'keydown', 'scroll', 'touchstart'].forEach(evt => {
+    document.removeEventListener(evt, resetIdleTimer);
+  });
+}
+function resetIdleTimer() {
+  if (!currentAdmin) return;
+  if ($('#idleModalOverlay') && !$('#idleModalOverlay').hidden) return; // don't reset while warning is showing
+  if (idleTimer) clearTimeout(idleTimer);
+  idleTimer = setTimeout(showIdleWarning, IDLE_LIMIT_MS - IDLE_WARNING_MS);
+}
+function showIdleWarning() {
+  const overlay = $('#idleModalOverlay');
+  const countdownEl = $('#idleCountdown');
+  overlay.hidden = false;
+  let secondsLeft = Math.floor(IDLE_WARNING_MS / 1000);
+  countdownEl.textContent = secondsLeft;
+  idleCountdownInterval = setInterval(() => {
+    secondsLeft -= 1;
+    countdownEl.textContent = Math.max(secondsLeft, 0);
+    if (secondsLeft <= 0) {
+      clearInterval(idleCountdownInterval);
+      idleAutoSignOut();
+    }
+  }, 1000);
+}
+async function idleAutoSignOut() {
+  $('#idleModalOverlay').hidden = true;
+  await endSessionCleanup();
+  await sb.auth.signOut();
+  currentAdmin = null;
+  showLogin();
+  toast('Signed out after 20 minutes of inactivity.');
+}
+$('#idleStayBtn').addEventListener('click', () => {
+  $('#idleModalOverlay').hidden = true;
+  if (idleCountdownInterval) clearInterval(idleCountdownInterval);
+  resetIdleTimer();
 });
 
 /* =========================================================
@@ -700,6 +1057,7 @@ function gotoSection(name) {
   if (name === 'blog') loadBlog();
   if (name === 'support') loadSupportThreads();
   if (name === 'insights') loadInsights();
+  if (name === 'sessions') loadSessions();
 }
 
 $all('.nav-item[data-section]').forEach(btn => {
