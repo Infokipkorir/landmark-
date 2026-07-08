@@ -1136,7 +1136,13 @@
       return;
     }
 
+    // Generate the id client-side so we never need to read the row back
+    // (anon visitors have INSERT rights but no SELECT rights on quote_requests,
+    // so insert().select() would fail RLS on the RETURNING step).
+    const newId = (crypto.randomUUID ? crypto.randomUUID() : (Date.now().toString(36) + Math.random().toString(36).slice(2)));
+
     const payload = {
+      id: newId,
       name: document.getElementById('qName').value.trim(),
       phone: document.getElementById('qPhone').value.trim(),
       service: document.getElementById('qService').value,
@@ -1148,11 +1154,11 @@
     submitBtn.textContent = 'Sending…';
 
     try {
-      const { data, error } = await LM.sb.from('quote_requests').insert(payload).select().single();
+      const { error } = await LM.sb.from('quote_requests').insert(payload);
       if (error) throw error;
 
       // Fire-and-forget: generate + email the PDF copy (does not block the UI)
-      LM.sb.functions.invoke('send-quote-pdf', { body: { id: data.id, ...payload } }).catch(err => console.warn('PDF email failed:', err));
+      LM.sb.functions.invoke('send-quote-pdf', { body: payload }).catch(err => console.warn('PDF email failed:', err));
 
       fb.style.display = 'block';
       fb.style.color = 'var(--forest)';
