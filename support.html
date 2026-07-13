@@ -2,553 +2,545 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Support &amp; Live Chat — Landmark Landscaping</title>
-<meta name="description" content="Chat live with the Landmark Landscaping team. Get quick answers on quotes, projects, and ongoing work — or reach us by phone and WhatsApp.">
-<meta name="robots" content="noindex">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Support | Landmark Landscaping Services</title>
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
 <style>
   :root{
-    /* ---- Green & white palette, landscaping-appropriate ---- */
-    --green-900:#0C3B2E;
-    --green-800:#0F4A38;
-    --green-700:#127A4F;
-    --green-600:#18A566;
-    --green-500:#22C07A;
-    --green-100:#E4F5EA;
-    --green-50:#F2FAF5;
-    --white:#FFFFFF;
-    --ink-900:#0E1B16;
-    --ink-700:#354238;
-    --ink-500:#6B7A70;
-    --ink-400:#93A199;
-    --line:#E6ECE7;
-    --line-soft:#EEF3EF;
-    --danger-bg:#FDECEC;
-    --danger:#B3261E;
-
-    --radius-lg:20px;
-    --radius-md:16px;
-    --radius-sm:12px;
-    --radius-pill:999px;
-
-    --shadow-xs:0 1px 2px rgba(14,27,22,0.05);
-    --shadow-sm:0 4px 14px rgba(14,27,22,0.06);
-    --shadow-md:0 10px 30px rgba(12,59,46,0.10);
-    --shadow-lg:0 20px 48px rgba(12,59,46,0.14);
-
-    --ease:cubic-bezier(.4,0,.2,1);
-    --font:'Inter','Plus Jakarta Sans','Segoe UI',Roboto,Arial,sans-serif;
+    --forest:#1B5E20;
+    --forest-deep:#143F18;
+    --leaf:#43A047;
+    --sage:#EEF3E7;
+    --clay:#C0703A;
+    --clay-deep:#9C5526;
+    --sun:#E0A93B;
+    --cream:#FBF8F2;
+    --ink:#1C2418;
+    --ink-soft:#52604A;
+    --line:rgba(28,36,24,0.08);
+    --body:'Inter', 'Plus Jakarta Sans', 'Segoe UI', Roboto, Arial, sans-serif;
   }
   *{box-sizing:border-box;}
   html,body{height:100%;}
   body{
-    margin:0; font-family:var(--font); color:var(--ink-900); background:var(--green-50);
-    display:flex; flex-direction:column; min-height:100vh;
-    -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
-    font-size:15px; line-height:1.5;
+    margin:0;
+    font-family:var(--body);
+    color:var(--ink);
+    background:var(--cream);
+    display:flex;
+    flex-direction:column;
+    overflow:hidden;
   }
-  h1,h2,h3,.display{ font-family:var(--font); color:var(--ink-900); letter-spacing:-0.02em; margin:0; font-weight:700; }
-  a{ color:var(--green-700); }
-  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible{
-    outline:2px solid var(--green-600); outline-offset:2px; border-radius:8px;
-  }
-  .eyebrow{ font-family:var(--font); font-size:.72rem; letter-spacing:.09em; text-transform:uppercase; color:var(--green-700); font-weight:700; }
+  button{font-family:inherit;}
+  a{color:var(--forest);}
 
-  /* ---------- Top bar ---------- */
-  .topbar{
-    display:flex; align-items:center; gap:14px; padding:14px 24px;
-    background:rgba(255,255,255,.9); backdrop-filter:saturate(180%) blur(10px);
-    border-bottom:1px solid var(--line); position:sticky; top:0; z-index:20;
+  /* ---------- Header ---------- */
+  .sup-head{
+    flex-shrink:0;
+    background:linear-gradient(135deg, var(--forest-deep) 0%, var(--forest) 55%, var(--leaf) 130%);
+    color:#fff;
+    padding:1.1rem 1.2rem;
+    display:flex; align-items:center; justify-content:space-between;
+    gap:.75rem;
+    position:relative;
+    overflow:hidden;
   }
-  .brand{ display:flex; align-items:center; gap:11px; text-decoration:none; }
-  .brand-mark{
-    width:40px; height:40px; border-radius:12px;
-    background:linear-gradient(155deg, var(--green-600), var(--green-800));
-    color:#fff; display:flex; align-items:center; justify-content:center;
-    font-family:var(--font); font-weight:800; font-size:17px; flex-shrink:0; box-shadow:var(--shadow-sm);
+  .sup-head::before{
+    content:'';
+    position:absolute; inset:0;
+    background:radial-gradient(circle at 85% -20%, rgba(255,255,255,.18), transparent 55%);
   }
-  .brand-text{ font-weight:700; font-size:15px; color:var(--ink-900); line-height:1.25; }
-  .brand-sub{ font-size:12px; color:var(--ink-500); font-weight:500; }
-  .topbar-spacer{ flex:1; }
-  .topbar .btn-home{
-    display:inline-flex; align-items:center; gap:6px; font-size:13.5px; font-weight:600; color:var(--ink-700);
-    text-decoration:none; padding:9px 16px; border-radius:var(--radius-pill); border:1px solid var(--line);
-    transition:background .15s var(--ease), border-color .15s var(--ease), color .15s var(--ease), transform .1s var(--ease);
-  }
-  .topbar .btn-home:hover{ background:var(--green-100); border-color:var(--green-100); color:var(--green-800); transform:translateY(-1px); }
-  .topbar .btn-home:active{ transform:translateY(0); }
-
-  /* ---------- Layout ---------- */
-  .helpdesk{ flex:1; display:flex; max-width:1180px; margin:0 auto; width:100%; padding:24px 20px 32px; gap:20px; }
-  .side{ width:288px; flex-shrink:0; display:flex; flex-direction:column; gap:14px; }
-  .card{
-    background:var(--white); border:1px solid var(--line); border-radius:var(--radius-lg); padding:20px;
-    box-shadow:var(--shadow-xs); transition:box-shadow .2s var(--ease), transform .2s var(--ease);
-  }
-  .card:hover{ box-shadow:var(--shadow-sm); }
-  .side h2{ font-size:18px; margin-bottom:6px; }
-  .side p.lead-soft{ color:var(--ink-500); font-size:13.5px; line-height:1.6; margin:0; }
-
-  .hours-row{ display:flex; align-items:center; gap:8px; margin-top:14px; font-size:13.5px; }
-  .status-dot{ width:9px; height:9px; border-radius:50%; flex-shrink:0; }
-  .status-dot.open{ background:var(--green-600); box-shadow:0 0 0 4px rgba(24,165,102,0.16); }
-  .status-dot.closed{ background:var(--ink-400); box-shadow:0 0 0 4px rgba(147,161,153,0.16); }
-  .hours-detail{ color:var(--ink-500); font-size:12.5px; margin-top:5px; }
-
-  .contact-row{
-    display:flex; align-items:center; gap:11px; padding:11px 8px; margin:0 -8px; border-radius:var(--radius-sm);
-    text-decoration:none; color:var(--ink-900); font-size:14px; font-weight:600;
-    transition:background .15s var(--ease), transform .15s var(--ease);
-  }
-  .contact-row i{
-    width:34px; height:34px; border-radius:10px; background:var(--green-100); color:var(--green-700);
-    display:flex; align-items:center; justify-content:center; font-size:15px; flex-shrink:0;
-    transition:background .15s var(--ease), color .15s var(--ease);
-  }
-  .contact-row:hover{ background:var(--green-50); transform:translateX(2px); color:var(--green-800); }
-  .contact-row:hover i{ background:var(--green-600); color:#fff; }
-
-  .faq-list{ display:flex; flex-direction:column; gap:7px; }
-  .faq-item{
-    display:flex; align-items:center; gap:9px; font-size:13.5px; padding:11px 13px; border-radius:var(--radius-sm);
-    background:var(--green-50); color:var(--ink-900); cursor:pointer; border:1px solid transparent;
-    text-align:left; font-weight:600; font-family:var(--font);
-    transition:background .15s var(--ease), border-color .15s var(--ease), transform .1s var(--ease);
-  }
-  .faq-item::before{
-    content:"\f2f6"; font-family:"bootstrap-icons"; font-size:13px; color:var(--green-600); flex-shrink:0;
-  }
-  .faq-item:hover{ background:var(--green-100); border-color:var(--green-100); }
-  .faq-item:active{ transform:scale(.98); }
-
-  /* ---------- Chat panel ---------- */
-  .chat-panel{
-    flex:1; display:flex; flex-direction:column; background:var(--white); border:1px solid var(--line);
-    border-radius:var(--radius-lg); overflow:hidden; box-shadow:var(--shadow-md); min-height:600px;
-  }
-  .chat-head{ display:flex; align-items:center; gap:13px; padding:16px 22px; border-bottom:1px solid var(--line); }
-  .chat-head-avatar{
+  .sup-head-who{display:flex; align-items:center; gap:.75rem; position:relative; z-index:1;}
+  .sup-avatar{
     width:44px; height:44px; border-radius:50%;
-    background:linear-gradient(155deg, var(--green-600), var(--green-800));
-    color:#fff; display:flex; align-items:center; justify-content:center; font-family:var(--font); font-weight:800; font-size:16px;
-    box-shadow:var(--shadow-sm);
+    background:rgba(255,255,255,.16);
+    border:2px solid rgba(255,255,255,.35);
+    display:flex; align-items:center; justify-content:center;
+    font-size:1.25rem; position:relative; flex-shrink:0;
   }
-  .chat-head-name{ font-weight:700; font-size:15.5px; color:var(--ink-900); }
-  .chat-head-status{ font-size:12.5px; color:var(--ink-500); display:flex; align-items:center; gap:6px; font-weight:500; }
-  .chat-head-status .dot{ width:7px; height:7px; border-radius:50%; background:var(--green-600); box-shadow:0 0 0 3px rgba(24,165,102,0.18); }
-  .chat-head-spacer{ flex:1; }
-  .new-chat-btn{
-    font-size:12.5px; font-weight:600; color:var(--ink-700); background:none; border:1px solid var(--line);
-    border-radius:var(--radius-pill); padding:8px 15px; cursor:pointer; font-family:var(--font);
-    transition:background .15s var(--ease), color .15s var(--ease), border-color .15s var(--ease);
+  .sup-avatar .dot{
+    position:absolute; bottom:-1px; right:-1px;
+    width:11px; height:11px; border-radius:50%;
+    background:#2ECC71; border:2px solid var(--forest-deep);
   }
-  .new-chat-btn:hover{ background:var(--green-100); color:var(--green-800); border-color:var(--green-100); }
+  .sup-head-name{font-weight:700; font-size:1rem; line-height:1.25;}
+  .sup-head-status{font-size:.76rem; color:rgba(255,255,255,.85); display:flex; align-items:center; gap:.35rem;}
+  .sup-head-actions{display:flex; align-items:center; gap:.4rem; position:relative; z-index:1;}
+  .sup-icon-btn{
+    width:34px; height:34px; border-radius:50%; border:none;
+    background:rgba(255,255,255,.16); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer; transition:background .2s ease, transform .2s ease;
+  }
+  .sup-icon-btn:hover{background:rgba(255,255,255,.3);}
+  #supBackBtn{display:none;}
+  body.embedded #supBackBtn{display:none;}
+  body.standalone #supCloseInline{display:none;}
+  body.embedded #supCloseInline{display:flex;}
 
-  .chat-body{
-    flex:1; overflow-y:auto; padding:24px; display:flex; flex-direction:column; gap:12px;
-    background:
-      radial-gradient(circle at 15% 0%, rgba(24,165,102,0.05), transparent 45%),
-      var(--white);
+  /* ---------- Scroll area ---------- */
+  .sup-body{
+    flex:1 1 auto;
+    overflow-y:auto;
+    -webkit-overflow-scrolling:touch;
+    padding:1.1rem 1.1rem 0.5rem;
+    scroll-behavior:smooth;
   }
-  .msg-row{ display:flex; flex-direction:column; max-width:72%; }
-  .msg-row.from-visitor{ align-self:flex-end; align-items:flex-end; }
-  .msg-row.from-admin{ align-self:flex-start; align-items:flex-start; }
-  .msg-bubble{
-    padding:12px 16px; border-radius:18px; font-size:14.5px; line-height:1.55;
-    box-shadow:var(--shadow-xs);
-  }
-  .msg-row.from-visitor .msg-bubble{
-    background:linear-gradient(155deg, var(--green-600), var(--green-700)); color:#fff; border-bottom-right-radius:5px;
-  }
-  .msg-row.from-admin .msg-bubble{ background:var(--green-50); color:var(--ink-900); border-bottom-left-radius:5px; }
-  .msg-time{ font-size:11px; color:var(--ink-400); margin-top:5px; font-weight:500; }
+  .sup-body::-webkit-scrollbar{width:6px;}
+  .sup-body::-webkit-scrollbar-thumb{background:rgba(27,94,32,.18); border-radius:999px;}
 
-  .chat-empty{ margin:auto; text-align:center; color:var(--ink-500); padding:20px; }
-  .chat-empty i{
-    font-size:30px; color:var(--green-600); margin-bottom:12px; display:flex; align-items:center; justify-content:center;
-    width:60px; height:60px; border-radius:50%; background:var(--green-100); margin-left:auto; margin-right:auto;
+  /* Welcome card */
+  .sup-welcome{
+    background:linear-gradient(160deg, #fff 0%, var(--sage) 130%);
+    border:1px solid var(--line);
+    border-radius:20px;
+    padding:1.4rem 1.3rem;
+    margin-bottom:1.1rem;
+    animation:supFadeUp .5s ease both;
   }
-  .chat-empty h3{ font-size:16.5px; margin-bottom:6px; }
-  .chat-empty p{ font-size:13.5px; margin:0; }
+  .sup-welcome h2{
+    font-size:1.15rem; font-weight:700; margin:0 0 .35rem; color:var(--forest-deep);
+    letter-spacing:-0.01em;
+  }
+  .sup-welcome p{font-size:.87rem; color:var(--ink-soft); margin:0 0 .2rem; line-height:1.5;}
+  .sup-meta-row{display:flex; gap:1.2rem; margin-top:.9rem; flex-wrap:wrap;}
+  .sup-meta-item{display:flex; align-items:center; gap:.4rem; font-size:.78rem; color:var(--ink-soft); font-weight:600;}
+  .sup-meta-item i{color:var(--leaf); font-size:.95rem;}
 
-  .chat-input-bar{ display:flex; align-items:flex-end; gap:10px; padding:16px 20px; border-top:1px solid var(--line); }
-  .chat-input-bar textarea{
-    flex:1; resize:none; border:1.5px solid var(--line); border-radius:var(--radius-md); padding:13px 16px;
-    font-family:var(--font); font-size:14.5px; min-height:48px; max-height:120px; outline:none; background:var(--green-50);
-    color:var(--ink-900); transition:border-color .15s var(--ease), box-shadow .15s var(--ease), background .15s var(--ease);
+  /* Quick actions */
+  .sup-chip-row{
+    display:flex; gap:.55rem; flex-wrap:wrap;
+    margin-bottom:1.2rem;
   }
-  .chat-input-bar textarea::placeholder{ color:var(--ink-400); }
-  .chat-input-bar textarea:focus{ border-color:var(--green-600); box-shadow:0 0 0 4px rgba(24,165,102,0.14); background:var(--white); }
-  .send-btn{
-    width:48px; height:48px; border-radius:var(--radius-md);
-    background:linear-gradient(155deg, var(--green-600), var(--green-700)); color:#fff; border:none;
-    display:flex; align-items:center; justify-content:center; font-size:17px; flex-shrink:0; cursor:pointer;
-    box-shadow:var(--shadow-sm); transition:transform .12s var(--ease), box-shadow .15s var(--ease), filter .15s var(--ease);
+  .sup-chip{
+    border:1.5px solid var(--line);
+    background:#fff;
+    border-radius:999px;
+    padding:.5rem 1rem;
+    font-size:.82rem; font-weight:600; color:var(--forest-deep);
+    cursor:pointer;
+    display:inline-flex; align-items:center; gap:.4rem;
+    transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease, background .2s ease;
   }
-  .send-btn:hover{ filter:brightness(1.06); transform:translateY(-1px); box-shadow:var(--shadow-md); }
-  .send-btn:active{ transform:scale(0.96); }
-  .send-btn[disabled]{ opacity:.5; cursor:not-allowed; transform:none; box-shadow:none; }
-
-  /* ---------- Pre-chat form ---------- */
-  .prechat{ flex:1; display:flex; align-items:center; justify-content:center; padding:32px; }
-  .prechat-inner{ width:100%; max-width:400px; text-align:center; }
-  .prechat-inner i{
-    font-size:32px; color:var(--green-600); margin-bottom:14px; display:flex; align-items:center; justify-content:center;
-    width:68px; height:68px; border-radius:50%; background:var(--green-100); margin-left:auto; margin-right:auto;
-  }
-  .prechat-inner h2{ font-size:23px; margin-bottom:8px; }
-  .prechat-inner p{ color:var(--ink-500); font-size:14px; margin:0 0 24px; line-height:1.6; }
-  .field{ text-align:left; margin-bottom:15px; }
-  .field label{ display:block; font-size:12.5px; font-weight:700; color:var(--ink-700); letter-spacing:.02em; margin-bottom:7px; }
-  .field input, .field textarea{
-    width:100%; font-family:var(--font); font-size:14.5px; padding:12px 14px; border-radius:var(--radius-sm);
-    border:1.5px solid var(--line); background:var(--green-50); outline:none; color:var(--ink-900);
-    transition:border-color .15s var(--ease), box-shadow .15s var(--ease), background .15s var(--ease);
-  }
-  .field input::placeholder, .field textarea::placeholder{ color:var(--ink-400); }
-  .field input:focus, .field textarea:focus{ border-color:var(--green-600); box-shadow:0 0 0 4px rgba(24,165,102,0.14); background:var(--white); }
-  .field textarea{ min-height:88px; resize:vertical; }
-  .prechat-submit{
-    width:100%; background:linear-gradient(155deg, var(--green-600), var(--green-700)); color:#fff; border:none;
-    border-radius:var(--radius-md); padding:14px; font-weight:700; font-size:15px; cursor:pointer;
-    display:flex; align-items:center; justify-content:center; gap:8px; font-family:var(--font);
-    box-shadow:var(--shadow-sm); transition:transform .12s var(--ease), box-shadow .15s var(--ease), filter .15s var(--ease);
-  }
-  .prechat-submit:hover{ filter:brightness(1.06); transform:translateY(-1px); box-shadow:var(--shadow-md); }
-  .prechat-submit[disabled]{ opacity:.6; cursor:not-allowed; transform:none; box-shadow:none; }
-  .prechat-error{ background:var(--danger-bg); color:var(--danger); border-radius:var(--radius-sm); padding:11px 14px; font-size:13px; font-weight:500; margin-bottom:16px; display:none; }
-
-  .toast{
-    position:fixed; bottom:22px; left:50%; transform:translateX(-50%) translateY(10px); background:var(--ink-900); color:#fff;
-    padding:12px 20px; border-radius:var(--radius-pill); font-size:13.5px; font-weight:500; box-shadow:var(--shadow-lg);
-    z-index:300; opacity:0; transition:opacity .2s var(--ease), transform .2s var(--ease); pointer-events:none;
-  }
-  .toast.show{ opacity:1; transform:translateX(-50%) translateY(0); }
-
-  @media (max-width: 860px){
-    .helpdesk{ flex-direction:column; padding:14px 14px 24px; gap:14px; }
-    .side{
-      width:100%; flex-direction:row; overflow-x:auto; gap:12px; padding-bottom:4px;
-      scroll-snap-type:x proximity; -webkit-overflow-scrolling:touch;
-    }
-    .side .card{ min-width:264px; scroll-snap-align:start; }
-    .chat-panel{ min-height:72vh; border-radius:var(--radius-lg); }
-    .chat-head{ padding:14px 16px; }
-    .chat-body{ padding:18px; }
-    .chat-input-bar{ padding:12px 14px; }
-    .msg-row{ max-width:85%; }
+  .sup-chip i{color:var(--leaf);}
+  .sup-chip:hover{
+    transform:translateY(-2px);
+    box-shadow:0 10px 22px -10px rgba(20,63,24,.35);
+    border-color:var(--leaf);
+    background:var(--sage);
   }
 
-  @media (max-width: 420px){
-    .topbar{ padding:12px 16px; }
-    .brand-sub{ display:none; }
-    .send-btn{ width:46px; height:46px; }
+  /* FAQ cards */
+  .sup-section-label{
+    font-size:.72rem; font-weight:700; text-transform:uppercase; letter-spacing:.08em;
+    color:var(--ink-soft); margin:0 0 .6rem .1rem;
+  }
+  .sup-faq-grid{
+    display:grid; grid-template-columns:1fr 1fr; gap:.65rem;
+    margin-bottom:1.3rem;
+  }
+  @media (max-width:380px){ .sup-faq-grid{grid-template-columns:1fr;} }
+  .sup-faq-card{
+    background:#fff; border:1px solid var(--line); border-radius:16px;
+    padding:.9rem .95rem; cursor:pointer; text-align:left;
+    transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  }
+  .sup-faq-card:hover{
+    transform:translateY(-3px);
+    box-shadow:0 16px 32px -16px rgba(20,63,24,.3);
+    border-color:transparent;
+  }
+  .sup-faq-card .ic{
+    width:34px; height:34px; border-radius:10px;
+    background:var(--sage); color:var(--forest);
+    display:flex; align-items:center; justify-content:center;
+    font-size:1rem; margin-bottom:.55rem;
+  }
+  .sup-faq-card .t{font-size:.85rem; font-weight:700; color:var(--ink); margin-bottom:.15rem;}
+  .sup-faq-card .s{font-size:.74rem; color:var(--ink-soft); line-height:1.35;}
+
+  /* Divider */
+  .sup-divider{
+    display:flex; align-items:center; gap:.7rem;
+    margin:.3rem 0 1rem; color:var(--ink-soft); font-size:.72rem;
+    text-transform:uppercase; letter-spacing:.08em; font-weight:700;
+  }
+  .sup-divider::before, .sup-divider::after{content:''; flex:1; height:1px; background:var(--line);}
+
+  /* Messages */
+  .sup-thread{display:flex; flex-direction:column; gap:.55rem; padding-bottom:.4rem;}
+  .sup-msg{
+    max-width:82%;
+    padding:.65rem .95rem;
+    font-size:.88rem; line-height:1.45;
+    border-radius:16px;
+    animation:supBubbleIn .28s ease both;
+    white-space:pre-wrap;
+    word-wrap:break-word;
+  }
+  .sup-msg.visitor{
+    align-self:flex-end;
+    background:linear-gradient(135deg, var(--leaf), var(--forest));
+    color:#fff;
+    border-bottom-right-radius:5px;
+  }
+  .sup-msg.admin{
+    align-self:flex-start;
+    background:#fff;
+    border:1px solid var(--line);
+    color:var(--ink);
+    border-bottom-left-radius:5px;
+  }
+  .sup-msg-time{
+    font-size:.68rem; color:var(--ink-soft); margin-top:.3rem; opacity:.75;
+    align-self:inherit;
+  }
+  .sup-msg.visitor + .sup-msg-time{align-self:flex-end;}
+
+  .sup-typing{
+    align-self:flex-start;
+    display:none;
+    align-items:center; gap:.3rem;
+    background:#fff; border:1px solid var(--line);
+    border-radius:16px; border-bottom-left-radius:5px;
+    padding:.65rem .95rem;
+  }
+  .sup-typing.show{display:flex;}
+  .sup-typing span{
+    width:6px; height:6px; border-radius:50%; background:var(--ink-soft); opacity:.5;
+    animation:supTypingBounce 1.2s infinite ease-in-out;
+  }
+  .sup-typing span:nth-child(2){animation-delay:.15s;}
+  .sup-typing span:nth-child(3){animation-delay:.3s;}
+
+  @keyframes supTypingBounce{
+    0%,60%,100%{transform:translateY(0); opacity:.5;}
+    30%{transform:translateY(-4px); opacity:1;}
+  }
+  @keyframes supBubbleIn{
+    from{opacity:0; transform:translateY(8px) scale(.97);}
+    to{opacity:1; transform:translateY(0) scale(1);}
+  }
+  @keyframes supFadeUp{
+    from{opacity:0; transform:translateY(14px);}
+    to{opacity:1; transform:translateY(0);}
+  }
+
+  /* ---------- Input ---------- */
+  .sup-input-bar{
+    flex-shrink:0;
+    display:flex; align-items:flex-end; gap:.6rem;
+    padding:.8rem 1rem calc(.8rem + env(safe-area-inset-bottom,0px));
+    background:#fff;
+    border-top:1px solid var(--line);
+  }
+  .sup-input-bar textarea{
+    flex:1 1 auto;
+    resize:none;
+    border:1.5px solid var(--line);
+    border-radius:18px;
+    padding:.7rem 1rem;
+    font-family:var(--body);
+    font-size:.9rem;
+    max-height:110px;
+    min-height:44px;
+    outline:none;
+    transition:border-color .2s ease, box-shadow .2s ease;
+    background:var(--cream);
+  }
+  .sup-input-bar textarea:focus{
+    border-color:var(--leaf);
+    box-shadow:0 0 0 3px rgba(67,160,71,.15);
+    background:#fff;
+  }
+  .sup-send-btn{
+    width:44px; height:44px; border-radius:50%; border:none; flex-shrink:0;
+    background:linear-gradient(135deg, var(--leaf), var(--forest));
+    color:#fff; font-size:1.1rem;
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer;
+    box-shadow:0 10px 22px -8px rgba(20,63,24,.5);
+    transition:transform .2s cubic-bezier(.34,1.56,.64,1), opacity .2s ease;
+  }
+  .sup-send-btn:hover{transform:scale(1.08);}
+  .sup-send-btn:active{transform:scale(.94);}
+  .sup-send-btn:disabled{opacity:.5; cursor:default; transform:none;}
+
+  .sup-empty-note{
+    text-align:center; color:var(--ink-soft); font-size:.78rem;
+    padding:.4rem 0 1rem;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .sup-welcome, .sup-msg, .sup-typing span{animation:none !important;}
   }
 </style>
 </head>
 <body>
 
-<header class="topbar">
-  <a class="brand" href="index.html">
-    <div class="brand-mark">L</div>
+<!-- ============ HEADER ============ -->
+<div class="sup-head">
+  <div class="sup-head-who">
+    <button class="sup-icon-btn" id="supBackBtn" aria-label="Back"><i class="bi bi-arrow-left"></i></button>
+    <div class="sup-avatar"><i class="bi bi-headset"></i><span class="dot"></span></div>
     <div>
-      <div class="brand-text">Landmark Landscaping</div>
-      <div class="brand-sub">Support &amp; live chat</div>
+      <div class="sup-head-name">Landmark Support</div>
+      <div class="sup-head-status"><i class="bi bi-circle-fill" style="font-size:.5rem;color:#2ECC71;"></i> Online now &middot; usually replies in a few minutes</div>
     </div>
-  </a>
-  <div class="topbar-spacer"></div>
-  <a class="btn-home" href="index.html"><i class="bi bi-arrow-left"></i> Back to site</a>
-</header>
-
-<div class="helpdesk">
-
-  <!-- SIDE PANEL -->
-  <aside class="side">
-    <div class="card">
-      <p class="eyebrow">We're here to help</p>
-      <h2>Talk to our team</h2>
-      <p class="lead-soft">Ask about a quote, check on an ongoing project, or get quick advice — a real person from Landmark replies here.</p>
-      <div class="hours-row">
-        <span class="status-dot" id="hoursDot"></span>
-        <strong id="hoursLabel">Checking hours…</strong>
-      </div>
-      <div class="hours-detail">Mon–Sat, 8:00 AM – 6:00 PM (Nairobi time)</div>
-    </div>
-
-    <div class="card">
-      <p class="eyebrow" style="margin-bottom:10px;">Other ways to reach us</p>
-      <a class="contact-row" href="https://wa.me/254728158526" target="_blank" rel="noopener"><i class="bi bi-whatsapp"></i> WhatsApp us</a>
-      <a class="contact-row" href="tel:+254728158526"><i class="bi bi-telephone-fill"></i> +254 728 158 526</a>
-      <a class="contact-row" href="mailto:bennyoike@gmail.com"><i class="bi bi-envelope-fill"></i> Email us</a>
-      <a class="contact-row" href="quote.html"><i class="bi bi-file-earmark-text-fill"></i> Request a quote</a>
-    </div>
-
-    <div class="card">
-      <p class="eyebrow" style="margin-bottom:10px;">Quick questions</p>
-      <div class="faq-list">
-        <button class="faq-item" data-faq="How much does a garden design project typically cost?">Typical project pricing?</button>
-        <button class="faq-item" data-faq="Which areas in Kenya do you serve?">Which areas do you serve?</button>
-        <button class="faq-item" data-faq="How long does a typical landscaping project take?">How long do projects take?</button>
-        <button class="faq-item" data-faq="Do you offer ongoing lawn maintenance plans?">Maintenance plans available?</button>
-      </div>
-    </div>
-  </aside>
-
-  <!-- CHAT PANEL -->
-  <main class="chat-panel">
-    <div class="chat-head">
-      <div class="chat-head-avatar">L</div>
-      <div>
-        <div class="chat-head-name">Landmark Support</div>
-        <div class="chat-head-status"><span class="dot"></span><span id="chatHeadStatusLabel">Typically replies within a few hours</span></div>
-      </div>
-      <div class="chat-head-spacer"></div>
-      <button class="new-chat-btn" id="newChatBtn" hidden>Start new conversation</button>
-    </div>
-
-    <!-- Pre-chat form (shown until a thread exists) -->
-    <div class="prechat" id="prechatView">
-      <div class="prechat-inner">
-        <i class="bi bi-chat-dots-fill"></i>
-        <h2>Start a conversation</h2>
-        <p>Tell us a little about yourself and what you need — we'll pick it up right away.</p>
-        <div class="prechat-error" id="prechatError"></div>
-        <form id="prechatForm">
-          <div class="field">
-            <label for="pcName">Your name</label>
-            <input type="text" id="pcName" required placeholder="e.g. Wanjiru Kamau">
-          </div>
-          <div class="field">
-            <label for="pcEmail">Email <span style="text-transform:none; font-weight:400;">(optional)</span></label>
-            <input type="email" id="pcEmail" placeholder="you@example.com">
-          </div>
-          <div class="field">
-            <label for="pcMessage">How can we help?</label>
-            <textarea id="pcMessage" required placeholder="I'd like a quote for a garden redesign in Karen…"></textarea>
-          </div>
-          <button type="submit" class="prechat-submit" id="prechatSubmitBtn"><i class="bi bi-send-fill"></i> Start chat</button>
-        </form>
-      </div>
-    </div>
-
-    <!-- Active chat (hidden until a thread exists) -->
-    <div class="chat-body" id="chatBody" hidden></div>
-    <div class="chat-input-bar" id="chatInputBar" hidden>
-      <textarea id="chatInput" placeholder="Type a message…" rows="1"></textarea>
-      <button class="send-btn" id="chatSendBtn" aria-label="Send"><i class="bi bi-send-fill"></i></button>
-    </div>
-  </main>
-
+  </div>
+  <div class="sup-head-actions">
+    <button class="sup-icon-btn" id="supCloseInline" aria-label="Close support chat"><i class="bi bi-x-lg"></i></button>
+  </div>
 </div>
 
-<div class="toast" id="toast"></div>
+<!-- ============ SCROLLABLE BODY ============ -->
+<div class="sup-body" id="supBody">
 
+  <div class="sup-welcome" id="supWelcome">
+    <h2>Hi there 👋 How can we help?</h2>
+    <p>Our team is based in Nairobi and happy to help with quotes, project questions, or anything else about your outdoor space.</p>
+    <div class="sup-meta-row">
+      <div class="sup-meta-item"><i class="bi bi-clock-history"></i> Avg. response ~10 min</div>
+      <div class="sup-meta-item"><i class="bi bi-geo-alt"></i> Nairobi &amp; nationwide</div>
+    </div>
+  </div>
+
+  <div class="sup-chip-row" id="supChipRow">
+    <button class="sup-chip" data-msg="I'd like to request a free quote for a project."><i class="bi bi-clipboard2-check"></i> Get a quote</button>
+    <button class="sup-chip" data-msg="What areas in Kenya do you currently serve?"><i class="bi bi-geo-alt"></i> Service areas</button>
+    <button class="sup-chip" data-msg="I have a question about irrigation systems."><i class="bi bi-droplet"></i> Irrigation help</button>
+    <button class="sup-chip" data-msg="I'd like to talk to a person, please."><i class="bi bi-person-badge"></i> Talk to a human</button>
+  </div>
+
+  <div class="sup-divider">Frequently asked</div>
+  <div class="sup-faq-grid" id="supFaqGrid">
+    <button class="sup-faq-card" data-msg="How much does a typical landscaping project cost?">
+      <div class="ic"><i class="bi bi-cash-coin"></i></div>
+      <div class="t">Pricing</div>
+      <div class="s">What affects project cost</div>
+    </button>
+    <button class="sup-faq-card" data-msg="How long does a landscaping or irrigation project usually take?">
+      <div class="ic"><i class="bi bi-hourglass-split"></i></div>
+      <div class="t">Timelines</div>
+      <div class="s">How long projects take</div>
+    </button>
+    <button class="sup-faq-card" data-msg="Do you offer ongoing garden maintenance plans?">
+      <div class="ic"><i class="bi bi-flower1"></i></div>
+      <div class="t">Maintenance</div>
+      <div class="s">Ongoing care plans</div>
+    </button>
+    <button class="sup-faq-card" data-msg="Do you handle commercial landscaping projects?">
+      <div class="ic"><i class="bi bi-building"></i></div>
+      <div class="t">Commercial</div>
+      <div class="s">Business &amp; institutional</div>
+    </button>
+  </div>
+
+  <div class="sup-divider" id="supThreadDivider" style="display:none;">Conversation</div>
+  <div class="sup-thread" id="supThread"></div>
+  <div class="sup-typing" id="supTyping"><span></span><span></span><span></span></div>
+  <div class="sup-empty-note">You're chatting with Landmark Landscaping Services &middot; Nairobi, Kenya</div>
+</div>
+
+<!-- ============ INPUT BAR ============ -->
+<div class="sup-input-bar">
+  <textarea id="supInput" rows="1" placeholder="Type your message…" aria-label="Message"></textarea>
+  <button class="sup-send-btn" id="supSendBtn" aria-label="Send message"><i class="bi bi-send-fill"></i></button>
+</div>
+
+<!-- Supabase client -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script>
 (function(){
-  const sb = supabase.createClient(
+  'use strict';
+
+  var sb = supabase.createClient(
     'https://bwcsuxvcqmykhckxqgjh.supabase.co',
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ3Y3N1eHZjcW15a2hja3hxZ2poIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODMyOTE1NjIsImV4cCI6MjA5ODg2NzU2Mn0.rAXetUdSG-uzEhQfvhgK8Kn-K5Hxyxx9M7QO4nKTZiA'
   );
 
-  const THREAD_KEY = 'lm_support_thread_id';
-  const $ = (sel, root) => (root || document).querySelector(sel);
-  const $all = (sel, root) => Array.from((root || document).querySelectorAll(sel));
+  var THREAD_KEY = 'lm_support_thread_id';
+  var isEmbedded = (window.self !== window.top);
+  document.body.classList.add(isEmbedded ? 'embedded' : 'standalone');
 
-  function escapeHtml(str){
-    return (str ?? '').toString().replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  }
-  function formatTime(iso){
-    const d = new Date(iso);
-    return d.toLocaleTimeString('en-KE', { hour: 'numeric', minute: '2-digit' });
-  }
+  var el = {
+    body: document.getElementById('supBody'),
+    thread: document.getElementById('supThread'),
+    threadDivider: document.getElementById('supThreadDivider'),
+    typing: document.getElementById('supTyping'),
+    input: document.getElementById('supInput'),
+    sendBtn: document.getElementById('supSendBtn'),
+    closeInline: document.getElementById('supCloseInline'),
+    backBtn: document.getElementById('supBackBtn')
+  };
 
-  let toastTimer;
-  function toast(msg){
-    const el = $('#toast');
-    el.textContent = msg;
-    el.classList.add('show');
-    clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => el.classList.remove('show'), 2600);
-  }
+  var threadId = localStorage.getItem(THREAD_KEY) || null;
+  var channel = null;
+  var renderedIds = {};
 
-  /* ---------- Business hours (Africa/Nairobi, Mon–Sat 08:00–18:00) ---------- */
-  function updateHoursBadge(){
-    const nowStr = new Date().toLocaleString('en-US', { timeZone: 'Africa/Nairobi', hour12: false, weekday: 'short', hour: '2-digit', minute: '2-digit' });
-    const parts = new Intl.DateTimeFormat('en-US', { timeZone: 'Africa/Nairobi', weekday: 'short', hour: 'numeric', hour12: false }).formatToParts(new Date());
-    const weekday = parts.find(p => p.type === 'weekday').value;
-    const hour = parseInt(parts.find(p => p.type === 'hour').value, 10);
-    const isOpenDay = !['Sun'].includes(weekday);
-    const isOpenHour = hour >= 8 && hour < 18;
-    const open = isOpenDay && isOpenHour;
-    $('#hoursDot').className = 'status-dot ' + (open ? 'open' : 'closed');
-    $('#hoursLabel').textContent = open ? 'We\u2019re online now' : 'Currently offline';
-    $('#chatHeadStatusLabel').textContent = open
-      ? 'Online now \u2014 usually replies within minutes'
-      : 'Offline \u2014 typically replies within a few hours';
-  }
-  updateHoursBadge();
-  setInterval(updateHoursBadge, 60000);
-
-  /* ---------- FAQ quick-fill ---------- */
-  $all('.faq-item').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const q = btn.dataset.faq;
-      const activeThread = localStorage.getItem(THREAD_KEY);
-      if (activeThread) {
-        $('#chatInput').value = q;
-        $('#chatInput').focus();
-      } else {
-        $('#pcMessage').value = q;
-        $('#pcMessage').focus();
-      }
-    });
-  });
-
-  /* ---------- Thread state ---------- */
-  let threadId = localStorage.getItem(THREAD_KEY);
-  let messagesChannel = null;
-
-  async function init(){
-    if (threadId) {
-      const { data: thread, error } = await sb.from('support_threads').select('*').eq('id', threadId).maybeSingle();
-      if (error || !thread) {
-        // Stale/deleted thread reference — start fresh.
-        localStorage.removeItem(THREAD_KEY);
-        threadId = null;
-        showPrechat();
-        return;
-      }
-      showChat();
-      await loadMessages();
-      subscribeToMessages();
+  function closePanel(){
+    if (isEmbedded) {
+      window.parent.postMessage('landmark-support:close', '*');
+    } else if (window.history.length > 1) {
+      window.history.back();
     } else {
-      showPrechat();
+      window.location.href = 'index.html';
+    }
+  }
+  el.closeInline.addEventListener('click', closePanel);
+  el.backBtn.addEventListener('click', closePanel);
+
+  function timeLabel(iso){
+    try{
+      var d = new Date(iso);
+      return d.toLocaleTimeString([], { hour:'2-digit', minute:'2-digit' });
+    }catch(e){ return ''; }
+  }
+
+  function scrollToBottom(){
+    el.body.scrollTop = el.body.scrollHeight;
+  }
+
+  function renderMessage(msg){
+    if (renderedIds[msg.id]) return;
+    renderedIds[msg.id] = true;
+    el.threadDivider.style.display = 'flex';
+
+    var wrap = document.createElement('div');
+    wrap.style.display = 'flex';
+    wrap.style.flexDirection = 'column';
+    wrap.style.alignItems = msg.sender === 'visitor' ? 'flex-end' : 'flex-start';
+
+    var bubble = document.createElement('div');
+    bubble.className = 'sup-msg ' + (msg.sender === 'visitor' ? 'visitor' : 'admin');
+    bubble.textContent = msg.message;
+
+    var time = document.createElement('div');
+    time.className = 'sup-msg-time';
+    time.textContent = (msg.sender === 'visitor' ? 'You' : 'Landmark Support') + ' · ' + timeLabel(msg.created_at);
+
+    wrap.appendChild(bubble);
+    wrap.appendChild(time);
+    el.thread.appendChild(wrap);
+    scrollToBottom();
+  }
+
+  function showTyping(on){
+    el.typing.classList.toggle('show', !!on);
+    if (on) scrollToBottom();
+  }
+
+  async function loadExistingThread(){
+    if (!threadId) return;
+    try{
+      var { data, error } = await sb
+        .from('support_messages')
+        .select('id, sender, message, created_at')
+        .eq('thread_id', threadId)
+        .order('created_at', { ascending: true });
+      if (error) throw error;
+      (data || []).forEach(renderMessage);
+      subscribeToThread();
+    }catch(err){
+      console.warn('Could not load support thread:', err);
     }
   }
 
-  function showPrechat(){
-    $('#prechatView').hidden = false;
-    $('#chatBody').hidden = true;
-    $('#chatInputBar').hidden = true;
-    $('#newChatBtn').hidden = true;
-  }
-  function showChat(){
-    $('#prechatView').hidden = true;
-    $('#chatBody').hidden = false;
-    $('#chatInputBar').hidden = false;
-    $('#newChatBtn').hidden = false;
-  }
-
-  async function loadMessages(){
-    const body = $('#chatBody');
-    const { data, error } = await sb.from('support_messages').select('*').eq('thread_id', threadId).order('created_at', { ascending: true });
-    if (error) { body.innerHTML = `<div class="chat-empty"><p>Could not load your conversation. Please refresh.</p></div>`; return; }
-    renderMessages(data || []);
-  }
-
-  function renderMessages(msgs){
-    const body = $('#chatBody');
-    if (!msgs || msgs.length === 0) {
-      body.innerHTML = `<div class="chat-empty"><i class="bi bi-chat-dots"></i><h3>Conversation started</h3><p>Send a message below to continue.</p></div>`;
-      return;
-    }
-    body.innerHTML = msgs.map(m => `
-      <div class="msg-row from-${m.sender}">
-        <div class="msg-bubble">${escapeHtml(m.message)}</div>
-        <div class="msg-time">${m.sender === 'admin' ? 'Landmark team \u00b7 ' : ''}${formatTime(m.created_at)}</div>
-      </div>`).join('');
-    body.scrollTop = body.scrollHeight;
-  }
-
-  function subscribeToMessages(){
-    if (messagesChannel) sb.removeChannel(messagesChannel);
-    messagesChannel = sb
-      .channel('support-thread-' + threadId)
-      .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'support_messages', filter: `thread_id=eq.${threadId}` }, () => loadMessages())
+  function subscribeToThread(){
+    if (!threadId || channel) return;
+    channel = sb.channel('support-thread-' + threadId)
+      .on('postgres_changes', {
+        event: 'INSERT',
+        schema: 'public',
+        table: 'support_messages',
+        filter: 'thread_id=eq.' + threadId
+      }, function(payload){
+        showTyping(false);
+        renderMessage(payload.new);
+      })
       .subscribe();
   }
 
-  /* ---------- Starting a new conversation ---------- */
-  $('#prechatForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const errBox = $('#prechatError');
-    errBox.style.display = 'none';
-    const btn = $('#prechatSubmitBtn');
-    btn.disabled = true;
-    btn.innerHTML = '<i class="bi bi-hourglass-split"></i> Starting…';
+  async function ensureThread(){
+    if (threadId) return threadId;
+    var { data, error } = await sb
+      .from('support_threads')
+      .insert({})
+      .select('id')
+      .single();
+    if (error) throw error;
+    threadId = data.id;
+    localStorage.setItem(THREAD_KEY, threadId);
+    subscribeToThread();
+    return threadId;
+  }
 
-    const name = $('#pcName').value.trim();
-    const email = $('#pcEmail').value.trim();
-    const firstMessage = $('#pcMessage').value.trim();
+  async function sendMessage(text){
+    text = (text || '').trim();
+    if (!text) return;
 
-    try {
-      const newThreadId = (crypto.randomUUID ? crypto.randomUUID() : (Date.now().toString(36) + Math.random().toString(36).slice(2)));
-      const { error: threadErr } = await sb.from('support_threads').insert({
-        id: newThreadId, visitor_name: name, visitor_email: email || null,
+    el.sendBtn.disabled = true;
+    try{
+      var tId = await ensureThread();
+      var optimisticId = 'local-' + Date.now();
+      renderMessage({
+        id: optimisticId,
+        sender: 'visitor',
+        message: text,
+        created_at: new Date().toISOString()
       });
-      if (threadErr) throw threadErr;
 
-      const { error: msgErr } = await sb.from('support_messages').insert({
-        thread_id: newThreadId, sender: 'visitor', message: firstMessage,
+      var { error } = await sb.from('support_messages').insert({
+        thread_id: tId,
+        sender: 'visitor',
+        message: text
       });
-      if (msgErr) throw msgErr;
+      if (error) throw error;
 
-      threadId = newThreadId;
-      localStorage.setItem(THREAD_KEY, threadId);
-      showChat();
-      await loadMessages();
-      subscribeToMessages();
-    } catch (err) {
-      errBox.textContent = 'Something went wrong starting the chat. Please try again or WhatsApp us directly.';
-      errBox.style.display = 'block';
-    } finally {
-      btn.disabled = false;
-      btn.innerHTML = '<i class="bi bi-send-fill"></i> Start chat';
+      // Light acknowledgment so the panel doesn't feel like it went nowhere,
+      // while we wait for a real reply to arrive over realtime.
+      showTyping(true);
+      window.setTimeout(function(){ showTyping(false); }, 4500);
+    }catch(err){
+      console.error('Failed to send support message:', err);
+    }finally{
+      el.sendBtn.disabled = false;
+    }
+  }
+
+  el.sendBtn.addEventListener('click', function(){
+    var text = el.input.value;
+    el.input.value = '';
+    el.input.style.height = 'auto';
+    sendMessage(text);
+  });
+
+  el.input.addEventListener('keydown', function(e){
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      el.sendBtn.click();
     }
   });
 
-  /* ---------- Sending a message in an existing conversation ---------- */
-  async function sendMessage(){
-    const input = $('#chatInput');
-    const message = input.value.trim();
-    if (!message || !threadId) return;
-    const btn = $('#chatSendBtn');
-    btn.disabled = true;
-    input.value = '';
-    input.style.height = 'auto';
-
-    const { error } = await sb.from('support_messages').insert({ thread_id: threadId, sender: 'visitor', message });
-    if (error) { toast('Could not send — please try again.'); input.value = message; }
-    else { await loadMessages(); }
-    btn.disabled = false;
-    input.focus();
-  }
-
-  $('#chatSendBtn').addEventListener('click', sendMessage);
-  $('#chatInput').addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
-  });
-  $('#chatInput').addEventListener('input', function(){
-    this.style.height = 'auto';
-    this.style.height = Math.min(this.scrollHeight, 120) + 'px';
+  el.input.addEventListener('input', function(){
+    el.input.style.height = 'auto';
+    el.input.style.height = Math.min(el.input.scrollHeight, 110) + 'px';
   });
 
-  $('#newChatBtn').addEventListener('click', () => {
-    if (!confirm('Start a new conversation? Your current chat history will stay saved, but you\u2019ll begin a fresh thread.')) return;
-    if (messagesChannel) sb.removeChannel(messagesChannel);
-    localStorage.removeItem(THREAD_KEY);
-    threadId = null;
-    $('#pcName').value = ''; $('#pcEmail').value = ''; $('#pcMessage').value = '';
-    showPrechat();
+  document.querySelectorAll('.sup-chip, .sup-faq-card').forEach(function(node){
+    node.addEventListener('click', function(){
+      sendMessage(node.getAttribute('data-msg'));
+    });
   });
 
-  init();
+  loadExistingThread();
 })();
 </script>
+
 </body>
 </html>
