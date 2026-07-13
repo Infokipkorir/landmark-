@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Support &amp; Live Chat — Landmark Landscaping</title>
+<meta name="description" content="Chat live with the Landmark Landscaping team. Get quick answers on quotes, projects, and ongoing work — or reach us by phone and WhatsApp.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+<style>
+  :root{
+    --forest:#1B5E20;
+    --forest-deep:#143F18;
+    --leaf:#43A047;
+    --sage:#EEF3E7;
+    --clay:#C0703A;
+    --clay-deep:#9C5526;
+    --sun:#E0A93B;
+    --cream:#FBF8F2;
+    --ink:#1C2418;
+    --ink-soft:#52604A;
+    --line:rgba(28,36,24,0.08);
+    --display:'Fraunces', serif;
+    --body:'Plus Jakarta Sans', system-ui, sans-serif;
+    --mono:'JetBrains Mono', monospace;
+  }
+  *{box-sizing:border-box;}
+  html,body{height:100%;}
+  body{
+    margin:0; font-family:var(--body); color:var(--ink); background:var(--cream);
+    display:flex; flex-direction:column; min-height:100vh;
+  }
+  h1,h2,h3,.display{ font-family:var(--display); color:var(--forest-deep); letter-spacing:-0.01em; margin:0; }
+  a{ color:var(--forest); }
+  .eyebrow{ font-family:var(--mono); font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--clay-deep); font-weight:500; }
+
+  /* ---------- Top bar ---------- */
+  .topbar{
+    display:flex; align-items:center; gap:14px; padding:14px 24px;
+    background:#fff; border-bottom:1px solid var(--line); position:sticky; top:0; z-index:20;
+  }
+  .brand{ display:flex; align-items:center; gap:10px; text-decoration:none; }
+  .brand-mark{
+    width:38px; height:38px; border-radius:10px; background:var(--forest); color:#fff;
+    display:flex; align-items:center; justify-content:center; font-family:var(--display); font-weight:600; font-size:17px; flex-shrink:0;
+  }
+  .brand-text{ font-weight:700; font-size:15px; color:var(--forest-deep); line-height:1.2; }
+  .brand-sub{ font-size:11px; color:var(--ink-soft); }
+  .topbar-spacer{ flex:1; }
+  .topbar .btn-home{
+    display:inline-flex; align-items:center; gap:6px; font-size:13.5px; font-weight:600; color:var(--ink-soft);
+    text-decoration:none; padding:8px 14px; border-radius:999px; border:1px solid var(--line);
+  }
+  .topbar .btn-home:hover{ background:var(--sage); color:var(--forest-deep); }
+
+  /* ---------- Layout ---------- */
+  .helpdesk{ flex:1; display:flex; max-width:1180px; margin:0 auto; width:100%; padding:28px 20px 40px; gap:24px; }
+  .side{ width:300px; flex-shrink:0; display:flex; flex-direction:column; gap:16px; }
+  .card{ background:#fff; border:1px solid var(--line); border-radius:20px; padding:20px; box-shadow:0 1px 2px rgba(28,36,24,0.04), 0 8px 24px rgba(28,36,24,0.05); }
+  .side h2{ font-size:19px; margin-bottom:8px; }
+  .side p.lead-soft{ color:var(--ink-soft); font-size:13.5px; line-height:1.6; margin:0; }
+
+  .hours-row{ display:flex; align-items:center; gap:8px; margin-top:14px; font-size:13px; }
+  .status-dot{ width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+  .status-dot.open{ background:var(--leaf); box-shadow:0 0 0 3px rgba(67,160,71,0.18); }
+  .status-dot.closed{ background:var(--clay); box-shadow:0 0 0 3px rgba(192,112,58,0.18); }
+  .hours-detail{ color:var(--ink-soft); font-size:12px; margin-top:4px; }
+
+  .contact-row{ display:flex; align-items:center; gap:10px; padding:10px 0; border-top:1px solid var(--line); text-decoration:none; color:var(--ink); font-size:13.5px; font-weight:500; }
+  .contact-row:first-of-type{ border-top:none; }
+  .contact-row i{ width:30px; height:30px; border-radius:9px; background:var(--sage); color:var(--forest); display:flex; align-items:center; justify-content:center; font-size:14px; flex-shrink:0; }
+  .contact-row:hover{ color:var(--forest); }
+
+  .faq-list{ display:flex; flex-direction:column; gap:6px; }
+  .faq-item{ font-size:13px; padding:9px 12px; border-radius:10px; background:var(--sage); color:var(--forest-deep); cursor:pointer; border:none; text-align:left; font-weight:500; }
+  .faq-item:hover{ background:#E2EBD8; }
+
+  /* ---------- Chat panel ---------- */
+  .chat-panel{ flex:1; display:flex; flex-direction:column; background:#fff; border:1px solid var(--line); border-radius:22px; overflow:hidden; box-shadow:0 1px 2px rgba(28,36,24,0.04), 0 10px 30px rgba(28,36,24,0.06); min-height:560px; }
+  .chat-head{ display:flex; align-items:center; gap:12px; padding:16px 22px; border-bottom:1px solid var(--line); }
+  .chat-head-avatar{ width:42px; height:42px; border-radius:50%; background:var(--forest); color:#fff; display:flex; align-items:center; justify-content:center; font-family:var(--display); font-weight:600; }
+  .chat-head-name{ font-weight:700; font-size:15px; color:var(--forest-deep); }
+  .chat-head-status{ font-size:12px; color:var(--ink-soft); display:flex; align-items:center; gap:6px; }
+  .chat-head-status .dot{ width:7px; height:7px; border-radius:50%; background:var(--leaf); }
+  .chat-head-spacer{ flex:1; }
+  .new-chat-btn{ font-size:12.5px; font-weight:600; color:var(--ink-soft); background:none; border:1px solid var(--line); border-radius:999px; padding:7px 13px; cursor:pointer; }
+  .new-chat-btn:hover{ background:var(--sage); color:var(--forest-deep); }
+
+  .chat-body{ flex:1; overflow-y:auto; padding:24px; display:flex; flex-direction:column; gap:14px; background:linear-gradient(180deg, rgba(238,243,231,0.4), transparent 120px); }
+  .msg-row{ display:flex; flex-direction:column; max-width:74%; }
+  .msg-row.from-visitor{ align-self:flex-end; align-items:flex-end; }
+  .msg-row.from-admin{ align-self:flex-start; align-items:flex-start; }
+  .msg-bubble{ padding:11px 15px; border-radius:16px; font-size:14px; line-height:1.55; }
+  .msg-row.from-visitor .msg-bubble{ background:var(--forest); color:#fff; border-bottom-right-radius:4px; }
+  .msg-row.from-admin .msg-bubble{ background:var(--sage); color:var(--ink); border-bottom-left-radius:4px; }
+  .msg-time{ font-size:10.5px; color:var(--ink-soft); margin-top:4px; font-family:var(--mono); }
+
+  .chat-empty{ margin:auto; text-align:center; color:var(--ink-soft); padding:20px; }
+  .chat-empty i{ font-size:34px; color:var(--leaf); margin-bottom:10px; display:block; }
+  .chat-empty h3{ font-size:17px; margin-bottom:6px; }
+  .chat-empty p{ font-size:13.5px; margin:0; }
+
+  .chat-input-bar{ display:flex; align-items:flex-end; gap:10px; padding:16px 20px; border-top:1px solid var(--line); }
+  .chat-input-bar textarea{
+    flex:1; resize:none; border:1px solid var(--line); border-radius:14px; padding:11px 14px;
+    font-family:var(--body); font-size:14px; min-height:46px; max-height:120px; outline:none; background:var(--cream);
+  }
+  .chat-input-bar textarea:focus{ border-color:var(--forest); box-shadow:0 0 0 3px rgba(27,94,32,0.12); }
+  .send-btn{
+    width:46px; height:46px; border-radius:14px; background:var(--forest); color:#fff; border:none;
+    display:flex; align-items:center; justify-content:center; font-size:17px; flex-shrink:0; cursor:pointer;
+    transition:background .15s ease, transform .1s ease;
+  }
+  .send-btn:hover{ background:var(--forest-deep); }
+  .send-btn:active{ transform:scale(0.96); }
+  .send-btn[disabled]{ opacity:.5; cursor:not-allowed; }
+
+  /* ---------- Pre-chat form ---------- */
+  .prechat{ flex:1; display:flex; align-items:center; justify-content:center; padding:32px; }
+  .prechat-inner{ width:100%; max-width:380px; text-align:center; }
+  .prechat-inner i{ font-size:38px; color:var(--leaf); margin-bottom:10px; display:block; }
+  .prechat-inner h2{ font-size:22px; margin-bottom:8px; }
+  .prechat-inner p{ color:var(--ink-soft); font-size:13.5px; margin:0 0 22px; }
+  .field{ text-align:left; margin-bottom:14px; }
+  .field label{ display:block; font-size:12px; font-weight:600; color:var(--ink-soft); text-transform:uppercase; letter-spacing:.04em; margin-bottom:6px; }
+  .field input, .field textarea{
+    width:100%; font-family:var(--body); font-size:14px; padding:11px 13px; border-radius:12px;
+    border:1px solid var(--line); background:var(--cream); outline:none;
+  }
+  .field input:focus, .field textarea:focus{ border-color:var(--forest); box-shadow:0 0 0 3px rgba(27,94,32,0.12); }
+  .field textarea{ min-height:80px; resize:vertical; }
+  .prechat-submit{
+    width:100%; background:var(--forest); color:#fff; border:none; border-radius:14px; padding:13px;
+    font-weight:700; font-size:14.5px; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px;
+  }
+  .prechat-submit:hover{ background:var(--forest-deep); }
+  .prechat-submit[disabled]{ opacity:.6; cursor:not-allowed; }
+  .prechat-error{ background:#FBEAE3; color:var(--clay-deep); border-radius:10px; padding:9px 12px; font-size:12.5px; margin-bottom:14px; display:none; }
+
+  .toast{
+    position:fixed; bottom:22px; left:50%; transform:translateX(-50%) translateY(10px); background:var(--ink); color:#fff;
+    padding:11px 18px; border-radius:999px; font-size:13px; box-shadow:0 10px 30px rgba(0,0,0,.2);
+    z-index:300; opacity:0; transition:opacity .2s ease, transform .2s ease; pointer-events:none;
+  }
+  .toast.show{ opacity:1; transform:translateX(-50%) translateY(0); }
+
+  @media (max-width: 860px){
+    .helpdesk{ flex-direction:column; padding:16px; }
+    .side{ width:100%; flex-direction:row; overflow-x:auto; }
+    .side .card{ min-width:260px; }
+    .chat-panel{ min-height:70vh; }
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <a class="brand" href="index.html">
+    <div class="brand-mark">L</div>
+    <div>
+      <div class="brand-text">Landmark Landscaping</div>
+      <div class="brand-sub">Support &amp; live chat</div>
+    </div>
+  </a>
+  <div class="topbar-spacer"></div>
+  <a class="btn-home" href="index.html"><i class="bi bi-arrow-left"></i> Back to site</a>
+</header>
+
+<div class="helpdesk">
+
+  <!-- SIDE PANEL -->
+  <aside class="side">
+    <div class="card">
+      <p class="eyebrow">We're here to help</p>
+      <h2>Talk to our team</h2>
+      <p class="lead-soft">Ask about a quote, check on an ongoing project, or get quick advice — a real person from Landmark replies here.</p>
+      <div class="hours-row">
+        <span class="status-dot" id="hoursDot"></span>
+        <strong id="hoursLabel">Checking hours…</strong>
+      </div>
+      <div class="hours-detail">Mon–Sat, 8:00 AM – 6:00 PM (Nairobi time)</div>
+    </div>
+
+    <div class="card">
+      <p class="eyebrow" style="margin-bottom:10px;">Other ways to reach us</p>
+      <a class="contact-row" href="https://wa.me/254728158526" target="_blank" rel="noopener"><i class="bi bi-whatsapp"></i> WhatsApp us</a>
+      <a class="contact-row" href="tel:+254728158526"><i class="bi bi-telephone-fill"></i> +254 728 158 526</a>
+      <a class="contact-row" href="mailto:bennyoike@gmail.com"><i class="bi bi-envelope-fill"></i> Email us</a>
+      <a class="contact-row" href="quote.html"><i class="bi bi-file-earmark-text-fill"></i> Request a quote</a>
+    </div>
+
+    <div class="card">
+      <p class="eyebrow" style="margin-bottom:10px;">Quick questions</p>
+      <div class="faq-list">
+        <button class="faq-item" data-faq="How much does a garden design project typically cost?">Typical project pricing?</button>
+        <button class="faq-item" data-faq="Which areas in Kenya do you serve?">Which areas do you serve?</button>
+        <button class="faq-item" data-faq="How long does a typical landscaping project take?">How long do projects take?</button>
+        <button class="faq-item" data-faq="Do you offer ongoing lawn maintenance plans?">Maintenance plans available?</button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- CHAT PANEL -->
+  <main class="chat-panel">
+    <div class="chat-head">
+      <div class="chat-head-avatar">L</div>
+      <div>
+        <div class="chat-head-name">Landmark Support</div>
+        <div class="chat-head-status"><span class="dot"></span><span id="chatHeadStatusLabel">Typically replies within a few hours</span></div>
+      </div>
+      <div class="chat-head-spacer"></div>
+      <button class="new-chat-btn" id="newChatBtn" hidden>Start new conversation</button>
+    </div>
+
+    <!-- Pre-chat form (shown until a thread exists) -->
+    <div class="prechat" id="prechatView">
+      <div class="prechat-inner">
+        <i class="bi bi-chat-dots-fill"></i>
+        <h2>Start a conversation</h2>
+        <p>Tell us a little about yourself and what you need — we'll pick it up right away.</p>
+        <div class="prechat-error" id="prechatError"></div>
+        <form id="prechatForm">
+          <div class="field">
+            <label for="pcName">Your name</label>
+            <input type="text" id="pcName" required placeholder="e.g. Wanjiru Kamau">
+          </div>
+          <div class="field">
+            <label for="pcEmail">Email <span style="text-transform:none; font-weight:400;">(optional)</span></label>
+            <input type="email" id="pcEmail" placeholder="you@example.com">
+          </div>
+          <div class="field">
+            <label for="pcMessage">How can we help?</label>
+            <textarea id="pcMessage" required placeholder="I'd like a quote for a garden redesign in Karen…"></textarea>
+          </div>
+          <button type="submit" class="prechat-submit" id="prechatSubmitBtn"><i class="bi bi-send-fill"></i> Start chat</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Active chat (hidden until a thread exists) -->
+    <div class="chat-body" id="chatBody" hidden></div>
+    <div class="chat-input-bar" id="chatInputBar" hidden>
+      <textarea id="chatInput" placeholder="Type a message…" rows="1"></textarea>
+      <button class="send-btn" id="chatSendBtn" aria-label="Send"><i class="bi bi-send-fill"></i></button>
+    </div>
+  </main>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script>
+(function(){
+  const sb = supabase.createClient(
+    'https://bwcsuxvcqmykhckxqgjh.supabase.co',
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ3Y3N1eHZjcW15a2hja3hxZ2poIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODMyOTE1NjIsImV4cCI6MjA5ODg2NzU2Mn0.rAXetUdSG-uzEhQfvhgK8Kn-K5Hxyxx9M7QO4nKTZiA'
+  );
+
+  const THREAD_KEY = 'lm_support_thread_id';
+  const $ = (sel, root) => (root || document).querySelector(sel);
+  const $all = (sel, root) => Array.from((root || document).querySelectorAll(sel));
+
+  function escapeHtml(str){
+    return (str ?? '').toString().replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+  function formatTime(iso){
+    const d = new Date(iso);
+    return d.toLocaleTimeString('en-KE', { hour: 'numeric', minute: '2-digit' });
+  }
+
+  let toastTimer;
+  function toast(msg){
+    const el = $('#toast');
+    el.textContent = msg;
+    el.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => el.classList.remove('show'), 2600);
+  }
+
+  /* ---------- Business hours (Africa/Nairobi, Mon–Sat 08:00–18:00) ---------- */
+  function updateHoursBadge(){
+    const nowStr = new Date().toLocaleString('en-US', { timeZone: 'Africa/Nairobi', hour12: false, weekday: 'short', hour: '2-digit', minute: '2-digit' });
+    const parts = new Intl.DateTimeFormat('en-US', { timeZone: 'Africa/Nairobi', weekday: 'short', hour: 'numeric', hour12: false }).formatToParts(new Date());
+    const weekday = parts.find(p => p.type === 'weekday').value;
+    const hour = parseInt(parts.find(p => p.type === 'hour').value, 10);
+    const isOpenDay = !['Sun'].includes(weekday);
+    const isOpenHour = hour >= 8 && hour < 18;
+    const open = isOpenDay && isOpenHour;
+    $('#hoursDot').className = 'status-dot ' + (open ? 'open' : 'closed');
+    $('#hoursLabel').textContent = open ? 'We\u2019re online now' : 'Currently offline';
+    $('#chatHeadStatusLabel').textContent = open
+      ? 'Online now \u2014 usually replies within minutes'
+      : 'Offline \u2014 typically replies within a few hours';
+  }
+  updateHoursBadge();
+  setInterval(updateHoursBadge, 60000);
+
+  /* ---------- FAQ quick-fill ---------- */
+  $all('.faq-item').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const q = btn.dataset.faq;
+      const activeThread = localStorage.getItem(THREAD_KEY);
+      if (activeThread) {
+        $('#chatInput').value = q;
+        $('#chatInput').focus();
+      } else {
+        $('#pcMessage').value = q;
+        $('#pcMessage').focus();
+      }
+    });
+  });
+
+  /* ---------- Thread state ---------- */
+  let threadId = localStorage.getItem(THREAD_KEY);
+  let messagesChannel = null;
+
+  async function init(){
+    if (threadId) {
+      const { data: thread, error } = await sb.from('support_threads').select('*').eq('id', threadId).maybeSingle();
+      if (error || !thread) {
+        // Stale/deleted thread reference — start fresh.
+        localStorage.removeItem(THREAD_KEY);
+        threadId = null;
+        showPrechat();
+        return;
+      }
+      showChat();
+      await loadMessages();
+      subscribeToMessages();
+    } else {
+      showPrechat();
+    }
+  }
+
+  function showPrechat(){
+    $('#prechatView').hidden = false;
+    $('#chatBody').hidden = true;
+    $('#chatInputBar').hidden = true;
+    $('#newChatBtn').hidden = true;
+  }
+  function showChat(){
+    $('#prechatView').hidden = true;
+    $('#chatBody').hidden = false;
+    $('#chatInputBar').hidden = false;
+    $('#newChatBtn').hidden = false;
+  }
+
+  async function loadMessages(){
+    const body = $('#chatBody');
+    const { data, error } = await sb.from('support_messages').select('*').eq('thread_id', threadId).order('created_at', { ascending: true });
+    if (error) { body.innerHTML = `<div class="chat-empty"><p>Could not load your conversation. Please refresh.</p></div>`; return; }
+    renderMessages(data || []);
+  }
+
+  function renderMessages(msgs){
+    const body = $('#chatBody');
+    if (!msgs || msgs.length === 0) {
+      body.innerHTML = `<div class="chat-empty"><i class="bi bi-chat-dots"></i><h3>Conversation started</h3><p>Send a message below to continue.</p></div>`;
+      return;
+    }
+    body.innerHTML = msgs.map(m => `
+      <div class="msg-row from-${m.sender}">
+        <div class="msg-bubble">${escapeHtml(m.message)}</div>
+        <div class="msg-time">${m.sender === 'admin' ? 'Landmark team \u00b7 ' : ''}${formatTime(m.created_at)}</div>
+      </div>`).join('');
+    body.scrollTop = body.scrollHeight;
+  }
+
+  function subscribeToMessages(){
+    if (messagesChannel) sb.removeChannel(messagesChannel);
+    messagesChannel = sb
+      .channel('support-thread-' + threadId)
+      .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'support_messages', filter: `thread_id=eq.${threadId}` }, () => loadMessages())
+      .subscribe();
+  }
+
+  /* ---------- Starting a new conversation ---------- */
+  $('#prechatForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const errBox = $('#prechatError');
+    errBox.style.display = 'none';
+    const btn = $('#prechatSubmitBtn');
+    btn.disabled = true;
+    btn.innerHTML = '<i class="bi bi-hourglass-split"></i> Starting…';
+
+    const name = $('#pcName').value.trim();
+    const email = $('#pcEmail').value.trim();
+    const firstMessage = $('#pcMessage').value.trim();
+
+    try {
+      const newThreadId = (crypto.randomUUID ? crypto.randomUUID() : (Date.now().toString(36) + Math.random().toString(36).slice(2)));
+      const { error: threadErr } = await sb.from('support_threads').insert({
+        id: newThreadId, visitor_name: name, visitor_email: email || null,
+      });
+      if (threadErr) throw threadErr;
+
+      const { error: msgErr } = await sb.from('support_messages').insert({
+        thread_id: newThreadId, sender: 'visitor', message: firstMessage,
+      });
+      if (msgErr) throw msgErr;
+
+      threadId = newThreadId;
+      localStorage.setItem(THREAD_KEY, threadId);
+      showChat();
+      await loadMessages();
+      subscribeToMessages();
+    } catch (err) {
+      errBox.textContent = 'Something went wrong starting the chat. Please try again or WhatsApp us directly.';
+      errBox.style.display = 'block';
+    } finally {
+      btn.disabled = false;
+      btn.innerHTML = '<i class="bi bi-send-fill"></i> Start chat';
+    }
+  });
+
+  /* ---------- Sending a message in an existing conversation ---------- */
+  async function sendMessage(){
+    const input = $('#chatInput');
+    const message = input.value.trim();
+    if (!message || !threadId) return;
+    const btn = $('#chatSendBtn');
+    btn.disabled = true;
+    input.value = '';
+    input.style.height = 'auto';
+
+    const { error } = await sb.from('support_messages').insert({ thread_id: threadId, sender: 'visitor', message });
+    if (error) { toast('Could not send — please try again.'); input.value = message; }
+    else { await loadMessages(); }
+    btn.disabled = false;
+    input.focus();
+  }
+
+  $('#chatSendBtn').addEventListener('click', sendMessage);
+  $('#chatInput').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+  });
+  $('#chatInput').addEventListener('input', function(){
+    this.style.height = 'auto';
+    this.style.height = Math.min(this.scrollHeight, 120) + 'px';
+  });
+
+  $('#newChatBtn').addEventListener('click', () => {
+    if (!confirm('Start a new conversation? Your current chat history will stay saved, but you\u2019ll begin a fresh thread.')) return;
+    if (messagesChannel) sb.removeChannel(messagesChannel);
+    localStorage.removeItem(THREAD_KEY);
+    threadId = null;
+    $('#pcName').value = ''; $('#pcEmail').value = ''; $('#pcMessage').value = '';
+    showPrechat();
+  });
+
+  init();
+})();
+</script>
+</body>
+</html>
