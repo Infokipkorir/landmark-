@@ -1,0 +1,2027 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Console — Landmark Landscaping</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* =========================================================
+   Landmark Landscaping — Admin Console
+   Design tokens: "greenhouse control room"
+   ========================================================= */
+
+:root {
+  --ink: #1B2420;
+  --ink-muted: #5B655F;
+  --surface: #F7F6F2;
+  --panel: #FFFFFF;
+  --moss: #3F6C4E;
+  --moss-dark: #2E5039;
+  --moss-tint: #E7EEE9;
+  --clay: #B5651D;
+  --clay-tint: #F7EAE0;
+  --sand: #D8CFBE;
+  --sand-light: #EDE9E0;
+  --red: #A3372B;
+  --red-tint: #F7E6E3;
+  --gold: #9C7A24;
+  --gold-tint: #F5EFDD;
+
+  --font-display: "Fraunces", Georgia, serif;
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", "Courier New", monospace;
+
+  --radius-sm: 6px;
+  --radius: 10px;
+  --radius-lg: 14px;
+  --shadow-card: 0 1px 2px rgba(27,36,32,0.06), 0 4px 16px rgba(27,36,32,0.05);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--surface);
+  color: var(--ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 600; margin: 0; color: var(--ink); }
+a { color: var(--moss-dark); }
+button { font-family: var(--font-body); cursor: pointer; }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  height: 38px; padding: 0 16px; border-radius: var(--radius-sm);
+  border: 1px solid var(--sand); background: var(--panel); color: var(--ink);
+  font-size: 13.5px; font-weight: 500;
+  transition: background .15s ease, border-color .15s ease, transform .1s ease;
+}
+.btn:hover { background: var(--sand-light); }
+.btn:active { transform: scale(0.98); }
+.btn-primary { background: var(--moss); border-color: var(--moss); color: #fff; }
+.btn-primary:hover { background: var(--moss-dark); }
+.btn-danger { background: var(--panel); border-color: var(--red); color: var(--red); }
+.btn-danger:hover { background: var(--red-tint); }
+.btn-block { width: 100%; }
+.btn-sm { height: 30px; padding: 0 12px; font-size: 12.5px; }
+.btn[disabled] { opacity: .55; cursor: not-allowed; }
+.btn-icon { width: 34px; height: 34px; padding: 0; border-radius: var(--radius-sm); }
+
+.field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+.field-label { font-size: 12.5px; font-weight: 600; color: var(--ink-muted); text-transform: uppercase; letter-spacing: .04em; }
+input, select, textarea {
+  font-family: var(--font-body); font-size: 14px; padding: 10px 12px;
+  border-radius: var(--radius-sm); border: 1px solid var(--sand);
+  background: var(--panel); color: var(--ink); outline: none; width: 100%;
+}
+input:focus, select:focus, textarea:focus { border-color: var(--moss); box-shadow: 0 0 0 3px var(--moss-tint); }
+textarea { resize: vertical; min-height: 90px; font-family: var(--font-body); }
+
+/* LOGIN PAGE */
+.login-body {
+  min-height: 100vh; display: flex; align-items: center; justify-content: center;
+  background:
+    radial-gradient(circle at 20% 10%, rgba(63,108,78,0.10), transparent 45%),
+    radial-gradient(circle at 85% 90%, rgba(181,101,29,0.08), transparent 40%),
+    var(--surface);
+  padding: 24px;
+}
+.login-wrap { width: 100%; max-width: 400px; }
+.login-card { background: var(--panel); border: 1px solid var(--sand); border-radius: var(--radius-lg); box-shadow: var(--shadow-card); padding: 36px 32px 30px; }
+.login-brand { display: flex; align-items: center; gap: 12px; margin-bottom: 26px; }
+.brand-mark {
+  width: 40px; height: 40px; border-radius: 9px; background: var(--moss); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); font-weight: 600; font-size: 18px;
+}
+.brand-name { font-weight: 600; font-size: 14.5px; color: var(--ink); }
+.brand-sub { font-size: 11.5px; color: var(--ink-muted); text-transform: uppercase; letter-spacing: .06em; }
+.login-title { font-size: 24px; margin-bottom: 6px; }
+.login-help { font-size: 13.5px; color: var(--ink-muted); line-height: 1.5; margin: 0 0 24px; }
+.login-form { margin-top: 6px; }
+.login-error { background: var(--red-tint); color: var(--red); border-radius: var(--radius-sm); padding: 10px 12px; font-size: 13px; margin-bottom: 14px; }
+.login-footnote { text-align: center; font-size: 12px; color: var(--ink-muted); margin-top: 18px; }
+
+/* DASHBOARD SHELL */
+.shell { display: flex; min-height: 100vh; }
+.sidebar {
+  width: 240px; flex-shrink: 0; background: var(--ink); color: #EDEFEC;
+  display: flex; flex-direction: column; transition: width .18s ease;
+  position: sticky; top: 0; height: 100vh; overflow: hidden;
+}
+.shell.sidebar-collapsed .sidebar { width: 68px; }
+.sidebar-head { display: flex; align-items: center; gap: 10px; padding: 18px 16px; border-bottom: 1px solid rgba(255,255,255,0.08); white-space: nowrap; }
+.sidebar-head .brand-mark { flex-shrink: 0; }
+.sidebar-head .brand-name { color: #fff; }
+.sidebar-head .brand-sub { color: #9BA69E; }
+.shell.sidebar-collapsed .sidebar-head .brand-name,
+.shell.sidebar-collapsed .sidebar-head .brand-sub { display: none; }
+.sidebar-nav { flex: 1; padding: 12px 10px; overflow-y: auto; }
+.nav-item {
+  display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: var(--radius-sm);
+  color: #C7CFC9; font-size: 13.5px; font-weight: 500; cursor: pointer; white-space: nowrap;
+  margin-bottom: 2px; border: none; background: none; width: 100%; text-align: left;
+}
+.nav-item:hover { background: rgba(255,255,255,0.06); color: #fff; }
+.nav-item.active { background: var(--moss); color: #fff; }
+.nav-icon { width: 18px; height: 18px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+.nav-badge { margin-left: auto; background: var(--clay); color: #fff; font-size: 10.5px; font-weight: 600; border-radius: 20px; padding: 1px 7px; font-family: var(--font-mono); }
+.shell.sidebar-collapsed .nav-label,
+.shell.sidebar-collapsed .nav-badge { display: none; }
+.sidebar-foot { padding: 12px 10px 16px; border-top: 1px solid rgba(255,255,255,0.08); }
+
+.main { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.topbar { display: flex; align-items: center; gap: 14px; padding: 14px 24px; background: var(--panel); border-bottom: 1px solid var(--sand); position: sticky; top: 0; z-index: 10; }
+.topbar-title { font-size: 19px; }
+.topbar-sub { font-size: 12.5px; color: var(--ink-muted); margin-top: 1px; }
+.topbar-spacer { flex: 1; }
+.topbar-user { display: flex; align-items: center; gap: 10px; }
+.avatar-circle { width: 32px; height: 32px; border-radius: 50%; background: var(--moss-tint); color: var(--moss-dark); display: flex; align-items: center; justify-content: center; font-size: 12.5px; font-weight: 600; }
+.icon-btn { width: 36px; height: 36px; border-radius: var(--radius-sm); border: 1px solid var(--sand); background: var(--panel); display: flex; align-items: center; justify-content: center; color: var(--ink-muted); }
+.icon-btn:hover { background: var(--sand-light); }
+
+.content { padding: 24px; flex: 1; }
+.panel-section { display: none; }
+.panel-section.active { display: block; animation: fadein .15s ease; }
+@keyframes fadein { from { opacity: 0; transform: translateY(3px);} to { opacity: 1; transform: translateY(0);} }
+
+.card { background: var(--panel); border: 1px solid var(--sand); border-radius: var(--radius-lg); box-shadow: var(--shadow-card); }
+.card-pad { padding: 20px; }
+.card-head { display: flex; align-items: center; justify-content: space-between; padding: 18px 20px 0; }
+.card-head h3 { font-size: 15.5px; }
+
+.stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 20px; }
+.stat-card { background: var(--panel); border: 1px solid var(--sand); border-radius: var(--radius-lg); padding: 16px 18px; }
+.stat-label { font-size: 11.5px; text-transform: uppercase; letter-spacing: .05em; color: var(--ink-muted); font-weight: 600; }
+.stat-value { font-family: var(--font-display); font-size: 30px; margin-top: 6px; }
+.stat-delta { font-size: 12px; margin-top: 4px; font-family: var(--font-mono); }
+.stat-delta.up { color: var(--moss-dark); }
+.stat-delta.down { color: var(--red); }
+
+.rings-card { display: flex; align-items: center; gap: 28px; flex-wrap: wrap; }
+.rings-legend { display: flex; flex-direction: column; gap: 10px; font-size: 13px; }
+.rings-legend-item { display: flex; align-items: center; gap: 8px; }
+.rings-dot { width: 9px; height: 9px; border-radius: 50%; }
+
+.table-wrap { overflow-x: auto; }
+table.data-table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+.data-table th { text-align: left; padding: 10px 14px; font-size: 11.5px; text-transform: uppercase; letter-spacing: .04em; color: var(--ink-muted); font-weight: 600; border-bottom: 1px solid var(--sand); white-space: nowrap; }
+.data-table td { padding: 12px 14px; border-bottom: 1px solid var(--sand-light); vertical-align: middle; }
+.data-table tr:last-child td { border-bottom: none; }
+.data-table tr:hover td { background: var(--sand-light); }
+.cell-mono { font-family: var(--font-mono); font-size: 12.5px; color: var(--ink-muted); }
+.cell-name { font-weight: 600; cursor: pointer; }
+.cell-muted { color: var(--ink-muted); }
+
+.pill { display: inline-flex; align-items: center; gap: 5px; padding: 3px 10px; border-radius: 20px; font-size: 11.5px; font-weight: 600; }
+.pill-new { background: var(--clay-tint); color: var(--clay); }
+.pill-contacted, .pill-read { background: var(--gold-tint); color: var(--gold); }
+.pill-closed_won, .pill-published, .pill-responded { background: var(--moss-tint); color: var(--moss-dark); }
+.pill-closed_lost, .pill-archived { background: var(--sand-light); color: var(--ink-muted); }
+.pill-draft { background: var(--sand-light); color: var(--ink-muted); }
+.pill-open { background: var(--clay-tint); color: var(--clay); }
+.pill-pending { background: var(--gold-tint); color: var(--gold); }
+.pill-closed { background: var(--sand-light); color: var(--ink-muted); }
+
+.toolbar { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; flex-wrap: wrap; }
+.toolbar .search-input { max-width: 260px; }
+.toolbar-spacer { flex: 1; }
+
+.empty-state { text-align: center; padding: 48px 20px; color: var(--ink-muted); }
+.empty-state h4 { font-size: 15px; color: var(--ink); margin-bottom: 6px; }
+.empty-state p { font-size: 13.5px; margin: 0; }
+
+.modal-overlay { position: fixed; inset: 0; background: rgba(27,36,32,0.45); display: flex; align-items: center; justify-content: center; padding: 20px; z-index: 100; }
+.modal { background: var(--panel); border-radius: var(--radius-lg); width: 100%; max-width: 560px; max-height: 88vh; overflow-y: auto; box-shadow: 0 20px 60px rgba(0,0,0,0.25); }
+.modal-head { display: flex; align-items: center; justify-content: space-between; padding: 18px 22px; border-bottom: 1px solid var(--sand); }
+.modal-body { padding: 22px; }
+.modal-foot { display: flex; justify-content: flex-end; gap: 10px; padding: 16px 22px; border-top: 1px solid var(--sand); }
+
+.admin-gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px,1fr)); gap: 14px; }
+.admin-gallery-item { position: relative; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--sand); aspect-ratio: 4/3; background: var(--sand-light); }
+.admin-gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.admin-gallery-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(27,36,32,0.75), transparent 55%); display: flex; align-items: flex-end; justify-content: space-between; padding: 8px; opacity: 0; transition: opacity .15s ease; }
+.admin-gallery-item:hover .admin-gallery-overlay { opacity: 1; }
+.admin-gallery-overlay .tag { color: #fff; font-size: 11px; font-weight: 600; }
+
+.editor-grid { display: grid; grid-template-columns: 1fr 260px; gap: 20px; align-items: start; }
+.upload-zone { border: 1.5px dashed var(--sand); border-radius: var(--radius); padding: 22px; text-align: center; color: var(--ink-muted); font-size: 13px; cursor: pointer; background: var(--sand-light); }
+.upload-zone:hover { border-color: var(--moss); }
+
+.support-layout { display: grid; grid-template-columns: 300px 1fr; gap: 0; border: 1px solid var(--sand); border-radius: var(--radius-lg); overflow: hidden; background: var(--panel); min-height: 480px; }
+.thread-list { border-right: 1px solid var(--sand); overflow-y: auto; max-height: 620px; }
+.thread-item { padding: 14px 16px; border-bottom: 1px solid var(--sand-light); cursor: pointer; }
+.thread-item:hover { background: var(--sand-light); }
+.thread-item.active { background: var(--moss-tint); }
+.thread-item .t-name { font-weight: 600; font-size: 13.5px; }
+.thread-item .t-preview { font-size: 12.5px; color: var(--ink-muted); margin-top: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.thread-item .t-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px; }
+.thread-item .t-time { font-size: 10.5px; color: var(--ink-muted); font-family: var(--font-mono); }
+
+.thread-panel { display: flex; flex-direction: column; }
+.thread-header { padding: 14px 18px; border-bottom: 1px solid var(--sand); display: flex; justify-content: space-between; align-items: center; }
+.thread-messages { flex: 1; padding: 18px; overflow-y: auto; max-height: 460px; display: flex; flex-direction: column; gap: 12px; }
+.msg { max-width: 72%; padding: 9px 13px; border-radius: var(--radius); font-size: 13.5px; line-height: 1.5; }
+.msg-visitor { background: var(--sand-light); align-self: flex-start; border-bottom-left-radius: 3px; }
+.msg-admin { background: var(--moss); color: #fff; align-self: flex-end; border-bottom-right-radius: 3px; }
+.thread-reply { display: flex; gap: 10px; padding: 14px 18px; border-top: 1px solid var(--sand); }
+.thread-reply textarea { min-height: 42px; }
+
+/* SESSIONS / SECURITY */
+.topbar-admin-status {
+  display: flex; align-items: center; gap: 6px; font-size: 11.5px; font-weight: 600;
+  padding: 5px 11px; border-radius: 20px; background: var(--sand-light); color: var(--ink-muted);
+  border: 1px solid var(--sand); white-space: nowrap; appearance: none; font-family: var(--font-body);
+}
+.topbar-admin-status .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--sand); flex-shrink: 0; }
+.topbar-admin-status.both-online { background: var(--moss-tint); color: var(--moss-dark); border-color: transparent; }
+.topbar-admin-status.both-online .dot { background: var(--moss-dark); box-shadow: 0 0 0 3px rgba(63,108,78,0.18); }
+
+.session-banner {
+  display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-radius: var(--radius);
+  background: var(--moss-tint); color: var(--moss-dark); font-size: 13.5px; font-weight: 500; margin-bottom: 18px;
+}
+.session-banner .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--moss-dark); flex-shrink: 0; box-shadow: 0 0 0 3px rgba(63,108,78,0.18); }
+
+.session-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; margin-bottom: 20px; }
+.session-card { border: 1px solid var(--sand); border-radius: var(--radius-lg); background: var(--panel); box-shadow: var(--shadow-card); padding: 18px 20px; position: relative; }
+.session-card.is-you { border-color: var(--moss); box-shadow: 0 0 0 3px var(--moss-tint); }
+.session-card.is-offline { opacity: .6; }
+.session-card-head { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+.session-card-name { font-weight: 600; font-size: 14.5px; display: flex; align-items: center; gap: 8px; }
+.session-card-email { font-size: 12px; color: var(--ink-muted); margin-top: 1px; }
+.you-badge { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; background: var(--moss); color: #fff; padding: 2px 7px; border-radius: 20px; }
+.status-tag { display: inline-flex; align-items: center; gap: 5px; font-size: 11.5px; font-weight: 600; }
+.status-tag .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--sand); }
+.status-tag.online { color: var(--moss-dark); }
+.status-tag.online .dot { background: var(--moss-dark); box-shadow: 0 0 0 3px rgba(63,108,78,0.16); }
+.status-tag.offline { color: var(--ink-muted); }
+.session-meta-list { display: flex; flex-direction: column; gap: 8px; }
+.session-meta-row { display: flex; align-items: flex-start; gap: 9px; font-size: 12.5px; color: var(--ink); }
+.session-meta-row .m-icon { width: 16px; flex-shrink: 0; text-align: center; color: var(--ink-muted); }
+.session-meta-row .m-label { color: var(--ink-muted); min-width: 62px; flex-shrink: 0; }
+.session-card-empty { border: 1.5px dashed var(--sand); border-radius: var(--radius-lg); padding: 26px 20px; text-align: center; color: var(--ink-muted); font-size: 13px; background: var(--sand-light); }
+.security-note { display: flex; gap: 10px; align-items: flex-start; padding: 13px 16px; border-radius: var(--radius); background: var(--gold-tint); color: #6E5417; font-size: 12.5px; line-height: 1.5; margin-top: 4px; }
+
+.session-card-body { display: flex; flex-direction: column; gap: 10px; }
+.device-row { border: 1px solid var(--sand); border-radius: var(--radius); padding: 12px 14px; position: relative; background: var(--panel); }
+.device-row.is-current { border-color: var(--moss); background: var(--moss-tint); }
+.device-row.is-new-device { border-color: var(--red); background: var(--red-tint); }
+.device-row-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 8px; }
+.device-row-head-left { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.device-title { font-weight: 600; font-size: 13px; }
+.critical-flag {
+  display: inline-flex; align-items: center; gap: 4px; font-size: 10px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .04em; color: #fff; background: var(--red);
+  padding: 3px 8px; border-radius: 20px; animation: pulse-critical 1.8s ease-in-out infinite;
+}
+@keyframes pulse-critical { 0%, 100% { opacity: 1; } 50% { opacity: .65; } }
+.device-loc-badge {
+  display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; font-weight: 600;
+  color: var(--ink); background: var(--sand-light); padding: 4px 10px; border-radius: 20px; margin-bottom: 8px;
+}
+.device-loc-badge .m-icon { color: var(--ink-muted); }
+.device-row .session-meta-list { gap: 6px; }
+.device-row .session-meta-row { font-size: 12px; }
+.kill-btn { margin-left: auto; }
+.live-dot {
+  width: 6px; height: 6px; border-radius: 50%; background: var(--moss-dark); display: inline-block;
+  box-shadow: 0 0 0 3px rgba(63,108,78,0.18); animation: pulse-live 1.6s ease-in-out infinite;
+}
+@keyframes pulse-live { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.3); opacity: .6; } }
+.live-indicator { display: inline-flex; align-items: center; gap: 6px; font-size: 11.5px; font-weight: 600; color: var(--moss-dark); }
+
+.admin-gallery-item { display: flex; flex-direction: column; aspect-ratio: unset; }
+.admin-gallery-item .thumb-wrap { position: relative; aspect-ratio: 4/3; overflow: hidden; }
+.admin-gallery-item .thumb-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.admin-gallery-item .thumb-wrap .admin-gallery-overlay { position: absolute; }
+.admin-gallery-caption { padding: 8px 10px; font-size: 12px; }
+.admin-gallery-caption .cap-text { color: var(--ink); font-weight: 500; margin-bottom: 3px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.admin-gallery-caption .cap-meta { color: var(--ink-muted); font-size: 11px; display: flex; align-items: center; gap: 5px; }
+.watermark-badge { display: inline-flex; align-items: center; gap: 3px; font-size: 10px; font-weight: 600; color: var(--moss-dark); }
+.upload-review-row { display: flex; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--sand-light); align-items: flex-start; }
+.upload-review-row:last-child { border-bottom: none; }
+.upload-review-thumb { width: 64px; height: 64px; border-radius: var(--radius-sm); object-fit: cover; flex-shrink: 0; background: var(--sand-light); }
+.upload-review-fields { flex: 1; display: flex; flex-direction: column; gap: 8px; }
+.upload-review-fields .field { margin-bottom: 0; }
+.idle-modal-overlay { position: fixed; inset: 0; background: rgba(27,36,32,0.55); display: flex; align-items: center; justify-content: center; padding: 20px; z-index: 400; }
+.idle-modal { background: var(--panel); border-radius: var(--radius-lg); width: 100%; max-width: 380px; padding: 26px 24px; text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+.idle-modal h3 { margin-bottom: 8px; }
+.idle-modal p { font-size: 13.5px; color: var(--ink-muted); line-height: 1.5; margin: 0 0 18px; }
+
+.sidebar-toggle-mobile { display: none; }
+.sidebar-scrim { display: none; }
+.toast { position: fixed; bottom: 22px; right: 22px; background: var(--ink); color: #fff; padding: 12px 18px; border-radius: var(--radius-sm); font-size: 13.5px; box-shadow: var(--shadow-card); z-index: 300; opacity: 0; transform: translateY(8px); transition: opacity .2s ease, transform .2s ease; pointer-events: none; }
+.toast.show { opacity: 1; transform: translateY(0); }
+.split-field { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+[hidden] { display: none !important; }
+
+@media (max-width: 900px) {
+  .stat-grid { grid-template-columns: repeat(2, 1fr); }
+  .editor-grid { grid-template-columns: 1fr; }
+  .support-layout { grid-template-columns: 1fr; }
+  .thread-list { max-height: 220px; }
+}
+@media (max-width: 768px) {
+  .sidebar { position: fixed; z-index: 200; left: 0; top: 0; transform: translateX(-100%); transition: transform .2s ease; width: 240px; }
+  .shell.mobile-nav-open .sidebar { transform: translateX(0); }
+  .shell.sidebar-collapsed .sidebar { width: 240px; }
+  .sidebar-scrim { display: none; position: fixed; inset: 0; background: rgba(27,36,32,0.4); z-index: 150; }
+  .shell.mobile-nav-open .sidebar-scrim { display: block; }
+  .sidebar-toggle-mobile { display: flex; }
+  .stat-grid { grid-template-columns: 1fr 1fr; }
+  .content { padding: 16px; }
+  .topbar { padding: 12px 16px; }
+  .topbar-title { font-size: 16.5px; }
+  .rings-card { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 520px) {
+  .stat-grid { grid-template-columns: 1fr; }
+  .toolbar { flex-direction: column; align-items: stretch; }
+  .toolbar .search-input { max-width: none; }
+  .admin-gallery-grid { grid-template-columns: repeat(2,1fr); }
+  .msg { max-width: 88%; }
+  .split-field { grid-template-columns: 1fr; }
+  .session-grid { grid-template-columns: 1fr; }
+  .topbar-admin-status .label { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     LOGIN VIEW
+     ============================================================ -->
+<div class="login-body" id="loginView">
+  <div class="login-wrap">
+    <div class="login-card">
+      <div class="login-brand">
+        <div class="brand-mark">L</div>
+        <div>
+          <div class="brand-name">Landmark Landscaping</div>
+          <div class="brand-sub">Admin console</div>
+        </div>
+      </div>
+      <h1 class="login-title">Sign in</h1>
+      <p class="login-help">Use your admin email and password to manage quotes, contacts, the gallery and the blog.</p>
+      <form id="loginForm" class="login-form" autocomplete="on">
+        <label class="field">
+          <span class="field-label">Email</span>
+          <input type="email" id="email" name="email" required placeholder="you@landmarklandscaping.co.ke">
+        </label>
+        <label class="field">
+          <span class="field-label">Password</span>
+          <input type="password" id="password" name="password" required placeholder="••••••••">
+        </label>
+        <div id="loginError" class="login-error" hidden></div>
+        <button type="submit" class="btn btn-primary btn-block" id="loginBtn">Sign in</button>
+      </form>
+    </div>
+    <p class="login-footnote">Access is restricted to authorized Landmark Landscaping staff.</p>
+  </div>
+</div>
+
+<!-- ============================================================
+     DASHBOARD VIEW
+     ============================================================ -->
+<div class="shell" id="shell" hidden>
+
+  <div class="sidebar-scrim" id="sidebarScrim"></div>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-head">
+      <div class="brand-mark">L</div>
+      <div>
+        <div class="brand-name">Landmark</div>
+        <div class="brand-sub">Admin console</div>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav" id="sidebarNav">
+      <button class="nav-item active" data-section="overview"><span class="nav-icon">&#9678;</span><span class="nav-label">Overview</span></button>
+      <button class="nav-item" data-section="quotes"><span class="nav-icon">&#9776;</span><span class="nav-label">Quotes</span><span class="nav-badge" id="badgeQuotes" hidden>0</span></button>
+      <button class="nav-item" data-section="contacts"><span class="nav-icon">&#9993;</span><span class="nav-label">Contacts</span><span class="nav-badge" id="badgeContacts" hidden>0</span></button>
+      <button class="nav-item" data-section="testimonials"><span class="nav-icon">&#9733;</span><span class="nav-label">Testimonials</span><span class="nav-badge" id="badgeTestimonials" hidden>0</span></button>
+      <button class="nav-item" data-section="gallery"><span class="nav-icon">&#9635;</span><span class="nav-label">Gallery</span></button>
+      <button class="nav-item" data-section="blog"><span class="nav-icon">&#9998;</span><span class="nav-label">Blog</span></button>
+      <button class="nav-item" data-section="support"><span class="nav-icon">&#9990;</span><span class="nav-label">Support</span><span class="nav-badge" id="badgeSupport" hidden>0</span></button>
+      <button class="nav-item" data-section="insights"><span class="nav-icon">&#9776;</span><span class="nav-label">Page insights</span></button>
+      <button class="nav-item" data-section="sessions"><span class="nav-icon">&#9673;</span><span class="nav-label">Admin sessions</span></button>
+    </nav>
+
+    <div class="sidebar-foot">
+      <button class="nav-item" id="logoutBtn"><span class="nav-icon">&#9099;</span><span class="nav-label">Sign out</span></button>
+    </div>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <button class="icon-btn sidebar-toggle-mobile" id="mobileNavToggle" aria-label="Open menu">&#9776;</button>
+      <button class="icon-btn" id="sidebarCollapseBtn" aria-label="Collapse sidebar" title="Collapse sidebar">&#8676;</button>
+      <div>
+        <div class="topbar-title" id="pageTitle">Overview</div>
+        <div class="topbar-sub" id="pageSub">Snapshot of everything happening on the site</div>
+      </div>
+      <div class="topbar-spacer"></div>
+      <div class="topbar-user">
+        <button class="topbar-admin-status" id="topbarAdminStatus" data-goto="sessions" title="View admin sessions">
+          <span class="dot"></span><span class="label" id="topbarAdminStatusLabel">Checking…</span>
+        </button>
+        <div class="avatar-circle" id="userInitials">--</div>
+      </div>
+    </header>
+
+    <main class="content">
+
+      <!-- OVERVIEW -->
+      <section class="panel-section active" id="section-overview">
+        <div class="stat-grid">
+          <div class="stat-card"><div class="stat-label">New quotes (7d)</div><div class="stat-value" id="statQuotes7d">–</div></div>
+          <div class="stat-card"><div class="stat-label">New contacts (7d)</div><div class="stat-value" id="statContacts7d">–</div></div>
+          <div class="stat-card"><div class="stat-label">Pending testimonials</div><div class="stat-value" id="statTestimonialsPending">–</div></div>
+          <div class="stat-card"><div class="stat-label">Open support threads</div><div class="stat-value" id="statSupportOpen">–</div></div>
+        </div>
+
+        <div class="card card-pad rings-card" style="margin-bottom:20px;">
+          <svg id="growthRings" width="180" height="180" viewBox="0 0 180 180"></svg>
+          <div class="rings-legend" id="ringsLegend"></div>
+        </div>
+
+        <div class="card">
+          <div class="card-head"><h3>Latest quote requests</h3><button class="btn btn-sm" data-goto="quotes">View all</button></div>
+          <div class="table-wrap" style="padding:14px 20px 20px;">
+            <table class="data-table"><thead><tr><th>Name</th><th>Service</th><th>Status</th><th>Received</th></tr></thead>
+              <tbody id="overviewQuotesBody"><tr><td colspan="4" class="cell-muted">Loading…</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- QUOTES -->
+      <section class="panel-section" id="section-quotes">
+        <div class="toolbar">
+          <input class="search-input" type="text" id="quoteSearch" placeholder="Search by name or phone">
+          <select id="quoteStatusFilter">
+            <option value="">All statuses</option>
+            <option value="new">New</option>
+            <option value="contacted">Contacted</option>
+            <option value="closed_won">Closed won</option>
+            <option value="closed_lost">Closed lost</option>
+          </select>
+          <div class="toolbar-spacer"></div>
+          <button class="btn btn-sm" id="refreshQuotes">Refresh</button>
+        </div>
+        <div class="card">
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr><th>Name</th><th>Phone</th><th>Service</th><th>Status</th><th>Received</th><th></th></tr></thead>
+              <tbody id="quotesBody"><tr><td colspan="6" class="cell-muted">Loading…</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACTS -->
+      <section class="panel-section" id="section-contacts">
+        <div class="toolbar">
+          <input class="search-input" type="text" id="contactSearch" placeholder="Search by name or phone">
+          <select id="contactStatusFilter">
+            <option value="">All statuses</option>
+            <option value="new">New</option>
+            <option value="contacted">Contacted</option>
+            <option value="closed_won">Closed won</option>
+            <option value="closed_lost">Closed lost</option>
+          </select>
+          <div class="toolbar-spacer"></div>
+          <button class="btn btn-sm" id="refreshContacts">Refresh</button>
+        </div>
+        <div class="card">
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr><th>Name</th><th>Phone</th><th>Requests</th><th>Last service</th><th>Last contact</th><th></th></tr></thead>
+              <tbody id="contactsBody"><tr><td colspan="6" class="cell-muted">Loading…</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- TESTIMONIALS -->
+      <section class="panel-section" id="section-testimonials">
+        <div class="toolbar">
+          <select id="testimonialFilter">
+            <option value="">All testimonials</option>
+            <option value="pending">Pending review</option>
+            <option value="published">Published</option>
+          </select>
+          <div class="toolbar-spacer"></div>
+          <button class="btn btn-sm" id="refreshTestimonials">Refresh</button>
+        </div>
+        <div class="card">
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr><th>Name</th><th>Rating</th><th>Comment</th><th>Status</th><th>Received</th><th></th></tr></thead>
+              <tbody id="testimonialsBody"><tr><td colspan="6" class="cell-muted">Loading…</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- GALLERY -->
+      <section class="panel-section" id="section-gallery">
+        <div class="toolbar">
+          <select id="galleryCategoryFilter">
+            <option value="">All categories</option>
+            <option value="gardens">Gardens</option>
+            <option value="lawns">Lawns</option>
+            <option value="irrigation">Irrigation</option>
+            <option value="features">Features</option>
+            <option value="commercial">Commercial</option>
+          </select>
+          <div class="toolbar-spacer"></div>
+          <button class="btn btn-primary btn-sm" id="uploadImageBtn">Upload image</button>
+          <input type="file" id="galleryFileInput" accept="image/*" multiple hidden>
+        </div>
+        <div class="admin-gallery-grid" id="galleryGridAdmin"></div>
+      </section>
+
+      <!-- BLOG -->
+      <section class="panel-section" id="section-blog">
+        <div class="toolbar">
+          <input class="search-input" type="text" id="blogSearch" placeholder="Search posts">
+          <select id="blogStatusFilter">
+            <option value="">All posts</option>
+            <option value="draft">Drafts</option>
+            <option value="published">Published</option>
+          </select>
+          <div class="toolbar-spacer"></div>
+          <button class="btn btn-primary btn-sm" id="newPostBtn">New post</button>
+        </div>
+        <div class="card">
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr><th>Title</th><th>Category</th><th>Status</th><th>Updated</th><th></th></tr></thead>
+              <tbody id="blogBody"><tr><td colspan="5" class="cell-muted">Loading…</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- SUPPORT -->
+      <section class="panel-section" id="section-support">
+        <div class="support-layout">
+          <div class="thread-list" id="threadList"></div>
+          <div class="thread-panel">
+            <div class="thread-header">
+              <div>
+                <div id="threadHeaderName" style="font-weight:600;font-size:14px;">Select a conversation</div>
+                <div id="threadHeaderMeta" class="cell-muted" style="font-size:12px;"></div>
+              </div>
+              <button class="btn btn-sm" id="closeThreadBtn" hidden>Mark closed</button>
+            </div>
+            <div class="thread-messages" id="threadMessages">
+              <div class="empty-state"><h4>No conversation selected</h4><p>Pick a thread on the left to view and reply.</p></div>
+            </div>
+            <div class="thread-reply" id="threadReplyBar" hidden>
+              <textarea id="threadReplyInput" placeholder="Type a reply…"></textarea>
+              <button class="btn btn-primary" id="threadReplySend">Send</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PAGE INSIGHTS -->
+      <section class="panel-section" id="section-insights">
+        <div class="stat-grid">
+          <div class="stat-card"><div class="stat-label">Views today</div><div class="stat-value" id="statViewsToday">–</div></div>
+          <div class="stat-card"><div class="stat-label">Views (7d)</div><div class="stat-value" id="statViews7d">–</div></div>
+          <div class="stat-card"><div class="stat-label">Views (30d)</div><div class="stat-value" id="statViews30d">–</div></div>
+          <div class="stat-card"><div class="stat-label">Unique pages</div><div class="stat-value" id="statUniquePages">–</div></div>
+        </div>
+        <div class="card">
+          <div class="card-head"><h3>Top pages (last 30 days)</h3></div>
+          <div class="table-wrap" style="padding:14px 20px 20px;">
+            <table class="data-table"><thead><tr><th>Page</th><th>Views</th></tr></thead>
+              <tbody id="insightsBody"><tr><td colspan="2" class="cell-muted">Loading…</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ADMIN SESSIONS -->
+      <section class="panel-section" id="section-sessions">
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:12px;">
+          <span class="live-indicator"><span class="live-dot"></span>Live — updates automatically</span>
+          <button class="btn btn-sm" id="refreshSessions">Refresh</button>
+        </div>
+        <div id="sessionsBanner"></div>
+        <div class="session-grid" id="sessionsGrid">
+          <div class="session-card"><div class="session-card-empty">Loading sessions…</div></div>
+        </div>
+        <div class="card card-pad">
+          <h3 style="margin-bottom:10px;">Access &amp; security</h3>
+          <div class="security-note">
+            &#9888;&nbsp; This console is limited to <strong>2 admin accounts</strong>, enforced at the database level. Signing in automatically registers this device, browser and approximate location below. A device this browser hasn't used before is flagged <strong>New device</strong> in red — review it and terminate it if you don't recognize it. This panel updates live as devices sign in, go idle, or get terminated. Closing this browser window or tab ends your session — you'll need to sign in again next time. Sessions also time out automatically after 20 minutes of inactivity.
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<!-- Idle timeout warning -->
+<div class="idle-modal-overlay" id="idleModalOverlay" hidden>
+  <div class="idle-modal">
+    <h3>Still there?</h3>
+    <p>For security, you'll be signed out in <strong id="idleCountdown">60</strong> seconds due to inactivity.</p>
+    <button class="btn btn-primary btn-block" id="idleStayBtn">Stay signed in</button>
+  </div>
+</div>
+
+<!-- Generic detail / edit modal -->
+<div class="modal-overlay" id="modalOverlay" hidden>
+  <div class="modal" id="modalBox">
+    <div class="modal-head">
+      <h3 id="modalTitle">Details</h3>
+      <button class="icon-btn" id="modalClose" aria-label="Close">&times;</button>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+    <div class="modal-foot" id="modalFoot"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+(function () {
+/* =========================================================
+   Supabase connection — Landmark Landscaping project
+   ========================================================= */
+const SUPABASE_URL = 'https://bwcsuxvcqmykhckxqgjh.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ3Y3N1eHZjcW15a2hja3hxZ2poIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODMyOTE1NjIsImV4cCI6MjA5ODg2NzU2Mn0.rAXetUdSG-uzEhQfvhgK8Kn-K5Hxyxx9M7QO4nKTZiA';
+
+// Guard against this script block ever running twice on the same page
+// (e.g. embedded alongside another script that already created a client).
+if (window.__landmarkAdminBooted) { return; }
+window.__landmarkAdminBooted = true;
+
+// Using sessionStorage (not localStorage) means the login session lives only
+// as long as this browser tab/window stays open — closing it clears the
+// session automatically, so nobody needs to remember to sign out.
+const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+  auth: {
+    persistSession: true,
+    storage: window.sessionStorage,
+    autoRefreshToken: true,
+    detectSessionInUrl: false,
+  },
+});
+
+const MEDIA_BUCKET = 'media';
+const MAX_ADMINS = 2;
+const IDLE_LIMIT_MS = 20 * 60 * 1000;      // auto sign-out after 20 min inactivity
+const IDLE_WARNING_MS = 60 * 1000;         // show warning 60s before sign-out
+const SESSION_HEARTBEAT_MS = 30 * 1000;    // refresh "last seen" every 30s
+const SESSION_ONLINE_WINDOW_MS = 90 * 1000; // considered online if seen in last 90s
+
+// A fresh key per browser tab, kept only in sessionStorage — used to tell
+// this device's row apart in admin_sessions and to clean it up on close.
+function getTabSessionKey() {
+  let key = sessionStorage.getItem('landmark_admin_tab_key');
+  if (!key) {
+    key = (crypto.randomUUID ? crypto.randomUUID() : 'tab-' + Date.now() + '-' + Math.random().toString(36).slice(2));
+    sessionStorage.setItem('landmark_admin_tab_key', key);
+  }
+  return key;
+}
+const TAB_SESSION_KEY = getTabSessionKey();
+
+// A device id that survives across tabs, sign-outs and idle timeouts on the
+// SAME browser (stored in localStorage, not sessionStorage), so we can tell
+// "a device we've already seen" apart from a genuinely new/unknown one.
+function getPersistentDeviceId() {
+  let id = localStorage.getItem('landmark_admin_device_id');
+  if (!id) {
+    id = (crypto.randomUUID ? crypto.randomUUID() : 'dev-' + Date.now() + '-' + Math.random().toString(36).slice(2));
+    localStorage.setItem('landmark_admin_device_id', id);
+  }
+  return id;
+}
+const DEVICE_ID = getPersistentDeviceId();
+
+/* =========================================================
+   Small helpers
+   ========================================================= */
+function $(sel, root) { return (root || document).querySelector(sel); }
+function $all(sel, root) { return Array.from((root || document).querySelectorAll(sel)); }
+function escapeHtml(str) {
+  return (str ?? '').toString().replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+function timeAgo(iso) {
+  if (!iso) return '';
+  const d = new Date(iso), diff = (Date.now() - d.getTime()) / 1000;
+  if (diff < 60) return 'just now';
+  if (diff < 3600) return Math.floor(diff/60) + 'm ago';
+  if (diff < 86400) return Math.floor(diff/3600) + 'h ago';
+  if (diff < 2592000) return Math.floor(diff/86400) + 'd ago';
+  return d.toLocaleDateString();
+}
+function pill(status) {
+  const label = (status || '').replace(/_/g, ' ');
+  return `<span class="pill pill-${status}">${escapeHtml(label)}</span>`;
+}
+function parseUserAgent(ua) {
+  ua = ua || navigator.userAgent || '';
+  let browser = 'Unknown browser', browserVersion = '';
+  let m;
+  if (/Edg\//.test(ua)) { browser = 'Edge'; m = ua.match(/Edg\/([\d.]+)/); }
+  else if (/OPR\//.test(ua)) { browser = 'Opera'; m = ua.match(/OPR\/([\d.]+)/); }
+  else if (/Chrome\//.test(ua) && !/Chromium/.test(ua)) { browser = 'Chrome'; m = ua.match(/Chrome\/([\d.]+)/); }
+  else if (/Firefox\//.test(ua)) { browser = 'Firefox'; m = ua.match(/Firefox\/([\d.]+)/); }
+  else if (/Safari\//.test(ua) && /Version\//.test(ua)) { browser = 'Safari'; m = ua.match(/Version\/([\d.]+)/); }
+  else if (/MSIE|Trident/.test(ua)) { browser = 'Internet Explorer'; }
+  browserVersion = m ? m[1] : '';
+
+  let os = 'Unknown OS';
+  if (/Windows NT/.test(ua)) os = 'Windows';
+  else if (/Mac OS X/.test(ua) && !/iPhone|iPad/.test(ua)) os = 'macOS';
+  else if (/Android/.test(ua)) os = 'Android';
+  else if (/iPhone|iPad|iPod/.test(ua)) os = 'iOS';
+  else if (/Linux/.test(ua)) os = 'Linux';
+
+  let device = 'Desktop';
+  if (/iPad|Tablet/.test(ua)) device = 'Tablet';
+  else if (/Mobi|Android(?!.*Tablet)|iPhone/.test(ua)) device = 'Mobile';
+
+  return { browser, browserVersion, os, device };
+}
+
+async function lookupApproxLocation() {
+  // Best-effort IP-based geolocation — no permission prompt, no precise GPS.
+  try {
+    const res = await fetch('https://ipapi.co/json/');
+    if (!res.ok) throw new Error('lookup failed');
+    const j = await res.json();
+    return {
+      ip: j.ip || null,
+      city: j.city || null,
+      region: j.region || null,
+      country: j.country_name || null,
+    };
+  } catch {
+    return { ip: null, city: null, region: null, country: null };
+  }
+}
+
+let toastTimer;
+function toast(msg) {
+  const el = $('#toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove('show'), 2600);
+}
+
+/* =========================================================
+   Auth
+   ========================================================= */
+let currentAdmin = null;
+
+async function checkSession() {
+  const { data: { session } } = await sb.auth.getSession();
+  if (!session) return showLogin();
+
+  const { data: profile } = await sb
+    .from('admin_profiles')
+    .select('id, full_name, email')
+    .eq('id', session.user.id)
+    .maybeSingle();
+
+  if (!profile) {
+    await sb.auth.signOut();
+    return showLogin();
+  }
+  currentAdmin = profile;
+  showDashboard();
+  registerSession();
+  startHeartbeat();
+  startIdleWatch();
+}
+
+function showLogin() {
+  $('#loginView').hidden = false;
+  $('#shell').hidden = true;
+}
+
+function showDashboard() {
+  $('#loginView').hidden = true;
+  $('#shell').hidden = false;
+  const initialsSource = currentAdmin.full_name || currentAdmin.email || '--';
+  $('#userInitials').textContent = initialsSource.trim().split(/\s+/).map(w => w[0]).join('').slice(0,2).toUpperCase();
+  loadOverview();
+  updateTopbarAdminStatus();
+}
+
+$('#loginForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const errorBox = $('#loginError');
+  const loginBtn = $('#loginBtn');
+  errorBox.hidden = true;
+  loginBtn.disabled = true;
+  loginBtn.textContent = 'Signing in…';
+
+  const email = $('#email').value.trim();
+  const password = $('#password').value;
+
+  try {
+    const { data, error } = await sb.auth.signInWithPassword({ email, password });
+    if (error) throw error;
+
+    const { data: profile, error: profileError } = await sb
+      .from('admin_profiles')
+      .select('id, full_name, email')
+      .eq('id', data.user.id)
+      .maybeSingle();
+
+    if (profileError || !profile) {
+      await sb.auth.signOut();
+      throw new Error('This account is not authorized for admin access.');
+    }
+
+    currentAdmin = profile;
+    showDashboard();
+    registerSession();
+    startHeartbeat();
+    startIdleWatch();
+  } catch (err) {
+    errorBox.textContent = err.message || 'Could not sign in. Check your details and try again.';
+    errorBox.hidden = false;
+  } finally {
+    loginBtn.disabled = false;
+    loginBtn.textContent = 'Sign in';
+  }
+});
+
+$('#logoutBtn').addEventListener('click', async () => {
+  await endSessionCleanup();
+  await sb.auth.signOut();
+  currentAdmin = null;
+  showLogin();
+});
+
+/* =========================================================
+   Device / session tracking
+   ========================================================= */
+let heartbeatTimer = null;
+
+async function registerSession() {
+  if (!currentAdmin) return;
+  const { browser, browserVersion, os, device } = parseUserAgent(navigator.userAgent);
+  const loc = await lookupApproxLocation();
+
+  // Have we ever seen this admin+device combo before? If not, remember it
+  // AND flag this session row as a new/unrecognized device.
+  const { data: known } = await sb
+    .from('admin_trusted_devices')
+    .select('device_id')
+    .eq('admin_id', currentAdmin.id)
+    .eq('device_id', DEVICE_ID)
+    .maybeSingle();
+
+  const isNewDevice = !known;
+  if (isNewDevice) {
+    await sb.from('admin_trusted_devices').insert({
+      admin_id: currentAdmin.id,
+      device_id: DEVICE_ID,
+      label: `${browser} on ${os}`,
+    });
+  }
+
+  await sb.from('admin_sessions').upsert({
+    session_token: TAB_SESSION_KEY,
+    admin_id: currentAdmin.id,
+    device_id: DEVICE_ID,
+    device, browser, os,
+    browser_version: browserVersion,
+    user_agent: navigator.userAgent,
+    ip_address: loc.ip, city: loc.city, region: loc.region, country: loc.country,
+    is_new_device: isNewDevice,
+    last_active_at: new Date().toISOString(),
+  }, { onConflict: 'session_token' });
+
+  if (isNewDevice) {
+    toast('New device flagged for security review.');
+  }
+
+  if ($('#section-sessions').classList.contains('active')) loadSessions();
+  startSessionsRealtime();
+}
+
+function startHeartbeat() {
+  stopHeartbeat();
+  heartbeatTimer = setInterval(async () => {
+    if (!currentAdmin) return;
+    const { data, error } = await sb.from('admin_sessions')
+      .update({ last_active_at: new Date().toISOString() })
+      .eq('session_token', TAB_SESSION_KEY)
+      .select('id');
+    // If the row is gone, this device/tab was terminated from elsewhere.
+    if (!error && (!data || data.length === 0)) {
+      return forceSignOutKicked();
+    }
+    updateTopbarAdminStatus();
+    if ($('#section-sessions').classList.contains('active')) loadSessions();
+  }, SESSION_HEARTBEAT_MS);
+}
+function stopHeartbeat() {
+  if (heartbeatTimer) { clearInterval(heartbeatTimer); heartbeatTimer = null; }
+}
+
+async function endSessionCleanup() {
+  stopHeartbeat();
+  stopIdleWatch();
+  stopSessionsRealtime();
+  try {
+    await sb.from('admin_sessions').delete().eq('session_token', TAB_SESSION_KEY);
+  } catch { /* best effort */ }
+}
+
+// There's no reliable way to run an authenticated Supabase call from
+// beforeunload (sendBeacon can't carry the auth headers PostgREST needs).
+// Instead, "online" status is simply derived from how recently the
+// heartbeat last updated last_seen_at — once a tab closes, the heartbeat
+// stops and the row falls out of the online window within ~90s.
+window.addEventListener('pagehide', () => { stopHeartbeat(); stopIdleWatch(); });
+
+/* =========================================================
+   Live session sync — realtime channel keeps the Sessions panel,
+   topbar status, and this tab's own kill-switch instant instead of
+   waiting on the 30s heartbeat poll.
+   ========================================================= */
+let sessionsChannel = null;
+
+function startSessionsRealtime() {
+  if (sessionsChannel) return;
+  sessionsChannel = sb
+    .channel('admin-sessions-live')
+    .on('postgres_changes', { event: '*', schema: 'public', table: 'admin_sessions' }, (payload) => {
+      // This exact tab got terminated by another admin — sign out immediately.
+      if (payload.eventType === 'DELETE' && payload.old && payload.old.session_token === TAB_SESSION_KEY) {
+        forceSignOutKicked();
+        return;
+      }
+      updateTopbarAdminStatus();
+      if ($('#section-sessions') && $('#section-sessions').classList.contains('active')) loadSessions();
+    })
+    .subscribe();
+}
+function stopSessionsRealtime() {
+  if (sessionsChannel) { sb.removeChannel(sessionsChannel); sessionsChannel = null; }
+}
+
+async function forceSignOutKicked() {
+  stopHeartbeat();
+  stopIdleWatch();
+  stopSessionsRealtime();
+  await sb.auth.signOut();
+  currentAdmin = null;
+  showLogin();
+  toast('This device was signed out by an admin.');
+}
+
+async function killSession(id, isSelf) {
+  if (isSelf) {
+    if (!confirm('This is your current device. Sign it out now?')) return;
+  } else if (!confirm('Terminate this session? That device will be signed out immediately.')) {
+    return;
+  }
+  const { error } = await sb.from('admin_sessions').delete().eq('id', id);
+  if (error) return toast('Could not terminate that session.');
+  toast('Session terminated.');
+  loadSessions();
+}
+
+async function loadSessions() {
+  const grid = $('#sessionsGrid');
+  const banner = $('#sessionsBanner');
+  grid.innerHTML = `<div class="session-card"><div class="session-card-empty">Loading sessions…</div></div>`;
+
+  const { data, error } = await sb
+    .from('admin_sessions')
+    .select('*, admin_profiles(id, full_name, email)')
+    .order('last_active_at', { ascending: false });
+
+  if (error) {
+    grid.innerHTML = `<div class="session-card"><div class="session-card-empty">Could not load session data.</div></div>`;
+    return;
+  }
+
+  const now = Date.now();
+  const isOnline = (row) => (now - new Date(row.last_active_at).getTime()) < SESSION_ONLINE_WINDOW_MS;
+
+  // Group EVERY active session (every device/tab) under its admin — not
+  // just the most recent one — so extra/unknown devices are visible.
+  const byAdmin = new Map();
+  (data || []).forEach(row => {
+    if (!byAdmin.has(row.admin_id)) byAdmin.set(row.admin_id, []);
+    byAdmin.get(row.admin_id).push(row);
+  });
+
+  const { data: allAdmins } = await sb.from('admin_profiles').select('id, full_name, email').limit(MAX_ADMINS + 5);
+  const cards = (allAdmins || []).map(admin => {
+    const rows = byAdmin.get(admin.id) || [];
+    const you = currentAdmin && admin.id === currentAdmin.id;
+    const name = admin.full_name || admin.email;
+    const anyOnline = rows.some(isOnline);
+
+    if (rows.length === 0) {
+      return `
+        <div class="session-card is-offline">
+          <div class="session-card-head">
+            <div class="avatar-circle">${initialsFor(name)}</div>
+            <div style="flex:1;">
+              <div class="session-card-name">${escapeHtml(name)}${you ? '<span class="you-badge">You</span>' : ''}</div>
+              <div class="session-card-email">${escapeHtml(admin.email || '')}</div>
+            </div>
+            <span class="status-tag offline"><span class="dot"></span>Offline</span>
+          </div>
+          <div class="session-card-empty" style="padding:14px;">No active session right now.</div>
+        </div>`;
+    }
+
+    const deviceRows = rows.map(row => {
+      const online = isOnline(row);
+      const isThisTab = row.session_token === TAB_SESSION_KEY;
+      const browserLabel = [row.browser, row.browser_version].filter(Boolean).join(' ');
+      const locationLabel = [row.city, row.region, row.country].filter(Boolean).join(', ') || 'Location unavailable';
+      return `
+        <div class="device-row ${isThisTab ? 'is-current' : ''} ${row.is_new_device ? 'is-new-device' : ''}">
+          <div class="device-row-head">
+            <div class="device-row-head-left">
+              <span class="device-title">${escapeHtml(row.device || 'Unknown')} &middot; ${escapeHtml(row.os || 'Unknown OS')}</span>
+              ${isThisTab ? '<span class="you-badge">This device</span>' : ''}
+              ${row.is_new_device ? '<span class="critical-flag">&#9888; New device</span>' : ''}
+              <span class="status-tag ${online ? 'online' : 'offline'}"><span class="dot"></span>${online ? 'Online' : 'Offline'}</span>
+            </div>
+            <button class="btn btn-sm btn-danger kill-btn" data-kill-session="${row.id}" data-kill-self="${isThisTab}">
+              ${isThisTab ? 'Sign out' : 'Terminate'}
+            </button>
+          </div>
+          <div class="device-loc-badge"><span class="m-icon">&#128205;</span>Signed in from ${escapeHtml(locationLabel)}</div>
+          <div class="session-meta-list">
+            <div class="session-meta-row"><span class="m-icon">&#127760;</span><span class="m-label">Browser</span><span>${escapeHtml(browserLabel || 'Unknown')}</span></div>
+            <div class="session-meta-row"><span class="m-icon">&#127760;</span><span class="m-label">IP</span><span class="cell-mono">${escapeHtml(row.ip_address || 'Unavailable')}</span></div>
+            <div class="session-meta-row"><span class="m-icon">&#9201;</span><span class="m-label">Signed in</span><span>${timeAgo(row.created_at)}</span></div>
+            <div class="session-meta-row"><span class="m-icon">&#128337;</span><span class="m-label">Last active</span><span>${timeAgo(row.last_active_at)}</span></div>
+          </div>
+        </div>`;
+    }).join('');
+
+    return `
+      <div class="session-card ${you ? 'is-you' : ''} ${anyOnline ? '' : 'is-offline'}">
+        <div class="session-card-head">
+          <div class="avatar-circle">${initialsFor(name)}</div>
+          <div style="flex:1;">
+            <div class="session-card-name">${escapeHtml(name)}${you ? '<span class="you-badge">You</span>' : ''}</div>
+            <div class="session-card-email">${escapeHtml(admin.email || '')}</div>
+          </div>
+          <span class="status-tag ${anyOnline ? 'online' : 'offline'}"><span class="dot"></span>${rows.length} device${rows.length === 1 ? '' : 's'}</span>
+        </div>
+        <div class="session-card-body">${deviceRows}</div>
+      </div>`;
+  }).join('');
+
+  grid.innerHTML = cards || `<div class="session-card"><div class="session-card-empty">No admin accounts found.</div></div>`;
+
+  $all('[data-kill-session]', grid).forEach(btn => {
+    btn.addEventListener('click', () => killSession(btn.dataset.killSession, btn.dataset.killSelf === 'true'));
+  });
+
+  const onlineAdmins = Array.from(byAdmin.entries()).filter(([, rows]) => rows.some(isOnline)).length;
+  const anyNewDevice = (data || []).some(r => r.is_new_device && isOnline(r));
+  banner.innerHTML = anyNewDevice
+    ? `<div class="session-banner" style="background:var(--red-tint); color:var(--red);"><span class="dot" style="background:var(--red); box-shadow:0 0 0 3px rgba(163,55,43,0.18);"></span>An unrecognized device is currently signed in — review it below.</div>`
+    : (onlineAdmins >= 2
+      ? `<div class="session-banner"><span class="dot"></span>Both admins are currently logged in and active.</div>`
+      : '');
+
+  updateTopbarAdminStatus(onlineAdmins);
+}
+
+function initialsFor(source) {
+  const s = (source || '--').trim();
+  if (!s) return '--';
+  return s.split(/\s+/).map(w => w[0]).join('').slice(0, 2).toUpperCase();
+}
+
+async function updateTopbarAdminStatus(precomputedOnlineCount) {
+  const el = $('#topbarAdminStatus');
+  const label = $('#topbarAdminStatusLabel');
+  if (!el || !label) return;
+
+  let onlineCount = precomputedOnlineCount;
+  if (onlineCount === undefined) {
+    const { data } = await sb.from('admin_sessions').select('admin_id, last_active_at');
+    const now = Date.now();
+    const onlineIds = new Set((data || [])
+      .filter(r => (now - new Date(r.last_active_at).getTime()) < SESSION_ONLINE_WINDOW_MS)
+      .map(r => r.admin_id));
+    onlineCount = onlineIds.size;
+  }
+
+  label.textContent = onlineCount >= 2 ? 'Both admins online' : (onlineCount === 1 ? '1 admin online' : 'No other admins online');
+  el.classList.toggle('both-online', onlineCount >= 2);
+}
+
+/* =========================================================
+   Idle timeout — auto sign-out after inactivity
+   ========================================================= */
+let idleTimer = null, idleWarnTimer = null, idleCountdownInterval = null;
+
+function startIdleWatch() {
+  stopIdleWatch();
+  resetIdleTimer();
+  ['mousemove', 'mousedown', 'keydown', 'scroll', 'touchstart'].forEach(evt => {
+    document.addEventListener(evt, resetIdleTimer, { passive: true });
+  });
+}
+function stopIdleWatch() {
+  if (idleTimer) clearTimeout(idleTimer);
+  if (idleWarnTimer) clearTimeout(idleWarnTimer);
+  if (idleCountdownInterval) clearInterval(idleCountdownInterval);
+  idleTimer = idleWarnTimer = idleCountdownInterval = null;
+  ['mousemove', 'mousedown', 'keydown', 'scroll', 'touchstart'].forEach(evt => {
+    document.removeEventListener(evt, resetIdleTimer);
+  });
+}
+function resetIdleTimer() {
+  if (!currentAdmin) return;
+  if ($('#idleModalOverlay') && !$('#idleModalOverlay').hidden) return; // don't reset while warning is showing
+  if (idleTimer) clearTimeout(idleTimer);
+  idleTimer = setTimeout(showIdleWarning, IDLE_LIMIT_MS - IDLE_WARNING_MS);
+}
+function showIdleWarning() {
+  const overlay = $('#idleModalOverlay');
+  const countdownEl = $('#idleCountdown');
+  overlay.hidden = false;
+  let secondsLeft = Math.floor(IDLE_WARNING_MS / 1000);
+  countdownEl.textContent = secondsLeft;
+  idleCountdownInterval = setInterval(() => {
+    secondsLeft -= 1;
+    countdownEl.textContent = Math.max(secondsLeft, 0);
+    if (secondsLeft <= 0) {
+      clearInterval(idleCountdownInterval);
+      idleAutoSignOut();
+    }
+  }, 1000);
+}
+async function idleAutoSignOut() {
+  $('#idleModalOverlay').hidden = true;
+  await endSessionCleanup();
+  await sb.auth.signOut();
+  currentAdmin = null;
+  showLogin();
+  toast('Signed out after 20 minutes of inactivity.');
+}
+$('#idleStayBtn').addEventListener('click', () => {
+  $('#idleModalOverlay').hidden = true;
+  if (idleCountdownInterval) clearInterval(idleCountdownInterval);
+  resetIdleTimer();
+});
+
+/* =========================================================
+   Sidebar / navigation
+   ========================================================= */
+const SECTION_META = {
+  overview:     ['Overview', 'Snapshot of everything happening on the site'],
+  quotes:       ['Quote requests', 'Every quote submitted through the website'],
+  contacts:     ['Contacts', 'Everyone who has requested a quote, grouped by phone number'],
+  testimonials: ['Testimonials', 'Reviews awaiting approval or already published'],
+  gallery:      ['Gallery', 'Project photos shown across the site'],
+  blog:         ['Blog', 'Articles and landscaping tips'],
+  support:      ['Support', 'Live chat conversations with visitors'],
+  insights:     ['Page insights', 'Traffic across the public site'],
+};
+
+function gotoSection(name) {
+  $all('.panel-section').forEach(s => s.classList.remove('active'));
+  $('#section-' + name).classList.add('active');
+  $all('.nav-item[data-section]').forEach(b => b.classList.toggle('active', b.dataset.section === name));
+  const [title, sub] = SECTION_META[name];
+  $('#pageTitle').textContent = title;
+  $('#pageSub').textContent = sub;
+  $('#shell').classList.remove('mobile-nav-open');
+
+  if (name === 'quotes') loadQuotes();
+  if (name === 'contacts') loadContacts();
+  if (name === 'testimonials') loadTestimonials();
+  if (name === 'gallery') loadGallery();
+  if (name === 'blog') loadBlog();
+  if (name === 'support') loadSupportThreads();
+  if (name === 'insights') loadInsights();
+  if (name === 'sessions') loadSessions();
+}
+
+$all('.nav-item[data-section]').forEach(btn => {
+  btn.addEventListener('click', () => gotoSection(btn.dataset.section));
+});
+$all('[data-goto]').forEach(btn => {
+  btn.addEventListener('click', () => gotoSection(btn.dataset.goto));
+});
+$('#sidebarCollapseBtn').addEventListener('click', () => $('#shell').classList.toggle('sidebar-collapsed'));
+$('#mobileNavToggle').addEventListener('click', () => $('#shell').classList.toggle('mobile-nav-open'));
+$('#sidebarScrim').addEventListener('click', () => $('#shell').classList.remove('mobile-nav-open'));
+
+/* =========================================================
+   Modal
+   ========================================================= */
+function openModal(title, bodyHtml, footHtml) {
+  $('#modalTitle').textContent = title;
+  $('#modalBody').innerHTML = bodyHtml;
+  $('#modalFoot').innerHTML = footHtml || '';
+  $('#modalOverlay').hidden = false;
+}
+function closeModal() { $('#modalOverlay').hidden = true; }
+$('#modalClose').addEventListener('click', closeModal);
+$('#modalOverlay').addEventListener('click', (e) => { if (e.target.id === 'modalOverlay') closeModal(); });
+
+/* =========================================================
+   OVERVIEW
+   ========================================================= */
+async function loadOverview() {
+  const since7d = new Date(Date.now() - 7*86400000).toISOString();
+
+  const [{ count: quotes7d }, { data: recentQuotePhones }, { count: testimonialsPending }, { count: supportOpen }] = await Promise.all([
+    sb.from('quote_requests').select('id', { count: 'exact', head: true }).gte('created_at', since7d),
+    sb.from('quote_requests').select('phone').gte('created_at', since7d),
+    sb.from('testimonials').select('id', { count: 'exact', head: true }).eq('status', 'pending'),
+    sb.from('support_threads').select('id', { count: 'exact', head: true }).eq('status', 'open'),
+  ]);
+  // "New contacts" = distinct people (by phone) who requested a quote in
+  // the last 7 days, not raw quote volume — a repeat request isn't a new contact.
+  const contacts7d = new Set((recentQuotePhones || []).map(r => normalizePhone(r.phone)).filter(Boolean)).size;
+
+  $('#statQuotes7d').textContent = quotes7d ?? 0;
+  $('#statContacts7d').textContent = contacts7d ?? 0;
+  $('#statTestimonialsPending').textContent = testimonialsPending ?? 0;
+  $('#statSupportOpen').textContent = supportOpen ?? 0;
+
+  updateBadge('badgeQuotes', quotes7d);
+  updateBadge('badgeContacts', contacts7d);
+  updateBadge('badgeTestimonials', testimonialsPending);
+  updateBadge('badgeSupport', supportOpen);
+
+  drawGrowthRings({
+    quotes: quotes7d || 0,
+    contacts: contacts7d || 0,
+    testimonials: testimonialsPending || 0,
+    support: supportOpen || 0,
+  });
+
+  const { data: latestQuotes } = await sb
+    .from('quote_requests')
+    .select('id, name, service, status, created_at')
+    .order('created_at', { ascending: false })
+    .limit(6);
+
+  const body = $('#overviewQuotesBody');
+  if (!latestQuotes || latestQuotes.length === 0) {
+    body.innerHTML = `<tr><td colspan="4" class="cell-muted">No quote requests yet.</td></tr>`;
+  } else {
+    body.innerHTML = latestQuotes.map(q => `
+      <tr>
+        <td class="cell-name">${escapeHtml(q.name)}</td>
+        <td>${escapeHtml(q.service || '—')}</td>
+        <td>${pill(q.status)}</td>
+        <td class="cell-muted">${timeAgo(q.created_at)}</td>
+      </tr>`).join('');
+  }
+}
+
+function updateBadge(id, count) {
+  const el = $('#' + id);
+  if (count && count > 0) { el.hidden = false; el.textContent = count; }
+  else { el.hidden = true; }
+}
+
+function drawGrowthRings(data) {
+  const svg = $('#growthRings');
+  const legend = $('#ringsLegend');
+  const series = [
+    { key: 'quotes', label: 'Quotes (7d)', color: 'var(--moss)' },
+    { key: 'contacts', label: 'Contacts (7d)', color: 'var(--clay)' },
+    { key: 'testimonials', label: 'Pending testimonials', color: 'var(--gold)' },
+    { key: 'support', label: 'Open support', color: 'var(--red)' },
+  ];
+  const max = Math.max(1, ...series.map(s => data[s.key]));
+  const cx = 90, cy = 90;
+  let radius = 78;
+  let svgParts = [];
+  series.forEach(s => {
+    const value = data[s.key];
+    const frac = value / max;
+    const circumference = 2 * Math.PI * radius;
+    const dash = Math.max(frac * circumference, value > 0 ? 4 : 0);
+    svgParts.push(`
+      <circle cx="${cx}" cy="${cy}" r="${radius}" fill="none" stroke="var(--sand-light)" stroke-width="10"></circle>
+      <circle cx="${cx}" cy="${cy}" r="${radius}" fill="none" stroke="${s.color}" stroke-width="10"
+        stroke-linecap="round" stroke-dasharray="${dash} ${circumference}"
+        transform="rotate(-90 ${cx} ${cy})"></circle>
+    `);
+    radius -= 18;
+  });
+  svg.innerHTML = svgParts.join('');
+  legend.innerHTML = series.map(s => `
+    <div class="rings-legend-item">
+      <span class="rings-dot" style="background:${s.color}"></span>
+      <span>${s.label}: <strong>${data[s.key]}</strong></span>
+    </div>`).join('');
+}
+
+/* =========================================================
+   QUOTES
+   ========================================================= */
+async function loadQuotes() {
+  const body = $('#quotesBody');
+  body.innerHTML = `<tr><td colspan="6" class="cell-muted">Loading…</td></tr>`;
+
+  let query = sb.from('quote_requests').select('*').order('created_at', { ascending: false });
+  const status = $('#quoteStatusFilter').value;
+  if (status) query = query.eq('status', status);
+
+  const { data, error } = await query;
+  if (error) { body.innerHTML = `<tr><td colspan="6" class="cell-muted">Could not load quotes.</td></tr>`; return; }
+
+  const search = $('#quoteSearch').value.trim().toLowerCase();
+  const rows = (data || []).filter(q =>
+    !search || (q.name || '').toLowerCase().includes(search) || (q.phone || '').toLowerCase().includes(search)
+  );
+
+  if (rows.length === 0) {
+    body.innerHTML = `<tr><td colspan="6" class="cell-muted">No quote requests found.</td></tr>`;
+    return;
+  }
+
+  body.innerHTML = rows.map(q => `
+    <tr>
+      <td class="cell-name" data-open-quote="${q.id}">${escapeHtml(q.name)}</td>
+      <td class="cell-mono">${escapeHtml(q.phone || '—')}</td>
+      <td>${escapeHtml(q.service || '—')}</td>
+      <td>${pill(q.status)}</td>
+      <td class="cell-muted">${timeAgo(q.created_at)}</td>
+      <td><button class="btn btn-sm" data-open-quote="${q.id}">View</button></td>
+    </tr>`).join('');
+
+  $all('[data-open-quote]', body).forEach(el => {
+    el.addEventListener('click', () => openQuoteModal(rows.find(r => r.id === el.dataset.openQuote)));
+  });
+}
+
+function openQuoteModal(q) {
+  if (!q) return;
+  openModal('Quote request', `
+    <div class="field"><span class="field-label">Name</span><div>${escapeHtml(q.name)}</div></div>
+    <div class="split-field">
+      <div class="field"><span class="field-label">Phone</span><div>${escapeHtml(q.phone || '—')}</div></div>
+      <div class="field"><span class="field-label">Email</span><div>${escapeHtml(q.email || '—')}</div></div>
+    </div>
+    <div class="field"><span class="field-label">Service</span><div>${escapeHtml(q.service || '—')}</div></div>
+    <div class="field"><span class="field-label">Message</span><div>${escapeHtml(q.message || '—')}</div></div>
+    <label class="field">
+      <span class="field-label">Status</span>
+      <select id="quoteStatusSelect">
+        ${['new','contacted','closed_won','closed_lost'].map(s => `<option value="${s}" ${s===q.status?'selected':''}>${s.replace('_',' ')}</option>`).join('')}
+      </select>
+    </label>
+  `, `
+    <button class="btn" id="deleteQuoteBtn">Delete</button>
+    <button class="btn btn-primary" id="saveQuoteBtn">Save status</button>
+  `);
+
+  $('#saveQuoteBtn').addEventListener('click', async () => {
+    const status = $('#quoteStatusSelect').value;
+    const { error } = await sb.from('quote_requests').update({ status }).eq('id', q.id);
+    if (error) return toast('Could not update quote.');
+    toast('Quote updated.');
+    closeModal();
+    loadQuotes();
+    loadOverview();
+  });
+  $('#deleteQuoteBtn').addEventListener('click', async () => {
+    if (!confirm('Delete this quote request?')) return;
+    const { error } = await sb.from('quote_requests').delete().eq('id', q.id);
+    if (error) return toast('Could not delete quote.');
+    toast('Quote deleted.');
+    closeModal();
+    loadQuotes();
+    loadOverview();
+  });
+}
+
+$('#refreshSessions').addEventListener('click', loadSessions);
+$('#refreshQuotes').addEventListener('click', loadQuotes);
+$('#quoteStatusFilter').addEventListener('change', loadQuotes);
+$('#quoteSearch').addEventListener('input', debounce(loadQuotes, 250));
+
+/* =========================================================
+   CONTACTS
+   Contacts aren't their own table — they're built by grouping the
+   quote_requests table by phone number, so every quote submitter
+   automatically becomes a contact with their full request history.
+   ========================================================= */
+function normalizePhone(phone) {
+  return (phone || '').replace(/[^\d+]/g, '');
+}
+
+async function fetchContacts() {
+  const { data, error } = await sb
+    .from('quote_requests')
+    .select('*')
+    .order('created_at', { ascending: false });
+  if (error) return { contacts: [], error };
+
+  const byPhone = new Map();
+  (data || []).forEach(q => {
+    const key = normalizePhone(q.phone) || `no-phone-${q.id}`;
+    if (!byPhone.has(key)) {
+      byPhone.set(key, {
+        phone: q.phone || '—',
+        name: q.name,
+        email: q.email || null,
+        quotes: [],
+      });
+    }
+    const c = byPhone.get(key);
+    c.quotes.push(q);
+    // Keep the most recent name/email as the display name (quotes are
+    // already sorted newest-first, so the first one we see per phone wins).
+  });
+
+  const contacts = Array.from(byPhone.values()).map(c => {
+    const sorted = c.quotes.slice().sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+    return {
+      ...c,
+      name: sorted[0].name,
+      email: sorted[0].email || c.email,
+      lastQuote: sorted[0],
+      requestCount: sorted.length,
+    };
+  }).sort((a, b) => new Date(b.lastQuote.created_at) - new Date(a.lastQuote.created_at));
+
+  return { contacts, error: null };
+}
+
+async function loadContacts() {
+  const body = $('#contactsBody');
+  body.innerHTML = `<tr><td colspan="6" class="cell-muted">Loading…</td></tr>`;
+
+  const { contacts, error } = await fetchContacts();
+  if (error) { body.innerHTML = `<tr><td colspan="6" class="cell-muted">Could not load contacts.</td></tr>`; return; }
+
+  const status = $('#contactStatusFilter').value;
+  const search = $('#contactSearch').value.trim().toLowerCase();
+  const rows = contacts.filter(c => {
+    if (status && c.lastQuote.status !== status) return false;
+    if (!search) return true;
+    return (c.name || '').toLowerCase().includes(search) || (c.phone || '').toLowerCase().includes(search);
+  });
+
+  if (rows.length === 0) {
+    body.innerHTML = `<tr><td colspan="6" class="cell-muted">No contacts found.</td></tr>`;
+    return;
+  }
+
+  body.innerHTML = rows.map(c => `
+    <tr>
+      <td class="cell-name" data-open-contact="${escapeHtml(c.phone)}">${escapeHtml(c.name)}</td>
+      <td class="cell-mono">${escapeHtml(c.phone)}</td>
+      <td>${c.requestCount}</td>
+      <td>${escapeHtml(c.lastQuote.service || '—')}</td>
+      <td class="cell-muted">${timeAgo(c.lastQuote.created_at)}</td>
+      <td><button class="btn btn-sm" data-open-contact="${escapeHtml(c.phone)}">View</button></td>
+    </tr>`).join('');
+
+  $all('[data-open-contact]', body).forEach(el => {
+    el.addEventListener('click', () => openContactModal(rows.find(r => r.phone === el.dataset.openContact)));
+  });
+}
+
+function openContactModal(c) {
+  if (!c) return;
+  const history = c.quotes.slice().sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+  openModal(escapeHtml(c.name), `
+    <div class="split-field">
+      <div class="field"><span class="field-label">Phone</span><div>${escapeHtml(c.phone)}</div></div>
+      <div class="field"><span class="field-label">Email</span><div>${escapeHtml(c.email || '—')}</div></div>
+    </div>
+    <div class="field">
+      <span class="field-label">Request history (${history.length})</span>
+      <div class="table-wrap" style="border:1px solid var(--sand); border-radius:var(--radius); margin-top:6px;">
+        <table class="data-table">
+          <thead><tr><th>Service</th><th>Status</th><th>Received</th></tr></thead>
+          <tbody>
+            ${history.map(q => `
+              <tr>
+                <td>${escapeHtml(q.service || '—')}</td>
+                <td>${pill(q.status)}</td>
+                <td class="cell-muted">${timeAgo(q.created_at)}</td>
+              </tr>`).join('')}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    ${history[0].message ? `<div class="field" style="margin-top:14px;"><span class="field-label">Latest message</span><div>${escapeHtml(history[0].message)}</div></div>` : ''}
+  `, `
+    <a class="btn" href="tel:${escapeHtml(c.phone)}">Call</a>
+    <a class="btn" href="https://wa.me/${escapeHtml(c.phone.replace(/[^\d]/g,''))}" target="_blank" rel="noopener">WhatsApp</a>
+    <button class="btn btn-primary" id="closeContactBtn">Close</button>
+  `);
+
+  $('#closeContactBtn').addEventListener('click', closeModal);
+}
+
+$('#refreshContacts').addEventListener('click', loadContacts);
+$('#contactStatusFilter').addEventListener('change', loadContacts);
+$('#contactSearch').addEventListener('input', debounce(loadContacts, 250));
+
+/* =========================================================
+   TESTIMONIALS
+   ========================================================= */
+async function loadTestimonials() {
+  const body = $('#testimonialsBody');
+  body.innerHTML = `<tr><td colspan="6" class="cell-muted">Loading…</td></tr>`;
+
+  let query = sb.from('testimonials').select('*').order('created_at', { ascending: false });
+  const status = $('#testimonialFilter').value;
+  if (status) query = query.eq('status', status);
+
+  const { data, error } = await query;
+  if (error) { body.innerHTML = `<tr><td colspan="6" class="cell-muted">Could not load testimonials.</td></tr>`; return; }
+
+  if (!data || data.length === 0) {
+    body.innerHTML = `<tr><td colspan="6" class="cell-muted">No testimonials found.</td></tr>`;
+    return;
+  }
+
+  body.innerHTML = data.map(t => `
+    <tr>
+      <td class="cell-name">${escapeHtml(t.name)}</td>
+      <td>${'&#9733;'.repeat(t.rating || 0)}${'&#9734;'.repeat(5 - (t.rating || 0))}</td>
+      <td style="max-width:280px;">${escapeHtml((t.comment || '').slice(0, 90))}${(t.comment||'').length > 90 ? '…' : ''}</td>
+      <td>${pill(t.status)}</td>
+      <td class="cell-muted">${timeAgo(t.created_at)}</td>
+      <td style="white-space:nowrap;">
+        ${t.status !== 'published' ? `<button class="btn btn-sm btn-primary" data-publish="${t.id}">Publish</button>` : `<button class="btn btn-sm" data-unpublish="${t.id}">Unpublish</button>`}
+        <button class="btn btn-sm btn-danger" data-delete-testimonial="${t.id}">Delete</button>
+      </td>
+    </tr>`).join('');
+
+  $all('[data-publish]', body).forEach(btn => btn.addEventListener('click', () => setTestimonialStatus(btn.dataset.publish, 'published')));
+  $all('[data-unpublish]', body).forEach(btn => btn.addEventListener('click', () => setTestimonialStatus(btn.dataset.unpublish, 'pending')));
+  $all('[data-delete-testimonial]', body).forEach(btn => btn.addEventListener('click', () => deleteTestimonial(btn.dataset.deleteTestimonial)));
+}
+
+async function setTestimonialStatus(id, status) {
+  const { error } = await sb.from('testimonials').update({ status }).eq('id', id);
+  if (error) return toast('Could not update testimonial.');
+  toast(status === 'published' ? 'Testimonial published.' : 'Testimonial unpublished.');
+  loadTestimonials();
+  loadOverview();
+}
+async function deleteTestimonial(id) {
+  if (!confirm('Delete this testimonial?')) return;
+  const { error } = await sb.from('testimonials').delete().eq('id', id);
+  if (error) return toast('Could not delete testimonial.');
+  toast('Testimonial deleted.');
+  loadTestimonials();
+  loadOverview();
+}
+
+$('#refreshTestimonials').addEventListener('click', loadTestimonials);
+$('#testimonialFilter').addEventListener('change', loadTestimonials);
+
+/* =========================================================
+   GALLERY
+   ========================================================= */
+async function loadGallery() {
+  const grid = $('#galleryGridAdmin');
+  grid.innerHTML = `<div class="empty-state"><p>Loading…</p></div>`;
+
+  let query = sb.from('gallery_images').select('*').order('created_at', { ascending: false });
+  const category = $('#galleryCategoryFilter').value;
+  if (category) query = query.eq('category', category);
+
+  const { data, error } = await query;
+  if (error) { grid.innerHTML = `<div class="empty-state"><p>Could not load the gallery.</p></div>`; return; }
+
+  if (!data || data.length === 0) {
+    grid.innerHTML = `<div class="empty-state"><h4>No images yet</h4><p>Upload a project photo to get started.</p></div>`;
+    return;
+  }
+
+  grid.innerHTML = data.map(img => `
+    <div class="admin-gallery-item">
+      <div class="thumb-wrap">
+        <img src="${escapeHtml(img.url)}" alt="${escapeHtml(img.caption || '')}" loading="lazy">
+        <div class="admin-gallery-overlay">
+          <span class="tag">${escapeHtml(img.category || '')}</span>
+          <button class="btn btn-sm btn-danger" data-delete-image="${img.id}" data-storage-path="${escapeHtml(img.storage_path || '')}">Delete</button>
+        </div>
+      </div>
+      <div class="admin-gallery-caption">
+        <div class="cap-text" title="${escapeHtml(img.caption || '')}">${escapeHtml(img.caption || 'No description')}</div>
+        <div class="cap-meta">
+          <span>&#128197; ${new Date(img.created_at).toLocaleDateString('en-KE', { day: 'numeric', month: 'short', year: 'numeric' })}</span>
+          ${img.watermarked ? '<span class="watermark-badge">&middot; &#128737; Watermarked</span>' : ''}
+        </div>
+      </div>
+    </div>`).join('');
+
+  $all('[data-delete-image]', grid).forEach(btn => {
+    btn.addEventListener('click', () => deleteGalleryImage(btn.dataset.deleteImage, btn.dataset.storagePath));
+  });
+}
+
+async function deleteGalleryImage(id, storagePath) {
+  if (!confirm('Delete this image?')) return;
+  if (storagePath) await sb.storage.from(MEDIA_BUCKET).remove([storagePath]);
+  const { error } = await sb.from('gallery_images').delete().eq('id', id);
+  if (error) return toast('Could not delete image.');
+  toast('Image deleted.');
+  loadGallery();
+}
+
+// Draws the image onto a canvas with a semi-transparent watermark stamped
+// in the bottom-right corner, then resolves with the watermarked blob.
+function watermarkImage(file) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    const objectUrl = URL.createObjectURL(file);
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      canvas.width = img.naturalWidth;
+      canvas.height = img.naturalHeight;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0);
+
+      const label = 'Landmark Landscaping';
+      const dateLabel = new Date().toLocaleDateString('en-KE', { day: 'numeric', month: 'short', year: 'numeric' });
+      const fontSize = Math.max(16, Math.round(canvas.width * 0.028));
+      ctx.font = `600 ${fontSize}px Inter, sans-serif`;
+      ctx.textBaseline = 'bottom';
+      const padding = fontSize * 0.9;
+      const labelWidth = ctx.measureText(label).width;
+      ctx.font = `500 ${Math.round(fontSize * 0.6)}px Inter, sans-serif`;
+      const dateWidth = ctx.measureText(dateLabel).width;
+      const boxWidth = Math.max(labelWidth, dateWidth) + padding * 1.6;
+      const boxHeight = fontSize * 2.15;
+
+      ctx.fillStyle = 'rgba(27,36,32,0.45)';
+      ctx.fillRect(canvas.width - boxWidth - padding * 0.5, canvas.height - boxHeight - padding * 0.5, boxWidth, boxHeight);
+
+      ctx.fillStyle = 'rgba(255,255,255,0.92)';
+      ctx.font = `600 ${fontSize}px Inter, sans-serif`;
+      ctx.fillText(label, canvas.width - boxWidth - padding * 0.5 + padding * 0.8, canvas.height - padding * 0.5 - fontSize * 0.55);
+
+      ctx.fillStyle = 'rgba(255,255,255,0.75)';
+      ctx.font = `500 ${Math.round(fontSize * 0.6)}px Inter, sans-serif`;
+      ctx.fillText(dateLabel, canvas.width - boxWidth - padding * 0.5 + padding * 0.8, canvas.height - padding * 0.5);
+
+      URL.revokeObjectURL(objectUrl);
+      canvas.toBlob(blob => blob ? resolve(blob) : reject(new Error('Could not render watermark')), file.type === 'image/png' ? 'image/png' : 'image/jpeg', 0.9);
+    };
+    img.onerror = () => { URL.revokeObjectURL(objectUrl); reject(new Error('Could not read image')); };
+    img.src = objectUrl;
+  });
+}
+
+$('#uploadImageBtn').addEventListener('click', () => $('#galleryFileInput').click());
+$('#galleryFileInput').addEventListener('change', (e) => {
+  const files = Array.from(e.target.files || []);
+  if (files.length === 0) return;
+  openUploadReviewModal(files);
+  e.target.value = '';
+});
+
+function openUploadReviewModal(files) {
+  const defaultCategory = $('#galleryCategoryFilter').value || 'gardens';
+  const categories = ['gardens','lawns','irrigation','features','commercial'];
+  const thumbs = files.map(f => URL.createObjectURL(f));
+
+  openModal(`Upload ${files.length} image${files.length > 1 ? 's' : ''}`, `
+    <label class="field">
+      <span class="field-label">Category (applies to all)</span>
+      <select id="uploadCategorySelect">
+        ${categories.map(c => `<option value="${c}" ${c === defaultCategory ? 'selected' : ''}>${c[0].toUpperCase()+c.slice(1)}</option>`).join('')}
+      </select>
+    </label>
+    <div style="margin-top:6px;">
+      ${files.map((f, i) => `
+        <div class="upload-review-row">
+          <img class="upload-review-thumb" src="${thumbs[i]}" alt="">
+          <div class="upload-review-fields">
+            <div class="field-label" style="text-transform:none; font-weight:600; color:var(--ink);">${escapeHtml(f.name)}</div>
+            <label class="field">
+              <span class="field-label">Description</span>
+              <input type="text" class="upload-caption-input" data-file-index="${i}" placeholder="e.g. Backyard garden redesign — Karen, Nairobi">
+            </label>
+          </div>
+        </div>`).join('')}
+    </div>
+    <div class="security-note" style="background:var(--moss-tint); color:var(--moss-dark); margin-top:4px;">
+      &#128737;&nbsp; A "Landmark Landscaping" watermark and the upload date will be stamped onto each photo automatically before it's saved.
+    </div>
+  `, `
+    <button class="btn" id="cancelUploadBtn">Cancel</button>
+    <button class="btn btn-primary" id="confirmUploadBtn">Upload &amp; watermark</button>
+  `);
+
+  $('#cancelUploadBtn').addEventListener('click', () => {
+    thumbs.forEach(u => URL.revokeObjectURL(u));
+    closeModal();
+  });
+
+  $('#confirmUploadBtn').addEventListener('click', async () => {
+    const btn = $('#confirmUploadBtn');
+    btn.disabled = true;
+    btn.textContent = 'Uploading…';
+    const category = $('#uploadCategorySelect').value;
+    const captionInputs = $all('.upload-caption-input');
+
+    let successCount = 0;
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      const caption = (captionInputs[i]?.value || '').trim();
+      try {
+        const watermarkedBlob = await watermarkImage(file);
+        const ext = file.type === 'image/png' ? 'png' : 'jpg';
+        const path = `gallery/${Date.now()}-${Math.random().toString(36).slice(2,8)}-${file.name.replace(/\.[^.]+$/, '').replace(/[^a-zA-Z0-9.\-_]/g,'_')}.${ext}`;
+        const { error: upErr } = await sb.storage.from(MEDIA_BUCKET).upload(path, watermarkedBlob, {
+          upsert: false, contentType: watermarkedBlob.type,
+        });
+        if (upErr) { toast('Upload failed: ' + upErr.message); continue; }
+        const { data: pub } = sb.storage.from(MEDIA_BUCKET).getPublicUrl(path);
+        await sb.from('gallery_images').insert({
+          url: pub.publicUrl, storage_path: path, category,
+          caption: caption || null, watermarked: true,
+          file_size_bytes: watermarkedBlob.size,
+        });
+        successCount++;
+      } catch (err) {
+        toast('Could not process ' + file.name + ': ' + err.message);
+      }
+    }
+
+    thumbs.forEach(u => URL.revokeObjectURL(u));
+    toast(`${successCount} of ${files.length} image${files.length > 1 ? 's' : ''} uploaded.`);
+    closeModal();
+    loadGallery();
+  });
+}
+$('#galleryCategoryFilter').addEventListener('change', loadGallery);
+
+/* =========================================================
+   BLOG
+   ========================================================= */
+async function loadBlog() {
+  const body = $('#blogBody');
+  body.innerHTML = `<tr><td colspan="5" class="cell-muted">Loading…</td></tr>`;
+
+  let query = sb.from('blog_posts').select('*').order('updated_at', { ascending: false });
+  const status = $('#blogStatusFilter').value;
+  if (status) query = query.eq('status', status);
+
+  const { data, error } = await query;
+  if (error) { body.innerHTML = `<tr><td colspan="5" class="cell-muted">Could not load posts.</td></tr>`; return; }
+
+  const search = $('#blogSearch').value.trim().toLowerCase();
+  const rows = (data || []).filter(p => !search || (p.title || '').toLowerCase().includes(search));
+
+  if (rows.length === 0) {
+    body.innerHTML = `<tr><td colspan="5" class="cell-muted">No posts found.</td></tr>`;
+    return;
+  }
+
+  body.innerHTML = rows.map(p => `
+    <tr>
+      <td class="cell-name" data-edit-post="${p.id}">${escapeHtml(p.title)}</td>
+      <td>${escapeHtml(p.category || '—')}</td>
+      <td>${pill(p.status)}</td>
+      <td class="cell-muted">${timeAgo(p.updated_at)}</td>
+      <td><button class="btn btn-sm" data-edit-post="${p.id}">Edit</button></td>
+    </tr>`).join('');
+
+  $all('[data-edit-post]', body).forEach(el => {
+    el.addEventListener('click', () => openBlogModal(rows.find(r => r.id === el.dataset.editPost)));
+  });
+}
+
+function slugify(title) {
+  return (title || '').toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+}
+
+function openBlogModal(post) {
+  const isNew = !post;
+  const p = post || { title: '', category: '', content: '', status: 'draft' };
+  openModal(isNew ? 'New post' : 'Edit post', `
+    <label class="field"><span class="field-label">Title</span><input id="postTitle" value="${escapeHtml(p.title)}" placeholder="Post title"></label>
+    <div class="split-field">
+      <label class="field"><span class="field-label">Category</span><input id="postCategory" value="${escapeHtml(p.category || '')}" placeholder="e.g. Lawn care"></label>
+      <label class="field"><span class="field-label">Status</span>
+        <select id="postStatus">
+          <option value="draft" ${p.status==='draft'?'selected':''}>Draft</option>
+          <option value="published" ${p.status==='published'?'selected':''}>Published</option>
+        </select>
+      </label>
+    </div>
+    <label class="field"><span class="field-label">Content</span><textarea id="postContent" style="min-height:180px;">${escapeHtml(p.content || '')}</textarea></label>
+  `, `
+    ${!isNew ? `<button class="btn btn-danger" id="deletePostBtn">Delete</button>` : ''}
+    <button class="btn btn-primary" id="savePostBtn">Save post</button>
+  `);
+
+  $('#savePostBtn').addEventListener('click', async () => {
+    const title = $('#postTitle').value.trim();
+    if (!title) return toast('Please add a title.');
+    const payload = {
+      title,
+      category: $('#postCategory').value.trim(),
+      content: $('#postContent').value,
+      status: $('#postStatus').value,
+      slug: slugify(title),
+      updated_at: new Date().toISOString(),
+    };
+    const { error } = isNew
+      ? await sb.from('blog_posts').insert(payload)
+      : await sb.from('blog_posts').update(payload).eq('id', p.id);
+    if (error) return toast('Could not save post.');
+    toast('Post saved.');
+    closeModal();
+    loadBlog();
+  });
+
+  if (!isNew) {
+    $('#deletePostBtn').addEventListener('click', async () => {
+      if (!confirm('Delete this post?')) return;
+      const { error } = await sb.from('blog_posts').delete().eq('id', p.id);
+      if (error) return toast('Could not delete post.');
+      toast('Post deleted.');
+      closeModal();
+      loadBlog();
+    });
+  }
+}
+
+$('#newPostBtn').addEventListener('click', () => openBlogModal(null));
+$('#blogStatusFilter').addEventListener('change', loadBlog);
+$('#blogSearch').addEventListener('input', debounce(loadBlog, 250));
+
+/* =========================================================
+   SUPPORT
+   ========================================================= */
+let activeThreadId = null;
+let supportChannel = null;
+
+async function loadSupportThreads() {
+  const list = $('#threadList');
+  list.innerHTML = `<div class="empty-state"><p>Loading…</p></div>`;
+
+  const { data, error } = await sb
+    .from('support_threads')
+    .select('*')
+    .order('last_message_at', { ascending: false });
+
+  if (error) { list.innerHTML = `<div class="empty-state"><p>Could not load conversations.</p></div>`; return; }
+  if (!data || data.length === 0) { list.innerHTML = `<div class="empty-state"><h4>No conversations yet</h4><p>Visitor chats will show up here.</p></div>`; return; }
+
+  list.innerHTML = data.map(t => `
+    <div class="thread-item ${t.id === activeThreadId ? 'active' : ''}" data-thread="${t.id}">
+      <div class="t-meta">
+        <span class="t-name">${escapeHtml(t.visitor_name || 'Website visitor')}</span>
+        <span class="t-time">${timeAgo(t.last_message_at)}</span>
+      </div>
+      <div class="t-preview">${pill(t.status)} &nbsp;${escapeHtml(t.visitor_email || '')}</div>
+    </div>`).join('');
+
+  $all('[data-thread]', list).forEach(el => {
+    el.addEventListener('click', () => openThread(el.dataset.thread, data.find(t => t.id === el.dataset.thread)));
+  });
+}
+
+async function openThread(id, threadMeta) {
+  activeThreadId = id;
+  $all('.thread-item', $('#threadList')).forEach(el => el.classList.toggle('active', el.dataset.thread === id));
+
+  $('#threadHeaderName').textContent = threadMeta?.visitor_name || 'Website visitor';
+  $('#threadHeaderMeta').textContent = threadMeta?.visitor_email || '';
+  $('#threadReplyBar').hidden = false;
+  $('#closeThreadBtn').hidden = false;
+  $('#closeThreadBtn').textContent = threadMeta?.status === 'closed' ? 'Reopen thread' : 'Mark closed';
+
+  await renderThreadMessages(id);
+
+  if (supportChannel) sb.removeChannel(supportChannel);
+  supportChannel = sb
+    .channel('support-thread-' + id)
+    .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'support_messages', filter: `thread_id=eq.${id}` }, () => renderThreadMessages(id))
+    .subscribe();
+}
+
+async function renderThreadMessages(id) {
+  const wrap = $('#threadMessages');
+  const { data, error } = await sb
+    .from('support_messages')
+    .select('*')
+    .eq('thread_id', id)
+    .order('created_at', { ascending: true });
+
+  if (error) { wrap.innerHTML = `<div class="empty-state"><p>Could not load messages.</p></div>`; return; }
+  if (!data || data.length === 0) { wrap.innerHTML = `<div class="empty-state"><p>No messages yet.</p></div>`; return; }
+
+  wrap.innerHTML = data.map(m => `<div class="msg msg-${m.sender}">${escapeHtml(m.message)}</div>`).join('');
+  wrap.scrollTop = wrap.scrollHeight;
+}
+
+$('#threadReplySend').addEventListener('click', async () => {
+  if (!activeThreadId) return;
+  const input = $('#threadReplyInput');
+  const message = input.value.trim();
+  if (!message) return;
+  const { error } = await sb.from('support_messages').insert({ thread_id: activeThreadId, sender: 'admin', message });
+  if (error) return toast('Could not send reply.');
+  await sb.from('support_threads').update({ last_message_at: new Date().toISOString() }).eq('id', activeThreadId);
+  input.value = '';
+  renderThreadMessages(activeThreadId);
+});
+
+$('#closeThreadBtn').addEventListener('click', async () => {
+  if (!activeThreadId) return;
+  const { data: t } = await sb.from('support_threads').select('status').eq('id', activeThreadId).maybeSingle();
+  const newStatus = t?.status === 'closed' ? 'open' : 'closed';
+  await sb.from('support_threads').update({ status: newStatus }).eq('id', activeThreadId);
+  toast(newStatus === 'closed' ? 'Thread closed.' : 'Thread reopened.');
+  loadSupportThreads();
+  loadOverview();
+});
+
+/* =========================================================
+   PAGE INSIGHTS
+   ========================================================= */
+async function loadInsights() {
+  const startOfToday = new Date(); startOfToday.setHours(0,0,0,0);
+  const since7d = new Date(Date.now() - 7*86400000).toISOString();
+  const since30d = new Date(Date.now() - 30*86400000).toISOString();
+
+  const [{ count: today }, { count: v7 }, { data: v30rows }] = await Promise.all([
+    sb.from('page_views').select('id', { count: 'exact', head: true }).gte('viewed_at', startOfToday.toISOString()),
+    sb.from('page_views').select('id', { count: 'exact', head: true }).gte('viewed_at', since7d),
+    sb.from('page_views').select('page_path').gte('viewed_at', since30d),
+  ]);
+
+  $('#statViewsToday').textContent = today ?? 0;
+  $('#statViews7d').textContent = v7 ?? 0;
+  $('#statViews30d').textContent = (v30rows || []).length;
+
+  const counts = {};
+  (v30rows || []).forEach(r => { counts[r.page_path] = (counts[r.page_path] || 0) + 1; });
+  const pages = Object.entries(counts).sort((a,b) => b[1]-a[1]);
+
+  $('#statUniquePages').textContent = pages.length;
+
+  const body = $('#insightsBody');
+  if (pages.length === 0) {
+    body.innerHTML = `<tr><td colspan="2" class="cell-muted">No page views recorded in the last 30 days.</td></tr>`;
+  } else {
+    body.innerHTML = pages.slice(0, 20).map(([page, count]) => `
+      <tr><td class="cell-mono">${escapeHtml(page)}</td><td>${count}</td></tr>
+    `).join('');
+  }
+}
+
+/* =========================================================
+   Utilities
+   ========================================================= */
+function debounce(fn, ms) {
+  let t;
+  return (...args) => { clearTimeout(t); t = setTimeout(() => fn(...args), ms); };
+}
+
+/* =========================================================
+   Boot
+   ========================================================= */
+checkSession();
+sb.auth.onAuthStateChange((event) => {
+  if (event === 'SIGNED_OUT') showLogin();
+});
+
+})();
+</script>
+</body>
+</html>
