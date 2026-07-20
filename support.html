@@ -83,6 +83,67 @@
   body.standalone #supCloseInline{display:none;}
   body.embedded #supCloseInline{display:flex;}
 
+  /* ---------- Main (body + input, gate overlays this) ---------- */
+  .sup-main{
+    flex:1 1 auto;
+    display:flex;
+    flex-direction:column;
+    min-height:0;
+    position:relative;
+  }
+
+  /* ---------- Contact gate ---------- */
+  .sup-gate{
+    position:absolute; inset:0; z-index:20;
+    background:rgba(251,248,242,.98);
+    backdrop-filter:blur(2px);
+    display:flex; align-items:center; justify-content:center;
+    overflow-y:auto;
+    padding:1.2rem;
+    animation:supFadeUp .4s ease both;
+  }
+  .sup-gate.hide{display:none;}
+  .sup-gate-card{
+    width:100%; max-width:360px;
+    background:#fff; border:1px solid var(--line); border-radius:20px;
+    padding:1.4rem 1.3rem;
+    box-shadow:0 20px 45px -20px rgba(20,63,24,.25);
+  }
+  .sup-gate-card h3{margin:0 0 .3rem; font-size:1.05rem; font-weight:700; color:var(--forest-deep);}
+  .sup-gate-card > p{margin:0 0 1.1rem; font-size:.82rem; color:var(--ink-soft); line-height:1.45;}
+  .sup-gate-field{margin-bottom:.85rem;}
+  .sup-gate-field label{display:block; font-size:.76rem; font-weight:700; color:var(--ink); margin-bottom:.35rem;}
+  .sup-gate-field label .req{color:var(--clay-deep); margin-left:.15rem;}
+  .sup-gate-field input, .sup-gate-field select{
+    width:100%; border:1.5px solid var(--line); border-radius:12px;
+    padding:.62rem .8rem; font-family:var(--body); font-size:.86rem;
+    outline:none; background:var(--cream); color:var(--ink);
+    transition:border-color .2s ease, box-shadow .2s ease;
+    appearance:none; -webkit-appearance:none;
+  }
+  .sup-gate-field select{
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%2352604A'><path d='M5.5 7.5l4.5 4.5 4.5-4.5' stroke='%2352604A' stroke-width='1.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+    background-repeat:no-repeat; background-position:right .8rem center; background-size:14px;
+    padding-right:2.2rem;
+  }
+  .sup-gate-field input:focus, .sup-gate-field select:focus{
+    border-color:var(--leaf); box-shadow:0 0 0 3px rgba(67,160,71,.15); background-color:#fff;
+  }
+  .sup-gate-field.error input, .sup-gate-field.error select{border-color:var(--clay);}
+  .sup-gate-error{font-size:.72rem; color:var(--clay-deep); margin-top:.3rem; display:none;}
+  .sup-gate-field.error .sup-gate-error{display:block;}
+  .sup-gate-submit{
+    width:100%; border:none; border-radius:14px;
+    background:linear-gradient(135deg, var(--leaf), var(--forest));
+    color:#fff; font-weight:700; font-size:.88rem;
+    padding:.75rem; cursor:pointer; margin-top:.3rem;
+    display:flex; align-items:center; justify-content:center; gap:.4rem;
+    transition:transform .2s ease, opacity .2s ease;
+  }
+  .sup-gate-submit:hover{transform:translateY(-1px);}
+  .sup-gate-submit:active{transform:translateY(0);}
+  .sup-gate-note{font-size:.7rem; color:var(--ink-soft); text-align:center; margin-top:.7rem; line-height:1.4;}
+
   /* ---------- Scroll area ---------- */
   .sup-body{
     flex:1 1 auto;
@@ -298,6 +359,51 @@
   </div>
 </div>
 
+<!-- ============ MAIN (gate overlays this until contact info is submitted) ============ -->
+<div class="sup-main" id="supMain">
+
+<div class="sup-gate" id="supGate">
+  <div class="sup-gate-card">
+    <h3>Before we chat 👋</h3>
+    <p>Share a few details so the right person can help you faster.</p>
+    <form id="supGateForm" novalidate>
+      <div class="sup-gate-field" id="fieldName">
+        <label for="gateName">Full name<span class="req">*</span></label>
+        <input type="text" id="gateName" name="gateName" autocomplete="name" required>
+        <div class="sup-gate-error">Please enter your name.</div>
+      </div>
+      <div class="sup-gate-field" id="fieldContact">
+        <label for="gateContact">Phone or email<span class="req">*</span></label>
+        <input type="text" id="gateContact" name="gateContact" autocomplete="tel" placeholder="e.g. 07XX XXX XXX" required>
+        <div class="sup-gate-error">Please enter a phone number or email.</div>
+      </div>
+      <div class="sup-gate-field" id="fieldService">
+        <label for="gateService">Service(s) needed<span class="req">*</span></label>
+        <select id="gateService" name="gateService" required>
+          <option value="" disabled selected>Select a service</option>
+          <option value="Garden maintenance">Garden maintenance</option>
+          <option value="Landscape design & installation">Landscape design &amp; installation</option>
+          <option value="Irrigation systems">Irrigation systems</option>
+          <option value="Commercial landscaping">Commercial landscaping</option>
+          <option value="Fumigation & pest control">Fumigation &amp; pest control</option>
+          <option value="Pool maintenance">Pool maintenance</option>
+          <option value="Golf green construction">Golf green construction</option>
+          <option value="Dog training">Dog training</option>
+          <option value="Other">Other / not sure yet</option>
+        </select>
+        <div class="sup-gate-error">Please choose a service.</div>
+      </div>
+      <div class="sup-gate-field" id="fieldLocation">
+        <label for="gateLocation">Location<span class="req">*</span></label>
+        <input type="text" id="gateLocation" name="gateLocation" autocomplete="address-level2" placeholder="e.g. Karen, Nairobi" required>
+        <div class="sup-gate-error">Please enter your location.</div>
+      </div>
+      <button type="submit" class="sup-gate-submit" id="gateSubmitBtn"><i class="bi bi-chat-dots"></i> Start chatting</button>
+    </form>
+    <div class="sup-gate-note">We'll use these details only to follow up on your request.</div>
+  </div>
+</div>
+
 <!-- ============ SCROLLABLE BODY ============ -->
 <div class="sup-body" id="supBody">
 
@@ -353,6 +459,8 @@
   <button class="sup-send-btn" id="supSendBtn" aria-label="Send message"><i class="bi bi-send-fill"></i></button>
 </div>
 
+</div><!-- /.sup-main -->
+
 <!-- Supabase client -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script>
@@ -374,6 +482,7 @@
   );
 
   var THREAD_KEY = 'lm_support_thread_id';
+  var CONTACT_KEY = 'lm_support_contact_info';
   var isEmbedded = (window.self !== window.top);
   document.body.classList.add(isEmbedded ? 'embedded' : 'standalone');
 
@@ -385,8 +494,86 @@
     input: document.getElementById('supInput'),
     sendBtn: document.getElementById('supSendBtn'),
     closeInline: document.getElementById('supCloseInline'),
-    backBtn: document.getElementById('supBackBtn')
+    backBtn: document.getElementById('supBackBtn'),
+    gate: document.getElementById('supGate'),
+    gateForm: document.getElementById('supGateForm'),
+    gateName: document.getElementById('gateName'),
+    gateContact: document.getElementById('gateContact'),
+    gateService: document.getElementById('gateService'),
+    gateLocation: document.getElementById('gateLocation')
   };
+
+  // ---------------------------------------------------------------------
+  // Contact gate — visitor must provide name, phone/email, service needed,
+  // and location before the chat becomes usable. Stored locally so it
+  // only has to be filled once per browser, and attached to the thread
+  // when it's first created.
+  // ---------------------------------------------------------------------
+  var contactInfo = null;
+  try{
+    var savedContact = localStorage.getItem(CONTACT_KEY);
+    if (savedContact) contactInfo = JSON.parse(savedContact);
+  }catch(e){ contactInfo = null; }
+
+  function requiredGateFields(){
+    return [
+      { input: el.gateName, wrap: document.getElementById('fieldName') },
+      { input: el.gateContact, wrap: document.getElementById('fieldContact') },
+      { input: el.gateService, wrap: document.getElementById('fieldService') },
+      { input: el.gateLocation, wrap: document.getElementById('fieldLocation') }
+    ];
+  }
+
+  function validateGate(){
+    var valid = true;
+    requiredGateFields().forEach(function(f){
+      var val = (f.input.value || '').trim();
+      var ok = val.length > 0;
+      if (f.input === el.gateContact && ok){
+        // Loosely accept either a phone number or an email address.
+        ok = /[a-zA-Z0-9]/.test(val) && val.length >= 6;
+      }
+      f.wrap.classList.toggle('error', !ok);
+      if (!ok) valid = false;
+    });
+    return valid;
+  }
+
+  function openGate(){
+    el.gate.classList.remove('hide');
+  }
+
+  function unlockChat(){
+    el.gate.classList.add('hide');
+  }
+
+  el.gateForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    if (!validateGate()) return;
+
+    contactInfo = {
+      name: el.gateName.value.trim(),
+      contact: el.gateContact.value.trim(),
+      service: el.gateService.value,
+      location: el.gateLocation.value.trim()
+    };
+    try{ localStorage.setItem(CONTACT_KEY, JSON.stringify(contactInfo)); }catch(e){}
+
+    unlockChat();
+    el.input.focus();
+  });
+
+  requiredGateFields().forEach(function(f){
+    f.input.addEventListener('input', function(){
+      document.getElementById(f.wrap.id).classList.remove('error');
+    });
+  });
+
+  if (contactInfo){
+    unlockChat();
+  } else {
+    openGate();
+  }
 
   var threadId = localStorage.getItem(THREAD_KEY) || null;
   var channel = null;
@@ -482,7 +669,14 @@
     // SELECT RLS policy, which anon can fail, breaking thread creation
     // silently. Same pattern already fixed on the public quote form.
     var newId = crypto.randomUUID();
-    var { error } = await sb.from('support_threads').insert({ id: newId });
+    var threadRow = { id: newId };
+    if (contactInfo){
+      threadRow.visitor_name = contactInfo.name;
+      threadRow.visitor_contact = contactInfo.contact;
+      threadRow.service_needed = contactInfo.service;
+      threadRow.location = contactInfo.location;
+    }
+    var { error } = await sb.from('support_threads').insert(threadRow);
     if (error) throw error;
     threadId = newId;
     localStorage.setItem(THREAD_KEY, threadId);
@@ -493,6 +687,7 @@
   async function sendMessage(text){
     text = (text || '').trim();
     if (!text) return;
+    if (!contactInfo){ openGate(); return; }
 
     el.sendBtn.disabled = true;
     try{
