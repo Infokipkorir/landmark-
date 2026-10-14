@@ -1,0 +1,1565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#ffffff">
+<title>Landmark Landscaping Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+<style>
+:root {
+  --bs-body-font-family: "Source Sans 3", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --bs-body-bg: #f3f5f4;
+  --bs-body-color: #1d2622;
+  --bs-border-color: #d8ded9;
+  --bs-primary: #2b6a3f;
+  --bs-primary-rgb: 43, 106, 63;
+  --bs-link-color: #2b6a3f;
+  --bs-link-color-rgb: 43, 106, 63;
+  --bs-link-hover-color: #1f4f2e;
+  --bs-border-radius: .4rem;
+  --sidebar-w: 232px;
+}
+.btn-primary {
+  --bs-btn-bg: #2b6a3f; --bs-btn-border-color: #2b6a3f;
+  --bs-btn-hover-bg: #235834; --bs-btn-hover-border-color: #235834;
+  --bs-btn-active-bg: #1f4f2e; --bs-btn-active-border-color: #1f4f2e;
+  --bs-btn-disabled-bg: #2b6a3f; --bs-btn-disabled-border-color: #2b6a3f;
+  --bs-btn-focus-shadow-rgb: 43, 106, 63;
+}
+.btn-outline-primary {
+  --bs-btn-color: #2b6a3f; --bs-btn-border-color: #2b6a3f;
+  --bs-btn-hover-bg: #2b6a3f; --bs-btn-hover-border-color: #2b6a3f;
+  --bs-btn-active-bg: #235834; --bs-btn-active-border-color: #235834;
+  --bs-btn-focus-shadow-rgb: 43, 106, 63;
+}
+.form-control:focus, .form-select:focus {
+  border-color: #2b6a3f; box-shadow: 0 0 0 .2rem rgba(43, 106, 63, .2);
+}
+.form-check-input:checked { background-color: #2b6a3f; border-color: #2b6a3f; }
+.card { --bs-card-border-color: var(--bs-border-color); --bs-card-bg: #fff; }
+.modal { --bs-modal-bg: #fff; }
+.offcanvas { --bs-offcanvas-bg: #fff; }
+.list-group { --bs-list-group-border-color: var(--bs-border-color); --bs-list-group-bg: #fff; }
+.min-w-0 { min-width: 0; }
+[hidden] { display: none !important; } /* beats Bootstrap's d-flex etc. */
+
+/* shell */
+.sidebar {
+  position: fixed; inset: 0 auto 0 0; width: var(--sidebar-w); background: #fff;
+  border-right: 1px solid var(--bs-border-color); z-index: 1030;
+  padding-top: env(safe-area-inset-top); overflow-y: auto;
+}
+.side-link {
+  display: flex; align-items: center; gap: .75rem; width: 100%; border: 0; background: none;
+  padding: .55rem .85rem; border-radius: var(--bs-border-radius); color: #38443d; text-align: left;
+}
+.side-link:hover { background: #eef2ef; }
+.side-link.active { background: #e3eee7; color: #1f4f2e; font-weight: 600; }
+.side-link i { font-size: 1.1rem; }
+.count-pill {
+  margin-left: auto; min-width: 1.4rem; padding: .05rem .4rem; border-radius: 1rem;
+  background: #b4472f; color: #fff; font-size: .75rem; font-weight: 600; text-align: center;
+}
+@media (min-width: 992px) { .app-main { margin-left: var(--sidebar-w); } }
+.appbar {
+  position: sticky; top: 0; z-index: 1020; background: #fff; border-bottom: 1px solid var(--bs-border-color);
+  padding: .6rem 1rem; padding-top: calc(.6rem + env(safe-area-inset-top));
+  display: flex; align-items: center; gap: .75rem;
+}
+.appbar h1 { font-size: 1.2rem; font-weight: 600; margin: 0; }
+.app-content { padding: 1rem; padding-bottom: calc(5.5rem + env(safe-area-inset-bottom)); max-width: 1040px; }
+@media (min-width: 992px) { .app-content { padding: 1.5rem 2rem 2rem; } }
+.bottom-nav {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 1030; background: #fff; display: flex;
+  border-top: 1px solid var(--bs-border-color); padding-bottom: env(safe-area-inset-bottom);
+}
+.bottom-nav button {
+  flex: 1; border: 0; background: none; padding: .5rem 0 .4rem; color: #56615b; font-size: .75rem;
+  display: flex; flex-direction: column; align-items: center; gap: .1rem; position: relative;
+}
+.bottom-nav button i { font-size: 1.3rem; }
+.bottom-nav button.active { color: var(--bs-primary); font-weight: 600; }
+.bottom-nav .count-pill { position: absolute; top: .2rem; left: 54%; margin: 0; font-size: .68rem; min-width: 1.15rem; }
+.panel { display: none; }
+.panel.active { display: block; }
+.toast-container { bottom: calc(4.6rem + env(safe-area-inset-bottom)); }
+@media (min-width: 992px) { .toast-container { bottom: 0; } }
+
+/* login */
+.login-box { max-width: 400px; }
+
+/* lists */
+.list-group-item-action { cursor: pointer; }
+.gallery-thumb { object-fit: cover; }
+.thread-list { max-height: 62vh; overflow-y: auto; }
+.thread-messages { height: 46vh; overflow-y: auto; }
+.bubble { max-width: 82%; padding: .5rem .75rem; border-radius: .6rem; white-space: pre-wrap; word-break: break-word; }
+.bubble.visitor { background: #e9edea; align-self: flex-start; }
+.bubble.ai { background: #e3eef5; align-self: flex-start; }
+.bubble.admin { background: var(--bs-primary); color: #fff; align-self: flex-end; }
+@media (max-width: 991.98px) {
+  #supportWrap:not(.thread-open) #threadPanel { display: none !important; }
+  #supportWrap.thread-open #threadList { display: none; }
+  .thread-list { max-height: none; }
+}
+.status-dot { display: inline-block; width: .55rem; height: .55rem; border-radius: 50%; background: #aab3ad; }
+.status-dot.on { background: #2b8a4f; }
+
+/* splash */
+#splash {
+  position: fixed; inset: 0; z-index: 2000; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  background: #2b6a3f; color: #fff; transition: opacity .45s ease, visibility .45s ease;
+  padding-top: env(safe-area-inset-top); padding-bottom: env(safe-area-inset-bottom);
+}
+#splash.hide { opacity: 0; visibility: hidden; }
+#splash .splash-logo {
+  width: 88px; height: 88px; border-radius: 24px; background: rgba(255,255,255,.14);
+  display: flex; align-items: center; justify-content: center; font-size: 2.6rem;
+  animation: splash-pop .7s ease both;
+}
+#splash .splash-name { margin-top: 1.1rem; font-size: 1.5rem; font-weight: 700; letter-spacing: .01em; animation: splash-rise .7s .15s ease both; }
+#splash .splash-sub { opacity: .8; animation: splash-rise .7s .25s ease both; }
+#splash .splash-bar { margin-top: 2rem; width: 120px; height: 3px; border-radius: 3px; background: rgba(255,255,255,.25); overflow: hidden; }
+#splash .splash-bar::after { content: ''; display: block; height: 100%; width: 40%; background: #fff; border-radius: 3px; animation: splash-load 1.1s ease-in-out infinite; }
+@keyframes splash-pop { from { opacity: 0; transform: scale(.8); } to { opacity: 1; transform: scale(1); } }
+@keyframes splash-rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes splash-load { from { transform: translateX(-100%); } to { transform: translateX(300%); } }
+@media (prefers-reduced-motion: reduce) { #splash *, #splash::after { animation: none !important; } }
+</style>
+</head>
+<body>
+
+<!-- ============ SPLASH ============ -->
+<div id="splash" role="status" aria-label="Loading">
+  <div class="splash-logo"><i class="bi bi-flower2"></i></div>
+  <div class="splash-name">Landmark Landscaping</div>
+  <div class="splash-sub">Admin</div>
+  <div class="splash-bar"></div>
+</div>
+
+<!-- ============ LOGIN ============ -->
+<div id="loginView" class="min-vh-100 d-flex align-items-center justify-content-center p-3">
+  <div class="login-box w-100">
+    <div class="mb-3">
+      <div class="fw-bold fs-5">Landmark Landscaping</div>
+      <div class="text-body-secondary">Admin</div>
+    </div>
+    <div class="card">
+      <div class="card-body p-4">
+        <h2 class="h4 mb-1">Sign in</h2>
+        <p class="text-body-secondary mb-4" id="loginLead">Use the passkey saved on your phone.</p>
+        <div id="loginError" class="alert alert-danger py-2" role="alert" hidden></div>
+
+        <div id="passkeyBlock">
+          <button type="button" class="btn btn-primary btn-lg w-100" id="passkeyLoginBtn">
+            <i class="bi bi-fingerprint me-2"></i>Sign in with passkey
+          </button>
+          <p class="form-text mt-2 mb-0">On a computer, choose &ldquo;Use a phone or tablet&rdquo; when asked, then scan the code with your phone.</p>
+        </div>
+
+        <div id="orDivider" class="d-flex align-items-center gap-3 my-4 text-body-secondary small">
+          <hr class="flex-grow-1 m-0"><span>or</span><hr class="flex-grow-1 m-0">
+        </div>
+        <button type="button" class="btn btn-outline-secondary w-100" id="togglePasswordBtn">Use email and password</button>
+
+        <form id="loginForm" class="mt-3" hidden autocomplete="on">
+          <div class="mb-3">
+            <label class="form-label" for="email">Email</label>
+            <input type="email" class="form-control" id="email" name="email" required autocomplete="username">
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="password">Password</label>
+            <input type="password" class="form-control" id="password" name="password" required autocomplete="current-password">
+          </div>
+          <button type="submit" class="btn btn-primary w-100" id="loginBtn">Sign in</button>
+        </form>
+      </div>
+    </div>
+    <div class="text-center mt-3" id="loginDownload" hidden>
+      <a class="btn btn-outline-primary btn-sm" data-app-download href="#" download><i class="bi bi-android2 me-1"></i>Download the Android app</a>
+    </div>
+    <p class="text-body-secondary small text-center mt-3">Only authorised Landmark Landscaping staff can sign in.</p>
+  </div>
+</div>
+
+<!-- ============ APP ============ -->
+<div id="appShell" hidden>
+  <aside class="sidebar d-none d-lg-flex flex-column" id="sidebar">
+    <div class="px-3 pt-3 pb-2">
+      <div class="fw-bold">Landmark Landscaping</div>
+      <div class="text-body-secondary small">Admin</div>
+    </div>
+    <nav class="px-2 flex-grow-1" id="sideNav"></nav>
+    <div class="p-2 border-top">
+      <div class="px-2 py-1 small text-body-secondary text-truncate" id="sideUser"></div>
+      <button class="side-link" id="signOutSide"><i class="bi bi-box-arrow-right"></i>Sign out</button>
+    </div>
+  </aside>
+
+  <div class="app-main">
+    <header class="appbar">
+      <h1 id="pageTitle" class="flex-grow-1">Overview</h1>
+      <button class="btn btn-light border position-relative" id="bellBtn" aria-label="Alerts">
+        <i class="bi bi-bell"></i>
+        <span class="count-pill" id="bellCount" hidden style="position:absolute;top:-.4rem;right:-.4rem;margin:0">0</span>
+      </button>
+    </header>
+
+    <main class="app-content mx-auto">
+      <div id="passkeyBanner" class="alert alert-light border d-flex align-items-center gap-3" hidden>
+        <i class="bi bi-fingerprint fs-4"></i>
+        <div class="flex-grow-1">
+          <strong>Sign in faster with a passkey.</strong>
+          <div class="small text-body-secondary">Save one on this device and skip typing your password.</div>
+        </div>
+        <button class="btn btn-primary btn-sm" id="bannerSetup">Set up</button>
+        <button class="btn-close" id="bannerDismiss" aria-label="Dismiss"></button>
+      </div>
+
+      <!-- Overview -->
+      <section class="panel active" id="section-overview">
+        <h2 class="h6 mb-2">Needs attention</h2>
+        <div class="list-group mb-4" id="attentionList"></div>
+        <div class="d-flex justify-content-between align-items-baseline mb-2">
+          <h2 class="h6 m-0">Latest quote requests</h2>
+          <button class="btn btn-link btn-sm p-0" data-goto="quotes">View all</button>
+        </div>
+        <div class="list-group" id="overviewQuotes"></div>
+        <p class="text-body-secondary small mt-3 mb-0" id="weekSummary"></p>
+      </section>
+
+      <!-- Quotes -->
+      <section class="panel" id="section-quotes">
+        <div class="row g-2 mb-3">
+          <div class="col-12 col-sm"><input class="form-control" id="quoteSearch" placeholder="Search name or phone" type="search"></div>
+          <div class="col-8 col-sm-auto">
+            <select class="form-select" id="quoteStatusFilter">
+              <option value="">All statuses</option><option value="new">New</option><option value="contacted">Contacted</option>
+              <option value="closed_won">Won</option><option value="closed_lost">Lost</option>
+            </select>
+          </div>
+          <div class="col-4 col-sm-auto"><button class="btn btn-outline-secondary w-100" id="refreshQuotes"><i class="bi bi-arrow-clockwise"></i></button></div>
+        </div>
+        <div class="list-group" id="quotesList"></div>
+      </section>
+
+      <!-- Contacts -->
+      <section class="panel" id="section-contacts">
+        <div class="row g-2 mb-3">
+          <div class="col"><input class="form-control" id="contactSearch" placeholder="Search name or phone" type="search"></div>
+          <div class="col-auto"><button class="btn btn-outline-secondary" id="refreshContacts"><i class="bi bi-arrow-clockwise"></i></button></div>
+        </div>
+        <p class="text-body-secondary small">Everyone who has asked for a quote, grouped by phone number.</p>
+        <div class="list-group" id="contactsList"></div>
+      </section>
+
+      <!-- Reviews -->
+      <section class="panel" id="section-testimonials">
+        <div class="row g-2 mb-3">
+          <div class="col-8 col-sm-auto">
+            <select class="form-select" id="testimonialFilter">
+              <option value="">All reviews</option><option value="pending">Waiting for approval</option><option value="published">Published</option>
+            </select>
+          </div>
+          <div class="col-4 col-sm-auto"><button class="btn btn-outline-secondary w-100" id="refreshTestimonials"><i class="bi bi-arrow-clockwise"></i></button></div>
+        </div>
+        <div class="list-group" id="testimonialsList"></div>
+      </section>
+
+      <!-- Gallery -->
+      <section class="panel" id="section-gallery">
+        <div class="row g-2 mb-3">
+          <div class="col-7 col-sm-auto">
+            <select class="form-select" id="galleryCategoryFilter">
+              <option value="">All categories</option><option value="gardens">Gardens</option><option value="lawns">Lawns</option>
+              <option value="irrigation">Irrigation</option><option value="features">Features</option><option value="commercial">Commercial</option>
+            </select>
+          </div>
+          <div class="col-5 col-sm-auto ms-sm-auto">
+            <button class="btn btn-primary w-100" id="uploadImageBtn"><i class="bi bi-upload me-1"></i>Upload</button>
+            <input type="file" id="galleryFileInput" accept="image/*" multiple hidden>
+          </div>
+        </div>
+        <div class="row row-cols-2 row-cols-md-3 row-cols-xl-4 g-3" id="galleryGrid"></div>
+      </section>
+
+      <!-- Blog -->
+      <section class="panel" id="section-blog">
+        <div class="row g-2 mb-3">
+          <div class="col-12 col-sm"><input class="form-control" id="blogSearch" placeholder="Search posts" type="search"></div>
+          <div class="col-6 col-sm-auto">
+            <select class="form-select" id="blogStatusFilter"><option value="">All posts</option><option value="draft">Drafts</option><option value="published">Published</option></select>
+          </div>
+          <div class="col-6 col-sm-auto"><button class="btn btn-primary w-100" id="newPostBtn"><i class="bi bi-plus-lg me-1"></i>New post</button></div>
+        </div>
+        <div class="list-group" id="blogList"></div>
+      </section>
+
+      <!-- Chats -->
+      <section class="panel" id="section-support">
+        <div class="card overflow-hidden" id="supportWrap">
+          <div class="row g-0">
+            <div class="col-lg-4 thread-list border-end list-group list-group-flush rounded-0" id="threadList"></div>
+            <div class="col-lg-8 d-flex flex-column" id="threadPanel">
+              <div class="p-3 border-bottom d-flex align-items-center gap-2">
+                <button class="btn btn-light border d-lg-none" id="threadBack" aria-label="Back"><i class="bi bi-arrow-left"></i></button>
+                <div class="flex-grow-1 min-w-0">
+                  <div class="fw-semibold text-truncate" id="threadName">Select a chat</div>
+                  <div class="small text-body-secondary text-truncate" id="threadMeta"></div>
+                </div>
+                <button class="btn btn-outline-secondary btn-sm" id="threadToggle" hidden>Mark closed</button>
+              </div>
+              <div class="thread-messages p-3 d-flex flex-column gap-2" id="threadMessages">
+                <p class="text-body-secondary m-auto">Pick a chat on the left to read and reply.</p>
+              </div>
+              <div class="p-3 border-top d-flex gap-2" id="threadReply" hidden>
+                <textarea class="form-control" id="threadInput" rows="1" placeholder="Write a reply"></textarea>
+                <button class="btn btn-primary" id="threadSend" aria-label="Send"><i class="bi bi-send"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Traffic -->
+      <section class="panel" id="section-insights">
+        <div class="card mb-3"><div class="card-body"><div class="row text-center">
+          <div class="col"><div class="fs-3 fw-semibold" id="viewsToday">–</div><div class="small text-body-secondary">Today</div></div>
+          <div class="col border-start"><div class="fs-3 fw-semibold" id="views7d">–</div><div class="small text-body-secondary">Last 7 days</div></div>
+          <div class="col border-start"><div class="fs-3 fw-semibold" id="views30d">–</div><div class="small text-body-secondary">Last 30 days</div></div>
+        </div></div></div>
+        <h2 class="h6 mb-2">Most visited pages, last 30 days</h2>
+        <div class="list-group" id="topPages"></div>
+      </section>
+
+      <!-- Alerts -->
+      <section class="panel" id="section-alerts">
+        <div class="card mb-3"><div class="card-body d-flex align-items-center gap-3">
+          <i class="bi bi-phone fs-4"></i>
+          <div class="flex-grow-1">
+            <div class="fw-semibold">Phone notifications</div>
+            <div class="small text-body-secondary" id="pushStatus"></div>
+          </div>
+          <button class="btn btn-outline-primary btn-sm" id="pushEnableBtn" hidden>Turn on</button>
+          <a class="btn btn-primary btn-sm" id="appDownloadBtn" data-app-download href="#" download hidden><i class="bi bi-download me-1"></i>Get the app</a>
+        </div></div>
+        <div class="d-flex gap-2 mb-2">
+          <button class="btn btn-outline-secondary btn-sm" id="markAllRead">Mark all as read</button>
+          <button class="btn btn-outline-danger btn-sm ms-auto" id="clearAlerts">Clear all</button>
+        </div>
+        <div class="list-group" id="alertsList"></div>
+      </section>
+
+      <!-- Devices -->
+      <section class="panel" id="section-devices">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <span class="small text-success"><i class="bi bi-broadcast me-1"></i>Live</span>
+          <button class="btn btn-outline-secondary btn-sm" id="refreshDevices"><i class="bi bi-arrow-clockwise"></i></button>
+        </div>
+        <div id="devicesBanner"></div>
+        <div class="row g-3" id="devicesGrid"></div>
+        <p class="text-body-secondary small mt-3">Two admin accounts are allowed. A device this account has not used before is marked <em>New device</em>; end it if you don't recognise it. In the browser, closing the tab signs you out and sessions end after 20 minutes of inactivity. The phone app stays signed in.</p>
+      </section>
+
+      <!-- Security -->
+      <section class="panel" id="section-security">
+        <div class="card mb-3">
+          <div class="card-body">
+            <h2 class="h5">Passkeys</h2>
+            <p class="text-body-secondary">A passkey lets you sign in with your phone's fingerprint, face or screen lock instead of a password.</p>
+            <div class="list-group mb-3" id="passkeyList"></div>
+            <button class="btn btn-primary" id="addPasskeyBtn"><i class="bi bi-plus-lg me-1"></i>Add a passkey on this device</button>
+          </div>
+        </div>
+        <div class="card border-danger-subtle">
+          <div class="card-body">
+            <h2 class="h5">Moving to a new phone?</h2>
+            <p class="text-body-secondary mb-3">Sign in on the new phone with your email and password, then replace your passkeys here. This saves a passkey on the new phone and removes the old ones. Every other device is signed out and stops receiving notifications.</p>
+            <button class="btn btn-outline-danger" id="replacePasskeyBtn"><i class="bi bi-arrow-repeat me-1"></i>Replace passkeys with this device</button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <nav class="bottom-nav d-lg-none" id="bottomNav"></nav>
+</div>
+
+<!-- More menu (mobile) -->
+<div class="offcanvas offcanvas-bottom rounded-top" tabindex="-1" id="moreMenu" style="height:auto">
+  <div class="offcanvas-header pb-0"><h2 class="offcanvas-title h6">More</h2><button class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button></div>
+  <div class="offcanvas-body" id="moreBody"></div>
+</div>
+
+<!-- Generic modal -->
+<div class="modal fade" id="appModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" id="appModalDialog">
+    <div class="modal-content">
+      <div class="modal-header"><h2 class="modal-title h5" id="appModalTitle"></h2><button class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+      <div class="modal-body" id="appModalBody"></div>
+      <div class="modal-footer" id="appModalFoot"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Confirm modal -->
+<div class="modal fade" id="confirmModal" tabindex="-1" aria-hidden="true" style="z-index:1065">
+  <div class="modal-dialog modal-dialog-centered modal-sm">
+    <div class="modal-content">
+      <div class="modal-body"><h2 class="h6" id="confirmTitle"></h2><p class="mb-0" id="confirmBody"></p></div>
+      <div class="modal-footer"><button class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button><button class="btn btn-primary" id="confirmOk">Confirm</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- Idle warning (browser only) -->
+<div class="modal fade" id="idleModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-sm"><div class="modal-content"><div class="modal-body text-center">
+    <h2 class="h5">Still there?</h2>
+    <p>You'll be signed out in <strong id="idleCountdown">60</strong> seconds.</p>
+    <button class="btn btn-primary w-100" id="idleStay">Stay signed in</button>
+  </div></div></div>
+</div>
+
+<div class="toast-container position-fixed end-0 p-3" id="toastWrap"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+(function () {
+'use strict';
+
+/* ================= Config ================= */
+const SUPABASE_URL = 'https://bwcsuxvcqmykhckxqgjh.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ3Y3N1eHZjcW15a2hja3hxZ2poIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODMyOTE1NjIsImV4cCI6MjA5ODg2NzU2Mn0.rAXetUdSG-uzEhQfvhgK8Kn-K5Hxyxx9M7QO4nKTZiA';
+const MEDIA_BUCKET = 'media';
+const IDLE_LIMIT_MS = 20 * 60 * 1000;
+const IDLE_WARNING_MS = 60 * 1000;
+const HEARTBEAT_MS = 30 * 1000;
+const ONLINE_WINDOW_MS = 90 * 1000;
+const PUSH_CHANNEL = 'landmark_alerts';
+// Where the signed Android app (APK) is hosted. Upload the file here, or change this link.
+const APP_DOWNLOAD_URL = '/landmark-admin.apk';
+const SPLASH_MIN_MS = 900;
+const splashStart = Date.now();
+function hideSplash() {
+  const s = document.getElementById('splash');
+  if (!s) return;
+  const wait = Math.max(0, SPLASH_MIN_MS - (Date.now() - splashStart));
+  setTimeout(() => { s.classList.add('hide'); setTimeout(() => s.remove(), 600); }, wait);
+}
+setTimeout(hideSplash, 6000); // never leave the splash up if something stalls
+
+const Cap = window.Capacitor;
+const isNative = !!(Cap && Cap.isNativePlatform && Cap.isNativePlatform());
+
+// The phone app stays signed in (so alerts keep working). In a browser the
+// session lives only as long as the tab.
+const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+  auth: {
+    persistSession: true,
+    storage: isNative ? window.localStorage : window.sessionStorage,
+    autoRefreshToken: true,
+    detectSessionInUrl: false,
+  },
+});
+
+function uuid() {
+  return crypto.randomUUID ? crypto.randomUUID() : 'id-' + Date.now() + '-' + Math.random().toString(36).slice(2);
+}
+let DEVICE_ID = localStorage.getItem('landmark_admin_device_id');
+if (!DEVICE_ID) { DEVICE_ID = uuid(); localStorage.setItem('landmark_admin_device_id', DEVICE_ID); }
+let TAB_KEY = sessionStorage.getItem('landmark_admin_tab_key');
+if (!TAB_KEY) { TAB_KEY = uuid(); sessionStorage.setItem('landmark_admin_tab_key', TAB_KEY); }
+// One row per app install; one row per browser tab.
+const SESSION_KEY = isNative ? 'app-' + DEVICE_ID : TAB_KEY;
+
+/* ================= Helpers ================= */
+const $ = (s, r) => (r || document).querySelector(s);
+const $$ = (s, r) => Array.from((r || document).querySelectorAll(s));
+const esc = (v) => (v ?? '').toString().replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const debounce = (fn, ms) => { let t; return (...a) => { clearTimeout(t); t = setTimeout(() => fn(...a), ms); }; };
+
+function timeAgo(iso) {
+  if (!iso) return '';
+  const d = new Date(iso), s = (Date.now() - d.getTime()) / 1000;
+  if (s < 60) return 'just now';
+  if (s < 3600) return Math.floor(s / 60) + 'm ago';
+  if (s < 86400) return Math.floor(s / 3600) + 'h ago';
+  if (s < 2592000) return Math.floor(s / 86400) + 'd ago';
+  return d.toLocaleDateString('en-KE');
+}
+const fmtDate = (iso) => iso ? new Date(iso).toLocaleDateString('en-KE', { day: 'numeric', month: 'short', year: 'numeric' }) : '';
+
+const STATUS = {
+  new: ['New', 'warning'], contacted: ['Contacted', 'info'], closed_won: ['Won', 'success'], closed_lost: ['Lost', 'secondary'],
+  read: ['Read', 'info'], responded: ['Responded', 'success'], archived: ['Archived', 'secondary'],
+  pending: ['Waiting', 'warning'], published: ['Published', 'success'], draft: ['Draft', 'secondary'],
+  open: ['Open', 'warning'], closed: ['Closed', 'secondary'],
+};
+function badge(status) {
+  const [label, tone] = STATUS[status] || [status || '', 'secondary'];
+  return `<span class="badge bg-${tone}-subtle text-${tone}-emphasis">${esc(label)}</span>`;
+}
+const empty = (msg) => `<div class="list-group-item text-body-secondary py-4 text-center">${esc(msg)}</div>`;
+
+function toast(msg, kind) {
+  const el = document.createElement('div');
+  el.className = `toast align-items-center text-bg-${kind || 'dark'} border-0`;
+  el.setAttribute('role', 'status');
+  el.innerHTML = `<div class="d-flex"><div class="toast-body">${esc(msg)}</div><button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button></div>`;
+  $('#toastWrap').appendChild(el);
+  new bootstrap.Toast(el, { delay: 3500 }).show();
+  el.addEventListener('hidden.bs.toast', () => el.remove());
+}
+
+function openModal(title, bodyHtml, footHtml, opts) {
+  opts = opts || {};
+  $('#appModalTitle').textContent = title;
+  $('#appModalBody').innerHTML = bodyHtml;
+  const foot = $('#appModalFoot');
+  foot.innerHTML = footHtml || '';
+  foot.hidden = !footHtml;
+  $('#appModalDialog').className = 'modal-dialog modal-dialog-scrollable ' + (opts.full ? 'modal-fullscreen-sm-down modal-lg' : 'modal-dialog-centered');
+  bootstrap.Modal.getOrCreateInstance($('#appModal')).show();
+}
+const closeModal = () => bootstrap.Modal.getOrCreateInstance($('#appModal')).hide();
+
+function askConfirm(message, o) {
+  o = o || {};
+  return new Promise(resolve => {
+    const el = $('#confirmModal'), m = bootstrap.Modal.getOrCreateInstance(el), ok = $('#confirmOk');
+    $('#confirmTitle').textContent = o.title || 'Are you sure?';
+    $('#confirmBody').textContent = message;
+    ok.textContent = o.confirmLabel || 'Confirm';
+    ok.className = 'btn ' + (o.danger ? 'btn-danger' : 'btn-primary');
+    let result = false;
+    const onOk = () => { result = true; m.hide(); };
+    ok.addEventListener('click', onOk, { once: true });
+    el.addEventListener('hidden.bs.modal', () => { ok.removeEventListener('click', onOk); resolve(result); }, { once: true });
+    m.show();
+  });
+}
+
+function parseUserAgent(ua) {
+  ua = ua || navigator.userAgent || '';
+  let browser = 'Browser', version = '', m;
+  if (isNative) browser = 'Landmark app';
+  else if (/Edg\//.test(ua)) { browser = 'Edge'; m = ua.match(/Edg\/([\d.]+)/); }
+  else if (/OPR\//.test(ua)) { browser = 'Opera'; m = ua.match(/OPR\/([\d.]+)/); }
+  else if (/Chrome\//.test(ua)) { browser = 'Chrome'; m = ua.match(/Chrome\/([\d.]+)/); }
+  else if (/Firefox\//.test(ua)) { browser = 'Firefox'; m = ua.match(/Firefox\/([\d.]+)/); }
+  else if (/Safari\//.test(ua) && /Version\//.test(ua)) { browser = 'Safari'; m = ua.match(/Version\/([\d.]+)/); }
+  version = m ? m[1] : '';
+  let os = 'Unknown OS';
+  if (/Windows NT/.test(ua)) os = 'Windows';
+  else if (/Android/.test(ua)) os = 'Android';
+  else if (/iPhone|iPad|iPod/.test(ua)) os = 'iOS';
+  else if (/Mac OS X/.test(ua)) os = 'macOS';
+  else if (/Linux/.test(ua)) os = 'Linux';
+  let device = 'Desktop';
+  if (/iPad|Tablet/.test(ua)) device = 'Tablet';
+  else if (/Mobi|Android|iPhone/.test(ua)) device = 'Mobile';
+  return { browser, version, os, device };
+}
+function androidModel() {
+  const m = (navigator.userAgent || '').match(/Android[^;]*; ([^;)]+)/);
+  const model = m ? m[1].trim() : '';
+  return model.length > 2 ? model : 'Android phone';
+}
+function defaultDeviceName() {
+  if (isNative) return 'Landmark app on ' + androidModel();
+  const u = parseUserAgent();
+  return `${u.browser} on ${u.os}`;
+}
+
+async function lookupLocation() {
+  try {
+    const r = await fetch('https://ipapi.co/json/');
+    if (!r.ok) throw new Error();
+    const j = await r.json();
+    return { ip: j.ip || null, city: j.city || null, region: j.region || null, country: j.country_name || null };
+  } catch { return { ip: null, city: null, region: null, country: null }; }
+}
+
+/* ================= Passkey ceremonies ================= */
+const b64u = {
+  toBytes(s) {
+    s = s.replace(/-/g, '+').replace(/_/g, '/');
+    s += '='.repeat((4 - s.length % 4) % 4);
+    return Uint8Array.from(atob(s), c => c.charCodeAt(0));
+  },
+  from(buf) {
+    const b = new Uint8Array(buf);
+    let s = '';
+    for (let i = 0; i < b.length; i++) s += String.fromCharCode(b[i]);
+    return btoa(s).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+  },
+};
+// Android's WebView has no WebAuthn, so the app uses a native Capacitor plugin
+// (@capawesome/capacitor-passkeys). Browsers use the built-in API.
+const NativePasskeys = isNative ? Cap.registerPlugin('Passkeys') : null;
+
+async function passkeysAvailable() {
+  if (isNative) { try { return !!(await NativePasskeys.isAvailable()).available; } catch { return false; } }
+  return !!window.PublicKeyCredential && !!navigator.credentials;
+}
+
+async function ceremonyCreate(o) {
+  if (isNative) {
+    const r = await NativePasskeys.createPasskey({
+      attestation: o.attestation, authenticatorSelection: o.authenticatorSelection, challenge: o.challenge,
+      excludeCredentials: o.excludeCredentials, pubKeyCredParams: o.pubKeyCredParams, rp: o.rp, timeout: o.timeout, user: o.user,
+    });
+    return { ...r, clientExtensionResults: r.clientExtensionResults || {} };
+  }
+  const cred = await navigator.credentials.create({ publicKey: {
+    ...o,
+    challenge: b64u.toBytes(o.challenge),
+    user: { ...o.user, id: b64u.toBytes(o.user.id) },
+    excludeCredentials: (o.excludeCredentials || []).map(c => ({ ...c, id: b64u.toBytes(c.id) })),
+  } });
+  const r = cred.response;
+  return {
+    id: cred.id, rawId: b64u.from(cred.rawId), type: cred.type,
+    authenticatorAttachment: cred.authenticatorAttachment || undefined,
+    clientExtensionResults: cred.getClientExtensionResults(),
+    response: {
+      clientDataJSON: b64u.from(r.clientDataJSON), attestationObject: b64u.from(r.attestationObject),
+      transports: r.getTransports ? r.getTransports() : [],
+    },
+  };
+}
+
+async function ceremonyGet(o) {
+  if (isNative) {
+    const r = await NativePasskeys.getPasskey({
+      challenge: o.challenge, rpId: o.rpId, userVerification: o.userVerification, allowCredentials: o.allowCredentials, timeout: o.timeout,
+    });
+    return { ...r, clientExtensionResults: r.clientExtensionResults || {} };
+  }
+  const cred = await navigator.credentials.get({ publicKey: {
+    challenge: b64u.toBytes(o.challenge), rpId: o.rpId, timeout: o.timeout, userVerification: o.userVerification,
+    allowCredentials: (o.allowCredentials || []).map(c => ({ ...c, id: b64u.toBytes(c.id) })),
+  } });
+  const r = cred.response;
+  return {
+    id: cred.id, rawId: b64u.from(cred.rawId), type: cred.type,
+    authenticatorAttachment: cred.authenticatorAttachment || undefined,
+    clientExtensionResults: cred.getClientExtensionResults(),
+    response: {
+      clientDataJSON: b64u.from(r.clientDataJSON), authenticatorData: b64u.from(r.authenticatorData),
+      signature: b64u.from(r.signature), userHandle: r.userHandle ? b64u.from(r.userHandle) : undefined,
+    },
+  };
+}
+
+async function callPasskeyFn(body) {
+  const { data, error } = await sb.functions.invoke('passkey-auth', { body });
+  if (error) {
+    let msg = 'Could not reach the passkey service.';
+    try { const j = await error.context.json(); if (j && j.error) msg = j.error; } catch { /* keep default */ }
+    throw new Error(msg);
+  }
+  return data;
+}
+
+function friendlyError(e) {
+  const name = e && e.name, code = e && (e.code || e.message || '');
+  if (name === 'NotAllowedError' || /cancel/i.test(code)) return 'The passkey prompt was cancelled or timed out.';
+  if (name === 'InvalidStateError') return 'A passkey for this account already exists on this device.';
+  if (/DOMAIN_NOT_ASSOCIATED/.test(code)) return 'The app is not linked to the website yet. Add the assetlinks.json file described in the setup notes.';
+  if (/UNIMPLEMENTED/.test(code)) return 'This build of the app does not include passkeys. Update the app, or use your password.';
+  return (e && e.message) || 'Something went wrong. Try again.';
+}
+
+/* ================= Auth ================= */
+let currentAdmin = null;
+let passkeyCount = null;
+let bannerDismissed = false;
+let pendingRoute = null;
+
+function showLogin(message) {
+  $('#loginView').hidden = false;
+  $('#appShell').hidden = true;
+  const box = $('#loginError');
+  box.hidden = !message;
+  box.textContent = message || '';
+}
+
+async function enterDashboard(session) {
+  const { data: profile } = await sb.from('admin_profiles').select('id, full_name, email').eq('id', session.user.id).maybeSingle();
+  if (!profile) {
+    await sb.auth.signOut({ scope: 'local' });
+    return showLogin('This account is not authorised for admin access.');
+  }
+  currentAdmin = profile;
+  $('#loginView').hidden = true;
+  $('#appShell').hidden = false;
+  $('#sideUser').textContent = profile.full_name || profile.email || '';
+  buildNav();
+  gotoSection('overview');
+  registerSession();
+  startHeartbeat();
+  if (!isNative) startIdleWatch();
+  startRealtime();
+  loadNotifications();
+  loadPasskeyState();
+  setupPush(false);
+  if (pendingRoute) { const r = pendingRoute; pendingRoute = null; routeFromData(r); }
+}
+
+async function setupLogin() {
+  const available = await passkeysAvailable();
+  $('#passkeyBlock').hidden = !available;
+  $('#orDivider').hidden = !available;
+  $('#togglePasswordBtn').hidden = !available;
+  $('#loginForm').hidden = available;
+  $('#loginLead').textContent = available ? 'Use the passkey saved on your phone.' : 'Use your admin email and password.';
+}
+
+$('#togglePasswordBtn').addEventListener('click', () => {
+  const f = $('#loginForm');
+  f.hidden = !f.hidden;
+  if (!f.hidden) $('#email').focus();
+});
+
+$('#passkeyLoginBtn').addEventListener('click', async () => {
+  const btn = $('#passkeyLoginBtn');
+  showLogin('');
+  btn.disabled = true;
+  try {
+    const start = await callPasskeyFn({ action: 'login-options' });
+    const credential = await ceremonyGet(start.options);
+    const done = await callPasskeyFn({ action: 'login-verify', challengeId: start.challengeId, credential });
+    const { data, error } = await sb.auth.verifyOtp({ token_hash: done.token_hash, type: 'magiclink' });
+    if (error) throw error;
+    await enterDashboard(data.session);
+  } catch (e) {
+    showLogin(friendlyError(e));
+  } finally { btn.disabled = false; }
+});
+
+$('#loginForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const btn = $('#loginBtn');
+  showLogin('');
+  btn.disabled = true; btn.textContent = 'Signing in…';
+  try {
+    const { data, error } = await sb.auth.signInWithPassword({ email: $('#email').value.trim(), password: $('#password').value });
+    if (error) throw error;
+    $('#password').value = '';
+    await enterDashboard(data.session);
+  } catch (err) {
+    showLogin(err.message || 'Could not sign in. Check your details.');
+  } finally { btn.disabled = false; btn.textContent = 'Sign in'; }
+});
+
+async function signOutNow(removePush) {
+  await endSessionCleanup(removePush);
+  await sb.auth.signOut({ scope: 'local' });
+  currentAdmin = null; passkeyCount = null;
+  showLogin('');
+}
+$('#signOutSide').addEventListener('click', () => signOutNow(true));
+
+/* ================= Device sessions ================= */
+let heartbeatTimer = null, sessionsChannel = null, notifChannel = null;
+
+async function registerSession() {
+  if (!currentAdmin) return;
+  const u = parseUserAgent();
+  const loc = await lookupLocation();
+  const { data: known } = await sb.from('admin_trusted_devices').select('device_id').eq('admin_id', currentAdmin.id).eq('device_id', DEVICE_ID).maybeSingle();
+  const isNew = !known;
+  if (isNew) {
+    await sb.from('admin_trusted_devices').insert({ admin_id: currentAdmin.id, device_id: DEVICE_ID, label: `${u.browser} on ${u.os}` });
+  }
+  await sb.from('admin_sessions').upsert({
+    session_token: SESSION_KEY, admin_id: currentAdmin.id, device_id: DEVICE_ID,
+    device: u.device, browser: u.browser, os: u.os, browser_version: u.version, user_agent: navigator.userAgent,
+    ip_address: loc.ip, city: loc.city, region: loc.region, country: loc.country,
+    is_new_device: isNew, last_active_at: new Date().toISOString(),
+  }, { onConflict: 'session_token' });
+  if (isNew) toast('New device flagged for review.');
+}
+
+function startHeartbeat() {
+  stopHeartbeat();
+  heartbeatTimer = setInterval(async () => {
+    if (!currentAdmin) return;
+    const { data, error } = await sb.from('admin_sessions').update({ last_active_at: new Date().toISOString() }).eq('session_token', SESSION_KEY).select('id');
+    if (!error && (!data || data.length === 0)) return kicked();
+    if ($('#section-devices').classList.contains('active')) loadDevices();
+  }, HEARTBEAT_MS);
+}
+function stopHeartbeat() { if (heartbeatTimer) { clearInterval(heartbeatTimer); heartbeatTimer = null; } }
+
+async function endSessionCleanup(removePush) {
+  stopHeartbeat(); stopIdleWatch(); stopRealtime();
+  try {
+    if (removePush && myPushToken) await sb.from('admin_push_tokens').delete().eq('fcm_token', myPushToken);
+    await sb.from('admin_sessions').delete().eq('session_token', SESSION_KEY);
+  } catch { /* best effort */ }
+}
+
+async function kicked() {
+  await signOutNow(true);
+  toast('This device was signed out by an admin.');
+}
+window.addEventListener('pagehide', () => { stopHeartbeat(); });
+
+function startRealtime() {
+  stopRealtime();
+  sessionsChannel = sb.channel('admin-sessions-live')
+    .on('postgres_changes', { event: '*', schema: 'public', table: 'admin_sessions' }, (p) => {
+      if (p.eventType === 'DELETE' && p.old && p.old.session_token === SESSION_KEY) return kicked();
+      if ($('#section-devices').classList.contains('active')) loadDevices();
+    }).subscribe();
+  notifChannel = sb.channel('admin-notifications-live')
+    .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'admin_notifications' }, (p) => {
+      toast(p.new.title);
+      loadNotifications();
+      loadCounts();
+    }).subscribe();
+}
+function stopRealtime() {
+  if (sessionsChannel) { sb.removeChannel(sessionsChannel); sessionsChannel = null; }
+  if (notifChannel) { sb.removeChannel(notifChannel); notifChannel = null; }
+}
+
+/* ================= Idle timeout (browser only) ================= */
+let idleTimer = null, idleCountdown = null;
+const IDLE_EVENTS = ['mousemove', 'mousedown', 'keydown', 'scroll', 'touchstart'];
+function startIdleWatch() { stopIdleWatch(); resetIdle(); IDLE_EVENTS.forEach(e => document.addEventListener(e, resetIdle, { passive: true })); }
+function stopIdleWatch() {
+  clearTimeout(idleTimer); clearInterval(idleCountdown);
+  IDLE_EVENTS.forEach(e => document.removeEventListener(e, resetIdle));
+  const m = bootstrap.Modal.getInstance($('#idleModal')); if (m) m.hide();
+}
+function resetIdle() {
+  if (!currentAdmin || $('#idleModal').classList.contains('show')) return;
+  clearTimeout(idleTimer);
+  idleTimer = setTimeout(showIdleWarning, IDLE_LIMIT_MS - IDLE_WARNING_MS);
+}
+function showIdleWarning() {
+  bootstrap.Modal.getOrCreateInstance($('#idleModal')).show();
+  let left = IDLE_WARNING_MS / 1000;
+  $('#idleCountdown').textContent = left;
+  idleCountdown = setInterval(async () => {
+    left -= 1; $('#idleCountdown').textContent = Math.max(left, 0);
+    if (left <= 0) {
+      clearInterval(idleCountdown);
+      await signOutNow(false);
+      toast('Signed out after 20 minutes of inactivity.');
+    }
+  }, 1000);
+}
+$('#idleStay').addEventListener('click', () => {
+  clearInterval(idleCountdown);
+  bootstrap.Modal.getOrCreateInstance($('#idleModal')).hide();
+  setTimeout(resetIdle, 300);
+});
+
+/* ================= Navigation ================= */
+const NAV = [
+  { id: 'overview', label: 'Overview', icon: 'speedometer2' },
+  { id: 'quotes', label: 'Quotes', icon: 'file-earmark-text', count: 'quotes' },
+  { id: 'contacts', label: 'Contacts', icon: 'people' },
+  { id: 'support', label: 'Chats', icon: 'chat-dots', count: 'chats' },
+  { id: 'testimonials', label: 'Reviews', icon: 'star', count: 'reviews' },
+  { id: 'gallery', label: 'Gallery', icon: 'images' },
+  { id: 'blog', label: 'Blog', icon: 'journal-text' },
+  { id: 'insights', label: 'Traffic', icon: 'bar-chart' },
+  { id: 'alerts', label: 'Alerts', icon: 'bell', count: 'alerts' },
+  { id: 'devices', label: 'Devices', icon: 'phone' },
+  { id: 'security', label: 'Security', icon: 'shield-lock' },
+];
+const BOTTOM = ['overview', 'quotes', 'support', 'alerts'];
+const counts = { quotes: 0, chats: 0, reviews: 0, alerts: 0 };
+
+function pillHtml(key) { const n = counts[key] || 0; return n ? `<span class="count-pill" data-count="${key}">${n > 99 ? '99+' : n}</span>` : `<span class="count-pill" data-count="${key}" hidden>0</span>`; }
+
+function buildNav() {
+  const item = (n) => `<button class="side-link" data-nav="${n.id}"><i class="bi bi-${n.icon}"></i><span>${n.label}</span>${n.count ? pillHtml(n.count) : ''}</button>`;
+  const side = NAV.slice(0, 8).map(item).join('') + '<hr class="my-2">' + NAV.slice(8).map(item).join('');
+  $('#sideNav').innerHTML = side;
+  $('#bottomNav').innerHTML = BOTTOM.map(id => { const n = NAV.find(x => x.id === id);
+    return `<button data-nav="${n.id}"><i class="bi bi-${n.icon}"></i><span>${n.label}</span>${n.count ? pillHtml(n.count) : ''}</button>`; }).join('')
+    + `<button id="moreBtn"><i class="bi bi-three-dots"></i><span>More</span></button>`;
+  $('#moreBody').innerHTML = '<div class="list-group list-group-flush">' + NAV.filter(n => !BOTTOM.includes(n.id)).map(n =>
+    `<button class="list-group-item list-group-item-action d-flex align-items-center gap-3" data-nav="${n.id}"><i class="bi bi-${n.icon}"></i>${n.label}</button>`).join('')
+    + `<button class="list-group-item list-group-item-action d-flex align-items-center gap-3 text-danger" id="signOutMore"><i class="bi bi-box-arrow-right"></i>Sign out</button></div>`;
+  $$('[data-nav]').forEach(b => b.addEventListener('click', () => {
+    const off = bootstrap.Offcanvas.getInstance($('#moreMenu')); if (off) off.hide();
+    gotoSection(b.dataset.nav);
+  }));
+  $('#moreBtn').addEventListener('click', () => bootstrap.Offcanvas.getOrCreateInstance($('#moreMenu')).show());
+  $('#signOutMore').addEventListener('click', () => { bootstrap.Offcanvas.getInstance($('#moreMenu')).hide(); signOutNow(true); });
+  updateCounts();
+}
+
+function updateCounts() {
+  Object.keys(counts).forEach(k => $$(`[data-count="${k}"]`).forEach(el => {
+    const n = counts[k] || 0; el.hidden = !n; el.textContent = n > 99 ? '99+' : n;
+  }));
+  const bell = $('#bellCount'); bell.hidden = !counts.alerts; bell.textContent = counts.alerts > 99 ? '99+' : counts.alerts;
+}
+
+const LOADERS = {
+  overview: () => loadOverview(), quotes: () => loadQuotes(), contacts: () => loadContacts(), testimonials: () => loadTestimonials(),
+  gallery: () => loadGallery(), blog: () => loadBlog(), support: () => loadThreads(), insights: () => loadInsights(),
+  alerts: () => { loadNotifications(); renderPushStatus(); }, devices: () => loadDevices(), security: () => loadSecurity(),
+};
+function gotoSection(id) {
+  $$('.panel').forEach(p => p.classList.remove('active'));
+  $('#section-' + id).classList.add('active');
+  $$('[data-nav]').forEach(b => b.classList.toggle('active', b.dataset.nav === id));
+  $('#pageTitle').textContent = NAV.find(n => n.id === id).label;
+  window.scrollTo(0, 0);
+  LOADERS[id]();
+}
+$('#bellBtn').addEventListener('click', () => gotoSection('alerts'));
+document.addEventListener('click', (e) => {
+  const g = e.target.closest('[data-goto]');
+  if (!g) return;
+  if (g.dataset.filter) $('#quoteStatusFilter').value = g.dataset.filter;
+  gotoSection(g.dataset.goto);
+});
+
+/* ================= Overview ================= */
+async function loadCounts() {
+  const [q, r, c] = await Promise.all([
+    sb.from('quote_requests').select('id', { count: 'exact', head: true }).eq('status', 'new'),
+    sb.from('testimonials').select('id', { count: 'exact', head: true }).eq('status', 'pending'),
+    sb.from('support_threads').select('id', { count: 'exact', head: true }).eq('status', 'open'),
+  ]);
+  counts.quotes = q.count || 0; counts.reviews = r.count || 0; counts.chats = c.count || 0;
+  updateCounts();
+}
+
+async function loadOverview() {
+  await loadCounts();
+  const since = new Date(Date.now() - 7 * 864e5).toISOString();
+  const [week, latest] = await Promise.all([
+    sb.from('quote_requests').select('phone').gte('created_at', since),
+    sb.from('quote_requests').select('id, name, service, status, created_at').order('created_at', { ascending: false }).limit(5),
+  ]);
+
+  const rows = [
+    [counts.quotes, 'new quote request', 'new quote requests', 'quotes', 'new', 'file-earmark-text'],
+    [counts.chats, 'open chat', 'open chats', 'support', '', 'chat-dots'],
+    [counts.reviews, 'review waiting for approval', 'reviews waiting for approval', 'testimonials', 'pending', 'star'],
+    [counts.alerts, 'unread alert', 'unread alerts', 'alerts', '', 'bell'],
+  ].filter(r => r[0] > 0);
+  $('#attentionList').innerHTML = rows.length ? rows.map(r => `
+    <button class="list-group-item list-group-item-action d-flex align-items-center gap-3" data-goto="${r[3]}" data-filter="${r[3] === 'quotes' ? r[4] : ''}">
+      <i class="bi bi-${r[5]} fs-5 text-body-secondary"></i>
+      <span class="flex-grow-1"><strong>${r[0]}</strong> ${r[0] === 1 ? r[1] : r[2]}</span>
+      <i class="bi bi-chevron-right text-body-secondary"></i>
+    </button>`).join('') : empty('Nothing needs attention right now.');
+  if (rows.some(r => r[3] === 'testimonials')) $('#attentionList [data-goto="testimonials"]').addEventListener('click', () => { $('#testimonialFilter').value = 'pending'; });
+
+  const people = new Set((week.data || []).map(r => normalizePhone(r.phone)).filter(Boolean)).size;
+  const total = (week.data || []).length;
+  $('#weekSummary').textContent = total ? `This week: ${total} quote request${total === 1 ? '' : 's'} from ${people} ${people === 1 ? 'person' : 'people'}.` : 'No quote requests in the last 7 days.';
+
+  $('#overviewQuotes').innerHTML = (latest.data || []).length ? latest.data.map(quoteRow).join('') : empty('No quote requests yet. New requests from the website appear here.');
+  bindQuoteRows($('#overviewQuotes'), latest.data || []);
+}
+
+/* ================= Quotes ================= */
+const quoteCache = new Map();
+function quoteRow(q) {
+  quoteCache.set(q.id, q);
+  return `<button class="list-group-item list-group-item-action" data-quote="${q.id}">
+    <div class="d-flex justify-content-between gap-2"><strong class="text-truncate">${esc(q.name)}</strong><small class="text-body-secondary text-nowrap">${timeAgo(q.created_at)}</small></div>
+    <div class="d-flex justify-content-between align-items-center gap-2 mt-1"><span class="text-body-secondary text-truncate">${esc(q.service || 'No service given')}</span>${badge(q.status)}</div>
+  </button>`;
+}
+function bindQuoteRows(root) {
+  $$('[data-quote]', root).forEach(el => el.addEventListener('click', () => openQuoteModal(quoteCache.get(el.dataset.quote))));
+}
+
+async function loadQuotes() {
+  const list = $('#quotesList');
+  list.innerHTML = empty('Loading…');
+  let query = sb.from('quote_requests').select('*').order('created_at', { ascending: false });
+  const status = $('#quoteStatusFilter').value;
+  if (status) query = query.eq('status', status);
+  const { data, error } = await query;
+  if (error) { list.innerHTML = empty('Could not load quotes. Pull to refresh or try again.'); return; }
+  const s = $('#quoteSearch').value.trim().toLowerCase();
+  const rows = (data || []).filter(q => !s || (q.name || '').toLowerCase().includes(s) || (q.phone || '').toLowerCase().includes(s));
+  list.innerHTML = rows.length ? rows.map(quoteRow).join('') : empty('No quote requests match.');
+  bindQuoteRows(list);
+}
+
+function openQuoteModal(q) {
+  if (!q) return;
+  const phone = (q.phone || '').replace(/[^\d+]/g, '');
+  openModal('Quote request', `
+    <dl class="mb-3">
+      <dt class="small text-body-secondary">Name</dt><dd>${esc(q.name)}</dd>
+      <dt class="small text-body-secondary">Phone</dt><dd>${esc(q.phone || '—')}</dd>
+      <dt class="small text-body-secondary">Email</dt><dd>${esc(q.email || '—')}</dd>
+      <dt class="small text-body-secondary">Service</dt><dd>${esc(q.service || '—')}</dd>
+      <dt class="small text-body-secondary">Message</dt><dd class="mb-0" style="white-space:pre-wrap">${esc(q.message || '—')}</dd>
+    </dl>
+    ${phone ? `<div class="d-flex gap-2 mb-3"><a class="btn btn-outline-secondary btn-sm" href="tel:${esc(phone)}"><i class="bi bi-telephone me-1"></i>Call</a>
+      <a class="btn btn-outline-secondary btn-sm" target="_blank" rel="noopener" href="https://wa.me/${esc(phone.replace(/\D/g, ''))}"><i class="bi bi-whatsapp me-1"></i>WhatsApp</a></div>` : ''}
+    <label class="form-label" for="quoteStatus">Status</label>
+    <select class="form-select" id="quoteStatus">
+      ${[['new', 'New'], ['contacted', 'Contacted'], ['closed_won', 'Won'], ['closed_lost', 'Lost']].map(([v, l]) => `<option value="${v}" ${v === q.status ? 'selected' : ''}>${l}</option>`).join('')}
+    </select>`,
+    `<button class="btn btn-outline-danger me-auto" id="delQuote">Delete</button><button class="btn btn-primary" id="saveQuote">Save status</button>`);
+  $('#saveQuote').addEventListener('click', async () => {
+    const { error } = await sb.from('quote_requests').update({ status: $('#quoteStatus').value }).eq('id', q.id);
+    if (error) return toast('Could not save the status.', 'danger');
+    toast('Status saved.', 'success'); closeModal(); refreshActive();
+  });
+  $('#delQuote').addEventListener('click', async () => {
+    if (!await askConfirm('This quote request will be deleted for good.', { title: 'Delete quote request?', confirmLabel: 'Delete', danger: true })) return;
+    const { error } = await sb.from('quote_requests').delete().eq('id', q.id);
+    if (error) return toast('Could not delete the quote.', 'danger');
+    toast('Quote deleted.', 'success'); closeModal(); refreshActive();
+  });
+}
+async function openQuoteById(id) {
+  const { data } = await sb.from('quote_requests').select('*').eq('id', id).maybeSingle();
+  if (data) openQuoteModal(data);
+}
+function refreshActive() { const a = $('.panel.active'); if (a) LOADERS[a.id.replace('section-', '')](); }
+
+$('#refreshQuotes').addEventListener('click', loadQuotes);
+$('#quoteStatusFilter').addEventListener('change', loadQuotes);
+$('#quoteSearch').addEventListener('input', debounce(loadQuotes, 250));
+
+/* ================= Contacts ================= */
+const normalizePhone = (p) => (p || '').replace(/[^\d+]/g, '');
+const contactCache = new Map();
+
+async function loadContacts() {
+  const list = $('#contactsList');
+  list.innerHTML = empty('Loading…');
+  const { data, error } = await sb.from('quote_requests').select('*').order('created_at', { ascending: false });
+  if (error) { list.innerHTML = empty('Could not load contacts.'); return; }
+  const byPhone = new Map();
+  (data || []).forEach(q => {
+    const key = normalizePhone(q.phone) || 'no-phone-' + q.id;
+    if (!byPhone.has(key)) byPhone.set(key, { key, phone: q.phone || '', name: q.name, email: q.email, quotes: [] });
+    byPhone.get(key).quotes.push(q);
+  });
+  const s = $('#contactSearch').value.trim().toLowerCase();
+  const rows = Array.from(byPhone.values()).filter(c => !s || (c.name || '').toLowerCase().includes(s) || c.phone.toLowerCase().includes(s));
+  contactCache.clear(); rows.forEach(c => contactCache.set(c.key, c));
+  list.innerHTML = rows.length ? rows.map(c => `
+    <button class="list-group-item list-group-item-action" data-contact="${esc(c.key)}">
+      <div class="d-flex justify-content-between gap-2"><strong class="text-truncate">${esc(c.name)}</strong><small class="text-body-secondary text-nowrap">${timeAgo(c.quotes[0].created_at)}</small></div>
+      <div class="text-body-secondary">${esc(c.phone || 'No phone')}</div>
+      <div class="small text-body-secondary">${c.quotes.length} request${c.quotes.length === 1 ? '' : 's'}, latest for ${esc(c.quotes[0].service || 'no service given')}</div>
+    </button>`).join('') : empty('No contacts match.');
+  $$('[data-contact]', list).forEach(el => el.addEventListener('click', () => openContactModal(contactCache.get(el.dataset.contact))));
+}
+
+function openContactModal(c) {
+  if (!c) return;
+  const digits = c.phone.replace(/\D/g, '');
+  openModal(c.name, `
+    <p class="mb-1">${esc(c.phone || 'No phone')}</p><p class="text-body-secondary">${esc(c.email || 'No email')}</p>
+    ${digits ? `<div class="d-flex gap-2 mb-3"><a class="btn btn-outline-secondary btn-sm" href="tel:${esc(normalizePhone(c.phone))}"><i class="bi bi-telephone me-1"></i>Call</a>
+      <a class="btn btn-outline-secondary btn-sm" target="_blank" rel="noopener" href="https://wa.me/${digits}"><i class="bi bi-whatsapp me-1"></i>WhatsApp</a></div>` : ''}
+    <h3 class="h6">Requests</h3>
+    <ul class="list-group">${c.quotes.map(q => `<li class="list-group-item d-flex justify-content-between align-items-center gap-2"><span>${esc(q.service || 'No service given')}<br><small class="text-body-secondary">${fmtDate(q.created_at)}</small></span>${badge(q.status)}</li>`).join('')}</ul>`);
+}
+$('#refreshContacts').addEventListener('click', loadContacts);
+$('#contactSearch').addEventListener('input', debounce(loadContacts, 250));
+
+/* ================= Reviews ================= */
+async function loadTestimonials() {
+  const list = $('#testimonialsList');
+  list.innerHTML = empty('Loading…');
+  let query = sb.from('testimonials').select('*').order('created_at', { ascending: false });
+  const status = $('#testimonialFilter').value;
+  if (status) query = query.eq('status', status);
+  const { data, error } = await query;
+  if (error) { list.innerHTML = empty('Could not load reviews.'); return; }
+  list.innerHTML = (data || []).length ? data.map(t => `
+    <div class="list-group-item">
+      <div class="d-flex justify-content-between gap-2"><strong>${esc(t.name)}</strong>${badge(t.status)}</div>
+      <div class="text-warning" aria-label="${t.rating || 0} out of 5 stars">${'<i class="bi bi-star-fill"></i>'.repeat(t.rating || 0)}${'<i class="bi bi-star"></i>'.repeat(5 - (t.rating || 0))}</div>
+      <p class="my-2" style="white-space:pre-wrap">${esc(t.comment || '')}</p>
+      <div class="d-flex gap-2 align-items-center">
+        <small class="text-body-secondary me-auto">${timeAgo(t.created_at)}</small>
+        ${t.status !== 'published' ? `<button class="btn btn-primary btn-sm" data-pub="${t.id}">Publish</button>` : `<button class="btn btn-outline-secondary btn-sm" data-unpub="${t.id}">Unpublish</button>`}
+        <button class="btn btn-outline-danger btn-sm" data-del-review="${t.id}" aria-label="Delete review"><i class="bi bi-trash"></i></button>
+      </div>
+    </div>`).join('') : empty('No reviews yet.');
+  $$('[data-pub]', list).forEach(b => b.addEventListener('click', () => setReview(b.dataset.pub, 'published')));
+  $$('[data-unpub]', list).forEach(b => b.addEventListener('click', () => setReview(b.dataset.unpub, 'pending')));
+  $$('[data-del-review]', list).forEach(b => b.addEventListener('click', async () => {
+    if (!await askConfirm('This review will be deleted for good.', { title: 'Delete review?', confirmLabel: 'Delete', danger: true })) return;
+    const { error: e } = await sb.from('testimonials').delete().eq('id', b.dataset.delReview);
+    if (e) return toast('Could not delete the review.', 'danger');
+    toast('Review deleted.', 'success'); loadTestimonials(); loadCounts();
+  }));
+}
+async function setReview(id, status) {
+  const { error } = await sb.from('testimonials').update({ status }).eq('id', id);
+  if (error) return toast('Could not update the review.', 'danger');
+  toast(status === 'published' ? 'Review published.' : 'Review unpublished.', 'success');
+  loadTestimonials(); loadCounts();
+}
+$('#refreshTestimonials').addEventListener('click', loadTestimonials);
+$('#testimonialFilter').addEventListener('change', loadTestimonials);
+
+/* ================= Gallery ================= */
+async function loadGallery() {
+  const grid = $('#galleryGrid');
+  grid.innerHTML = '<div class="col-12 text-body-secondary">Loading…</div>';
+  let query = sb.from('gallery_images').select('*').order('created_at', { ascending: false });
+  const cat = $('#galleryCategoryFilter').value;
+  if (cat) query = query.eq('category', cat);
+  const { data, error } = await query;
+  if (error) { grid.innerHTML = '<div class="col-12 text-body-secondary">Could not load the gallery.</div>'; return; }
+  grid.innerHTML = (data || []).length ? data.map(img => `
+    <div class="col"><div class="card h-100">
+      <div class="ratio ratio-4x3"><img class="card-img-top gallery-thumb" src="${esc(img.url)}" alt="${esc(img.caption || '')}" loading="lazy"></div>
+      <div class="card-body p-2">
+        <div class="small text-truncate" title="${esc(img.caption || '')}">${esc(img.caption || 'No description')}</div>
+        <div class="d-flex align-items-center gap-2 mt-1">
+          <small class="text-body-secondary text-capitalize me-auto">${esc(img.category || '')}</small>
+          <button class="btn btn-outline-danger btn-sm" data-del-img="${img.id}" data-path="${esc(img.storage_path || '')}" aria-label="Delete image"><i class="bi bi-trash"></i></button>
+        </div>
+      </div>
+    </div></div>`).join('') : '<div class="col-12 text-body-secondary">No images yet. Upload a project photo to start.</div>';
+  $$('[data-del-img]', grid).forEach(b => b.addEventListener('click', async () => {
+    if (!await askConfirm('This image will be removed from the site.', { title: 'Delete image?', confirmLabel: 'Delete', danger: true })) return;
+    if (b.dataset.path) await sb.storage.from(MEDIA_BUCKET).remove([b.dataset.path]);
+    const { error: e } = await sb.from('gallery_images').delete().eq('id', b.dataset.delImg);
+    if (e) return toast('Could not delete the image.', 'danger');
+    toast('Image deleted.', 'success'); loadGallery();
+  }));
+}
+
+function watermarkImage(file) {
+  return new Promise((resolve, reject) => {
+    const img = new Image(), url = URL.createObjectURL(file);
+    img.onload = () => {
+      const c = document.createElement('canvas'); c.width = img.naturalWidth; c.height = img.naturalHeight;
+      const ctx = c.getContext('2d'); ctx.drawImage(img, 0, 0);
+      const label = 'Landmark Landscaping', date = new Date().toLocaleDateString('en-KE', { day: 'numeric', month: 'short', year: 'numeric' });
+      const fs = Math.max(16, Math.round(c.width * 0.028)), pad = fs * 0.9;
+      ctx.textBaseline = 'bottom';
+      ctx.font = `600 ${fs}px "Source Sans 3", sans-serif`; const lw = ctx.measureText(label).width;
+      ctx.font = `400 ${Math.round(fs * 0.6)}px "Source Sans 3", sans-serif`; const dw = ctx.measureText(date).width;
+      const bw = Math.max(lw, dw) + pad * 1.6, bh = fs * 2.15, x = c.width - bw - pad * 0.5, y = c.height - bh - pad * 0.5;
+      ctx.fillStyle = 'rgba(20,28,24,0.45)'; ctx.fillRect(x, y, bw, bh);
+      ctx.fillStyle = 'rgba(255,255,255,0.92)'; ctx.font = `600 ${fs}px "Source Sans 3", sans-serif`; ctx.fillText(label, x + pad * 0.8, c.height - pad * 0.5 - fs * 0.55);
+      ctx.fillStyle = 'rgba(255,255,255,0.78)'; ctx.font = `400 ${Math.round(fs * 0.6)}px "Source Sans 3", sans-serif`; ctx.fillText(date, x + pad * 0.8, c.height - pad * 0.5);
+      URL.revokeObjectURL(url);
+      c.toBlob(b => b ? resolve(b) : reject(new Error('Could not render watermark')), file.type === 'image/png' ? 'image/png' : 'image/jpeg', 0.9);
+    };
+    img.onerror = () => { URL.revokeObjectURL(url); reject(new Error('Could not read image')); };
+    img.src = url;
+  });
+}
+
+$('#uploadImageBtn').addEventListener('click', () => $('#galleryFileInput').click());
+$('#galleryFileInput').addEventListener('change', (e) => {
+  const files = Array.from(e.target.files || []);
+  e.target.value = '';
+  if (files.length) openUploadModal(files);
+});
+function openUploadModal(files) {
+  const cats = ['gardens', 'lawns', 'irrigation', 'features', 'commercial'];
+  const def = $('#galleryCategoryFilter').value || 'gardens';
+  const thumbs = files.map(f => URL.createObjectURL(f));
+  openModal(`Upload ${files.length} image${files.length > 1 ? 's' : ''}`, `
+    <label class="form-label" for="upCat">Category for all images</label>
+    <select class="form-select mb-3" id="upCat">${cats.map(c => `<option value="${c}" ${c === def ? 'selected' : ''}>${c[0].toUpperCase() + c.slice(1)}</option>`).join('')}</select>
+    ${files.map((f, i) => `<div class="d-flex gap-3 mb-3"><img src="${thumbs[i]}" alt="" width="64" height="64" class="rounded gallery-thumb flex-shrink-0">
+      <div class="flex-grow-1"><div class="small text-truncate mb-1">${esc(f.name)}</div><input class="form-control form-control-sm up-caption" data-i="${i}" placeholder="Description, e.g. Back garden, Karen"></div></div>`).join('')}
+    <p class="small text-body-secondary mb-0">Each photo gets a Landmark Landscaping watermark and the upload date before it is saved.</p>`,
+    `<button class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button><button class="btn btn-primary" id="upGo">Upload</button>`);
+  $('#appModal').addEventListener('hidden.bs.modal', () => thumbs.forEach(u => URL.revokeObjectURL(u)), { once: true });
+  $('#upGo').addEventListener('click', async () => {
+    const btn = $('#upGo'); btn.disabled = true; btn.textContent = 'Uploading…';
+    const category = $('#upCat').value, caps = $$('.up-caption');
+    let ok = 0;
+    for (let i = 0; i < files.length; i++) {
+      try {
+        const blob = await watermarkImage(files[i]);
+        const ext = files[i].type === 'image/png' ? 'png' : 'jpg';
+        const path = `gallery/${Date.now()}-${Math.random().toString(36).slice(2, 8)}-${files[i].name.replace(/\.[^.]+$/, '').replace(/[^a-zA-Z0-9.\-_]/g, '_')}.${ext}`;
+        const { error: upErr } = await sb.storage.from(MEDIA_BUCKET).upload(path, blob, { upsert: false, contentType: blob.type });
+        if (upErr) { toast('Upload failed: ' + upErr.message, 'danger'); continue; }
+        const { data: pub } = sb.storage.from(MEDIA_BUCKET).getPublicUrl(path);
+        await sb.from('gallery_images').insert({ url: pub.publicUrl, storage_path: path, category, caption: (caps[i].value || '').trim() || null, watermarked: true, file_size_bytes: blob.size });
+        ok++;
+      } catch (err) { toast(`Could not process ${files[i].name}: ${err.message}`, 'danger'); }
+    }
+    toast(`${ok} of ${files.length} uploaded.`, ok ? 'success' : 'danger'); closeModal(); loadGallery();
+  });
+}
+$('#galleryCategoryFilter').addEventListener('change', loadGallery);
+
+/* ================= Blog ================= */
+const postCache = new Map();
+async function loadBlog() {
+  const list = $('#blogList');
+  list.innerHTML = empty('Loading…');
+  let query = sb.from('blog_posts').select('*').order('updated_at', { ascending: false });
+  const status = $('#blogStatusFilter').value;
+  if (status) query = query.eq('status', status);
+  const { data, error } = await query;
+  if (error) { list.innerHTML = empty('Could not load posts.'); return; }
+  const s = $('#blogSearch').value.trim().toLowerCase();
+  const rows = (data || []).filter(p => !s || (p.title || '').toLowerCase().includes(s));
+  rows.forEach(p => postCache.set(p.id, p));
+  list.innerHTML = rows.length ? rows.map(p => `
+    <button class="list-group-item list-group-item-action" data-post="${p.id}">
+      <div class="d-flex justify-content-between gap-2"><strong class="text-truncate">${esc(p.title)}</strong>${badge(p.status)}</div>
+      <div class="small text-body-secondary">${esc(p.category || 'No category')}, updated ${timeAgo(p.updated_at)}</div>
+    </button>`).join('') : empty('No posts yet. Write the first one with New post.');
+  $$('[data-post]', list).forEach(el => el.addEventListener('click', () => openPostModal(postCache.get(el.dataset.post))));
+}
+const slugify = (t) => (t || '').toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+
+function openPostModal(post) {
+  const isNew = !post, p = post || { title: '', category: '', content: '', status: 'draft' };
+  openModal(isNew ? 'New post' : 'Edit post', `
+    <div class="mb-3"><label class="form-label" for="pTitle">Title</label><input class="form-control" id="pTitle" value="${esc(p.title)}"></div>
+    <div class="row g-3 mb-3">
+      <div class="col-sm-7"><label class="form-label" for="pCat">Category</label><input class="form-control" id="pCat" value="${esc(p.category || '')}" placeholder="e.g. Lawn care"></div>
+      <div class="col-sm-5"><label class="form-label" for="pStatus">Status</label><select class="form-select" id="pStatus"><option value="draft" ${p.status === 'draft' ? 'selected' : ''}>Draft</option><option value="published" ${p.status === 'published' ? 'selected' : ''}>Published</option></select></div>
+    </div>
+    <label class="form-label" for="pContent">Content</label><textarea class="form-control" id="pContent" rows="10">${esc(p.content || '')}</textarea>`,
+    `${!isNew ? '<button class="btn btn-outline-danger me-auto" id="pDelete">Delete</button>' : ''}<button class="btn btn-primary" id="pSave">Save post</button>`, { full: true });
+  $('#pSave').addEventListener('click', async () => {
+    const title = $('#pTitle').value.trim();
+    if (!title) return toast('Add a title first.', 'danger');
+    const payload = { title, category: $('#pCat').value.trim(), content: $('#pContent').value, status: $('#pStatus').value, slug: slugify(title), updated_at: new Date().toISOString() };
+    const { error } = isNew ? await sb.from('blog_posts').insert(payload) : await sb.from('blog_posts').update(payload).eq('id', p.id);
+    if (error) return toast('Could not save the post.', 'danger');
+    toast('Post saved.', 'success'); closeModal(); loadBlog();
+  });
+  if (!isNew) $('#pDelete').addEventListener('click', async () => {
+    if (!await askConfirm('This post will be deleted for good.', { title: 'Delete post?', confirmLabel: 'Delete', danger: true })) return;
+    const { error } = await sb.from('blog_posts').delete().eq('id', p.id);
+    if (error) return toast('Could not delete the post.', 'danger');
+    toast('Post deleted.', 'success'); closeModal(); loadBlog();
+  });
+}
+$('#newPostBtn').addEventListener('click', () => openPostModal(null));
+$('#blogStatusFilter').addEventListener('change', loadBlog);
+$('#blogSearch').addEventListener('input', debounce(loadBlog, 250));
+
+/* ================= Chats ================= */
+let activeThread = null, supportChannel = null;
+async function loadThreads() {
+  const list = $('#threadList');
+  list.innerHTML = empty('Loading…');
+  const { data, error } = await sb.from('support_threads').select('*').order('last_message_at', { ascending: false });
+  if (error) { list.innerHTML = empty('Could not load chats.'); return; }
+  list.innerHTML = (data || []).length ? data.map(t => `
+    <div class="list-group-item list-group-item-action border-0 border-bottom rounded-0 ${t.id === activeThread ? 'active-thread bg-body-secondary' : ''}" data-thread="${t.id}" role="button">
+      <div class="d-flex justify-content-between gap-2"><strong class="text-truncate">${esc(t.visitor_name || 'Website visitor')}</strong><small class="text-body-secondary text-nowrap">${timeAgo(t.last_message_at)}</small></div>
+      <div class="d-flex justify-content-between align-items-center gap-2"><span class="small text-body-secondary text-truncate">${esc(t.service_needed || t.visitor_contact || t.visitor_email || 'No details')}</span>${badge(t.status)}</div>
+    </div>`).join('') : '<div class="p-4 text-body-secondary text-center">No chats yet. Visitor chats appear here.</div>';
+  $$('[data-thread]', list).forEach(el => el.addEventListener('click', () => openThread(el.dataset.thread)));
+}
+
+async function openThread(id) {
+  activeThread = id;
+  const { data: t } = await sb.from('support_threads').select('*').eq('id', id).maybeSingle();
+  $('#supportWrap').classList.add('thread-open');
+  $('#threadName').textContent = (t && t.visitor_name) || 'Website visitor';
+  $('#threadMeta').textContent = t ? [t.visitor_contact || t.visitor_email, t.service_needed, t.location].filter(Boolean).join(', ') : '';
+  $('#threadReply').hidden = false;
+  const tog = $('#threadToggle'); tog.hidden = false; tog.dataset.status = t ? t.status : 'open';
+  tog.textContent = t && t.status === 'closed' ? 'Reopen' : 'Mark closed';
+  await renderMessages(id);
+  if (supportChannel) sb.removeChannel(supportChannel);
+  supportChannel = sb.channel('thread-' + id).on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'support_messages', filter: `thread_id=eq.${id}` }, () => renderMessages(id)).subscribe();
+}
+async function renderMessages(id) {
+  const wrap = $('#threadMessages');
+  const { data, error } = await sb.from('support_messages').select('*').eq('thread_id', id).order('created_at', { ascending: true });
+  if (error) { wrap.innerHTML = '<p class="text-body-secondary m-auto">Could not load messages.</p>'; return; }
+  wrap.innerHTML = (data || []).length ? data.map(m => `<div class="bubble ${esc(m.sender)}">${m.sender === 'ai' ? '<div class="small text-body-secondary">Assistant</div>' : ''}${esc(m.message)}</div>`).join('') : '<p class="text-body-secondary m-auto">No messages yet.</p>';
+  wrap.scrollTop = wrap.scrollHeight;
+}
+$('#threadBack').addEventListener('click', () => { $('#supportWrap').classList.remove('thread-open'); loadThreads(); });
+$('#threadSend').addEventListener('click', async () => {
+  if (!activeThread) return;
+  const input = $('#threadInput'), message = input.value.trim();
+  if (!message) return;
+  const { error } = await sb.from('support_messages').insert({ thread_id: activeThread, sender: 'admin', message });
+  if (error) return toast('Could not send the reply.', 'danger');
+  await sb.from('support_threads').update({ last_message_at: new Date().toISOString() }).eq('id', activeThread);
+  input.value = ''; renderMessages(activeThread);
+});
+$('#threadToggle').addEventListener('click', async () => {
+  if (!activeThread) return;
+  const next = $('#threadToggle').dataset.status === 'closed' ? 'open' : 'closed';
+  await sb.from('support_threads').update({ status: next }).eq('id', activeThread);
+  toast(next === 'closed' ? 'Chat closed.' : 'Chat reopened.', 'success');
+  $('#threadToggle').dataset.status = next; $('#threadToggle').textContent = next === 'closed' ? 'Reopen' : 'Mark closed';
+  loadThreads(); loadCounts();
+});
+
+/* ================= Traffic ================= */
+async function loadInsights() {
+  const today = new Date(); today.setHours(0, 0, 0, 0);
+  const d7 = new Date(Date.now() - 7 * 864e5).toISOString(), d30 = new Date(Date.now() - 30 * 864e5).toISOString();
+  const [a, b, c] = await Promise.all([
+    sb.from('page_views').select('id', { count: 'exact', head: true }).gte('viewed_at', today.toISOString()),
+    sb.from('page_views').select('id', { count: 'exact', head: true }).gte('viewed_at', d7),
+    sb.from('page_views').select('page_path').gte('viewed_at', d30).limit(5000),
+  ]);
+  $('#viewsToday').textContent = a.count ?? 0; $('#views7d').textContent = b.count ?? 0; $('#views30d').textContent = (c.data || []).length;
+  const tally = {}; (c.data || []).forEach(r => { tally[r.page_path] = (tally[r.page_path] || 0) + 1; });
+  const pages = Object.entries(tally).sort((x, y) => y[1] - x[1]).slice(0, 15), max = pages.length ? pages[0][1] : 1;
+  $('#topPages').innerHTML = pages.length ? pages.map(([p, n]) => `
+    <div class="list-group-item"><div class="d-flex justify-content-between gap-2"><span class="text-truncate">${esc(p)}</span><span class="fw-semibold">${n}</span></div>
+    <div class="progress mt-1" style="height:4px"><div class="progress-bar" style="width:${Math.round(n / max * 100)}%"></div></div></div>`).join('') : empty('No page views in the last 30 days.');
+}
+
+/* ================= Alerts + push ================= */
+let myPushToken = null, pushListeners = false, pushState = 'unknown';
+
+async function loadNotifications() {
+  const { data, error } = await sb.from('admin_notifications').select('*').order('created_at', { ascending: false }).limit(50);
+  if (error || !currentAdmin) return;
+  const me = currentAdmin.id;
+  counts.alerts = (data || []).filter(n => !(n.read_by || []).includes(me)).length;
+  updateCounts();
+  const ICON = { support_message: 'chat-dots', quote_request: 'file-earmark-text', gallery_upload: 'images', admin_login: 'box-arrow-in-right', passkey_added: 'key', passkey_removed: 'key', passkey_reset: 'key' };
+  $('#alertsList').innerHTML = (data || []).length ? data.map(n => {
+    const unread = !(n.read_by || []).includes(me);
+    return `<button class="list-group-item list-group-item-action d-flex gap-3" data-alert='${esc(JSON.stringify(n.data || {}))}' data-alert-type="${esc(n.event_type)}">
+      <i class="bi bi-${ICON[n.event_type] || 'bell'} fs-5 text-body-secondary"></i>
+      <span class="flex-grow-1 min-w-0"><span class="${unread ? 'fw-semibold' : ''} d-block">${esc(n.title)}</span><span class="small text-body-secondary d-block text-truncate">${esc(n.body || '')}</span></span>
+      <small class="text-body-secondary text-nowrap">${timeAgo(n.created_at)}</small>${unread ? '<span class="status-dot on align-self-center"></span>' : ''}
+    </button>`;
+  }).join('') : empty('No alerts yet. New quotes, chats and sign-ins show up here.');
+  $$('[data-alert]', $('#alertsList')).forEach(el => el.addEventListener('click', () => {
+    try { routeFromData(JSON.parse(el.dataset.alert), el.dataset.alertType); } catch { /* ignore */ }
+  }));
+}
+$('#markAllRead').addEventListener('click', async () => {
+  const { error } = await sb.rpc('mark_admin_notifications_read', { p_ids: null });
+  if (error) return toast('Could not mark alerts as read.', 'danger');
+  loadNotifications();
+});
+$('#clearAlerts').addEventListener('click', async () => {
+  if (!await askConfirm('All alerts will be removed for both admins.', { title: 'Clear all alerts?', confirmLabel: 'Clear', danger: true })) return;
+  const { error } = await sb.from('admin_notifications').delete().gte('created_at', '2000-01-01');
+  if (error) return toast('Could not clear alerts.', 'danger');
+  loadNotifications();
+});
+
+function routeFromData(d, type) {
+  if (!d) return;
+  if (!currentAdmin) { pendingRoute = d; return; }
+  if (d.thread_id) { gotoSection('support'); openThread(d.thread_id); }
+  else if (d.quote_id) { gotoSection('quotes'); openQuoteById(d.quote_id); }
+  else if (d.image_id) gotoSection('gallery');
+  else if (d.admin_id || type === 'admin_login') gotoSection('devices');
+  else if (type && type.startsWith('passkey')) gotoSection('security');
+}
+
+function renderPushStatus() {
+  const text = $('#pushStatus'), btn = $('#pushEnableBtn');
+  btn.hidden = true;
+  if (!isNative) {
+    text.textContent = 'Install the Landmark Android app to get quotes, chats and sign-in alerts on your phone.';
+    $('#appDownloadBtn').hidden = false;
+    return;
+  }
+  if (pushState === 'granted') text.textContent = 'On. This phone gets alerts for new quotes, chats and admin sign-ins.';
+  else if (pushState === 'denied') text.textContent = 'Blocked. Allow notifications for this app in your phone settings.';
+  else { text.textContent = 'Off. Turn on to get alerts for new quotes, chats and admin sign-ins.'; btn.hidden = false; }
+}
+$('#pushEnableBtn').addEventListener('click', () => setupPush(true));
+
+async function setupPush(ask) {
+  if (!isNative || !currentAdmin) return;
+  try {
+    const PN = Cap.registerPlugin('PushNotifications');
+    let perm = await PN.checkPermissions();
+    if (perm.receive !== 'granted') {
+      if (!ask && perm.receive === 'denied') { pushState = 'denied'; return renderPushStatus(); }
+      if (!ask && localStorage.getItem('landmark_push_asked')) { pushState = 'off'; return renderPushStatus(); }
+      localStorage.setItem('landmark_push_asked', '1');
+      perm = await PN.requestPermissions();
+    }
+    pushState = perm.receive === 'granted' ? 'granted' : (perm.receive === 'denied' ? 'denied' : 'off');
+    renderPushStatus();
+    if (pushState !== 'granted') return;
+    try { await PN.createChannel({ id: PUSH_CHANNEL, name: 'Landmark alerts', description: 'Quotes, chats and admin sign-ins', importance: 4, visibility: 1, vibration: true }); } catch { /* older Android */ }
+    if (!pushListeners) {
+      pushListeners = true;
+      PN.addListener('registration', async (t) => {
+        myPushToken = t.value;
+        const { error } = await sb.rpc('register_push_token', { p_token: t.value, p_label: defaultDeviceName(), p_platform: 'android' });
+        if (error) toast('Could not register this phone for alerts.', 'danger');
+      });
+      PN.addListener('registrationError', () => toast('Could not set up phone notifications.', 'danger'));
+      PN.addListener('pushNotificationReceived', (n) => { toast(n.title || 'New alert'); loadNotifications(); loadCounts(); });
+      PN.addListener('pushNotificationActionPerformed', (a) => routeFromData((a.notification && a.notification.data) || {}));
+    }
+    await PN.register();
+  } catch (e) {
+    pushState = 'off'; renderPushStatus();
+  }
+}
+
+/* ================= Devices ================= */
+const initialsFor = (s) => (s || '--').trim().split(/\s+/).map(w => w[0]).join('').slice(0, 2).toUpperCase();
+
+async function loadDevices() {
+  const grid = $('#devicesGrid'), banner = $('#devicesBanner');
+  const [{ data, error }, { data: admins }] = await Promise.all([
+    sb.from('admin_sessions').select('*').order('last_active_at', { ascending: false }),
+    sb.from('admin_profiles').select('id, full_name, email').limit(7),
+  ]);
+  if (error) { grid.innerHTML = '<div class="col-12 text-body-secondary">Could not load devices.</div>'; return; }
+  const now = Date.now(), online = (r) => now - new Date(r.last_active_at).getTime() < ONLINE_WINDOW_MS;
+  const by = new Map(); (data || []).forEach(r => { if (!by.has(r.admin_id)) by.set(r.admin_id, []); by.get(r.admin_id).push(r); });
+
+  grid.innerHTML = (admins || []).map(a => {
+    const rows = by.get(a.id) || [], you = currentAdmin && a.id === currentAdmin.id, name = a.full_name || a.email;
+    return `<div class="col-lg-6"><div class="card h-100 ${you ? 'border-primary' : ''}"><div class="card-body">
+      <div class="d-flex align-items-center gap-2 mb-3">
+        <div class="rounded-circle bg-body-secondary d-flex align-items-center justify-content-center fw-semibold" style="width:2.2rem;height:2.2rem">${esc(initialsFor(name))}</div>
+        <div class="min-w-0"><div class="fw-semibold text-truncate">${esc(name)} ${you ? '<span class="badge text-bg-primary ms-1">You</span>' : ''}</div><div class="small text-body-secondary text-truncate">${esc(a.email || '')}</div></div>
+      </div>
+      ${rows.length ? rows.map(r => {
+        const mine = r.session_token === SESSION_KEY, on = online(r);
+        const where = [r.city, r.region, r.country].filter(Boolean).join(', ') || 'Location unavailable';
+        return `<div class="border rounded p-2 mb-2 ${r.is_new_device ? 'border-danger bg-danger-subtle' : ''}">
+          <div class="d-flex align-items-center gap-2 flex-wrap">
+            <span class="status-dot ${on ? 'on' : ''}" title="${on ? 'Online' : 'Offline'}"></span>
+            <strong>${esc(r.device || 'Device')}, ${esc(r.os || '')}</strong>
+            ${mine ? '<span class="badge text-bg-primary">This device</span>' : ''}${r.is_new_device ? '<span class="badge text-bg-danger">New device</span>' : ''}
+            <button class="btn btn-outline-danger btn-sm ms-auto" data-kill="${r.id}" data-self="${mine}">${mine ? 'Sign out' : 'End session'}</button>
+          </div>
+          <div class="small text-body-secondary mt-1">${esc(r.browser || '')} ${esc(r.browser_version || '')}<br>${esc(where)}${r.ip_address ? ', ' + esc(r.ip_address) : ''}<br>Last active ${timeAgo(r.last_active_at)}</div>
+        </div>`; }).join('') : '<div class="text-body-secondary">Not signed in anywhere.</div>'}
+    </div></div></div>`;
+  }).join('') || '<div class="col-12 text-body-secondary">No admin accounts found.</div>';
+
+  $$('[data-kill]', grid).forEach(b => b.addEventListener('click', async () => {
+    const self = b.dataset.self === 'true';
+    if (!await askConfirm(self ? 'You will be signed out on this device.' : 'That device is signed out straight away.', { title: self ? 'Sign out here?' : 'End this session?', confirmLabel: self ? 'Sign out' : 'End session', danger: true })) return;
+    const { error: e } = await sb.from('admin_sessions').delete().eq('id', b.dataset.kill);
+    if (e) return toast('Could not end that session.', 'danger');
+    if (!self) { toast('Session ended.', 'success'); loadDevices(); }
+  }));
+  banner.innerHTML = (data || []).some(r => r.is_new_device && online(r))
+    ? '<div class="alert alert-danger"><i class="bi bi-exclamation-triangle me-2"></i>A device this account has not used before is signed in. Review it below.</div>' : '';
+}
+$('#refreshDevices').addEventListener('click', loadDevices);
+
+/* ================= Security / passkeys ================= */
+async function loadPasskeyState() {
+  const { data } = await sb.from('admin_passkeys').select('id');
+  passkeyCount = (data || []).length;
+  updatePasskeyBanner();
+}
+async function updatePasskeyBanner() {
+  $('#passkeyBanner').hidden = bannerDismissed || passkeyCount !== 0 || !(await passkeysAvailable());
+}
+$('#bannerDismiss').addEventListener('click', () => { bannerDismissed = true; updatePasskeyBanner(); });
+$('#bannerSetup').addEventListener('click', () => { gotoSection('security'); openPasskeyModal('add'); });
+
+async function loadSecurity() {
+  const list = $('#passkeyList');
+  list.innerHTML = empty('Loading…');
+  const { data, error } = await sb.from('admin_passkeys').select('id, device_label, device_type, backed_up, created_at, last_used_at').order('created_at', { ascending: false });
+  if (error) { list.innerHTML = empty('Could not load passkeys.'); return; }
+  passkeyCount = data.length; updatePasskeyBanner();
+  list.innerHTML = data.length ? data.map(p => `
+    <div class="list-group-item d-flex align-items-center gap-3">
+      <i class="bi bi-key fs-5 text-body-secondary"></i>
+      <div class="flex-grow-1 min-w-0">
+        <div class="fw-semibold">${esc(p.device_label || 'Passkey')}</div>
+        <div class="small text-body-secondary">Added ${fmtDate(p.created_at)}. ${p.last_used_at ? 'Last used ' + timeAgo(p.last_used_at) + '.' : 'Not used yet.'} ${p.backed_up ? 'Backed up to your account.' : 'Stays on this device only.'}</div>
+      </div>
+      <button class="btn btn-outline-danger btn-sm" data-rm="${p.id}" data-name="${esc(p.device_label || 'Passkey')}">Remove</button>
+    </div>`).join('') : empty('No passkeys yet. Add one on this phone to sign in without a password.');
+  $$('[data-rm]', list).forEach(b => b.addEventListener('click', () => openRemoveModal(b.dataset.rm, b.dataset.name)));
+}
+
+function passwordFields(withName) {
+  return `${withName ? `<div class="mb-3"><label class="form-label" for="pkName">Name</label><input class="form-control" id="pkName" maxlength="60" value="${esc(defaultDeviceName())}"><div class="form-text">Helps you recognise this device later.</div></div>` : ''}
+    <label class="form-label" for="pkPassword">Your password</label>
+    <input type="password" class="form-control" id="pkPassword" autocomplete="current-password">
+    <div class="form-text">Needed to confirm changes to your passkeys.</div>
+    <div id="pkError" class="alert alert-danger mt-3 mb-0" role="alert" hidden></div>`;
+}
+
+async function openPasskeyModal(mode) {
+  if (!await passkeysAvailable()) return toast('Passkeys are not available on this device or browser.', 'danger');
+  const replace = mode === 'replace';
+  openModal(replace ? 'Replace passkeys' : 'Add a passkey',
+    `<p>${replace ? 'A passkey is saved on this device and your other passkeys are removed. Every other device is signed out and stops getting notifications.' : 'You will be asked to use your fingerprint, face or screen lock.'}</p>${passwordFields(true)}`,
+    `<button class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button><button class="btn ${replace ? 'btn-danger' : 'btn-primary'}" id="pkGo">${replace ? 'Replace passkeys' : 'Save passkey'}</button>`);
+  $('#pkGo').addEventListener('click', async () => {
+    const btn = $('#pkGo'), err = $('#pkError');
+    err.hidden = true; btn.disabled = true;
+    try {
+      const password = $('#pkPassword').value;
+      if (!password) throw new Error('Enter your password to continue.');
+      const start = await callPasskeyFn({ action: 'register-options', password, replaceExisting: replace });
+      const credential = await ceremonyCreate(start.options);
+      await callPasskeyFn({ action: 'register-verify', challengeId: start.challengeId, credential, label: ($('#pkName').value || '').trim() || defaultDeviceName(), keepSessionToken: SESSION_KEY });
+      closeModal();
+      toast(replace ? 'Passkeys replaced.' : 'Passkey saved.', 'success');
+      loadSecurity();
+      if (replace) setupPush(false);
+    } catch (e) { err.textContent = friendlyError(e); err.hidden = false; }
+    finally { btn.disabled = false; }
+  });
+}
+$('#addPasskeyBtn').addEventListener('click', () => openPasskeyModal('add'));
+$('#replacePasskeyBtn').addEventListener('click', () => openPasskeyModal('replace'));
+
+function openRemoveModal(id, name) {
+  openModal('Remove passkey', `<p>&ldquo;${esc(name)}&rdquo; will no longer sign in to this console. ${passkeyCount === 1 ? 'This is your only passkey, so you will use your password until you add another.' : ''}</p>${passwordFields(false)}`,
+    `<button class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button><button class="btn btn-danger" id="pkRemove">Remove passkey</button>`);
+  $('#pkRemove').addEventListener('click', async () => {
+    const btn = $('#pkRemove'), err = $('#pkError');
+    err.hidden = true; btn.disabled = true;
+    try {
+      await callPasskeyFn({ action: 'remove', passkeyId: id, password: $('#pkPassword').value });
+      closeModal(); toast('Passkey removed.', 'success'); loadSecurity();
+    } catch (e) { err.textContent = friendlyError(e); err.hidden = false; }
+    finally { btn.disabled = false; }
+  });
+}
+
+/* ================= Boot ================= */
+sb.auth.onAuthStateChange((event) => { if (event === 'SIGNED_OUT' && !currentAdmin) showLogin(''); });
+(async function boot() {
+  $$('[data-app-download]').forEach(a => { a.href = APP_DOWNLOAD_URL; });
+  $('#loginDownload').hidden = isNative;
+  try {
+    await setupLogin();
+    const { data: { session } } = await sb.auth.getSession();
+    if (session) await enterDashboard(session); else showLogin('');
+  } finally { hideSplash(); }
+})();
+
+window.addEventListener('keydown', (e) => { if (e.key === 'Escape') { const o = bootstrap.Offcanvas.getInstance($('#moreMenu')); if (o) o.hide(); } });
+})();
+</script>
+</body>
+</html>
