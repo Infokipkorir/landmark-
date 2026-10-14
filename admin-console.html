@@ -444,7 +444,7 @@ const HEARTBEAT_MS = 30 * 1000;
 const ONLINE_WINDOW_MS = 90 * 1000;
 const PUSH_CHANNEL = 'landmark_alerts';
 // Where the signed Android app (APK) is hosted. Upload the file here, or change this link.
-const APP_DOWNLOAD_URL = '/landmark-admin.apk';
+const APP_DOWNLOAD_URL = SUPABASE_URL + '/storage/v1/object/public/app/landmark-admin.apk';
 const SPLASH_MIN_MS = 900;
 const splashStart = Date.now();
 function hideSplash() {
@@ -1549,7 +1549,17 @@ function openRemoveModal(id, name) {
 /* ================= Boot ================= */
 sb.auth.onAuthStateChange((event) => { if (event === 'SIGNED_OUT' && !currentAdmin) showLogin(''); });
 (async function boot() {
-  $$('[data-app-download]').forEach(a => { a.href = APP_DOWNLOAD_URL; });
+  $$('[data-app-download]').forEach(a => {
+    a.href = APP_DOWNLOAD_URL;
+    a.addEventListener('click', async (e) => {
+      e.preventDefault();
+      try {
+        const r = await fetch(APP_DOWNLOAD_URL, { method: 'HEAD' });
+        if (!r.ok) throw new Error();
+        window.location.href = APP_DOWNLOAD_URL;
+      } catch { toast('The app file has not been uploaded yet. Please try again later.', 'danger'); }
+    });
+  });
   $('#loginDownload').hidden = isNative;
   try {
     await setupLogin();
