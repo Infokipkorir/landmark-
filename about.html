@@ -1,7 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-page="about">
 <head>
 <meta charset="UTF-8">
+<script>
+/* Landmark hash links: /#home/<id>, /#about/<id> ... Each page keeps its own file and content. */
+(function () {
+  var PAGES = {"home": "index.html", "about": "about.html", "services": "services.html", "projects": "projects.html", "gallery": "gallery.html", "blog": "blog.html", "careers": "careers.html", "testimonials": "testimonials.html", "contact": "contact.html"};
+  var IDS = {"home": "yhfdy7533679999666", "about": "ggopa0093866963703", "services": "rfbvi1534962000876", "projects": "fautv7701138078370", "gallery": "orfsi3622140068536", "blog": "twoox0430942377864", "careers": "yhxxs2606916781316", "testimonials": "lzlub0191029824551", "contact": "ceujv9194469597035"};
+  var cur = document.documentElement.getAttribute('data-page') || 'home';
+  window.LM = window.LM || {};
+  LM.PAGES = PAGES; LM.IDS = IDS; LM.page = cur;
+
+  function go(r, id) { return PAGES[r] + '#' + r + '/' + (id || IDS[r]); }
+
+  function route() {
+    var parts = location.hash.replace(/^#\/?/, '').split('/');
+    var r = (parts[0] || '').toLowerCase();
+    if (Object.prototype.hasOwnProperty.call(PAGES, r) && r !== cur) {
+      LM.redirecting = true;
+      location.replace(go(r, parts[1]));
+      return true;
+    }
+    return false;
+  }
+  if (route()) return;
+
+  // Show this page's own hash link in the address bar when none is present
+  if (!location.hash) {
+    try { history.replaceState(null, '', location.pathname + location.search + '#' + cur + '/' + IDS[cur]); } catch (e) {}
+  }
+  window.addEventListener('hashchange', route);
+
+  // Plain clicks on /#route/id links jump straight to the right page (skips the index.html hop)
+  document.addEventListener('click', function (e) {
+    if (e.defaultPrevented || e.button || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    var a = e.target.closest && e.target.closest('a[href^="/#"]');
+    if (!a || a.target === '_blank') return;
+    var p = a.getAttribute('href').slice(2).split('/');
+    var r = (p[0] || '').toLowerCase();
+    if (!Object.prototype.hasOwnProperty.call(PAGES, r)) return;
+    e.preventDefault();
+    if (r === cur) { window.scrollTo({ top: 0, behavior: 'smooth' }); return; }
+    location.href = go(r, p[1]);
+  });
+})();
+</script>
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Learn about Landmark Landscaping Services — our story, mission, vision, and the spirit that drives our team to transform outdoor spaces across Kenya.">
 <meta name="keywords" content="about Landmark Landscaping, landscaping company Kenya, our mission vision, landscaping Nairobi, irrigation company Kenya">
@@ -240,7 +284,7 @@ a{color:var(--forest);}
 h4.incl{font-family:var(--mono); font-size:.74rem; letter-spacing:.1em; text-transform:uppercase; color:var(--clay-deep); margin-top:1.4rem; margin-bottom:.8rem;}
 ul.incl-list{list-style:none; padding:0; margin:0; display:grid; grid-template-columns:1fr 1fr; gap:.5rem .8rem;}
 ul.incl-list li{font-size:.85rem; color:var(--ink); display:flex; align-items:flex-start; gap:.4rem;}
-ul.incl-list li::before{content:'✓'; color:var(--forest); font-weight:700; flex-shrink:0;}
+ul.incl-list li::before{content:'\f26a'; font-family:'bootstrap-icons'; color:var(--forest); flex-shrink:0;}
 
 /* Team cards */
 .team-card{background:#fff; border-radius:var(--radius-md); overflow:hidden; border:1px solid var(--line); height:100%; transition:transform .3s ease, box-shadow .3s ease;}
@@ -259,7 +303,7 @@ ul.incl-list li::before{content:'✓'; color:var(--forest); font-weight:700; fle
 .coverage-card h3{font-size:1.2rem; font-weight:600; margin:.5rem 0 1.1rem;}
 .coverage-card ul{list-style:none; padding:0; margin:0; display:grid; grid-template-columns:1fr 1fr; gap:.55rem .8rem;}
 .coverage-card ul li{font-size:.88rem; color:var(--ink); display:flex; align-items:flex-start; gap:.4rem;}
-.coverage-card ul li::before{content:'📍'; flex-shrink:0; font-size:.78rem;}
+.coverage-card ul li::before{content:'\f3e7'; font-family:'bootstrap-icons'; color:var(--clay); flex-shrink:0; font-size:.78rem;}
 
 /* CTA band */
 .cta-band{background:linear-gradient(120deg, var(--forest-deep) 0%, var(--forest) 100%); border-radius:36px; padding:4rem 2.5rem; position:relative; overflow:hidden; color:#fff;}
@@ -419,27 +463,56 @@ a:focus-visible, button:focus-visible{outline:2px solid var(--clay); outline-off
   body.support-open{ overflow:hidden; }
 
 </style>
+<style id="lm-upgrade">
+/* ---- Landmark upgrade: index-style brand, sound button, Bootstrap-icon colours ---- */
+.brand{font-family:var(--display); font-weight:700; font-size:1.45rem; letter-spacing:-0.02em; color:#fff !important; display:flex; align-items:center; gap:.65rem; text-decoration:none; transition:color .35s ease;}
+.brand-text-wrap{overflow:hidden; display:inline-block; position:relative; vertical-align:middle;}
+.brand-text{display:inline-block; white-space:nowrap; animation:brandSlideLoop 4s ease-in-out infinite;}
+@keyframes brandSlideLoop{0%{transform:translateX(120%);opacity:0;}18%{transform:translateX(0);opacity:1;}65%{transform:translateX(0);opacity:1;}82%{transform:translateX(-120%);opacity:0;}82.1%{transform:translateX(120%);}100%{transform:translateX(120%);opacity:0;}}
+@media (prefers-reduced-motion: reduce){.brand-text{animation:none;}}
+.leaf-mark{width:46px; height:46px; object-fit:contain; display:inline-block; flex-shrink:0; transition:width .35s ease, height .35s ease;}
+.nav-wrap.scrolled .leaf-mark{width:40px; height:40px;}
+.nav-wrap.scrolled .brand{color:var(--forest-deep) !important;}
+@media (min-width:992px) and (max-width:1199.98px){
+  .brand{font-size:1.15rem;} .leaf-mark{width:38px; height:38px;}
+  .navbar-nav .nav-link{margin:0 .38rem !important; font-size:.88rem !important;}
+}
+.fab-sound{background:#fff; color:var(--forest); border:1px solid var(--line);}
+.fab-sound.off{color:var(--ink-soft,#52604A);}
+.fab i{line-height:1;}
+.ic-wrap i,.feature-icon i,.category-icon i,.blog-card-img i{color:var(--forest);}
+.svc-card:hover .ic-wrap i{color:#fff;}
+.ic-overlay i,.sm-icon i,.why-item .ck i{color:#fff;}
+.ic-wrap span i{display:inline-block;}
+.read-more i{margin-left:.25rem; transition:transform .2s ease;}
+.read-more:hover i{transform:translateX(3px);}
+
+</style>
 </head>
 <body>
 
 <!-- ============ NAVBAR ============ -->
 <nav class="navbar navbar-expand-lg nav-wrap" id="mainNav">
   <div class="container">
-    <a class="brand" href="index.html"><span class="leaf-mark">🌿</span>Landmark Landscaping</a>
+    <a class="brand" href="/#home/yhfdy7533679999666">
+    <img src="android-chrome-512x512 (1).png" alt="Landmark Landscaping" class="leaf-mark">
+    <span class="brand-text-wrap"><span class="brand-text">Landmark Landscaping</span></span>
+  </a>
     <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navMenu">
       <ul class="navbar-nav ms-auto align-items-lg-center">
-        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-        <li class="nav-item"><a class="nav-link active" href="about.html">About</a></li>
-        <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
-        <li class="nav-item"><a class="nav-link" href="projects.html">Projects</a></li>
-        <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
-        <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
-        <li class="nav-item"><a class="nav-link" href="testimonials.html">Testimonials</a></li>
+        <li class="nav-item"><a class="nav-link" href="/#home/yhfdy7533679999666">Home</a></li>
+        <li class="nav-item"><a class="nav-link active" href="/#about/ggopa0093866963703">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="/#services/rfbvi1534962000876">Services</a></li>
+        <li class="nav-item"><a class="nav-link" href="/#projects/fautv7701138078370">Projects</a></li>
+        <li class="nav-item"><a class="nav-link" href="/#gallery/orfsi3622140068536">Gallery</a></li>
+        <li class="nav-item"><a class="nav-link" href="/#blog/twoox0430942377864">Blog</a></li>
+        <li class="nav-item"><a class="nav-link" href="/#careers/yhxxs2606916781316">Careers</a></li>
+        <li class="nav-item"><a class="nav-link" href="/#testimonials/lzlub0191029824551">Testimonials</a></li>
         <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
-          <a class="btn btn-forest btn-sm" href="contact.html">Contact Us</a>
+          <a class="btn btn-forest btn-sm" href="/#contact/ceujv9194469597035">Contact Us</a>
         </li>
       </ul>
     </div>
@@ -454,7 +527,7 @@ a:focus-visible, button:focus-visible{outline:2px solid var(--clay); outline-off
   <div class="hero-overlay"></div>
   <div class="container hero-content">
     <div class="breadcrumb-bar">
-      <a href="index.html">Home</a><span class="sep">/</span><span class="current">About Us</span>
+      <a href="/#home/yhfdy7533679999666">Home</a><span class="sep">/</span><span class="current">About Us</span>
     </div>
     <p class="eyebrow">Our Story</p>
     <h1>About Landmark Landscaping Services</h1>
@@ -490,7 +563,7 @@ a:focus-visible, button:focus-visible{outline:2px solid var(--clay); outline-off
             <img src="hedgecutting.jpeg" alt="Award-winning garden landscape designed by Landmark Landscaping">
           </div>
           <div class="badge-floating" style="bottom:-1.5rem; left:-1.5rem;">
-            <span class="ic">🏆</span>
+            <span class="ic"><i class="bi bi-trophy-fill"></i></span>
             <div><div class="t">1+ Years</div><div class="s">of trusted craft</div></div>
           </div>
         </div>
@@ -510,21 +583,21 @@ a:focus-visible, button:focus-visible{outline:2px solid var(--clay); outline-off
     <div class="row g-4">
       <div class="col-md-4 reveal">
         <div class="svc-card pillar-card h-100">
-          <div class="ic-wrap"><span class="ic-trickle">🎯</span></div>
+          <div class="ic-wrap"><span class="ic-trickle"><i class="bi bi-bullseye"></i></span></div>
           <h3>Our Mission</h3>
           <p>To deliver exceptional landscaping and irrigation solutions that transform outdoor spaces into beautiful, sustainable environments — working hand-in-hand with every client's idea, and presenting results that exceed their expectations.</p>
         </div>
       </div>
       <div class="col-md-4 reveal">
         <div class="svc-card pillar-card vision h-100">
-          <div class="ic-wrap"><span class="ic-rotate">🧭</span></div>
+          <div class="ic-wrap"><span class="ic-rotate"><i class="bi bi-compass-fill"></i></span></div>
           <h3>Our Vision</h3>
           <p>To be the leading landscaping and irrigation company in Kenya — recognized for innovation, quality, sustainability, and customer excellence across residential, commercial, and public spaces.</p>
         </div>
       </div>
       <div class="col-md-4 reveal">
         <div class="svc-card pillar-card spirit h-100">
-          <div class="ic-wrap"><span class="ic-flicker">🔥</span></div>
+          <div class="ic-wrap"><span class="ic-flicker"><i class="bi bi-fire"></i></span></div>
           <h3>Our Spirit</h3>
           <p>Grounded in passion, driven by purpose. Every blade of grass, every drop of water, every line we draw reflects our love for the land and our promise to bring your outdoor dream to life — with care, not shortcuts.</p>
         </div>
@@ -544,28 +617,28 @@ a:focus-visible, button:focus-visible{outline:2px solid var(--clay); outline-off
     <div class="row g-4">
       <div class="col-sm-6 col-lg-3 reveal">
         <div class="svc-card h-100">
-          <div class="ic-wrap">✨</div>
+          <div class="ic-wrap"><i class="bi bi-stars"></i></div>
           <h3>Excellence</h3>
           <p>We maintain the highest standards in every aspect of our work, from design to implementation.</p>
         </div>
       </div>
       <div class="col-sm-6 col-lg-3 reveal">
         <div class="svc-card h-100">
-          <div class="ic-wrap">🤝</div>
+          <div class="ic-wrap"><i class="bi bi-people-fill"></i></div>
           <h3>Integrity</h3>
           <p>We build trust through honesty, transparency, and reliability in all client relationships.</p>
         </div>
       </div>
       <div class="col-sm-6 col-lg-3 reveal">
         <div class="svc-card h-100">
-          <div class="ic-wrap"><span class="ic-spin">🌍</span></div>
+          <div class="ic-wrap"><span class="ic-spin"><i class="bi bi-globe-europe-africa"></i></span></div>
           <h3>Sustainability</h3>
           <p>We prioritize environmentally responsible practices that benefit both clients and nature.</p>
         </div>
       </div>
       <div class="col-sm-6 col-lg-3 reveal">
         <div class="svc-card h-100">
-          <div class="ic-wrap"><span class="ic-heartbeat">💚</span></div>
+          <div class="ic-wrap"><span class="ic-heartbeat"><i class="bi bi-heart-fill"></i></span></div>
           <h3>Innovation</h3>
           <p>We embrace modern techniques and creative solutions to solve landscaping challenges.</p>
         </div>
@@ -724,7 +797,7 @@ a:focus-visible, button:focus-visible{outline:2px solid var(--clay); outline-off
     <div class="cta-band text-center reveal">
       <h2 class="fw-semibold mb-2">Discover how we can help</h2>
       <p class="mb-4" style="color:rgba(255,255,255,.85); max-width:520px; margin-inline:auto;">Bring us your idea — we'll present a space that exceeds what you imagined. Contact us today for a free consultation.</p>
-      <a href="contact.html" class="btn btn-line-light">Get in Touch</a>
+      <a href="/#contact/ceujv9194469597035" class="btn btn-line-light">Get in Touch</a>
     </div>
   </div>
 </section>
@@ -749,10 +822,11 @@ a:focus-visible, button:focus-visible{outline:2px solid var(--clay); outline-off
       <div class="col-lg-2 col-sm-6">
         <h3>Quick Links</h3>
         <ul class="footer-links list-unstyled">
-          <li><a href="about.html">About Us</a></li>
-          <li><a href="services.html">Services</a></li>
-          <li><a href="projects.html">Projects</a></li>
-          <li><a href="blog.html">Blog</a></li>
+          <li><a href="/#about/ggopa0093866963703">About Us</a></li>
+          <li><a href="/#services/rfbvi1534962000876">Services</a></li>
+          <li><a href="/#projects/fautv7701138078370">Projects</a></li>
+          <li><a href="/#blog/twoox0430942377864">Blog</a></li>
+          <li><a href="/#careers/yhxxs2606916781316">Careers</a></li>
         </ul>
       </div>
       <div class="col-lg-3 col-sm-6">
@@ -812,9 +886,10 @@ a:focus-visible, button:focus-visible{outline:2px solid var(--clay); outline-off
 
 <!-- ============ FLOATING ACTION BUTTONS ============ -->
 <div class="fab-stack">
-  <button id="back-to-top" class="fab fab-top" aria-label="Back to top" title="Back to top">⬆️</button>
-  <button id="quote-btn" class="fab fab-quote" aria-label="Request a quote" title="Request a Quote" data-bs-toggle="modal" data-bs-target="#quoteModal">📋</button>
-  <a href="https://wa.me/254728158526" target="_blank" rel="noopener" class="fab fab-whatsapp" aria-label="Contact on WhatsApp" title="Chat on WhatsApp">💬</a>
+  <button id="soundToggle" class="fab fab-sound" aria-label="Toggle sounds" aria-pressed="true" title="Sounds on (tap to mute)"><i class="bi bi-volume-up-fill"></i></button>
+  <button id="back-to-top" class="fab fab-top" aria-label="Back to top" title="Back to top"><i class="bi bi-arrow-up"></i></button>
+  <button id="quote-btn" class="fab fab-quote" aria-label="Request a quote" title="Request a Quote" data-bs-toggle="modal" data-bs-target="#quoteModal"><i class="bi bi-clipboard2-check"></i></button>
+  <a href="https://wa.me/254728158526" target="_blank" rel="noopener" class="fab fab-whatsapp" aria-label="Contact on WhatsApp" title="Chat on WhatsApp"><i class="bi bi-whatsapp"></i></a>
 </div>
 
 
@@ -907,6 +982,7 @@ a:focus-visible, button:focus-visible{outline:2px solid var(--clay); outline-off
     fb.style.display = 'block';
     fb.style.color = 'var(--forest)';
     fb.textContent = 'Thanks! We\'ll get back to you within 24 hours.';
+      if (window.LMSound) LMSound.success();
     this.reset();
     setTimeout(() => {
       bootstrap.Modal.getInstance(document.getElementById('quoteModal')).hide();
@@ -935,6 +1011,7 @@ a:focus-visible, button:focus-visible{outline:2px solid var(--clay); outline-off
       sessionStorage.setItem(SESSION_KEY, sessionId);
     }
 
+    if (window.LM && LM.redirecting) return;
     var pagePath = window.location.pathname || '/';
 
     LM.sb.from('page_views').insert({
@@ -1013,6 +1090,103 @@ a:focus-visible, button:focus-visible{outline:2px solid var(--clay); outline-off
       if (e && e.data === 'landmark-support:close') closeSupport();
     });
   })();
+</script>
+
+<!-- Landmark sounds: click, welcome chime, per-page arrival tone (Web Audio, no audio files needed) -->
+<script>
+(function () {
+  var KEY = 'lm_sound', ENTER_KEY = 'lm_entered';
+  var ctx = null, enabled = true, entered = false;
+  try { enabled = localStorage.getItem(KEY) !== 'off'; } catch (e) {}
+  try { entered = sessionStorage.getItem(ENTER_KEY) === '1'; } catch (e) {}
+  var NOTE = { home: 523.25, about: 587.33, services: 659.25, projects: 698.46, gallery: 783.99, blog: 880, careers: 493.88, testimonials: 739.99, contact: 622.25 };
+  var page = (window.LM && LM.page) || document.documentElement.getAttribute('data-page') || 'home';
+
+  function getCtx() {
+    if (!ctx) {
+      var AC = window.AudioContext || window.webkitAudioContext;
+      if (!AC) return null;
+      ctx = new AC();
+    }
+    if (ctx.state === 'suspended') ctx.resume();
+    return ctx;
+  }
+
+  function tone(freq, start, dur, type, vol) {
+    var c = getCtx(); if (!c) return;
+    var t0 = c.currentTime + start;
+    var o = c.createOscillator(), g = c.createGain();
+    o.type = type;
+    o.frequency.setValueAtTime(freq, t0);
+    g.gain.setValueAtTime(0.0001, t0);
+    g.gain.exponentialRampToValueAtTime(vol, t0 + 0.012);
+    g.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+    o.connect(g); g.connect(c.destination);
+    o.start(t0); o.stop(t0 + dur + 0.03);
+  }
+
+  var Snd = {
+    click:   function () { if (!enabled) return; tone(920, 0, .07, 'triangle', .11); tone(620, .028, .09, 'sine', .07); },
+    enter:   function () { if (!enabled) return; [523.25, 659.25, 783.99, 1046.5].forEach(function (f, i) { tone(f, i * .09, .55, 'sine', .10); }); },
+    success: function () { if (!enabled) return; [659.25, 830.61, 987.77, 1318.5].forEach(function (f, i) { tone(f, i * .08, .45, 'sine', .11); }); },
+    error:   function () { if (!enabled) return; tone(220, 0, .18, 'sawtooth', .06); tone(180, .1, .22, 'sawtooth', .05); },
+    arrive:  function () { if (!enabled) return; var f = NOTE[page] || 523.25; tone(f, 0, .35, 'sine', .07); tone(f * 1.5, .09, .5, 'sine', .05); }
+  };
+  window.LMSound = Snd;
+
+  // Arrival tone on every page after the first interaction of the visit (browsers block it before that)
+  function arrive() {
+    if (!enabled || !entered) return;
+    var c = getCtx(); if (!c) return;
+    setTimeout(function () { if (c.state === 'running') Snd.arrive(); }, 180);
+  }
+  if (document.readyState === 'complete') arrive(); else window.addEventListener('load', arrive);
+
+  var CLICKABLE = 'a[href], button, .btn, summary, [role="button"], .nav-link, label[for]';
+  var touchPending = false;
+
+  function handle(target) {
+    if (!target || !target.closest) return;
+    if (target.closest('#soundToggle')) return;
+    var isClickable = !!target.closest(CLICKABLE);
+    if (!entered) {            // first interaction of the visit = "entering the site"
+      entered = true;
+      try { sessionStorage.setItem(ENTER_KEY, '1'); } catch (e) {}
+      Snd.enter();
+      return;
+    }
+    if (isClickable) Snd.click();
+  }
+
+  document.addEventListener('pointerdown', function (e) {
+    if (e.pointerType === 'mouse') { handle(e.target); } else { touchPending = true; }
+  }, true);
+  document.addEventListener('click', function (e) {
+    if (touchPending) { touchPending = false; handle(e.target); }   // touch: unlock audio on click (iOS)
+  }, true);
+  document.addEventListener('keydown', function (e) {
+    if ((e.key === 'Enter' || e.key === ' ') && e.target && e.target.closest && e.target.closest('a[href], button, [role="button"]')) handle(e.target);
+  }, true);
+
+  // Mute / unmute toggle
+  var btn = document.getElementById('soundToggle');
+  function paint() {
+    if (!btn) return;
+    btn.classList.toggle('off', !enabled);
+    btn.innerHTML = '<i class="bi ' + (enabled ? 'bi-volume-up-fill' : 'bi-volume-mute-fill') + '"></i>';
+    btn.title = enabled ? 'Sounds on (tap to mute)' : 'Sounds off (tap to unmute)';
+    btn.setAttribute('aria-pressed', String(enabled));
+  }
+  if (btn) {
+    paint();
+    btn.addEventListener('click', function () {
+      enabled = !enabled;
+      try { localStorage.setItem(KEY, enabled ? 'on' : 'off'); } catch (e) {}
+      paint();
+      if (enabled) Snd.click();
+    });
+  }
+})();
 </script>
 
 </body>

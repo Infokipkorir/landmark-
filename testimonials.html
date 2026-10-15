@@ -1,7 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-page="testimonials">
 <head>
 <meta charset="UTF-8">
+<script>
+/* Landmark hash links: /#home/<id>, /#about/<id> ... Each page keeps its own file and content. */
+(function () {
+  var PAGES = {"home": "index.html", "about": "about.html", "services": "services.html", "projects": "projects.html", "gallery": "gallery.html", "blog": "blog.html", "careers": "careers.html", "testimonials": "testimonials.html", "contact": "contact.html"};
+  var IDS = {"home": "yhfdy7533679999666", "about": "ggopa0093866963703", "services": "rfbvi1534962000876", "projects": "fautv7701138078370", "gallery": "orfsi3622140068536", "blog": "twoox0430942377864", "careers": "yhxxs2606916781316", "testimonials": "lzlub0191029824551", "contact": "ceujv9194469597035"};
+  var cur = document.documentElement.getAttribute('data-page') || 'home';
+  window.LM = window.LM || {};
+  LM.PAGES = PAGES; LM.IDS = IDS; LM.page = cur;
+
+  function go(r, id) { return PAGES[r] + '#' + r + '/' + (id || IDS[r]); }
+
+  function route() {
+    var parts = location.hash.replace(/^#\/?/, '').split('/');
+    var r = (parts[0] || '').toLowerCase();
+    if (Object.prototype.hasOwnProperty.call(PAGES, r) && r !== cur) {
+      LM.redirecting = true;
+      location.replace(go(r, parts[1]));
+      return true;
+    }
+    return false;
+  }
+  if (route()) return;
+
+  // Show this page's own hash link in the address bar when none is present
+  if (!location.hash) {
+    try { history.replaceState(null, '', location.pathname + location.search + '#' + cur + '/' + IDS[cur]); } catch (e) {}
+  }
+  window.addEventListener('hashchange', route);
+
+  // Plain clicks on /#route/id links jump straight to the right page (skips the index.html hop)
+  document.addEventListener('click', function (e) {
+    if (e.defaultPrevented || e.button || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    var a = e.target.closest && e.target.closest('a[href^="/#"]');
+    if (!a || a.target === '_blank') return;
+    var p = a.getAttribute('href').slice(2).split('/');
+    var r = (p[0] || '').toLowerCase();
+    if (!Object.prototype.hasOwnProperty.call(PAGES, r)) return;
+    e.preventDefault();
+    if (r === cur) { window.scrollTo({ top: 0, behavior: 'smooth' }); return; }
+    location.href = go(r, p[1]);
+  });
+})();
+</script>
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Read real client testimonials and ratings for Landmark Landscaping Services. See why homeowners and businesses across Kenya trust us — and share your own feedback.">
 <meta name="keywords" content="testimonials, client reviews, landscaping reviews Kenya, customer feedback, Landmark Landscaping reviews">
@@ -302,27 +346,188 @@ a:focus-visible, button:focus-visible{outline:2px solid var(--clay); outline-off
   .rate-row .rate-label{max-width:100%;}
 }
 </style>
+<style id="lm-upgrade">
+/* ---- Landmark upgrade: index-style brand, sound button, Bootstrap-icon colours ---- */
+.brand{font-family:var(--display); font-weight:700; font-size:1.45rem; letter-spacing:-0.02em; color:#fff !important; display:flex; align-items:center; gap:.65rem; text-decoration:none; transition:color .35s ease;}
+.brand-text-wrap{overflow:hidden; display:inline-block; position:relative; vertical-align:middle;}
+.brand-text{display:inline-block; white-space:nowrap; animation:brandSlideLoop 4s ease-in-out infinite;}
+@keyframes brandSlideLoop{0%{transform:translateX(120%);opacity:0;}18%{transform:translateX(0);opacity:1;}65%{transform:translateX(0);opacity:1;}82%{transform:translateX(-120%);opacity:0;}82.1%{transform:translateX(120%);}100%{transform:translateX(120%);opacity:0;}}
+@media (prefers-reduced-motion: reduce){.brand-text{animation:none;}}
+.leaf-mark{width:46px; height:46px; object-fit:contain; display:inline-block; flex-shrink:0; transition:width .35s ease, height .35s ease;}
+.nav-wrap.scrolled .leaf-mark{width:40px; height:40px;}
+.nav-wrap.scrolled .brand{color:var(--forest-deep) !important;}
+@media (min-width:992px) and (max-width:1199.98px){
+  .brand{font-size:1.15rem;} .leaf-mark{width:38px; height:38px;}
+  .navbar-nav .nav-link{margin:0 .38rem !important; font-size:.88rem !important;}
+}
+.fab-sound{background:#fff; color:var(--forest); border:1px solid var(--line);}
+.fab-sound.off{color:var(--ink-soft,#52604A);}
+.fab i{line-height:1;}
+.ic-wrap i,.feature-icon i,.category-icon i,.blog-card-img i{color:var(--forest);}
+.svc-card:hover .ic-wrap i{color:#fff;}
+.ic-overlay i,.sm-icon i,.why-item .ck i{color:#fff;}
+.ic-wrap span i{display:inline-block;}
+.read-more i{margin-left:.25rem; transition:transform .2s ease;}
+.read-more:hover i{transform:translateX(3px);}
+/* ---------- Support widget (replaces Jotform) ---------- */
+  .support-fab-wrap{
+    position:fixed; right:1.6rem; bottom:1.6rem; z-index:1200;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .support-fab-ring{
+    position:absolute; inset:0; border-radius:50%;
+    background:var(--leaf);
+    opacity:.55;
+    animation:supportPulse 2.6s ease-out infinite;
+  }
+  @keyframes supportPulse{
+    0%{transform:scale(1); opacity:.5;}
+    70%{transform:scale(1.9); opacity:0;}
+    100%{transform:scale(1.9); opacity:0;}
+  }
+  .support-fab{
+    position:relative;
+    width:62px; height:62px; border-radius:50%;
+    border:none; cursor:pointer;
+    background:linear-gradient(145deg, var(--leaf) 0%, var(--forest) 100%);
+    color:#fff; font-size:1.55rem;
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 14px 32px -8px rgba(20,63,24,.55), 0 0 0 4px rgba(255,255,255,.9);
+    transition:transform .3s cubic-bezier(.34,1.56,.64,1), box-shadow .3s ease;
+  }
+  .support-fab:hover{
+    transform:scale(1.09) translateY(-2px);
+    box-shadow:0 18px 38px -6px rgba(20,63,24,.6), 0 0 0 4px rgba(255,255,255,.95);
+  }
+  .support-fab:active{transform:scale(.97);}
+  .support-fab .online-dot{
+    position:absolute; top:2px; right:2px;
+    width:15px; height:15px; border-radius:50%;
+    background:#2ECC71; border:2.5px solid #fff;
+    box-shadow:0 0 0 0 rgba(46,204,113,.7);
+    animation:dotPulse 2s ease-in-out infinite;
+  }
+  @keyframes dotPulse{
+    0%{box-shadow:0 0 0 0 rgba(46,204,113,.55);}
+    70%{box-shadow:0 0 0 7px rgba(46,204,113,0);}
+    100%{box-shadow:0 0 0 0 rgba(46,204,113,0);}
+  }
+  .support-fab-tooltip{
+    position:absolute; right:calc(100% + 14px); top:50%; transform:translateY(-50%) translateX(6px);
+    background:var(--ink); color:#fff;
+    font-size:.82rem; font-weight:600; white-space:nowrap;
+    padding:.55rem .95rem; border-radius:10px;
+    opacity:0; pointer-events:none;
+    transition:opacity .25s ease, transform .25s ease;
+    box-shadow:0 10px 24px -6px rgba(0,0,0,.35);
+  }
+  .support-fab-tooltip::after{
+    content:''; position:absolute; left:100%; top:50%; transform:translateY(-50%);
+    border:6px solid transparent; border-left-color:var(--ink);
+  }
+  .support-fab-wrap:hover .support-fab-tooltip{opacity:1; transform:translateY(-50%) translateX(0);}
+  @media (max-width:991.98px){ .support-fab-tooltip{display:none;} }
+
+  .support-panel-backdrop{
+    position:fixed; inset:0; z-index:1300;
+    background:rgba(15,25,15,.35);
+    backdrop-filter:blur(2px);
+    opacity:0; pointer-events:none;
+    transition:opacity .3s ease;
+  }
+  .support-panel-backdrop.open{opacity:1; pointer-events:auto;}
+
+  .support-panel{
+    position:fixed; z-index:1301;
+    right:1.6rem; bottom:1.6rem;
+    width:400px; height:min(680px, calc(100vh - 3.2rem));
+    background:#fff;
+    border-radius:22px;
+    box-shadow:0 30px 80px -20px rgba(15,30,15,.45);
+    overflow:hidden;
+    display:flex; flex-direction:column;
+    opacity:0; transform:translateY(24px) scale(.97);
+    pointer-events:none;
+    transform-origin:bottom right;
+    transition:opacity .32s cubic-bezier(.22,1,.36,1), transform .32s cubic-bezier(.22,1,.36,1);
+  }
+  .support-panel.open{
+    opacity:1; transform:translateY(0) scale(1);
+    pointer-events:auto;
+  }
+  .support-panel-head{
+    display:flex; align-items:center; justify-content:space-between;
+    gap:.75rem;
+    padding:1rem 1.1rem;
+    background:linear-gradient(120deg, var(--forest-deep) 0%, var(--forest) 100%);
+    color:#fff;
+    flex-shrink:0;
+  }
+  .support-panel-head .who{display:flex; align-items:center; gap:.7rem;}
+  .support-panel-head .avatar{
+    width:38px; height:38px; border-radius:50%;
+    background:rgba(255,255,255,.18);
+    display:flex; align-items:center; justify-content:center;
+    font-size:1.1rem; position:relative; flex-shrink:0;
+  }
+  .support-panel-head .avatar .dot{
+    position:absolute; bottom:-1px; right:-1px;
+    width:10px; height:10px; border-radius:50%;
+    background:#2ECC71; border:2px solid var(--forest);
+  }
+  .support-panel-head .name{font-weight:700; font-size:.95rem; line-height:1.2;}
+  .support-panel-head .status{font-size:.74rem; color:rgba(255,255,255,.8);}
+  .support-panel-head .close-btn{
+    width:32px; height:32px; border-radius:50%; border:none;
+    background:rgba(255,255,255,.15); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer; transition:background .2s ease, transform .2s ease;
+    flex-shrink:0;
+  }
+  .support-panel-head .close-btn:hover{background:rgba(255,255,255,.28); transform:rotate(90deg);}
+  .support-panel iframe{
+    flex:1 1 auto; width:100%; height:100%; border:none; display:block; background:var(--cream);
+  }
+
+  @media (max-width:575.98px){
+    .support-panel{
+      right:0; bottom:0; left:0; top:0;
+      width:100%; height:100%;
+      border-radius:0;
+      transform:translateY(100%) scale(1);
+    }
+    .support-panel.open{ transform:translateY(0) scale(1); }
+    .support-fab-wrap{ right:1rem; bottom:calc(1rem + env(safe-area-inset-bottom,0px)); }
+  }
+  body.support-open{ overflow:hidden; }
+
+  
+</style>
 </head>
 <body>
 
 <!-- ============ NAVBAR ============ -->
 <nav class="navbar navbar-expand-lg nav-wrap" id="mainNav">
   <div class="container">
-    <a class="brand" href="index.html"><span class="leaf-mark">🌿</span>Landmark Landscaping</a>
+    <a class="brand" href="/#home/yhfdy7533679999666">
+    <img src="android-chrome-512x512 (1).png" alt="Landmark Landscaping" class="leaf-mark">
+    <span class="brand-text-wrap"><span class="brand-text">Landmark Landscaping</span></span>
+  </a>
     <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navMenu">
       <ul class="navbar-nav ms-auto align-items-lg-center">
-        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-        <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
-        <li class="nav-item"><a class="nav-link" href="projects.html">Projects</a></li>
-        <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
-        <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
-        <li class="nav-item"><a class="nav-link active" href="testimonials.html">Testimonials</a></li>
+        <li class="nav-item"><a class="nav-link" href="/#home/yhfdy7533679999666">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="/#about/ggopa0093866963703">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="/#services/rfbvi1534962000876">Services</a></li>
+        <li class="nav-item"><a class="nav-link" href="/#projects/fautv7701138078370">Projects</a></li>
+        <li class="nav-item"><a class="nav-link" href="/#gallery/orfsi3622140068536">Gallery</a></li>
+        <li class="nav-item"><a class="nav-link" href="/#blog/twoox0430942377864">Blog</a></li>
+        <li class="nav-item"><a class="nav-link" href="/#careers/yhxxs2606916781316">Careers</a></li>
+        <li class="nav-item"><a class="nav-link active" href="/#testimonials/lzlub0191029824551">Testimonials</a></li>
         <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
-          <a class="btn btn-forest btn-sm" href="contact.html">Contact Us</a>
+          <a class="btn btn-forest btn-sm" href="/#contact/ceujv9194469597035">Contact Us</a>
         </li>
       </ul>
     </div>
@@ -337,7 +542,7 @@ a:focus-visible, button:focus-visible{outline:2px solid var(--clay); outline-off
   <div class="hero-overlay"></div>
   <div class="container hero-content">
     <div class="breadcrumb-bar">
-      <a href="index.html">Home</a><span class="sep">/</span><span class="current">Testimonials</span>
+      <a href="/#home/yhfdy7533679999666">Home</a><span class="sep">/</span><span class="current">Testimonials</span>
     </div>
     <p class="eyebrow">Client Stories</p>
     <h1>What Our Clients Say</h1>
@@ -478,7 +683,7 @@ a:focus-visible, button:focus-visible{outline:2px solid var(--clay); outline-off
     <div class="cta-band text-center reveal">
       <h2 class="fw-semibold mb-2">Ready to transform your outdoor space?</h2>
       <p class="mb-4" style="color:rgba(255,255,255,.85); max-width:520px; margin-inline:auto;">Get a free consultation and quote from our expert team today.</p>
-      <a href="contact.html" class="btn btn-line-light">Get Started Now</a>
+      <a href="/#contact/ceujv9194469597035" class="btn btn-line-light">Get Started Now</a>
     </div>
   </div>
 </section>
@@ -503,10 +708,11 @@ a:focus-visible, button:focus-visible{outline:2px solid var(--clay); outline-off
       <div class="col-lg-2 col-sm-6">
         <h3>Quick Links</h3>
         <ul class="footer-links list-unstyled">
-          <li><a href="about.html">About Us</a></li>
-          <li><a href="services.html">Services</a></li>
-          <li><a href="projects.html">Projects</a></li>
-          <li><a href="blog.html">Blog</a></li>
+          <li><a href="/#about/ggopa0093866963703">About Us</a></li>
+          <li><a href="/#services/rfbvi1534962000876">Services</a></li>
+          <li><a href="/#projects/fautv7701138078370">Projects</a></li>
+          <li><a href="/#blog/twoox0430942377864">Blog</a></li>
+          <li><a href="/#careers/yhxxs2606916781316">Careers</a></li>
         </ul>
       </div>
       <div class="col-lg-3 col-sm-6">
@@ -566,24 +772,80 @@ a:focus-visible, button:focus-visible{outline:2px solid var(--clay); outline-off
 
 <!-- ============ FLOATING ACTION BUTTONS ============ -->
 <div class="fab-stack">
+  <button id="soundToggle" class="fab fab-sound" aria-label="Toggle sounds" aria-pressed="true" title="Sounds on (tap to mute)"><i class="bi bi-volume-up-fill"></i></button>
   <button id="back-to-top" class="fab fab-top" aria-label="Back to top" title="Back to top"><i class="bi bi-arrow-up"></i></button>
-  <button id="quote-btn" class="fab fab-quote" aria-label="Request a quote" title="Request a Quote" data-bs-toggle="modal" data-bs-target="#quoteModal"><i class="bi bi-file-earmark-text-fill"></i></button>
+  <button id="quote-btn" class="fab fab-quote" aria-label="Request a quote" title="Request a Quote" data-bs-toggle="modal" data-bs-target="#quoteModal"><i class="bi bi-clipboard2-check"></i></button>
   <a href="https://wa.me/254728158526" target="_blank" rel="noopener" class="fab fab-whatsapp" aria-label="Contact on WhatsApp" title="Chat on WhatsApp"><i class="bi bi-whatsapp"></i></a>
 </div>
 
-<!-- Start of Tawk.to Script -->
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/6a35244b16fcef1d436fb5a9/default';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
+<!-- ============ SUPPORT WIDGET ============ -->
+<div class="support-fab-wrap" id="supportFabWrap">
+  <button class="support-fab" id="supportFabBtn" aria-haspopup="dialog" aria-expanded="false" aria-controls="supportPanel" aria-label="Open support chat">
+    <span class="support-fab-ring" aria-hidden="true"></span>
+    <i class="bi bi-headset" aria-hidden="true"></i>
+    <span class="online-dot" aria-hidden="true"></span>
+  </button>
+  <span class="support-fab-tooltip" role="tooltip">Need Help? Chat with us</span>
+</div>
+
+<div class="support-panel-backdrop" id="supportBackdrop"></div>
+
+<div class="support-panel" id="supportPanel" role="dialog" aria-modal="true" aria-label="Landmark Support chat">
+  <iframe id="supportFrame" title="Landmark Landscaping Support Chat" src="about:blank" loading="lazy"></iframe>
+</div>
+
+<script>
+  (function(){
+    var fabBtn      = document.getElementById('supportFabBtn');
+    var fabWrap     = document.getElementById('supportFabWrap');
+    var panel       = document.getElementById('supportPanel');
+    var backdrop    = document.getElementById('supportBackdrop');
+    var frame       = document.getElementById('supportFrame');
+    var frameLoaded = false;
+
+    // Very small / legacy phone screens: skip the in-page panel and just open
+    // support.html directly, since a docked panel doesn't work well below this size.
+    var TINY_SCREEN_WIDTH = 340;
+
+    function openSupport(){
+      if (window.innerWidth <= TINY_SCREEN_WIDTH) {
+        window.location.href = 'support.html';
+        return;
+      }
+      if (!frameLoaded) {
+        frame.src = 'support.html';
+        frameLoaded = true;
+      }
+      panel.classList.add('open');
+      backdrop.classList.add('open');
+      fabWrap.style.opacity = '0';
+      fabWrap.style.pointerEvents = 'none';
+      fabBtn.setAttribute('aria-expanded', 'true');
+      document.body.classList.add('support-open');
+    }
+
+    function closeSupport(){
+      panel.classList.remove('open');
+      backdrop.classList.remove('open');
+      fabWrap.style.opacity = '1';
+      fabWrap.style.pointerEvents = 'auto';
+      fabBtn.setAttribute('aria-expanded', 'false');
+      document.body.classList.remove('support-open');
+    }
+
+    fabBtn.addEventListener('click', openSupport);
+    backdrop.addEventListener('click', closeSupport);
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape' && panel.classList.contains('open')) closeSupport();
+    });
+
+    // Allow the embedded support.html to ask the parent to close the panel
+    // (e.g. a "Back" / "Close" control inside the chat UI on mobile).
+    window.addEventListener('message', function(e){
+      if (e && e.data === 'landmark-support:close') closeSupport();
+    });
+  })();
 </script>
-<!-- End of Tawk.to Script -->
 
 <!-- ============ FEEDBACK / TESTIMONIAL MODAL ============ -->
 <div class="modal fade" id="feedbackModal" tabindex="-1" aria-labelledby="feedbackModalLabel" aria-hidden="true">
@@ -739,6 +1001,41 @@ s0.parentNode.insertBefore(s1,s0);
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+
+<!-- Supabase client (shared by quote form + support chat) -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script>
+  window.LM = window.LM || {};
+  LM.sb = supabase.createClient(
+    'https://bwcsuxvcqmykhckxqgjh.supabase.co',
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ3Y3N1eHZjcW15a2hja3hxZ2poIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODMyOTE1NjIsImV4cCI6MjA5ODg2NzU2Mn0.rAXetUdSG-uzEhQfvhgK8Kn-K5Hxyxx9M7QO4nKTZiA'
+  );
+</script>
+
+<!-- Page-view tracking beacon (feeds the admin console's Page insights tab) -->
+<script>
+  (function () {
+    // One id per browser tab session, so repeat views within a visit are still separate rows
+    // but a page refresh doesn't spam a brand-new session each time.
+    var SESSION_KEY = 'lm_session_id';
+    var sessionId = sessionStorage.getItem(SESSION_KEY);
+    if (!sessionId) {
+      sessionId = (crypto.randomUUID ? crypto.randomUUID() : (Date.now().toString(36) + Math.random().toString(36).slice(2)));
+      sessionStorage.setItem(SESSION_KEY, sessionId);
+    }
+
+    if (window.LM && LM.redirecting) return;
+    var pagePath = window.location.pathname || '/';
+
+    LM.sb.from('page_views').insert({
+      page_path: pagePath,
+      session_id: sessionId
+    }).then(function (res) {
+      if (res.error) console.warn('Page view log failed:', res.error);
+    });
+  })();
+</script>
+
 <script>
 // ============ Navbar background on scroll ============
 const nav = document.getElementById('mainNav');
@@ -796,23 +1093,59 @@ const counterIO = new IntersectionObserver((entries) => {
 }, { threshold: 0.4 });
 counters.forEach(el => counterIO.observe(el));
 
-// ============ Quote form submit (front-end only demo) ============
-document.getElementById('quoteForm').addEventListener('submit', function (e) {
-  e.preventDefault();
-  const fb = document.getElementById('quoteFeedback');
-  if (!this.checkValidity()) {
-    this.reportValidity();
-    return;
-  }
-  fb.style.display = 'block';
-  fb.style.color = 'var(--forest)';
-  fb.textContent = "Thanks! We'll get back to you within 24 hours.";
-  this.reset();
-  setTimeout(() => {
-    bootstrap.Modal.getInstance(document.getElementById('quoteModal')).hide();
-    fb.style.display = 'none';
-  }, 2200);
-});
+// ============ Quote form submit (saved to Supabase) ============
+
+  document.getElementById('quoteForm').addEventListener('submit', async function(e){
+    e.preventDefault();
+    const fb = document.getElementById('quoteFeedback');
+    if (!this.checkValidity()) {
+      this.reportValidity();
+      return;
+    }
+
+    // Generate the id client-side so we never need to read the row back
+    // (anon visitors have INSERT rights but no SELECT rights on quote_requests,
+    // so insert().select() would fail RLS on the RETURNING step).
+    const newId = (crypto.randomUUID ? crypto.randomUUID() : (Date.now().toString(36) + Math.random().toString(36).slice(2)));
+
+    const payload = {
+      id: newId,
+      name: document.getElementById('qName').value.trim(),
+      phone: document.getElementById('qPhone').value.trim(),
+      service: document.getElementById('qService').value,
+      message: document.getElementById('qMessage').value.trim(),
+    };
+
+    const submitBtn = this.querySelector('button[type="submit"]');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending…';
+
+    try {
+      const { error } = await LM.sb.from('quote_requests').insert(payload);
+      if (error) throw error;
+
+      // Fire-and-forget: generate + email the PDF copy (does not block the UI)
+      LM.sb.functions.invoke('send-quote-pdf', { body: payload }).catch(err => console.warn('PDF email failed:', err));
+
+      fb.style.display = 'block';
+      fb.style.color = 'var(--forest)';
+      fb.textContent = 'Thanks! We\'ll get back to you within 24 hours.';
+      if (window.LMSound) LMSound.success();
+      this.reset();
+      setTimeout(() => {
+        bootstrap.Modal.getInstance(document.getElementById('quoteModal')).hide();
+        fb.style.display = 'none';
+      }, 2200);
+    } catch (err) {
+      console.error('Quote submit failed:', err);
+      fb.style.display = 'block';
+      fb.style.color = '#c0392b';
+      fb.textContent = 'Something went wrong. Please try again or WhatsApp us directly.';
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Send Request';
+    }
+  });
 
 // ============ Feedback / Testimonial modal logic ============
 const FIRST_NAMES = ["Happy", "Grateful", "Sunny", "Green", "Kind", "Bright", "Loyal", "Cheerful"];
@@ -914,5 +1247,102 @@ document.getElementById('feedbackForm').addEventListener('submit', function (e) 
   }, 2600);
 });
 </script>
+<!-- Landmark sounds: click, welcome chime, per-page arrival tone (Web Audio, no audio files needed) -->
+<script>
+(function () {
+  var KEY = 'lm_sound', ENTER_KEY = 'lm_entered';
+  var ctx = null, enabled = true, entered = false;
+  try { enabled = localStorage.getItem(KEY) !== 'off'; } catch (e) {}
+  try { entered = sessionStorage.getItem(ENTER_KEY) === '1'; } catch (e) {}
+  var NOTE = { home: 523.25, about: 587.33, services: 659.25, projects: 698.46, gallery: 783.99, blog: 880, careers: 493.88, testimonials: 739.99, contact: 622.25 };
+  var page = (window.LM && LM.page) || document.documentElement.getAttribute('data-page') || 'home';
+
+  function getCtx() {
+    if (!ctx) {
+      var AC = window.AudioContext || window.webkitAudioContext;
+      if (!AC) return null;
+      ctx = new AC();
+    }
+    if (ctx.state === 'suspended') ctx.resume();
+    return ctx;
+  }
+
+  function tone(freq, start, dur, type, vol) {
+    var c = getCtx(); if (!c) return;
+    var t0 = c.currentTime + start;
+    var o = c.createOscillator(), g = c.createGain();
+    o.type = type;
+    o.frequency.setValueAtTime(freq, t0);
+    g.gain.setValueAtTime(0.0001, t0);
+    g.gain.exponentialRampToValueAtTime(vol, t0 + 0.012);
+    g.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+    o.connect(g); g.connect(c.destination);
+    o.start(t0); o.stop(t0 + dur + 0.03);
+  }
+
+  var Snd = {
+    click:   function () { if (!enabled) return; tone(920, 0, .07, 'triangle', .11); tone(620, .028, .09, 'sine', .07); },
+    enter:   function () { if (!enabled) return; [523.25, 659.25, 783.99, 1046.5].forEach(function (f, i) { tone(f, i * .09, .55, 'sine', .10); }); },
+    success: function () { if (!enabled) return; [659.25, 830.61, 987.77, 1318.5].forEach(function (f, i) { tone(f, i * .08, .45, 'sine', .11); }); },
+    error:   function () { if (!enabled) return; tone(220, 0, .18, 'sawtooth', .06); tone(180, .1, .22, 'sawtooth', .05); },
+    arrive:  function () { if (!enabled) return; var f = NOTE[page] || 523.25; tone(f, 0, .35, 'sine', .07); tone(f * 1.5, .09, .5, 'sine', .05); }
+  };
+  window.LMSound = Snd;
+
+  // Arrival tone on every page after the first interaction of the visit (browsers block it before that)
+  function arrive() {
+    if (!enabled || !entered) return;
+    var c = getCtx(); if (!c) return;
+    setTimeout(function () { if (c.state === 'running') Snd.arrive(); }, 180);
+  }
+  if (document.readyState === 'complete') arrive(); else window.addEventListener('load', arrive);
+
+  var CLICKABLE = 'a[href], button, .btn, summary, [role="button"], .nav-link, label[for]';
+  var touchPending = false;
+
+  function handle(target) {
+    if (!target || !target.closest) return;
+    if (target.closest('#soundToggle')) return;
+    var isClickable = !!target.closest(CLICKABLE);
+    if (!entered) {            // first interaction of the visit = "entering the site"
+      entered = true;
+      try { sessionStorage.setItem(ENTER_KEY, '1'); } catch (e) {}
+      Snd.enter();
+      return;
+    }
+    if (isClickable) Snd.click();
+  }
+
+  document.addEventListener('pointerdown', function (e) {
+    if (e.pointerType === 'mouse') { handle(e.target); } else { touchPending = true; }
+  }, true);
+  document.addEventListener('click', function (e) {
+    if (touchPending) { touchPending = false; handle(e.target); }   // touch: unlock audio on click (iOS)
+  }, true);
+  document.addEventListener('keydown', function (e) {
+    if ((e.key === 'Enter' || e.key === ' ') && e.target && e.target.closest && e.target.closest('a[href], button, [role="button"]')) handle(e.target);
+  }, true);
+
+  // Mute / unmute toggle
+  var btn = document.getElementById('soundToggle');
+  function paint() {
+    if (!btn) return;
+    btn.classList.toggle('off', !enabled);
+    btn.innerHTML = '<i class="bi ' + (enabled ? 'bi-volume-up-fill' : 'bi-volume-mute-fill') + '"></i>';
+    btn.title = enabled ? 'Sounds on (tap to mute)' : 'Sounds off (tap to unmute)';
+    btn.setAttribute('aria-pressed', String(enabled));
+  }
+  if (btn) {
+    paint();
+    btn.addEventListener('click', function () {
+      enabled = !enabled;
+      try { localStorage.setItem(KEY, enabled ? 'on' : 'off'); } catch (e) {}
+      paint();
+      if (enabled) Snd.click();
+    });
+  }
+})();
+</script>
+
 </body>
 </html>

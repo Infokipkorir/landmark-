@@ -1,7 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-page="services">
 <head>
 <meta charset="UTF-8">
+<script>
+/* Landmark hash links: /#home/<id>, /#about/<id> ... Each page keeps its own file and content. */
+(function () {
+  var PAGES = {"home": "index.html", "about": "about.html", "services": "services.html", "projects": "projects.html", "gallery": "gallery.html", "blog": "blog.html", "careers": "careers.html", "testimonials": "testimonials.html", "contact": "contact.html"};
+  var IDS = {"home": "yhfdy7533679999666", "about": "ggopa0093866963703", "services": "rfbvi1534962000876", "projects": "fautv7701138078370", "gallery": "orfsi3622140068536", "blog": "twoox0430942377864", "careers": "yhxxs2606916781316", "testimonials": "lzlub0191029824551", "contact": "ceujv9194469597035"};
+  var cur = document.documentElement.getAttribute('data-page') || 'home';
+  window.LM = window.LM || {};
+  LM.PAGES = PAGES; LM.IDS = IDS; LM.page = cur;
+
+  function go(r, id) { return PAGES[r] + '#' + r + '/' + (id || IDS[r]); }
+
+  function route() {
+    var parts = location.hash.replace(/^#\/?/, '').split('/');
+    var r = (parts[0] || '').toLowerCase();
+    if (Object.prototype.hasOwnProperty.call(PAGES, r) && r !== cur) {
+      LM.redirecting = true;
+      location.replace(go(r, parts[1]));
+      return true;
+    }
+    return false;
+  }
+  if (route()) return;
+
+  // Show this page's own hash link in the address bar when none is present
+  if (!location.hash) {
+    try { history.replaceState(null, '', location.pathname + location.search + '#' + cur + '/' + IDS[cur]); } catch (e) {}
+  }
+  window.addEventListener('hashchange', route);
+
+  // Plain clicks on /#route/id links jump straight to the right page (skips the index.html hop)
+  document.addEventListener('click', function (e) {
+    if (e.defaultPrevented || e.button || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    var a = e.target.closest && e.target.closest('a[href^="/#"]');
+    if (!a || a.target === '_blank') return;
+    var p = a.getAttribute('href').slice(2).split('/');
+    var r = (p[0] || '').toLowerCase();
+    if (!Object.prototype.hasOwnProperty.call(PAGES, r)) return;
+    e.preventDefault();
+    if (r === cur) { window.scrollTo({ top: 0, behavior: 'smooth' }); return; }
+    location.href = go(r, p[1]);
+  });
+})();
+</script>
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Professional landscaping services in Nairobi & across Kenya: landscape design, irrigation, garden & lawn maintenance, tree planting, green construction, dog training, fumigation, pool maintenance, and commercial landscaping. Free consultation — call Landmark Landscaping today.">
 <meta name="keywords" content="landscaping services Kenya, landscaping services Nairobi, irrigation installation Nairobi, garden maintenance Kenya, lawn maintenance Nairobi, tree planting services Kenya, commercial landscaping Kenya, garden design Nairobi, dog training Kenya, fumigation services Nairobi, pest control Kenya, swimming pool maintenance Nairobi, green construction Kenya, sustainable building Kenya">
@@ -229,7 +273,7 @@ a{color:var(--forest);}
 h4.incl{font-family:var(--mono); font-size:.74rem; letter-spacing:.1em; text-transform:uppercase; color:var(--clay-deep); margin-top:1.4rem; margin-bottom:.8rem;}
 ul.incl-list{list-style:none; padding:0; margin:0; display:grid; grid-template-columns:1fr 1fr; gap:.5rem .8rem;}
 ul.incl-list li{font-size:.85rem; color:var(--ink); display:flex; align-items:flex-start; gap:.4rem;}
-ul.incl-list li::before{content:'✓'; color:var(--forest); font-weight:700; flex-shrink:0;}
+ul.incl-list li::before{content:'\f26a'; font-family:'bootstrap-icons'; color:var(--forest); flex-shrink:0;}
 
 /* Process steps */
 .process-card{background:#fff; border-radius:var(--radius-md); padding:1.8rem 1.6rem; height:100%; border:1px solid var(--line); position:relative; transition:transform .3s ease, box-shadow .3s ease;}
@@ -420,6 +464,31 @@ a:focus-visible, button:focus-visible{outline:2px solid var(--clay); outline-off
   body.support-open{ overflow:hidden; }
 
 </style>
+<style id="lm-upgrade">
+/* ---- Landmark upgrade: index-style brand, sound button, Bootstrap-icon colours ---- */
+.brand{font-family:var(--display); font-weight:700; font-size:1.45rem; letter-spacing:-0.02em; color:#fff !important; display:flex; align-items:center; gap:.65rem; text-decoration:none; transition:color .35s ease;}
+.brand-text-wrap{overflow:hidden; display:inline-block; position:relative; vertical-align:middle;}
+.brand-text{display:inline-block; white-space:nowrap; animation:brandSlideLoop 4s ease-in-out infinite;}
+@keyframes brandSlideLoop{0%{transform:translateX(120%);opacity:0;}18%{transform:translateX(0);opacity:1;}65%{transform:translateX(0);opacity:1;}82%{transform:translateX(-120%);opacity:0;}82.1%{transform:translateX(120%);}100%{transform:translateX(120%);opacity:0;}}
+@media (prefers-reduced-motion: reduce){.brand-text{animation:none;}}
+.leaf-mark{width:46px; height:46px; object-fit:contain; display:inline-block; flex-shrink:0; transition:width .35s ease, height .35s ease;}
+.nav-wrap.scrolled .leaf-mark{width:40px; height:40px;}
+.nav-wrap.scrolled .brand{color:var(--forest-deep) !important;}
+@media (min-width:992px) and (max-width:1199.98px){
+  .brand{font-size:1.15rem;} .leaf-mark{width:38px; height:38px;}
+  .navbar-nav .nav-link{margin:0 .38rem !important; font-size:.88rem !important;}
+}
+.fab-sound{background:#fff; color:var(--forest); border:1px solid var(--line);}
+.fab-sound.off{color:var(--ink-soft,#52604A);}
+.fab i{line-height:1;}
+.ic-wrap i,.feature-icon i,.category-icon i,.blog-card-img i{color:var(--forest);}
+.svc-card:hover .ic-wrap i{color:#fff;}
+.ic-overlay i,.sm-icon i,.why-item .ck i{color:#fff;}
+.ic-wrap span i{display:inline-block;}
+.read-more i{margin-left:.25rem; transition:transform .2s ease;}
+.read-more:hover i{transform:translateX(3px);}
+
+</style>
 </head>
 <body>
 
@@ -429,24 +498,25 @@ a:focus-visible, button:focus-visible{outline:2px solid var(--clay); outline-off
 <!-- ============ NAVBAR ============ -->
 <nav class="navbar navbar-expand-lg nav-wrap" id="mainNav">
   <div class="container">
-    <a class="brand" href="index.html">
-      <img src="android-chrome-512x512 (1).png" alt="Landmark Landscaping" class="leaf-mark">
-      <span class="brand-text-wrap"><span class="brand-text">Landmark Landscaping</span></span>
-    </a>
+    <a class="brand" href="/#home/yhfdy7533679999666">
+    <img src="android-chrome-512x512 (1).png" alt="Landmark Landscaping" class="leaf-mark">
+    <span class="brand-text-wrap"><span class="brand-text">Landmark Landscaping</span></span>
+  </a>
     <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navMenu">
       <ul class="navbar-nav ms-auto align-items-lg-center">
-        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-        <li class="nav-item"><a class="nav-link active" href="services.html">Services</a></li>
-        <li class="nav-item"><a class="nav-link" href="projects.html">Projects</a></li>
-        <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
-        <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
-        <li class="nav-item"><a class="nav-link" href="testimonials.html">Testimonials</a></li>
+        <li class="nav-item"><a class="nav-link" href="/#home/yhfdy7533679999666">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="/#about/ggopa0093866963703">About</a></li>
+        <li class="nav-item"><a class="nav-link active" href="/#services/rfbvi1534962000876">Services</a></li>
+        <li class="nav-item"><a class="nav-link" href="/#projects/fautv7701138078370">Projects</a></li>
+        <li class="nav-item"><a class="nav-link" href="/#gallery/orfsi3622140068536">Gallery</a></li>
+        <li class="nav-item"><a class="nav-link" href="/#blog/twoox0430942377864">Blog</a></li>
+        <li class="nav-item"><a class="nav-link" href="/#careers/yhxxs2606916781316">Careers</a></li>
+        <li class="nav-item"><a class="nav-link" href="/#testimonials/lzlub0191029824551">Testimonials</a></li>
         <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
-          <a class="btn btn-forest btn-sm" href="contact.html">Contact Us</a>
+          <a class="btn btn-forest btn-sm" href="/#contact/ceujv9194469597035">Contact Us</a>
         </li>
       </ul>
     </div>
@@ -461,7 +531,7 @@ a:focus-visible, button:focus-visible{outline:2px solid var(--clay); outline-off
   <div class="hero-overlay"></div>
   <div class="container hero-content">
     <div class="breadcrumb-bar">
-      <a href="index.html">Home</a><span class="sep">/</span><span class="current">Services</span>
+      <a href="/#home/yhfdy7533679999666">Home</a><span class="sep">/</span><span class="current">Services</span>
     </div>
     <p class="eyebrow">What We Offer</p>
     <h1>Services we actually stand behind</h1>
@@ -552,14 +622,14 @@ a:focus-visible, button:focus-visible{outline:2px solid var(--clay); outline-off
       <div class="col-lg-7">
         <div class="row">
           <div class="col-sm-6 reveal-right">
-            <div class="why-item"><span class="ck">✓</span><div><h3>We've done this a while</h3><p>Years of hands-in-the-soil experience means fewer surprises and fewer redos.</p></div></div>
-            <div class="why-item"><span class="ck">✓</span><div><h3>Your space, your plan</h3><p>We design around how you'll actually use the place, not a catalogue template.</p></div></div>
-            <div class="why-item" style="border-bottom:none;"><span class="ck">✓</span><div><h3>We try not to waste water</h3><p>Smarter irrigation and native plants mean lower bills and a garden that copes when the rains are late.</p></div></div>
+            <div class="why-item"><span class="ck"><i class="bi bi-check-lg"></i></span><div><h3>We've done this a while</h3><p>Years of hands-in-the-soil experience means fewer surprises and fewer redos.</p></div></div>
+            <div class="why-item"><span class="ck"><i class="bi bi-check-lg"></i></span><div><h3>Your space, your plan</h3><p>We design around how you'll actually use the place, not a catalogue template.</p></div></div>
+            <div class="why-item" style="border-bottom:none;"><span class="ck"><i class="bi bi-check-lg"></i></span><div><h3>We try not to waste water</h3><p>Smarter irrigation and native plants mean lower bills and a garden that copes when the rains are late.</p></div></div>
           </div>
           <div class="col-sm-6 reveal-right" style="transition-delay:.12s;">
-            <div class="why-item"><span class="ck">✓</span><div><h3>Fair pricing, no surprises</h3><p>You'll know the cost up front — what changes the quote, and what doesn't.</p></div></div>
-            <div class="why-item"><span class="ck">✓</span><div><h3>We don't disappear after</h3><p>Maintenance plans and a real phone number if something needs attention later.</p></div></div>
-            <div class="why-item" style="border-bottom:none;"><span class="ck">✓</span><div><h3>We turn up when we say we will</h3><p>Timelines are something we plan around, not something we apologise for missing.</p></div></div>
+            <div class="why-item"><span class="ck"><i class="bi bi-check-lg"></i></span><div><h3>Fair pricing, no surprises</h3><p>You'll know the cost up front — what changes the quote, and what doesn't.</p></div></div>
+            <div class="why-item"><span class="ck"><i class="bi bi-check-lg"></i></span><div><h3>We don't disappear after</h3><p>Maintenance plans and a real phone number if something needs attention later.</p></div></div>
+            <div class="why-item" style="border-bottom:none;"><span class="ck"><i class="bi bi-check-lg"></i></span><div><h3>We turn up when we say we will</h3><p>Timelines are something we plan around, not something we apologise for missing.</p></div></div>
           </div>
         </div>
       </div>
@@ -640,7 +710,7 @@ a:focus-visible, button:focus-visible{outline:2px solid var(--clay); outline-off
     <div class="cta-band text-center reveal">
       <h2 class="fw-semibold mb-2">Got a space that needs some love?</h2>
       <p class="mb-4" style="color:rgba(255,255,255,.85); max-width:520px; margin-inline:auto;">Tell us what you're picturing and we'll tell you honestly what it'll take to get there.</p>
-      <a href="contact.html" class="btn btn-line-light">Talk to us</a>
+      <a href="/#contact/ceujv9194469597035" class="btn btn-line-light">Talk to us</a>
     </div>
   </div>
 </section>
@@ -665,10 +735,11 @@ a:focus-visible, button:focus-visible{outline:2px solid var(--clay); outline-off
       <div class="col-lg-2 col-sm-6">
         <h3>Quick Links</h3>
         <ul class="footer-links list-unstyled">
-          <li><a href="about.html">About Us</a></li>
-          <li><a href="services.html">Services</a></li>
-          <li><a href="projects.html">Projects</a></li>
-          <li><a href="blog.html">Blog</a></li>
+          <li><a href="/#about/ggopa0093866963703">About Us</a></li>
+          <li><a href="/#services/rfbvi1534962000876">Services</a></li>
+          <li><a href="/#projects/fautv7701138078370">Projects</a></li>
+          <li><a href="/#blog/twoox0430942377864">Blog</a></li>
+          <li><a href="/#careers/yhxxs2606916781316">Careers</a></li>
         </ul>
       </div>
       <div class="col-lg-3 col-sm-6">
@@ -728,9 +799,10 @@ a:focus-visible, button:focus-visible{outline:2px solid var(--clay); outline-off
 
 <!-- ============ FLOATING ACTION BUTTONS ============ -->
 <div class="fab-stack">
-  <button id="back-to-top" class="fab fab-top" aria-label="Back to top" title="Back to top">⬆️</button>
-  <button id="quote-btn" class="fab fab-quote" aria-label="Request a quote" title="Request a Quote" data-bs-toggle="modal" data-bs-target="#quoteModal">📋</button>
-  <a href="https://wa.me/254728158526" target="_blank" rel="noopener" class="fab fab-whatsapp" aria-label="Contact on WhatsApp" title="Chat on WhatsApp">💬</a>
+  <button id="soundToggle" class="fab fab-sound" aria-label="Toggle sounds" aria-pressed="true" title="Sounds on (tap to mute)"><i class="bi bi-volume-up-fill"></i></button>
+  <button id="back-to-top" class="fab fab-top" aria-label="Back to top" title="Back to top"><i class="bi bi-arrow-up"></i></button>
+  <button id="quote-btn" class="fab fab-quote" aria-label="Request a quote" title="Request a Quote" data-bs-toggle="modal" data-bs-target="#quoteModal"><i class="bi bi-clipboard2-check"></i></button>
+  <a href="https://wa.me/254728158526" target="_blank" rel="noopener" class="fab fab-whatsapp" aria-label="Contact on WhatsApp" title="Chat on WhatsApp"><i class="bi bi-whatsapp"></i></a>
 </div>
 
 
@@ -810,7 +882,7 @@ a:focus-visible, button:focus-visible{outline:2px solid var(--clay); outline-off
 // ============ SERVICE DATA — single source of truth for cards + the detail modal ============
 const SERVICES = [
   {
-    icon: "🎨",
+    icon: "<i class='bi bi-palette-fill'></i>",
     title: "Landscaping Design",
     image: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=900&q=80",
     summary: "We sit down, listen to how you actually use your outdoor space, and sketch something that fits your land, your budget, and your life — not a template.",
@@ -818,7 +890,7 @@ const SERVICES = [
     included: ["Conceptual sketches", "3D renderings", "Plant selections suited to your site", "Hardscape planning", "Honest budget estimate"]
   },
   {
-    icon: "💧",
+    icon: "<i class='bi bi-droplet-fill'></i>",
     title: "Irrigation Systems Installation",
     image: "https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?auto=format&fit=crop&w=900&q=80",
     summary: "We put in watering systems that actually match your plants and your water bill — not a one-size-fits-all sprinkler setup.",
@@ -826,7 +898,7 @@ const SERVICES = [
     included: ["System design for your site", "Equipment supply", "Professional installation", "Timer programming", "Full system testing before we leave"]
   },
   {
-    icon: "🌾",
+    icon: "<i class='bi bi-flower3'></i>",
     title: "Garden Maintenance",
     image: "https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?auto=format&fit=crop&w=900&q=80",
     summary: "Regular visits to keep weeds down, growth in check, and your garden looking like someone's actually looking after it.",
@@ -834,7 +906,7 @@ const SERVICES = [
     included: ["Regular weeding", "Plant pruning", "Seasonal care adjustments", "Pest control", "Fertilization"]
   },
   {
-    icon: "🌱",
+    icon: "<i class='bi bi-flower1'></i>",
     title: "Lawn Establishment",
     image: "https://images.unsplash.com/photo-1558904541-efa843a96f01?auto=format&fit=crop&w=900&q=80",
     summary: "We get the ground right before we get the grass down — that's the difference between a lawn that lasts and one that doesn't.",
@@ -842,7 +914,7 @@ const SERVICES = [
     included: ["Soil preparation", "Site grading", "Grass species selection", "Sod or seed installation", "Initial aftercare guidance"]
   },
   {
-    icon: "🌳",
+    icon: "<i class='bi bi-tree-fill'></i>",
     title: "Tree Planting & Care",
     image: "https://images.unsplash.com/photo-1519331379826-f10be5486c6f?auto=format&fit=crop&w=900&q=80",
     summary: "Trees you plant today are shade you'll enjoy for decades — so we make sure they're the right species, in the right spot.",
@@ -850,7 +922,7 @@ const SERVICES = [
     included: ["Species selection for your site", "Site assessment", "Proper planting technique", "Staking & support", "Ongoing care guidance"]
   },
   {
-    icon: "✂️",
+    icon: "<i class='bi bi-scissors'></i>",
     title: "Lawn Maintenance",
     image: "https://images.unsplash.com/photo-1690068023694-053da714f95f?auto=format&fit=crop&w=900&q=80",
     summary: "Regular mowing, edging, and feeding so your grass stays thick, even, and genuinely green — not just after a big event.",
@@ -858,7 +930,7 @@ const SERVICES = [
     included: ["Scheduled mowing & edging", "Fertilizing & weed control", "Bare patch repair", "Seasonal aeration", "Watering guidance"]
   },
   {
-    icon: "🐕",
+    icon: "<i class='bi bi-heart-fill'></i>",
     title: "Dog Training",
     image: "https://images.unsplash.com/photo-1546815708-410983510897?auto=format&fit=crop&w=900&q=80",
     summary: "Obedience and behaviour training so your dog is a pleasure to have around the compound, not a liability.",
@@ -866,7 +938,7 @@ const SERVICES = [
     included: ["Basic obedience training", "Leash & recall training", "Boundary & compound training", "Behaviour correction", "Owner coaching sessions"]
   },
   {
-    icon: "🧴",
+    icon: "<i class='bi bi-bucket-fill'></i>",
     title: "Fumigation & Pest Control",
     image: "https://images.unsplash.com/photo-1711900177627-1182b446bc8f?auto=format&fit=crop&w=900&q=80",
     summary: "Safe, thorough treatment against mosquitoes, termites, ants, and other pests that undo all your garden's good work.",
@@ -874,7 +946,7 @@ const SERVICES = [
     included: ["Property pest inspection", "Termite & ant treatment", "Mosquito control", "Safe, licensed chemicals", "Follow-up treatment schedule"]
   },
   {
-    icon: "🏊",
+    icon: "<i class='bi bi-water'></i>",
     title: "Swimming Pool Maintenance",
     image: "https://images.unsplash.com/photo-1509577330292-0532d33c053e?auto=format&fit=crop&w=900&q=80",
     summary: "Clean water, balanced chemistry, and working equipment — so your pool is always ready when you are.",
@@ -882,7 +954,7 @@ const SERVICES = [
     included: ["Water testing & chemical balancing", "Cleaning & vacuuming", "Filter & pump checks", "Algae & debris control", "Seasonal deep cleaning"]
   },
   {
-    icon: "⛳",
+    icon: "<i class='bi bi-flag-fill'></i>",
     title: "Golf Design & Green Construction",
     image: "https://images.unsplash.com/photo-1621905251918-48416bd8575a?auto=format&fit=crop&w=900&q=80",
     summary: "From putting greens to garden structures — we design and build with sustainable materials and methods, on any scale.",
@@ -890,7 +962,7 @@ const SERVICES = [
     included: ["Golf green & fairway design", "Sustainable material sourcing", "Green roof & wall construction", "Water-wise structural integration", "Full project management"]
   },
   {
-    icon: "✨",
+    icon: "<i class='bi bi-stars'></i>",
     title: "Outdoor Beautification",
     image: "https://images.unsplash.com/photo-1480497490787-505ec076689f?auto=format&fit=crop&w=900&q=80",
     summary: "Paths, lighting, water features, and the finishing touches that turn 'nice garden' into 'wow, who did this?'",
@@ -898,7 +970,7 @@ const SERVICES = [
     included: ["Hardscape design", "Paving & pathways", "Water features", "Outdoor lighting", "Decorative elements"]
   },
   {
-    icon: "🏢",
+    icon: "<i class='bi bi-building-fill'></i>",
     title: "Commercial Landscaping",
     image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=900&q=80",
     summary: "For offices, hotels, and institutions that need grounds that look sharp every single day, not just on launch day.",
@@ -941,7 +1013,7 @@ document.getElementById('servicesGrid').addEventListener('click', (e) => {
   activeServiceTitle = svc.title;
   document.getElementById('smImage').src = svc.image;
   document.getElementById('smImage').alt = svc.title;
-  document.getElementById('smIcon').textContent = svc.icon;
+  document.getElementById('smIcon').innerHTML = svc.icon;
   document.getElementById('smTitle').textContent = svc.title;
   document.getElementById('smDescription').textContent = svc.description;
   document.getElementById('smInclList').innerHTML = svc.included.map(item => `<li>${item}</li>`).join('');
@@ -1070,6 +1142,7 @@ document.getElementById('quoteForm').addEventListener('submit', function (e) {
       sessionStorage.setItem(SESSION_KEY, sessionId);
     }
 
+    if (window.LM && LM.redirecting) return;
     var pagePath = window.location.pathname || '/';
 
     LM.sb.from('page_views').insert({
@@ -1148,6 +1221,103 @@ document.getElementById('quoteForm').addEventListener('submit', function (e) {
       if (e && e.data === 'landmark-support:close') closeSupport();
     });
   })();
+</script>
+
+<!-- Landmark sounds: click, welcome chime, per-page arrival tone (Web Audio, no audio files needed) -->
+<script>
+(function () {
+  var KEY = 'lm_sound', ENTER_KEY = 'lm_entered';
+  var ctx = null, enabled = true, entered = false;
+  try { enabled = localStorage.getItem(KEY) !== 'off'; } catch (e) {}
+  try { entered = sessionStorage.getItem(ENTER_KEY) === '1'; } catch (e) {}
+  var NOTE = { home: 523.25, about: 587.33, services: 659.25, projects: 698.46, gallery: 783.99, blog: 880, careers: 493.88, testimonials: 739.99, contact: 622.25 };
+  var page = (window.LM && LM.page) || document.documentElement.getAttribute('data-page') || 'home';
+
+  function getCtx() {
+    if (!ctx) {
+      var AC = window.AudioContext || window.webkitAudioContext;
+      if (!AC) return null;
+      ctx = new AC();
+    }
+    if (ctx.state === 'suspended') ctx.resume();
+    return ctx;
+  }
+
+  function tone(freq, start, dur, type, vol) {
+    var c = getCtx(); if (!c) return;
+    var t0 = c.currentTime + start;
+    var o = c.createOscillator(), g = c.createGain();
+    o.type = type;
+    o.frequency.setValueAtTime(freq, t0);
+    g.gain.setValueAtTime(0.0001, t0);
+    g.gain.exponentialRampToValueAtTime(vol, t0 + 0.012);
+    g.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+    o.connect(g); g.connect(c.destination);
+    o.start(t0); o.stop(t0 + dur + 0.03);
+  }
+
+  var Snd = {
+    click:   function () { if (!enabled) return; tone(920, 0, .07, 'triangle', .11); tone(620, .028, .09, 'sine', .07); },
+    enter:   function () { if (!enabled) return; [523.25, 659.25, 783.99, 1046.5].forEach(function (f, i) { tone(f, i * .09, .55, 'sine', .10); }); },
+    success: function () { if (!enabled) return; [659.25, 830.61, 987.77, 1318.5].forEach(function (f, i) { tone(f, i * .08, .45, 'sine', .11); }); },
+    error:   function () { if (!enabled) return; tone(220, 0, .18, 'sawtooth', .06); tone(180, .1, .22, 'sawtooth', .05); },
+    arrive:  function () { if (!enabled) return; var f = NOTE[page] || 523.25; tone(f, 0, .35, 'sine', .07); tone(f * 1.5, .09, .5, 'sine', .05); }
+  };
+  window.LMSound = Snd;
+
+  // Arrival tone on every page after the first interaction of the visit (browsers block it before that)
+  function arrive() {
+    if (!enabled || !entered) return;
+    var c = getCtx(); if (!c) return;
+    setTimeout(function () { if (c.state === 'running') Snd.arrive(); }, 180);
+  }
+  if (document.readyState === 'complete') arrive(); else window.addEventListener('load', arrive);
+
+  var CLICKABLE = 'a[href], button, .btn, summary, [role="button"], .nav-link, label[for]';
+  var touchPending = false;
+
+  function handle(target) {
+    if (!target || !target.closest) return;
+    if (target.closest('#soundToggle')) return;
+    var isClickable = !!target.closest(CLICKABLE);
+    if (!entered) {            // first interaction of the visit = "entering the site"
+      entered = true;
+      try { sessionStorage.setItem(ENTER_KEY, '1'); } catch (e) {}
+      Snd.enter();
+      return;
+    }
+    if (isClickable) Snd.click();
+  }
+
+  document.addEventListener('pointerdown', function (e) {
+    if (e.pointerType === 'mouse') { handle(e.target); } else { touchPending = true; }
+  }, true);
+  document.addEventListener('click', function (e) {
+    if (touchPending) { touchPending = false; handle(e.target); }   // touch: unlock audio on click (iOS)
+  }, true);
+  document.addEventListener('keydown', function (e) {
+    if ((e.key === 'Enter' || e.key === ' ') && e.target && e.target.closest && e.target.closest('a[href], button, [role="button"]')) handle(e.target);
+  }, true);
+
+  // Mute / unmute toggle
+  var btn = document.getElementById('soundToggle');
+  function paint() {
+    if (!btn) return;
+    btn.classList.toggle('off', !enabled);
+    btn.innerHTML = '<i class="bi ' + (enabled ? 'bi-volume-up-fill' : 'bi-volume-mute-fill') + '"></i>';
+    btn.title = enabled ? 'Sounds on (tap to mute)' : 'Sounds off (tap to unmute)';
+    btn.setAttribute('aria-pressed', String(enabled));
+  }
+  if (btn) {
+    paint();
+    btn.addEventListener('click', function () {
+      enabled = !enabled;
+      try { localStorage.setItem(KEY, enabled ? 'on' : 'off'); } catch (e) {}
+      paint();
+      if (enabled) Snd.click();
+    });
+  }
+})();
 </script>
 
 </body>
