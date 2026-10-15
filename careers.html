@@ -793,64 +793,21 @@
   </div>
 </section>
 
-<!-- ============ OPEN ROLES ============ -->
+<!-- ============ OPEN ROLES (loaded from Supabase) ============ -->
 <section class="section section-sage" id="openings">
   <div class="container">
     <div class="section-title reveal">
       <p class="eyebrow">Open Positions</p>
       <h2>Current openings</h2>
-      <p class="lead-soft mt-2">Don't see a perfect match? Send a general application below and we'll keep you in mind.</p>
+      <p class="lead-soft mt-2" id="openingsSub">Checking for open roles…</p>
     </div>
-      <div class="reveal mb-3">
-        <div class="job-card">
-          <div>
-            <h3><i class="bi bi-pencil-square me-2" style="color:var(--leaf);"></i>Landscape Designer</h3>
-            <div class="job-meta"><span><i class="bi bi-geo-alt-fill"></i>Nairobi</span><span><i class="bi bi-clock-fill"></i>Full-time</span></div>
-            <p>Create garden and commercial landscape concepts, plans and planting schedules for residential and corporate clients.</p>
-          </div>
-          <button type="button" class="btn btn-forest apply-btn" data-role="Landscape Designer">Apply Now</button>
-        </div>
-      </div>
-      <div class="reveal mb-3">
-        <div class="job-card">
-          <div>
-            <h3><i class="bi bi-droplet-fill me-2" style="color:var(--leaf);"></i>Irrigation Technician</h3>
-            <div class="job-meta"><span><i class="bi bi-geo-alt-fill"></i>Nairobi & surrounding areas</span><span><i class="bi bi-clock-fill"></i>Full-time</span></div>
-            <p>Install, test and maintain drip and sprinkler systems on client sites. Experience with pumps and pipe fitting is a plus.</p>
-          </div>
-          <button type="button" class="btn btn-forest apply-btn" data-role="Irrigation Technician">Apply Now</button>
-        </div>
-      </div>
-      <div class="reveal mb-3">
-        <div class="job-card">
-          <div>
-            <h3><i class="bi bi-flower2 me-2" style="color:var(--leaf);"></i>Garden Maintenance Supervisor</h3>
-            <div class="job-meta"><span><i class="bi bi-geo-alt-fill"></i>Nairobi</span><span><i class="bi bi-clock-fill"></i>Full-time</span></div>
-            <p>Lead a crew on recurring maintenance contracts, keeping quality, safety and punctuality high.</p>
-          </div>
-          <button type="button" class="btn btn-forest apply-btn" data-role="Garden Maintenance Supervisor">Apply Now</button>
-        </div>
-      </div>
-      <div class="reveal mb-3">
-        <div class="job-card">
-          <div>
-            <h3><i class="bi bi-tree-fill me-2" style="color:var(--leaf);"></i>Landscaping Crew Member</h3>
-            <div class="job-meta"><span><i class="bi bi-geo-alt-fill"></i>Nairobi & major towns</span><span><i class="bi bi-clock-fill"></i>Contract</span></div>
-            <p>Lawn establishment, planting, hedge trimming and site clean-up. We train motivated people.</p>
-          </div>
-          <button type="button" class="btn btn-forest apply-btn" data-role="Landscaping Crew Member">Apply Now</button>
-        </div>
-      </div>
-      <div class="reveal mb-3">
-        <div class="job-card">
-          <div>
-            <h3><i class="bi bi-headset me-2" style="color:var(--leaf);"></i>Sales & Customer Care Officer</h3>
-            <div class="job-meta"><span><i class="bi bi-geo-alt-fill"></i>Nairobi</span><span><i class="bi bi-clock-fill"></i>Full-time</span></div>
-            <p>Respond to quote requests, book site visits and keep clients informed from first call to handover.</p>
-          </div>
-          <button type="button" class="btn btn-forest apply-btn" data-role="Sales & Customer Care Officer">Apply Now</button>
-        </div>
-      </div>
+    <div id="jobList"></div>
+    <div id="noJobs" class="job-card justify-content-center text-center" style="display:none; flex-direction:column; padding:2.5rem 1.8rem;">
+      <div class="nl-icon" style="margin:0 auto 1rem;"><i class="bi bi-briefcase"></i></div>
+      <h3>No open positions right now</h3>
+      <p style="max-width:520px; margin:.5rem auto 1.2rem;">We're not hiring at the moment, but opportunities open up regularly. Fill in the form below and we'll contact you as soon as a suitable role is available.</p>
+      <a href="#apply" class="btn btn-forest align-self-center"><i class="bi bi-pencil-square me-2"></i>Register Your Interest</a>
+    </div>
   </div>
 </section>
 
@@ -860,8 +817,8 @@
     <div class="row justify-content-center">
       <div class="col-lg-8">
         <div class="section-title reveal" style="margin-bottom:2rem;">
-          <p class="eyebrow">Apply</p>
-          <h2>Send us your application</h2>
+          <p class="eyebrow" id="applyEyebrow">Apply</p>
+          <h2 id="applyTitle">Send us your application</h2>
         </div>
         <div class="apply-card reveal">
           <form id="applyForm" novalidate>
@@ -886,8 +843,7 @@
                 <label for="aRole" class="form-label">Position</label>
                 <select class="form-select" id="aRole" required>
                   <option value="" selected disabled>Choose a position…</option>
-                  <option>Landscape Designer</option><option>Irrigation Technician</option><option>Garden Maintenance Supervisor</option><option>Landscaping Crew Member</option><option>Sales & Customer Care Officer</option>
-                  <option>General application</option>
+                  <option value="General application">General application / Register interest</option>
                 </select>
               </div>
               <div class="col-md-6">
@@ -1375,13 +1331,61 @@
 
 
 <script>
-  // Apply buttons pre-select the role and jump to the form
-  document.querySelectorAll('.apply-btn').forEach(function (b) {
-    b.addEventListener('click', function () {
-      document.getElementById('aRole').value = b.getAttribute('data-role');
-      document.getElementById('apply').scrollIntoView({ behavior: 'smooth' });
-      setTimeout(function () { document.getElementById('aName').focus({ preventScroll: true }); }, 600);
-    });
+  // ---- Load open roles from Supabase table `job_openings` ----
+  function esc(s) { var d = document.createElement('div'); d.textContent = s == null ? '' : String(s); return d.innerHTML; }
+
+  function showNoJobs() {
+    document.getElementById('jobList').innerHTML = '';
+    document.getElementById('noJobs').style.display = 'flex';
+    document.getElementById('openingsSub').textContent = 'No roles are open right now. Register your interest below and we will reach out when one opens.';
+    document.getElementById('applyEyebrow').textContent = 'Talent pool';
+    document.getElementById('applyTitle').textContent = 'Register your interest';
+    document.getElementById('aRole').value = 'General application';
+  }
+
+  async function loadJobs() {
+    var list = document.getElementById('jobList');
+    var roleSel = document.getElementById('aRole');
+    try {
+      var res = await LM.sb.from('job_openings')
+        .select('id,title,location,job_type,description')
+        .eq('is_active', true)
+        .order('created_at', { ascending: false });
+      if (res.error) throw res.error;
+      var jobs = res.data || [];
+      if (!jobs.length) { showNoJobs(); return; }
+
+      document.getElementById('openingsSub').textContent = 'Pick a role and apply below. Don\'t see a perfect match? Send a general application and we\'ll keep you in mind.';
+      list.innerHTML = jobs.map(function (j) {
+        return '<div class="mb-3"><div class="job-card"><div>' +
+          '<h3><i class="bi bi-briefcase-fill me-2" style="color:var(--leaf);"></i>' + esc(j.title) + '</h3>' +
+          '<div class="job-meta">' +
+            (j.location ? '<span><i class="bi bi-geo-alt-fill"></i>' + esc(j.location) + '</span>' : '') +
+            (j.job_type ? '<span><i class="bi bi-clock-fill"></i>' + esc(j.job_type) + '</span>' : '') +
+          '</div>' +
+          (j.description ? '<p>' + esc(j.description) + '</p>' : '') +
+          '</div><button type="button" class="btn btn-forest apply-btn" data-job-id="' + esc(j.id) + '" data-role="' + esc(j.title) + '">Apply Now</button></div></div>';
+      }).join('');
+
+      jobs.forEach(function (j) {
+        var o = document.createElement('option');
+        o.value = j.title; o.textContent = j.title; o.dataset.jobId = j.id;
+        roleSel.insertBefore(o, roleSel.querySelector('option[value="General application"]'));
+      });
+    } catch (err) {
+      console.warn('Could not load job openings:', err);
+      showNoJobs();   // fall back to the interest form so visitors are never stuck
+    }
+  }
+  loadJobs();
+
+  // Apply buttons (rendered dynamically) pre-select the role and jump to the form
+  document.getElementById('jobList').addEventListener('click', function (e) {
+    var b = e.target.closest('.apply-btn');
+    if (!b) return;
+    document.getElementById('aRole').value = b.getAttribute('data-role');
+    document.getElementById('apply').scrollIntoView({ behavior: 'smooth' });
+    setTimeout(function () { document.getElementById('aName').focus({ preventScroll: true }); }, 600);
   });
 
   // Application form -> Supabase table `job_applications`
@@ -1400,6 +1404,7 @@
       phone: document.getElementById('aPhone').value.trim(),
       location: document.getElementById('aTown').value.trim(),
       position: document.getElementById('aRole').value,
+      job_id: (document.getElementById('aRole').selectedOptions[0] || {}).dataset ? (document.getElementById('aRole').selectedOptions[0].dataset.jobId || null) : null,
       experience: document.getElementById('aExp').value,
       cv_link: document.getElementById('aCv').value.trim() || null,
       message: document.getElementById('aMsg').value.trim()
